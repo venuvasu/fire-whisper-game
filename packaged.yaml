@@ -1,0 +1,264 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Python Lambda with Cognito-protected HTTP API
+Parameters:
+  TavernUserPool:
+    Type: String
+    Description: The Cognito User Pool ID (e.g., us-east-1_ABC123)
+  TavernUserPoolClient:
+    Type: String
+    Description: The Cognito User Pool App Client ID
+Resources:
+  TavernHttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      Auth:
+        DefaultAuthorizer: CognitoAuthorizer
+        Authorizers:
+          CognitoAuthorizer:
+            AuthorizationType: JWT
+            JwtConfiguration:
+              issuer:
+                Fn::Sub: https://cognito-idp.${AWS::Region}.amazonaws.com/${TavernUserPool}
+              audience:
+              - Ref: TavernUserPoolClient
+            IdentitySource: $request.header.Authorization
+      CorsConfiguration:
+        AllowMethods:
+        - POST
+        - GET
+        - OPTIONS
+        AllowHeaders:
+        - Authorization
+        - Content-Type
+        AllowOrigins:
+        - http://localhost:5173
+        - https://d2chhelaxtwh4k.cloudfront.net
+        - https://rpgtestdomain.com
+        - https://dev.firewhisper.io
+    Metadata:
+      SamResourceId: TavernHttpApi
+  StartGameFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://dnd-lambda-deployer-bucket/8b6a4447609976dc67af58c231fedee2
+      Handler: start_game.handler
+      Runtime: python3.11
+      Timeout: 30
+      Events:
+        TitanApi:
+          Type: HttpApi
+          Properties:
+            Path: /startgame
+            Method: POST
+            ApiId:
+              Ref: TavernHttpApi
+            Auth:
+              Authorizer: CognitoAuthorizer
+      Policies:
+      - Statement:
+        - Effect: Allow
+          Action: bedrock:InvokeModel
+          Resource:
+          - arn:aws:bedrock:us-east-1::foundation-model/*
+          - arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-haiku-20240307-v1:0
+          - arn:aws:bedrock:us-east-1:485875644646:inference-profile/us.anthropic.claude-3-5-haiku-20241022-v1:0
+          - arn:aws:bedrock:us-east-2:485875644646:inference-profile/us.anthropic.claude-3-5-haiku-20241022-v1:0
+          - arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0
+          - arn:aws:bedrock:us-east-2::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0
+          - arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0
+        - Effect: Allow
+          Action:
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+          Resource:
+          - arn:aws:dynamodb:us-east-1:485875644646:table/TavernGames_Dev
+          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+    Metadata:
+      SamResourceId: StartGameFunction
+  GetGameFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://dnd-lambda-deployer-bucket/8b6a4447609976dc67af58c231fedee2
+      Handler: get_game.handler
+      Runtime: python3.11
+      Timeout: 30
+      Events:
+        TitanApi:
+          Type: HttpApi
+          Properties:
+            Path: /getgame
+            Method: GET
+            ApiId:
+              Ref: TavernHttpApi
+            Auth:
+              Authorizer: CognitoAuthorizer
+      Policies:
+      - Statement:
+        - Effect: Allow
+          Action:
+          - dynamodb:GetItem
+          Resource: arn:aws:dynamodb:us-east-1:485875644646:table/TavernGames_Dev
+    Metadata:
+      SamResourceId: GetGameFunction
+  GetUserDataFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://dnd-lambda-deployer-bucket/8b6a4447609976dc67af58c231fedee2
+      Handler: get_user_data.handler
+      Runtime: python3.11
+      Timeout: 10
+      Events:
+        TitanApi:
+          Type: HttpApi
+          Properties:
+            Path: /getuserdata
+            Method: GET
+            ApiId:
+              Ref: TavernHttpApi
+            Auth:
+              Authorizer: CognitoAuthorizer
+      Policies:
+      - Statement:
+        - Effect: Allow
+          Action:
+          - dynamodb:GetItem
+          Resource: arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+    Metadata:
+      SamResourceId: GetUserDataFunction
+  TakeTurnFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://dnd-lambda-deployer-bucket/8b6a4447609976dc67af58c231fedee2
+      Handler: take_turn.handler
+      Runtime: python3.11
+      Timeout: 30
+      Events:
+        TitanApi:
+          Type: HttpApi
+          Properties:
+            Path: /taketurn
+            Method: POST
+            ApiId:
+              Ref: TavernHttpApi
+            Auth:
+              Authorizer: CognitoAuthorizer
+      Policies:
+      - Statement:
+        - Effect: Allow
+          Action: bedrock:InvokeModel
+          Resource:
+          - arn:aws:bedrock:us-east-1::foundation-model/*
+          - arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-haiku-20240307-v1:0
+          - arn:aws:bedrock:us-east-1:485875644646:inference-profile/us.anthropic.claude-3-5-haiku-20241022-v1:0
+          - arn:aws:bedrock:us-east-2:485875644646:inference-profile/us.anthropic.claude-3-5-haiku-20241022-v1:0
+          - arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0
+          - arn:aws:bedrock:us-east-2::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0
+          - arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0
+        - Effect: Allow
+          Action:
+          - dynamodb:GetItem
+          - dynamodb:UpdateItem
+          Resource: arn:aws:dynamodb:us-east-1:485875644646:table/TavernGames_Dev
+    Metadata:
+      SamResourceId: TakeTurnFunction
+  CreateCharacterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://dnd-lambda-deployer-bucket/8b6a4447609976dc67af58c231fedee2
+      Handler: create_character.handler
+      Runtime: python3.11
+      Timeout: 30
+      Events:
+        TitanApi:
+          Type: HttpApi
+          Properties:
+            Path: /createcharacter
+            Method: POST
+            ApiId:
+              Ref: TavernHttpApi
+            Auth:
+              Authorizer: CognitoAuthorizer
+      Policies:
+      - Statement:
+        - Effect: Allow
+          Action: bedrock:InvokeModel
+          Resource:
+          - arn:aws:bedrock:us-east-1::foundation-model/*
+          - arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-haiku-20240307-v1:0
+        - Effect: Allow
+          Action:
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+          Resource:
+          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
+          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+    Metadata:
+      SamResourceId: CreateCharacterFunction
+  GetCharacterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://dnd-lambda-deployer-bucket/8b6a4447609976dc67af58c231fedee2
+      Handler: get_character.handler
+      Runtime: python3.11
+      Timeout: 10
+      Events:
+        TitanApi:
+          Type: HttpApi
+          Properties:
+            Path: /getcharacter
+            Method: GET
+            ApiId:
+              Ref: TavernHttpApi
+            Auth:
+              Authorizer: CognitoAuthorizer
+      Policies:
+      - Statement:
+        - Effect: Allow
+          Action:
+          - dynamodb:GetItem
+          Resource: arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
+    Metadata:
+      SamResourceId: GetCharacterFunction
+  StartSagaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://dnd-lambda-deployer-bucket/8b6a4447609976dc67af58c231fedee2
+      Handler: create_saga.handler
+      Runtime: python3.11
+      Timeout: 30
+      Events:
+        TitanApi:
+          Type: HttpApi
+          Properties:
+            Path: /createsaga
+            Method: POST
+            ApiId:
+              Ref: TavernHttpApi
+            Auth:
+              Authorizer: CognitoAuthorizer
+      Policies:
+      - Statement:
+        - Effect: Allow
+          Action: bedrock:InvokeModel
+          Resource:
+          - arn:aws:bedrock:us-east-1::foundation-model/*
+          - arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-haiku-20240307-v1:0
+        - Effect: Allow
+          Action:
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+          Resource:
+          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
+          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+          - arn:aws:dynamodb:us-east-1:485875644646:table/TavernGames_Dev
+    Metadata:
+      SamResourceId: StartSagaFunction
+Outputs:
+  HttpApiUrl:
+    Description: HTTP API URL
+    Value:
+      Fn::Sub: https://${TavernHttpApi}.execute-api.${AWS::Region}.amazonaws.com
