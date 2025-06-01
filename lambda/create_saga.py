@@ -27,8 +27,31 @@ def handler(event, context):
     response = start_response['response']
 
     # Generate a new game record and attach to user
-    # TODO - update this to use saga creation logic
     game_record = create_new_game(user_id, prompt, response)
+
+    # Safely get user data
+    dynamodb = boto3.resource('dynamodb')
+    user_table = dynamodb.Table('FW_UserData_Dev')
+    response = user_table.get_item(Key={'user_id': user_id})
+    user_data = response.get('Item', {})
+
+    # Append to existing characters active_games or create new list
+    characters = user_data.get('characters', [])
+
+    # Find and update the correct character's active_games
+    for char in characters:
+        if char.get('character_id') == character_id:
+            if 'active_games' not in char:
+                char['active_games'] = []
+            char['active_games'].append(game_record["game_id"])
+            break
+
+    # Rebuild full item
+    user_data['user_id'] = user_id
+    user_data['characters'] = characters
+
+    # Write back to table
+    user_table.put_item(Item=user_data)
 
     return {
         'statusCode': 200,
