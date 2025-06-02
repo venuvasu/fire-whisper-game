@@ -174,6 +174,7 @@ Right now, your job is to create a character for use in the game. What gets retu
 {
     IDENTITY: {
         name: "",                  // Player's chosen name
+        gender: "",                // Male, Female, Transgender Male, Transgender Female, Non-Binary
         appearance: "",            // Physical description
         background: "",            // Origin story/personal history
         profession: "",            // Class equivalent (Warrior, Mage, etc.)
