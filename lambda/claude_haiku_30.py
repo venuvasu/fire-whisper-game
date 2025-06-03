@@ -161,7 +161,7 @@ Shadow of the Ember Queen"""
     text = response_body["content"][0]["text"]
     return text.strip()
 
-def create_character():
+def create_character(name, gender, profession):
     character_system_prompt = """
 You are the dungeon master of a custom, turn-based text roleplaying game.
 
@@ -290,8 +290,21 @@ Right now, your job is to create a character for use in the game. What gets retu
     }
 }
 """
+    name_prompt = ""
+    if name and name.strip() != "":
+        name_prompt = "The character's name should be " + name + "."
+    gender_prompt = ""
+    if gender and gender.strip() != "":
+        gender_prompt = "The character's gender should be " + gender + "."
+    profession_prompt = ""
+    if profession and profession.strip() != "":
+        profession_prompt = "The character's profession should be " + profession + "."
 
-    character_prompt = "Randomly generate a level 1 character."
+    character_prompt = f"""Generate a level 1 character. Any values not explicitly set below should be randomly generated with appropriate values.
+{name_prompt}
+{gender_prompt}
+{profession_prompt}
+"""
 
     client = boto3.client('bedrock-runtime', region_name="us-east-1")
 

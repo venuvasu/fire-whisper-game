@@ -17,7 +17,7 @@ def handler(event, context):
 
     # Initialize DynamoDB client
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('TavernGames_Dev')
+    table = dynamodb.Table('FW_Sagas_Dev')
 
     # Retrieve the game record from DynamoDB
     response = table.get_item(Key={'game_id': game_id})

@@ -14,7 +14,7 @@ def create_new_game(user_id, prompt, text):
     print(f"Game record: {game_record}")
 
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('TavernGames_Dev')
+    table = dynamodb.Table('FW_Sagas_Dev')
     table.put_item(Item=game_record)
 
     user_table = dynamodb.Table('FW_UserData_Dev')
@@ -37,7 +37,7 @@ def create_new_game(user_id, prompt, text):
 def get_game_by_id(game_id):
     # Retrieve the game record from DynamoDB
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('TavernGames_Dev')
+    table = dynamodb.Table('FW_Sagas_Dev')
     response = table.get_item(Key={'game_id': game_id})
 
     if 'Item' not in response:
@@ -54,7 +54,7 @@ def append_message_to_game(game_record, message):
 
 def update_game_messages(game_id, messages):
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('TavernGames_Dev')
+    table = dynamodb.Table('FW_Sagas_Dev')
 
     table.update_item(
         Key={'game_id': game_id},
