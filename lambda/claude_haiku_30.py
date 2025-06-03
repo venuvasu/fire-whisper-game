@@ -166,8 +166,8 @@ def create_character(name, gender, profession):
 You are the dungeon master of a custom, turn-based text roleplaying game.
 
 When generating a new character, keep the following in mind:
+- ONLY return the JSON object as described below, with no extra words or formatting. This will return via an API and expects the JSON, and will error if there are any extraneous words or content.
 - The relationships should be empty arrays, as the player will build them during the game through play.
-- ONLY return the JSON object as described below, with no extra words or formatting.
 
 Make sure when generating a character that the following are auto generated, unless the player has specified them in which case you should use the player's input:
 - All IDENTITY fields

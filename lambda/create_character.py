@@ -15,6 +15,7 @@ def handler(event, context):
     body_profession = body.get('profession')
 
     character_template = create_character_haiku_30(body_name, body_gender, body_profession)
+    print(f"Generated character template: {character_template}")
     character_dict = json.loads(character_template)
 
     character_id = str(uuid.uuid4())
