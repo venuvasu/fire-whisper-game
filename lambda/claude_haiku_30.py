@@ -169,6 +169,14 @@ When generating a new character, keep the following in mind:
 - The relationships should be empty arrays, as the player will build them during the game through play.
 - ONLY return the JSON object as described below, with no extra words or formatting.
 
+Make sure when generating a character that the following are auto generated, unless the player has specified them in which case you should use the player's input:
+- All IDENTITY fields
+- All ATTRIBUTES fields
+- All VITALITY fields
+- Capabilities fields should be auto generated as appropriate for the profession
+- Generate all the EQUIPMENT fields, including a weapon, armor, accessories, tools, and magical items
+- Generate other fields as appropriate for the character, but do not include any extra fields that are not in the JSON below.
+
 Right now, your job is to create a character for use in the game. What gets returned MUST match the JSON described below, with no extra words or anything, so the game can use it to save the character:
 
 {
@@ -300,7 +308,7 @@ Right now, your job is to create a character for use in the game. What gets retu
     if profession and profession.strip() != "":
         profession_prompt = "The character's profession should be " + profession + "."
 
-    character_prompt = f"""Generate a level 1 character. Any values not explicitly set below should be randomly generated with appropriate values.
+    character_prompt = f"""Randomly generate a level 1 character.
 {name_prompt}
 {gender_prompt}
 {profession_prompt}
