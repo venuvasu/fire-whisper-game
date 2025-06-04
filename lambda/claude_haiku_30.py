@@ -109,9 +109,7 @@ def take_turn(game_record, message):
             "anthropic_version": "bedrock-2023-05-31",
             "system": system_prompt,
             "messages": claude_messages,
-            "generationConfig": {
-                "max_tokens": 96
-            }
+            "max_tokens": 384
         }),
         contentType="application/json",
         accept="application/json"
@@ -170,7 +168,7 @@ When generating a new character, keep the following in mind:
 - The relationships should be empty arrays, as the player will build them during the game through play.
 
 Make sure when generating a character that the following are auto generated, unless the player has specified them in which case you should use the player's input:
-- All IDENTITY fields
+- Make sure All IDENTITY fields are filled in based on comment next to field.
 - All ATTRIBUTES fields
 - All VITALITY fields
 - Capabilities fields should be auto generated as appropriate for the profession
