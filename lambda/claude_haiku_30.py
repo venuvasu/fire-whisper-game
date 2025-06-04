@@ -342,7 +342,7 @@ Right now, your job is to create a character for use in the game. What gets retu
     text = response_body["content"][0]["text"]
     return text.strip()
 
-def create_saga_with_character(character_data):
+def create_saga_with_character(character_data, setting, difficulty, length):
     # Retrieve character dict from FW_Characters_Dev table
     dynamodb = boto3.resource('dynamodb')
     characters_table = dynamodb.Table('FW_Characters_Dev')
@@ -350,13 +350,26 @@ def create_saga_with_character(character_data):
     character_dict = response.get('Item')
     character_dict_str = json.dumps(character_dict, default=decimal_default)
 
+    setting_prompt = ""
+    if setting and setting.strip() != "":
+        setting_prompt = "- The setting of the story should be " + setting + "."
+    difficulty_prompt = ""
+    if difficulty and difficulty.strip() != "":
+        difficulty_prompt = "- The setting of the story should be " + difficulty + "."
+    length_prompt = ""
+    if length and length.strip() != "":
+        length_prompt = "- The setting of the story should be " + length + "."
+
+    print("Difficulty prompt:", difficulty_prompt)
+    print("Length prompt:", length_prompt)
+
     story_prompt = f"""
 We want to generate a game story for the following character. Track characters progress in this format as we play: {character_dict_str}
 
 The story should have the following characteristics:
 - Give the character simple, relevant backstory and a goal to achieve
 - Mix combat, puzzle-solving, and exploration
-- Enter the world of Norse mythology - land of frost giants and ancient gods
+{setting_prompt}
 - STORY MODE - Lighter challenges, focus on narrative and exploration
 - The duration should be: Short - 10 minutes
 """
