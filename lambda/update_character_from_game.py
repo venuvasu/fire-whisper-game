@@ -10,6 +10,7 @@ def handler(event, context):
     character_id = body.get('character_id')
 
     character_template = update_character_haiku_30(game_id, character_id)
+    print(f"Generated character template: {character_template}")
     character_dict = json.loads(character_template)
 
     return {

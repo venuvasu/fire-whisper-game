@@ -80,7 +80,7 @@ Begin the story now.
 
 def take_turn(game_record, message):
     messages = game_record.get('messages', [])
-
+    
     if not messages or len(messages) < 2:
         raise ValueError("Message history must contain at least an initial prompt and one AI response.")
 
@@ -340,20 +340,14 @@ Right now, your job is to create a character for use in the game. What gets retu
     text = response_body["content"][0]["text"]
     return text.strip()
 
+# brian
 def update_character(game_id, character_id):
     character_system_prompt = """You are the dungeon master of a custom, turn-based text roleplaying game. Your job is to update a character sheet based on what happened during gameplay, which is passed as the messages.
 
 The end character sheet should be based on the character sheet provided at the start of the game but updated based on what happened during the game. Award experience for successful acts and progress, including but not limited to:
-- Combat victories
 - Skill check successes
-- Exploration discoveries
 - Quest completion
-- Significant roleplay moments
-
-If the dungeon master during the game did not award experience properly, make adjustments. Also, make sure any attribute, inventory, skill, etc changes are reconciled.
-
 What gets returned MUST match the JSON described below, with no extra words or anything, so the game can use it to save the character:
-
 {
     IDENTITY: {
         name: "",                  // Player's chosen name
@@ -473,7 +467,6 @@ What gets returned MUST match the JSON described below, with no extra words or a
     }
 }
 
-Debug - if you can't do this, return why you can't do it, and what you need to do it.
 """
     # Get messages from game record
     dynamodb = boto3.resource('dynamodb')
@@ -483,6 +476,7 @@ Debug - if you can't do this, return why you can't do it, and what you need to d
     response = table.get_item(Key={'game_id': game_id})
     game_record = response['Item']
     messages = game_record.get('messages', [])
+    messages.append("Return an updated character sheet in the same format as the original character sheet, with any changes made during the turn. Do not return any other text or explanation, just the updated character sheet.")
 
     claude_messages = []
 
@@ -510,7 +504,7 @@ Debug - if you can't do this, return why you can't do it, and what you need to d
             "anthropic_version": "bedrock-2023-05-31",
             "system": character_system_prompt,
             "messages": claude_messages,
-            "max_tokens": 512
+            "max_tokens": 3072
         }),
         contentType="application/json",
         accept="application/json"
@@ -521,6 +515,7 @@ Debug - if you can't do this, return why you can't do it, and what you need to d
     if not content or not isinstance(content, list) or "text" not in content[0]:
         raise ValueError(f"Claude API returned no content: {response_body}")
     text = content[0]["text"]
+    print("Claude response text:", text)
 
     return text.strip()
 
