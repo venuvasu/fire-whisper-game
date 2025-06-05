@@ -97,7 +97,9 @@ Resources:
             - Effect: Allow
               Action:
                 - dynamodb:GetItem
-              Resource: arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
+              Resource:
+                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
+                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
 
   GetUserDataFunction:
     Type: AWS::Serverless::Function
