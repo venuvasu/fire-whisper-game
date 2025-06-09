@@ -1,6 +1,5 @@
 import boto3
 import json
-import os
 import uuid
 
 from claude_haiku_30 import create_character as create_character_haiku_30

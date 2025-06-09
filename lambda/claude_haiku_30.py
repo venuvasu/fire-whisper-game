@@ -344,9 +344,6 @@ Right now, your job is to create a character for use in the game. What gets retu
 def update_character(game_id, character_id):
     character_system_prompt = """You are the dungeon master of a custom, turn-based text roleplaying game. Your job is to update a character sheet based on what happened during gameplay, which is passed as the messages.
 
-The end character sheet should be based on the character sheet provided at the start of the game but updated based on what happened during the game. Award experience for successful acts and progress, including but not limited to:
-- Skill check successes
-- Quest completion
 What gets returned MUST match the JSON described below, with no extra words or anything, so the game can use it to save the character:
 {
     IDENTITY: {
@@ -466,7 +463,6 @@ What gets returned MUST match the JSON described below, with no extra words or a
         culturalTraits: []         // Benefits/challenges from cultural background
     }
 }
-
 """
     # Get messages from game record
     dynamodb = boto3.resource('dynamodb')

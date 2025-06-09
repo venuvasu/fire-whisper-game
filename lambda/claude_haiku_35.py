@@ -101,7 +101,7 @@ def take_turn(game_record, message):
             "anthropic_version": "bedrock-2023-05-31",
             "system": system_prompt,
             "messages": claude_messages,
-            "max_tokens": 512
+            "max_tokens": 384
         }),
         contentType="application/json",
         accept="application/json"
