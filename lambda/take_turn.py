@@ -1,6 +1,6 @@
 import json
 from game_manager import get_game_by_id, append_message_to_game, update_game_messages
-from mistral import take_turn as take_turn_mistral
+from mistral.mistral import take_turn as take_turn_mistral
 from claude_haiku_35 import take_turn as take_turn_claude_haiku
 from claude_haiku_30 import take_turn as take_turn_claude_haiku_30
 

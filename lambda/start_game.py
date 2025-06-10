@@ -1,6 +1,6 @@
 import json
-from mistral import start_game as start_game_mistral
-from amazon_titan import start_game as start_game_amazon_titan
+from mistral.mistral import start_game as start_game_mistral
+from amazon.amazon_titan import start_game as start_game_amazon_titan
 from claude_haiku_35 import start_game as start_game_claude_haiku
 from claude_haiku_30 import start_game as start_game_claude_haiku_30
 from game_manager import create_new_game
