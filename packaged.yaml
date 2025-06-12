@@ -38,49 +38,10 @@ Resources:
         - https://dev.firewhisper.io
     Metadata:
       SamResourceId: TavernHttpApi
-  StartGameFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/9b05aa4d46df65dc0e2592c7867d0276
-      Handler: start_game.handler
-      Runtime: python3.11
-      Timeout: 30
-      Events:
-        TitanApi:
-          Type: HttpApi
-          Properties:
-            Path: /startgame
-            Method: POST
-            ApiId:
-              Ref: TavernHttpApi
-            Auth:
-              Authorizer: CognitoAuthorizer
-      Policies:
-      - Statement:
-        - Effect: Allow
-          Action: bedrock:InvokeModel
-          Resource:
-          - arn:aws:bedrock:us-east-1::foundation-model/*
-          - arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-haiku-20240307-v1:0
-          - arn:aws:bedrock:us-east-1:485875644646:inference-profile/us.anthropic.claude-3-5-haiku-20241022-v1:0
-          - arn:aws:bedrock:us-east-2:485875644646:inference-profile/us.anthropic.claude-3-5-haiku-20241022-v1:0
-          - arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0
-          - arn:aws:bedrock:us-east-2::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0
-          - arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0
-        - Effect: Allow
-          Action:
-          - dynamodb:GetItem
-          - dynamodb:PutItem
-          - dynamodb:UpdateItem
-          Resource:
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
-    Metadata:
-      SamResourceId: StartGameFunction
   GetGameFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/9b05aa4d46df65dc0e2592c7867d0276
+      CodeUri: s3://dnd-lambda-deployer-bucket/20add47f3c87291babcb91a809a9d95a
       Handler: get_game.handler
       Runtime: python3.11
       Timeout: 30
@@ -107,7 +68,7 @@ Resources:
   GetUserDataFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/9b05aa4d46df65dc0e2592c7867d0276
+      CodeUri: s3://dnd-lambda-deployer-bucket/20add47f3c87291babcb91a809a9d95a
       Handler: get_user_data.handler
       Runtime: python3.11
       Timeout: 10
@@ -132,7 +93,7 @@ Resources:
   TakeTurnFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/9b05aa4d46df65dc0e2592c7867d0276
+      CodeUri: s3://dnd-lambda-deployer-bucket/20add47f3c87291babcb91a809a9d95a
       Handler: take_turn.handler
       Runtime: python3.11
       Timeout: 30
@@ -168,7 +129,7 @@ Resources:
   CreateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/9b05aa4d46df65dc0e2592c7867d0276
+      CodeUri: s3://dnd-lambda-deployer-bucket/20add47f3c87291babcb91a809a9d95a
       Handler: create_character.handler
       Runtime: python3.11
       Timeout: 30
@@ -202,7 +163,7 @@ Resources:
   UpdateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/9b05aa4d46df65dc0e2592c7867d0276
+      CodeUri: s3://dnd-lambda-deployer-bucket/20add47f3c87291babcb91a809a9d95a
       Handler: update_character_from_game.handler
       Runtime: python3.11
       Timeout: 30
@@ -235,7 +196,7 @@ Resources:
   GetCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/9b05aa4d46df65dc0e2592c7867d0276
+      CodeUri: s3://dnd-lambda-deployer-bucket/20add47f3c87291babcb91a809a9d95a
       Handler: get_character.handler
       Runtime: python3.11
       Timeout: 10
@@ -260,7 +221,7 @@ Resources:
   StartSagaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/9b05aa4d46df65dc0e2592c7867d0276
+      CodeUri: s3://dnd-lambda-deployer-bucket/20add47f3c87291babcb91a809a9d95a
       Handler: create_saga.handler
       Runtime: python3.11
       Timeout: 30

@@ -39,43 +39,6 @@ Resources:
           - https://rpgtestdomain.com
           - https://dev.firewhisper.io
 
-  StartGameFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: lambda/
-      Handler: start_game.handler
-      Runtime: python3.11
-      Timeout: 30
-      Events:
-        TitanApi:
-          Type: HttpApi
-          Properties:
-            Path: /startgame
-            Method: POST
-            ApiId: !Ref TavernHttpApi
-            Auth:
-              Authorizer: CognitoAuthorizer
-      Policies:
-        - Statement:
-            - Effect: Allow
-              Action: bedrock:InvokeModel
-              Resource:
-                - arn:aws:bedrock:us-east-1::foundation-model/*
-                - arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-haiku-20240307-v1:0
-                - arn:aws:bedrock:us-east-1:485875644646:inference-profile/us.anthropic.claude-3-5-haiku-20241022-v1:0
-                - arn:aws:bedrock:us-east-2:485875644646:inference-profile/us.anthropic.claude-3-5-haiku-20241022-v1:0
-                - arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0
-                - arn:aws:bedrock:us-east-2::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0
-                - arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0
-            - Effect: Allow
-              Action:
-                - dynamodb:GetItem
-                - dynamodb:PutItem
-                - dynamodb:UpdateItem
-              Resource:
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
-
   GetGameFunction:
     Type: AWS::Serverless::Function
     Properties:
