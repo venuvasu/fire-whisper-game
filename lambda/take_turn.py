@@ -100,13 +100,14 @@ def handler(event, context):
             ]
 
         # update character sheet from game record
-        character_template = update_character_haiku_30(game_id, character_profile.get('character_id'))
-        print("Time for after updating character sheet:", time.time() - start)
-        character_dict = json.loads(character_template)
-        characters_table = dynamodb.Table('FW_Characters_Dev')
-        characters_table.put_item(Item=character_dict)
+        # Commented out due to timeouts
+        # character_template = update_character_haiku_30(game_id, character_profile.get('character_id'))
+        # print("Time for after updating character sheet:", time.time() - start)
+        # character_dict = json.loads(character_template)
+        # characters_table = dynamodb.Table('FW_Characters_Dev')
+        # characters_table.put_item(Item=character_dict)
 
-        character_profile['level'] = character_dict["PROGRESSION"]["level"]
+        # character_profile['level'] = character_dict["PROGRESSION"]["level"]
 
         for idx, character in enumerate(user_record.get('characters', [])):
             if character.get('character_id') == character_profile.get('character_id'):
@@ -118,10 +119,12 @@ def handler(event, context):
         print("Time for after ending game:", time.time() - start)
 
     # Update game in dynamo db
-    update_game_messages(game_id, game_record['messages'])
+    update_game_messages(game_id, game_record['messages'], game_record['game_active'])
     print("Time for wrote game message:", time.time() - start)
 
     game_record['character_profile'] = character_profile
+
+    print(game_record)
 
     return {
         'statusCode': 200,

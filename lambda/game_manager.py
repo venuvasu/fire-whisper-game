@@ -37,12 +37,21 @@ def append_message_to_game(game_record, message):
     game_record['messages'] = messages
     return game_record
 
-def update_game_messages(game_id, messages):
+def update_game_messages(game_id, messages, game_active=None):
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('FW_Sagas_Dev')
 
+    update_expr = "SET messages = :m"
+    expr_attrs = {':m': messages}
+
+    print(f'game_active: {game_active}')
+    if game_active is not None:
+        print(f'in game_active: {game_active}')
+        update_expr += ", game_active = :g"
+        expr_attrs[':g'] = game_active
+
     table.update_item(
         Key={'game_id': game_id},
-        UpdateExpression="SET messages = :m",
-        ExpressionAttributeValues={':m': messages}
+        UpdateExpression=update_expr,
+        ExpressionAttributeValues=expr_attrs
     )

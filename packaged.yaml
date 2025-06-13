@@ -41,7 +41,7 @@ Resources:
   GetGameFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/3ef4dd329f591e482d25387806e7a3dc
+      CodeUri: s3://dnd-lambda-deployer-bucket/9facdafd9ead978a8b026b3f4a97408d
       Handler: get_game.handler
       Runtime: python3.11
       Timeout: 30
@@ -68,7 +68,7 @@ Resources:
   GetUserDataFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/3ef4dd329f591e482d25387806e7a3dc
+      CodeUri: s3://dnd-lambda-deployer-bucket/9facdafd9ead978a8b026b3f4a97408d
       Handler: get_user_data.handler
       Runtime: python3.11
       Timeout: 10
@@ -93,7 +93,7 @@ Resources:
   TakeTurnFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/3ef4dd329f591e482d25387806e7a3dc
+      CodeUri: s3://dnd-lambda-deployer-bucket/9facdafd9ead978a8b026b3f4a97408d
       Handler: take_turn.handler
       Runtime: python3.11
       Timeout: 45
@@ -133,7 +133,7 @@ Resources:
   CreateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/3ef4dd329f591e482d25387806e7a3dc
+      CodeUri: s3://dnd-lambda-deployer-bucket/9facdafd9ead978a8b026b3f4a97408d
       Handler: create_character.handler
       Runtime: python3.11
       Timeout: 30
@@ -167,7 +167,7 @@ Resources:
   UpdateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/3ef4dd329f591e482d25387806e7a3dc
+      CodeUri: s3://dnd-lambda-deployer-bucket/9facdafd9ead978a8b026b3f4a97408d
       Handler: update_character_from_game.handler
       Runtime: python3.11
       Timeout: 30
@@ -200,7 +200,7 @@ Resources:
   GetCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/3ef4dd329f591e482d25387806e7a3dc
+      CodeUri: s3://dnd-lambda-deployer-bucket/9facdafd9ead978a8b026b3f4a97408d
       Handler: get_character.handler
       Runtime: python3.11
       Timeout: 10
@@ -225,7 +225,7 @@ Resources:
   StartSagaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/3ef4dd329f591e482d25387806e7a3dc
+      CodeUri: s3://dnd-lambda-deployer-bucket/9facdafd9ead978a8b026b3f4a97408d
       Handler: create_saga.handler
       Runtime: python3.11
       Timeout: 30
