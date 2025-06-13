@@ -25,7 +25,8 @@ def handler(event, context):
         'name': character_dict["IDENTITY"]["name"],
         'level': character_dict["PROGRESSION"]["level"],
         'profession': character_dict["IDENTITY"]["profession"],
-        'active_games': []
+        'active_games': [],
+        'completed_games': []
     }
 
     dynamodb = boto3.resource('dynamodb')

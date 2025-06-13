@@ -12,7 +12,8 @@ def build_chat_record(game_id, game_name, original_message, messages):
         "game_id": game_id,
         "game_name": game_name,
         "original_message": original_message,
-        "messages": messages
+        "messages": messages,
+        "game_active": True,
     }
 
 def parse_chat_record(record):
@@ -20,5 +21,6 @@ def parse_chat_record(record):
         "game_id": record.get("game_id", ""),
         "game_name": record.get("game_name", ""),
         "original_message": record.get("original_message", ""),
-        "messages": record.get("messages", [])
+        "messages": record.get("messages", []),
+        "game_active": record.get("game_active", True)
     }

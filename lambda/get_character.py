@@ -1,7 +1,6 @@
 import boto3
 import decimal
 import json
-import os
 
 def default_serializer(obj):
     if isinstance(obj, decimal.Decimal):
@@ -9,9 +8,6 @@ def default_serializer(obj):
     raise TypeError
 
 def handler(event, context):
-    # claims = event['requestContext']['authorizer']['jwt']['claims']
-    # user_id = claims.get('sub')
-
     character_id = event.get("queryStringParameters", {}).get("character_id")
     print(f"Character ID: {character_id}")
 

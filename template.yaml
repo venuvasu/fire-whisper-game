@@ -93,7 +93,7 @@ Resources:
       CodeUri: lambda/
       Handler: take_turn.handler
       Runtime: python3.11
-      Timeout: 30
+      Timeout: 45
       Events:
         TitanApi:
           Type: HttpApi
@@ -118,10 +118,12 @@ Resources:
             - Effect: Allow
               Action:
                 - dynamodb:GetItem
+                - dynamodb:PutItem
                 - dynamodb:UpdateItem
               Resource:
                 - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
                 - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
 
   CreateCharacterFunction:
     Type: AWS::Serverless::Function

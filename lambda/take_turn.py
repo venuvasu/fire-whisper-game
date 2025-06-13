@@ -5,6 +5,8 @@ from game_manager import get_game_by_id, append_message_to_game, update_game_mes
 from mistral.mistral import take_turn as take_turn_mistral
 from claude_haiku_35 import take_turn as take_turn_claude_haiku
 from claude_haiku_30 import take_turn as take_turn_claude_haiku_30
+from claude_haiku_30 import update_character as update_character_haiku_30
+import time
 
 model_type = "claude_haiku_35"
 
@@ -14,6 +16,7 @@ def decimal_default(obj):
     raise TypeError
 
 def handler(event, context):
+    start = time.time()
     claims = event['requestContext']['authorizer']['jwt']['claims']
     user_id = claims.get('sub')
 
@@ -53,10 +56,10 @@ def handler(event, context):
     elif(model_type == "claude_haiku_30"):
         text = take_turn_claude_haiku_30(game_record, message)
 
-    # Append the AI response to the game record and update dynamodb
-    game_record = append_message_to_game(game_record, text)
-    update_game_messages(game_id, game_record['messages'])
+    print("Time for after taking turn:", time.time() - start)
 
+    # Append the AI response to the game record
+    game_record = append_message_to_game(game_record, text)
 
     # Retrieve user data from DynamoDB
     dynamodb = boto3.resource('dynamodb')
@@ -68,6 +71,55 @@ def handler(event, context):
     for character in user_record.get('characters', []):
         if character.get('active_games') and character['active_games'][0] == game_id:
             character_profile = character
+
+    if character_profile is None:
+        return {
+            'statusCode': 404,
+            'body': json.dumps({'error': 'Character profile not found for this game'}),
+            'headers': {
+                'Content-Type': 'application/json'
+            }
+        }
+
+    # Handle if this is the final turn in the game
+    if "Congratulations, you have completed this Saga!" in text:
+        print("Time for starting ending game:", time.time() - start)
+        print("Game completed, updating game record status.")
+        # Mark game_record as no longer active
+        game_record['game_active'] = False
+
+        # Append game_id to completed_games
+        if 'completed_games' not in character_profile or not isinstance(character_profile['completed_games'], list):
+            character_profile['completed_games'] = []
+        if game_id not in character_profile['completed_games']:
+            character_profile['completed_games'].append(game_id)
+
+        if 'active_games' in character_profile and isinstance(character_profile['active_games'], list):
+            character_profile['active_games'] = [
+                g for g in character_profile['active_games'] if g != game_id
+            ]
+
+        # update character sheet from game record
+        character_template = update_character_haiku_30(game_id, character_profile.get('character_id'))
+        print("Time for after updating character sheet:", time.time() - start)
+        character_dict = json.loads(character_template)
+        characters_table = dynamodb.Table('FW_Characters_Dev')
+        characters_table.put_item(Item=character_dict)
+
+        character_profile['level'] = character_dict["PROGRESSION"]["level"]
+
+        for idx, character in enumerate(user_record.get('characters', [])):
+            if character.get('character_id') == character_profile.get('character_id'):
+                user_record['characters'][idx] = character_profile
+                break
+
+        # Update game in dynamo db
+        user_table.put_item(Item=user_record)
+        print("Time for after ending game:", time.time() - start)
+
+    # Update game in dynamo db
+    update_game_messages(game_id, game_record['messages'])
+    print("Time for wrote game message:", time.time() - start)
 
     game_record['character_profile'] = character_profile
 

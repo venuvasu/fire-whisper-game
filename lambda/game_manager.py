@@ -17,21 +17,6 @@ def create_new_game(user_id, prompt, text):
     table = dynamodb.Table('FW_Sagas_Dev')
     table.put_item(Item=game_record)
 
-    user_table = dynamodb.Table('FW_UserData_Dev')
-    user_data = user_table.get_item(Key={'user_id': user_id})
-
-    if 'Item' not in user_data:
-        new_user_data = build_user_record(user_id, [{"id":unique_game_id, "name":game_name}])
-        user_table.put_item(Item=new_user_data)
-    else:
-        games = user_data['Item'].get('active_games', [])
-        games.append({"id":unique_game_id, "name":game_name})
-        user_table.update_item(
-            Key={'user_id': user_id},
-            UpdateExpression="SET active_games = :g",
-            ExpressionAttributeValues={':g': games}
-        )
-
     return game_record
 
 def get_game_by_id(game_id):

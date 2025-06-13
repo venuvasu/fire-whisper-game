@@ -340,7 +340,6 @@ Right now, your job is to create a character for use in the game. What gets retu
     text = response_body["content"][0]["text"]
     return text.strip()
 
-# brian
 def update_character(game_id, character_id):
     character_system_prompt = """You are the dungeon master of a custom, turn-based text roleplaying game. Your job is to update a character sheet based on what happened during gameplay, which is passed as the messages.
 
@@ -463,6 +462,36 @@ What gets returned MUST match the JSON described below, with no extra words or a
         culturalTraits: []         // Benefits/challenges from cultural background
     }
 }
+
+Players level up based on total experience points (XP). Use this XP table:
+Level 2 = 1000 XP
+Level 3 = 2000 XP
+Level 4 = 5000 XP
+Level 5 = 10000 XP
+Level 6 = 15000 XP
+Level 7 = 23000 XP
+Level 8 = 34000 XP
+Level 9 = 48000 XP
+Level 10 = 64000 XP
+Level 11 = 85000 XP
+Level 12 = 100000 XP
+Level 13 = 120000 XP
+Level 14 = 140000 XP
+Level 15 = 165000 XP
+Level 16 = 195000 XP
+Level 17 = 225000 XP
+Level 18 = 265000 XP
+Level 19 = 305000 XP
+Level 20 = 355000 XP
+Only increase level when XP meets or exceeds the threshold. Do not grant partial levels.
+
+On leveling up, bestow benefits on the character such as:
+- Increased attributes
+- New skills or skill improvements
+- New talents or spells
+- Increased hit points and mana
+- Special abilities at milestone levels
+If the benefits were bestowed during the game, they should be reflected in the character sheet. Correct the character sheet to upgrade the character if the game failed to.
 """
     # Get messages from game record
     dynamodb = boto3.resource('dynamodb')
@@ -490,7 +519,6 @@ What gets returned MUST match the JSON described below, with no extra words or a
                     }
             ]
         })
-    print("Claude messages:", claude_messages)
 
     client = boto3.client('bedrock-runtime', region_name="us-east-1")
 
@@ -511,7 +539,6 @@ What gets returned MUST match the JSON described below, with no extra words or a
     if not content or not isinstance(content, list) or "text" not in content[0]:
         raise ValueError(f"Claude API returned no content: {response_body}")
     text = content[0]["text"]
-    print("Claude response text:", text)
 
     return text.strip()
 
@@ -537,15 +564,26 @@ def create_saga_with_character(character_data, setting, difficulty, length):
     print("Difficulty prompt:", difficulty_prompt)
     print("Length prompt:", length_prompt)
 
-    story_prompt = f"""
-We want to generate a game story for the following character. Track characters progress in this format as we play: {character_dict_str}
+    story_prompt = f"""We want to generate a game story for the following character. Track characters progress in this format as we play: {character_dict_str}
 
 The story should have the following characteristics:
-- Give the character simple, relevant backstory and a goal to achieve
+- Give the character simple, relevant backstory and a specific goal (or quest) to achieve
 - Mix combat, puzzle-solving, and exploration
 {setting_prompt}
 - STORY MODE - Lighter challenges, focus on narrative and exploration
 - The duration should be: Short - 10 minutes
+- This is a SINGLE-SESSION tutorial story that MUST conclude after the goal is achieved.
+- The story should END automatically after the goals are completed and NOT prompt for further input. This means to options and no questions, as the user won't be able to respond.
+"""
+
+    if difficulty.strip() == "Tutorial":
+        story_prompt = f"""We want to generate a game story for the following character. Track characters progress in this format as we play: {character_dict_str}
+The story should have the following characteristics:
+- Give the character simple, relevant backstory and a goal to achieve
+- This is a SINGLE-SESSION tutorial story that MUST conclude after the goal is achieved.
+- The story should END automatically after the goals are completed and NOT prompt for further input. This means to options and no questions, as the user won't be able to respond.
+- This is a tutorial story, so it should be very simple, consisting of a very simple puzzle followed by a combat encounter leading to a conclusion.
+{setting_prompt}
 """
 
     client = boto3.client('bedrock-runtime', region_name="us-east-1")
