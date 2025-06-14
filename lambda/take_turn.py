@@ -119,6 +119,8 @@ def handler(event, context):
         print("Time for after ending game:", time.time() - start)
 
     # Update game in dynamo db
+    if 'game_active' not in game_record:
+        game_record['game_active'] = True
     update_game_messages(game_id, game_record['messages'], game_record['game_active'])
     print("Time for wrote game message:", time.time() - start)
 
