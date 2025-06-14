@@ -1,6 +1,7 @@
 import boto3
 import decimal
 import json
+from amplitude.amplitude_handler import send_bedrock_amplitude_event
 
 def decimal_default(obj):
     if isinstance(obj, decimal.Decimal):
@@ -159,7 +160,7 @@ Shadow of the Ember Queen"""
     text = response_body["content"][0]["text"]
     return text.strip()
 
-def create_character(name, gender, profession):
+def create_character(user_id, name, gender, profession):
     character_system_prompt = """
 You are the dungeon master of a custom, turn-based text roleplaying game.
 
@@ -335,6 +336,8 @@ Right now, your job is to create a character for use in the game. What gets retu
         contentType="application/json",
         accept="application/json"
     )
+
+    send_bedrock_amplitude_event(user_id, "create_character", "claude_haiku_30", response)
 
     response_body = json.loads(response["body"].read())
     text = response_body["content"][0]["text"]
@@ -543,7 +546,7 @@ If the benefits were bestowed during the game, they should be reflected in the c
     return text.strip()
 
 
-def create_saga_with_character(character_data, setting, difficulty, length):
+def create_saga_with_character(user_id, character_data, setting, difficulty, length):
     # Retrieve character dict from FW_Characters_Dev table
     dynamodb = boto3.resource('dynamodb')
     characters_table = dynamodb.Table('FW_Characters_Dev')
@@ -609,6 +612,8 @@ The story should have the following characteristics:
         contentType="application/json",
         accept="application/json"
     )
+
+    send_bedrock_amplitude_event(user_id, "create_saga", "claude_haiku_30", response)
 
     response_body = json.loads(response["body"].read())
     text = response_body["content"][0]["text"]

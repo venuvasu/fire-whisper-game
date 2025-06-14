@@ -1,5 +1,6 @@
 import boto3
 import json
+from amplitude.amplitude_handler import send_bedrock_amplitude_event
 
 with open("prompts/claude_system_prompt.txt", "r") as f:
     system_prompt = f.read()
@@ -45,7 +46,7 @@ Begin the story now.
 
     return {"prompt": initial_prompt, "response": text}
 
-def take_turn(game_record, message):
+def take_turn(user_id, game_record):
     messages = game_record.get('messages', [])
 
     if not messages or len(messages) < 2:
@@ -67,7 +68,6 @@ def take_turn(game_record, message):
                     }
             ]
         })
-    print(claude_messages)
 
     client = boto3.client('bedrock-runtime', region_name="us-east-1")
 
@@ -82,6 +82,8 @@ def take_turn(game_record, message):
         contentType="application/json",
         accept="application/json"
     )
+
+    send_bedrock_amplitude_event(user_id, "take_turn", "claude_haiku_35", response)
 
     response_body = json.loads(response["body"].read())
     text = response_body["content"][0]["text"]

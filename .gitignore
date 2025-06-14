@@ -174,3 +174,17 @@ cython_debug/
 .pypirc
 
 .DS_Store
+
+# Ignore dependencies installed by build step
+lambda/__pycache__/
+lambda/*.dist-info/
+lambda/*.egg-info/
+lambda/requests/
+lambda/urllib3/
+lambda/certifi/
+lambda/idna/
+lambda/chardet/
+lambda/charset_normalizer/
+lambda/*.pyc
+lambda/requests.installed
+lambda/bin/

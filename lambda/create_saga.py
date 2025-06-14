@@ -22,7 +22,7 @@ def handler(event, context):
     character_dict = response.get('Item')
     print("character_dict:", repr(character_dict))
     
-    start_response = create_saga_with_character_haiku_30(character_dict, setting, difficulty, length)
+    start_response = create_saga_with_character_haiku_30(user_id, character_dict, setting, difficulty, length)
     prompt = start_response['prompt']
     response = start_response['response']
 

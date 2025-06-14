@@ -8,7 +8,14 @@ ifneq (,$(wildcard .env))
   export
 endif
 
-package:
+build:
+	rm -rf lambda/requests.installed
+	rm -rf lambda/requests*
+	rm -rf lambda/urllib3*
+	python3 -m pip install -r lambda/requirements.txt -t lambda/
+	touch lambda/requests.installed
+
+package: build
 	sam package \
 	  --template-file template.yaml \
 	  --output-template-file packaged.yaml \

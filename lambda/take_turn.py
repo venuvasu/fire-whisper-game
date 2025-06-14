@@ -52,7 +52,7 @@ def handler(event, context):
     elif(model_type == "amazon_titan"):
         text = "Take turn using Amazon Titan model is not implemented yet."
     elif(model_type == "claude_haiku_35"):
-        text = take_turn_claude_haiku(game_record, message)
+        text = take_turn_claude_haiku(user_id, game_record)
     elif(model_type == "claude_haiku_30"):
         text = take_turn_claude_haiku_30(game_record, message)
 
