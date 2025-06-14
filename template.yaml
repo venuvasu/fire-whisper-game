@@ -209,7 +209,10 @@ Resources:
             - Effect: Allow
               Action:
                 - dynamodb:GetItem
-              Resource: arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
+              Resource:
+                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
+                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
 
   StartSagaFunction:
     Type: AWS::Serverless::Function

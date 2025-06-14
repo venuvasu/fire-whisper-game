@@ -55,3 +55,74 @@ def update_game_messages(game_id, messages, game_active=None):
         UpdateExpression=update_expr,
         ExpressionAttributeValues=expr_attrs
     )
+
+def get_game_summary(game_id):
+    dynamodb = boto3.client('dynamodb')
+    response = dynamodb.get_item(
+        TableName="FW_Sagas_Dev",
+        Key={'game_id': {'S': game_id}},
+        ProjectionExpression='game_name, messages'
+    )
+    item = response.get('Item')
+    if not item:
+        return {
+            'game_id': game_id,
+            'game_name': None,
+            'message_count': 0
+        }
+    
+    game_name = item.get('game_name', {}).get('S', '')
+    message_count = len(item.get('messages', {}).get('L', []))
+
+    return {
+        'game_id': game_id,
+        'game_name': game_name,
+        'message_count': message_count
+    }
+
+
+def get_games_for_character(user_id, target_character_id):
+    dynamodb = boto3.client('dynamodb')
+    response = dynamodb.get_item(
+        TableName='FW_UserData_Dev',
+        Key={'user_id': {'S': user_id}}
+    )
+    
+    item = response.get('Item')
+    if not item:
+        return None
+
+    characters = item.get('characters', {}).get('L', [])
+    
+    game_object = {
+        'character_id': target_character_id,
+        'active_games': [],
+        'completed_games': []
+    }
+    for char_entry in characters:
+        char = char_entry.get('M', {})
+        char_id = char.get('character_id', {}).get('S')
+        if char_id == target_character_id:
+            active_games = [g['S'] for g in char.get('active_games', {}).get('L', [])]
+            completed_games = [g['S'] for g in char.get('completed_games', {}).get('L', [])]
+            game_object = {
+                'character_id': char_id,
+                'active_games': active_games,
+                'completed_games': completed_games
+            }
+
+    hydrated_games = {
+        'character_id': game_object['character_id'],
+        'active_games': [],
+        'completed_games': []
+    }
+
+    for game_id in game_object.get('active_games', []):
+        hydrated_games['active_games'].append(get_game_summary(game_id))
+
+    for game_id in game_object.get('completed_games', []):
+        hydrated_games['completed_games'].append(get_game_summary(game_id))
+
+    game_object = hydrated_games
+
+    return game_object
