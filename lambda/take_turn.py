@@ -3,9 +3,9 @@ import decimal
 import json
 from game_manager import get_game_by_id, append_message_to_game, update_game_messages
 from mistral.mistral import take_turn as take_turn_mistral
-from claude_haiku_35 import take_turn as take_turn_claude_haiku
-from claude_haiku_30 import take_turn as take_turn_claude_haiku_30
-from claude_haiku_30 import update_character as update_character_haiku_30
+from claude_haiku_35.claude_haiku_35 import take_turn as take_turn_claude_haiku
+from claude_haiku_30.claude_haiku_30 import take_turn as take_turn_claude_haiku_30
+from claude_haiku_30.claude_haiku_30 import update_character as update_character_haiku_30
 import time
 
 model_type = "claude_haiku_35"

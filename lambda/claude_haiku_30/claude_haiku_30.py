@@ -557,35 +557,49 @@ def create_saga_with_character(user_id, character_data, setting, difficulty, len
     setting_prompt = ""
     if setting and setting.strip() != "":
         setting_prompt = "- The setting of the story should be " + setting + "."
+
     difficulty_prompt = ""
     if difficulty and difficulty.strip() != "":
-        difficulty_prompt = "- The setting of the story should be " + difficulty + "."
-    length_prompt = ""
-    if length and length.strip() != "":
-        length_prompt = "- The setting of the story should be " + length + "."
+        difficulty_prompt = "Story should focus on narrative and exploration, lighter challenges."
+    elif difficulty.strip() == "Story":
+        difficulty_prompt = "Story should focus on narrative and exploration, lighter challenges."
+    elif difficulty.strip() == "Adventurer":
+        difficulty_prompt = "Story should focus on narrative and exploration and combat should be moderately difficult and have the possibility of failure."
+    elif difficulty.strip() == "Hero":
+        difficulty_prompt = "Story should strive to challenge the player and mistakes should be punished."
+    else:
+        difficulty_prompt = "Story should focus on narrative and exploration, lighter challenges."
 
-    print("Difficulty prompt:", difficulty_prompt)
-    print("Length prompt:", length_prompt)
+    # Give story parameters by length chosen
+    length_prompt = ""
+    if not length or not length.strip() or length.strip() == "Short":
+        length_prompt = "The duration of this story should be short, consisting of simple puzzle followed by a combat encounter leading to a conclusion."
+    elif length.strip() == "Medium":
+        length_prompt = "The duration of this story should be medium, consisting of puzzle followed by 2-3 combat encounters leading to a conclusion."
+    elif length.strip() == "Long":
+        length_prompt = "The duration of this story should be longer, consisting of 3 clear quest milestones that cascade to a conclusion. Each milestone should consist of a puzzle, 1-2 combat encounters, or a boss fight. There should be a heavy bias to using a Boss fight for the third milestone. NPCs should be encouraged to adventure alongside the player in this story."
+    else:
+        length_prompt = "The duration of this story should be short, consisting of simple puzzle followed by a combat encounter leading to a conclusion."
 
     story_prompt = f"""We want to generate a game story for the following character. Track characters progress in this format as we play: {character_dict_str}
 
 The story should have the following characteristics:
 - Give the character simple, relevant backstory and a specific goal (or quest) to achieve
-- Mix combat, puzzle-solving, and exploration
-{setting_prompt}
-- STORY MODE - Lighter challenges, focus on narrative and exploration
-- The duration should be: Short - 10 minutes
-- This is a SINGLE-SESSION tutorial story that MUST conclude after the goal is achieved.
+- This is a SINGLE-SESSION story that MUST conclude after the goal is achieved.
 - The story should END automatically after the goals are completed and NOT prompt for further input. This means to options and no questions, as the user won't be able to respond.
+- {length_prompt}
+- {setting_prompt}
+- {difficulty_prompt}
 """
 
     if difficulty.strip() == "Tutorial":
         story_prompt = f"""We want to generate a game story for the following character. Track characters progress in this format as we play: {character_dict_str}
+
 The story should have the following characteristics:
-- Give the character simple, relevant backstory and a goal to achieve
-- This is a SINGLE-SESSION tutorial story that MUST conclude after the goal is achieved.
+- Give the character simple, relevant backstory and a specific goal (or quest) to achieve
+- This is a SINGLE-SESSION story that MUST conclude after the goal is achieved.
 - The story should END automatically after the goals are completed and NOT prompt for further input. This means to options and no questions, as the user won't be able to respond.
-- This is a tutorial story, so it should be very simple, consisting of a very simple puzzle followed by a combat encounter leading to a conclusion.
+- This is a tutorial story, so it should be very simple, consisting of a very simple puzzle followed by a combat encounter leading to a quick conclusion.
 {setting_prompt}
 """
 

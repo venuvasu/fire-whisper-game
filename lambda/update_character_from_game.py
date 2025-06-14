@@ -1,8 +1,5 @@
-import boto3
 import json
-import uuid
-
-from claude_haiku_30 import update_character as update_character_haiku_30
+from claude_haiku_30.claude_haiku_30 import update_character as update_character_haiku_30
 
 def handler(event, context):
     body = json.loads(event.get('body', '{}'))
