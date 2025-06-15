@@ -36,6 +36,13 @@ def handler(event, context):
     for character in user_record.get('characters', []):
         if character.get('active_games') and character['active_games'][0] == game_id:
             character_profile = character
+            break
+
+    if character_profile is None:
+        for character in user_record.get('characters', []):
+            if game_id in character.get('completed_games', []):
+                character_profile = character
+                break
 
     print(f"Character profile for game {game_id}: {character_profile}")
 
