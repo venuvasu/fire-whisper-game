@@ -621,7 +621,7 @@ The story should have the following characteristics:
                     ]
                 }
             ],
-            "max_tokens": 256
+            "max_tokens": 384
         }),
         contentType="application/json",
         accept="application/json"

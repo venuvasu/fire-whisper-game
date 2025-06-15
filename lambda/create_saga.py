@@ -1,7 +1,8 @@
 import boto3
 import json
 from game_manager import create_new_game
-from claude_haiku_30.claude_haiku_30 import create_saga_with_character as create_saga_with_character_haiku_30
+# from claude_haiku_30.claude_haiku_30 import create_saga_with_character as create_saga_with_character_haiku_30
+from claude_haiku.claude_haiku_create_saga import create_saga_with_character
 
 def handler(event, context):
     claims = event['requestContext']['authorizer']['jwt']['claims']
@@ -22,7 +23,7 @@ def handler(event, context):
     character_dict = response.get('Item')
     print("character_dict:", repr(character_dict))
     
-    start_response = create_saga_with_character_haiku_30(user_id, character_dict, setting, difficulty, length)
+    start_response = create_saga_with_character(user_id, character_dict, setting, difficulty, length, "claude_haiku_35")
     prompt = start_response['prompt']
     response = start_response['response']
 
