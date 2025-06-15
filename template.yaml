@@ -39,6 +39,14 @@ Resources:
           - https://rpgtestdomain.com
           - https://dev.firewhisper.io
 
+  AllowTakeTurnToInvokeUpdateCharacter:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt UpdateCharacterFunction.Arn
+      Action: lambda:InvokeFunction
+      Principal: lambda.amazonaws.com
+      SourceArn: !GetAtt TakeTurnFunction.Arn
+
   GetGameFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -93,7 +101,10 @@ Resources:
       CodeUri: lambda/
       Handler: take_turn.handler
       Runtime: python3.11
-      Timeout: 45
+      Timeout: 30
+      Environment:
+        Variables:
+          UPDATE_CHARACTER_ARN: !GetAtt UpdateCharacterFunction.Arn
       Events:
         TitanApi:
           Type: HttpApi
@@ -124,6 +135,10 @@ Resources:
                 - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
                 - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
                 - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
+            - Effect: Allow
+              Action:
+                - lambda:InvokeFunction
+              Resource: !GetAtt UpdateCharacterFunction.Arn
 
   CreateCharacterFunction:
     Type: AWS::Serverless::Function
@@ -187,6 +202,8 @@ Resources:
                 - dynamodb:UpdateItem
               Resource:
                 - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
+                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
+                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
 
   GetCharacterFunction:
     Type: AWS::Serverless::Function

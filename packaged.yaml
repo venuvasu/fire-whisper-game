@@ -38,10 +38,25 @@ Resources:
         - https://dev.firewhisper.io
     Metadata:
       SamResourceId: TavernHttpApi
+  AllowTakeTurnToInvokeUpdateCharacter:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Fn::GetAtt:
+        - UpdateCharacterFunction
+        - Arn
+      Action: lambda:InvokeFunction
+      Principal: lambda.amazonaws.com
+      SourceArn:
+        Fn::GetAtt:
+        - TakeTurnFunction
+        - Arn
+    Metadata:
+      SamResourceId: AllowTakeTurnToInvokeUpdateCharacter
   GetGameFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/c0ad3282c896a2c7d1f49318fc22c143
+      CodeUri: s3://dnd-lambda-deployer-bucket/0536940c18f707b7ec07dcb0b9282c46
       Handler: get_game.handler
       Runtime: python3.11
       Timeout: 30
@@ -68,7 +83,7 @@ Resources:
   GetUserDataFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/c0ad3282c896a2c7d1f49318fc22c143
+      CodeUri: s3://dnd-lambda-deployer-bucket/0536940c18f707b7ec07dcb0b9282c46
       Handler: get_user_data.handler
       Runtime: python3.11
       Timeout: 10
@@ -93,10 +108,16 @@ Resources:
   TakeTurnFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/c0ad3282c896a2c7d1f49318fc22c143
+      CodeUri: s3://dnd-lambda-deployer-bucket/0536940c18f707b7ec07dcb0b9282c46
       Handler: take_turn.handler
       Runtime: python3.11
-      Timeout: 45
+      Timeout: 30
+      Environment:
+        Variables:
+          UPDATE_CHARACTER_ARN:
+            Fn::GetAtt:
+            - UpdateCharacterFunction
+            - Arn
       Events:
         TitanApi:
           Type: HttpApi
@@ -128,12 +149,19 @@ Resources:
           - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
           - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
           - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
+        - Effect: Allow
+          Action:
+          - lambda:InvokeFunction
+          Resource:
+            Fn::GetAtt:
+            - UpdateCharacterFunction
+            - Arn
     Metadata:
       SamResourceId: TakeTurnFunction
   CreateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/c0ad3282c896a2c7d1f49318fc22c143
+      CodeUri: s3://dnd-lambda-deployer-bucket/0536940c18f707b7ec07dcb0b9282c46
       Handler: create_character.handler
       Runtime: python3.11
       Timeout: 30
@@ -167,7 +195,7 @@ Resources:
   UpdateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/c0ad3282c896a2c7d1f49318fc22c143
+      CodeUri: s3://dnd-lambda-deployer-bucket/0536940c18f707b7ec07dcb0b9282c46
       Handler: update_character_from_game.handler
       Runtime: python3.11
       Timeout: 30
@@ -195,12 +223,14 @@ Resources:
           - dynamodb:UpdateItem
           Resource:
           - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
+          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
+          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
     Metadata:
       SamResourceId: UpdateCharacterFunction
   GetCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/c0ad3282c896a2c7d1f49318fc22c143
+      CodeUri: s3://dnd-lambda-deployer-bucket/0536940c18f707b7ec07dcb0b9282c46
       Handler: get_character.handler
       Runtime: python3.11
       Timeout: 10
@@ -228,7 +258,7 @@ Resources:
   StartSagaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/c0ad3282c896a2c7d1f49318fc22c143
+      CodeUri: s3://dnd-lambda-deployer-bucket/0536940c18f707b7ec07dcb0b9282c46
       Handler: create_saga.handler
       Runtime: python3.11
       Timeout: 30

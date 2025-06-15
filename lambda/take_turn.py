@@ -1,12 +1,12 @@
 import boto3
 import decimal
 import json
+import os
 from game_manager import get_game_by_id, append_message_to_game, update_game_messages
 from mistral.mistral import take_turn as take_turn_mistral
 from claude_haiku_35.claude_haiku_35 import take_turn as take_turn_claude_haiku
 from claude_haiku_30.claude_haiku_30 import take_turn as take_turn_claude_haiku_30
 from claude_haiku_30.claude_haiku_30 import update_character as update_character_haiku_30
-import time
 
 model_type = "claude_haiku_35"
 
@@ -16,7 +16,6 @@ def decimal_default(obj):
     raise TypeError
 
 def handler(event, context):
-    start = time.time()
     claims = event['requestContext']['authorizer']['jwt']['claims']
     user_id = claims.get('sub')
 
@@ -56,8 +55,6 @@ def handler(event, context):
     elif(model_type == "claude_haiku_30"):
         text = take_turn_claude_haiku_30(game_record, message)
 
-    print("Time for after taking turn:", time.time() - start)
-
     # Append the AI response to the game record
     game_record = append_message_to_game(game_record, text)
 
@@ -83,7 +80,6 @@ def handler(event, context):
 
     # Handle if this is the final turn in the game
     if "Congratulations, you have completed this Saga!" in text:
-        print("Time for starting ending game:", time.time() - start)
         print("Game completed, updating game record status.")
         # Mark game_record as no longer active
         game_record['game_active'] = False
@@ -99,16 +95,6 @@ def handler(event, context):
                 g for g in character_profile['active_games'] if g != game_id
             ]
 
-        # update character sheet from game record
-        # Commented out due to timeouts
-        # character_template = update_character_haiku_30(game_id, character_profile.get('character_id'))
-        # print("Time for after updating character sheet:", time.time() - start)
-        # character_dict = json.loads(character_template)
-        # characters_table = dynamodb.Table('FW_Characters_Dev')
-        # characters_table.put_item(Item=character_dict)
-
-        # character_profile['level'] = character_dict["PROGRESSION"]["level"]
-
         for idx, character in enumerate(user_record.get('characters', [])):
             if character.get('character_id') == character_profile.get('character_id'):
                 user_record['characters'][idx] = character_profile
@@ -116,17 +102,32 @@ def handler(event, context):
 
         # Update game in dynamo db
         user_table.put_item(Item=user_record)
-        print("Time for after ending game:", time.time() - start)
 
     # Update game in dynamo db
     if 'game_active' not in game_record:
         game_record['game_active'] = True
     update_game_messages(game_id, game_record['messages'], game_record['game_active'])
-    print("Time for wrote game message:", time.time() - start)
 
     game_record['character_profile'] = character_profile
 
     print(game_record)
+
+    # Invoke an async update character if games completed
+    if "Congratulations, you have completed this Saga!" in text:
+        update_fn = os.environ["UPDATE_CHARACTER_ARN"]
+        lambda_client = boto3.client("lambda")
+
+        payload = {
+            "user_id": user_id,
+            "character_id": character_profile.get('character_id'),
+            "game_id": game_id
+        }
+
+        lambda_client.invoke(
+            FunctionName=update_fn,
+            InvocationType="Event",
+            Payload=json.dumps(payload)
+        )
 
     return {
         'statusCode': 200,
