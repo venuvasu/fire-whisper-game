@@ -7,6 +7,7 @@ from mistral.mistral import take_turn as take_turn_mistral
 from claude_haiku_35.claude_haiku_35 import take_turn as take_turn_claude_haiku
 from claude_haiku_30.claude_haiku_30 import take_turn as take_turn_claude_haiku_30
 from claude_haiku_30.claude_haiku_30 import update_character as update_character_haiku_30
+from claude_haiku.claude_haiku_take_turn import take_turn
 
 model_type = "claude_haiku_35"
 
@@ -51,9 +52,9 @@ def handler(event, context):
     elif(model_type == "amazon_titan"):
         text = "Take turn using Amazon Titan model is not implemented yet."
     elif(model_type == "claude_haiku_35"):
-        text = take_turn_claude_haiku(user_id, game_record)
+        text = take_turn(user_id, game_record, "claude_haiku_35")
     elif(model_type == "claude_haiku_30"):
-        text = take_turn_claude_haiku_30(game_record, message)
+        text = take_turn(user_id, game_record, "claude_haiku_30")
 
     # Append the AI response to the game record
     game_record = append_message_to_game(game_record, text)
