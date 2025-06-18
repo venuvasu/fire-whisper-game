@@ -11,48 +11,6 @@ def decimal_default(obj):
 with open("prompts/claude_system_prompt_turns.txt", "r") as f:
     system_prompt = f.read()
 
-
-def take_turn(game_record, message):
-    messages = game_record.get('messages', [])
-    
-    if not messages or len(messages) < 2:
-        raise ValueError("Message history must contain at least an initial prompt and one AI response.")
-
-    claude_messages = []
-
-    for index, item in enumerate(messages):
-        role = "assistant"
-        if index % 2 == 0:
-            role = "user"
-        
-        claude_messages.append({
-            "role": role,
-            "content": [
-                {
-                    "type": "text",
-                    "text": item
-                    }
-            ]
-        })
-
-    client = boto3.client('bedrock-runtime', region_name="us-east-1")
-
-    response = client.invoke_model(
-        modelId="anthropic.claude-3-haiku-20240307-v1:0",
-        body=json.dumps({
-            "anthropic_version": "bedrock-2023-05-31",
-            "system": system_prompt,
-            "messages": claude_messages,
-            "max_tokens": 384
-        }),
-        contentType="application/json",
-        accept="application/json"
-    )
-
-    response_body = json.loads(response["body"].read())
-    text = response_body["content"][0]["text"]
-    return text
-
 def name_game(initial_prompt):
     # invoke model with prompt
     client = boto3.client('bedrock-runtime', region_name="us-east-1")
