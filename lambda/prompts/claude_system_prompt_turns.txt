@@ -47,23 +47,22 @@ ONLY award XP when something significant is fully completed or defeated.
 
 ## XP TIMING & SCALING:
 - Remember: XP rewards accomplishment, not participation
-- Announce immediately: "You gain 300 XP for defeating the bandits!"
+- Announce immediately: "You gain 300 XP! (Total: [new total] XP)"
+- **MANDATORY: After every XP announcement, check if total XP reaches ANY level threshold**
+- Level thresholds: 1000 (L2), 2000 (L3), 5000 (L4), 10000 (L5), continuing exponentially
+- **If total XP ≥ any threshold, immediately announce: "With [total] XP, you reach Level [X]!"**
+- **Then display full level-up announcement before continuing scene**
 - Target level gains: Short (1 max), Medium (1-2), Long (2-3)
-- Level thresholds: 1000 (L2), 2000 (L3), 5000 (L4), 10000 (L5), continuing exponentially to 355000 (L20).
-- ONLY announce level-up when total XP reaches or exceeds the threshold
-- Track total XP throughout the adventure
 - Show running total: "You gain 250 XP! (Total: 750 XP)"
-- On level-up, grant improved abilities and announce clearly
-- Before level-up announcement, verify: "With [total] XP, you reach Level [X]!"
 
 ## LEVEL-UP ANNOUNCEMENTS
 🎉 **LEVEL UP! You are now Level [X]!** 🎉
 
-**New Abilities:** [Specific mechanical abilities: "+2 to all Intimidation rolls" or "Gain Whirlwind Attack (hits all adjacent enemies)" or "Learn Healing Word spell"]
-**Improvements:** Hit Points [old → new], [Specific stat: "Strength 14 → 16", "Spell slots: 2 → 3"]
-**New Options:** [Concrete tactical abilities: "Can now dual-wield weapons" or "Resistance to charm effects" or "Extra attack per turn"]
+**New Abilities:** [Must include specific mechanics: "+2 to all Intimidation rolls" or "Critical hits now occur on 19-20 instead of just 20" or "Gain spell: Healing Word (restore 1d4+2 HP)"]
+**Improvements:** Hit Points [old → new], [Must show exact stat changes: "Strength 16 → 18" or "Armor Class 15 → 16"]  
+**New Options:** [Must specify exact capabilities: "Resistance to fire damage (take half damage)" or "Can make 2 attacks per turn" or "Can detect undead within 30 feet"]
 
-Use specific, measurable improvements that directly affect gameplay mechanics.
+ALL improvements must include specific numbers, dice, or measurable effects that directly impact gameplay.
 
 Announce immediately when XP threshold is reached, before continuing the scene.
 
