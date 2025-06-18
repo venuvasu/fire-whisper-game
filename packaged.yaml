@@ -2,10 +2,10 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Python Lambda with Cognito-protected HTTP API
 Parameters:
-  TavernUserPool:
+  FireWhisperUserPool:
     Type: String
     Description: The Cognito User Pool ID (e.g., us-east-1_ABC123)
-  TavernUserPoolClient:
+  FireWhisperUserPoolClient:
     Type: String
     Description: The Cognito User Pool App Client ID
 Resources:
@@ -19,9 +19,9 @@ Resources:
             AuthorizationType: JWT
             JwtConfiguration:
               issuer:
-                Fn::Sub: https://cognito-idp.${AWS::Region}.amazonaws.com/${TavernUserPool}
+                Fn::Sub: https://cognito-idp.${AWS::Region}.amazonaws.com/${FireWhisperUserPool}
               audience:
-              - Ref: TavernUserPoolClient
+              - Ref: FireWhisperUserPoolClient
             IdentitySource: $request.header.Authorization
       CorsConfiguration:
         AllowMethods:
@@ -56,7 +56,7 @@ Resources:
   GetGameFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/f1c32d54b3382072cfc5da6771868a26
+      CodeUri: s3://dnd-lambda-deployer-bucket/1053690bb19179991cddad259e954c55
       Handler: get_game.handler
       Runtime: python3.11
       Timeout: 30
@@ -83,7 +83,7 @@ Resources:
   GetUserDataFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/f1c32d54b3382072cfc5da6771868a26
+      CodeUri: s3://dnd-lambda-deployer-bucket/1053690bb19179991cddad259e954c55
       Handler: get_user_data.handler
       Runtime: python3.11
       Timeout: 10
@@ -108,7 +108,7 @@ Resources:
   TakeTurnFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/f1c32d54b3382072cfc5da6771868a26
+      CodeUri: s3://dnd-lambda-deployer-bucket/1053690bb19179991cddad259e954c55
       Handler: take_turn.handler
       Runtime: python3.11
       Timeout: 30
@@ -161,7 +161,7 @@ Resources:
   CreateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/f1c32d54b3382072cfc5da6771868a26
+      CodeUri: s3://dnd-lambda-deployer-bucket/1053690bb19179991cddad259e954c55
       Handler: create_character.handler
       Runtime: python3.11
       Timeout: 30
@@ -195,7 +195,7 @@ Resources:
   UpdateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/f1c32d54b3382072cfc5da6771868a26
+      CodeUri: s3://dnd-lambda-deployer-bucket/1053690bb19179991cddad259e954c55
       Handler: update_character_from_game.handler
       Runtime: python3.11
       Timeout: 30
@@ -230,7 +230,7 @@ Resources:
   GetCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/f1c32d54b3382072cfc5da6771868a26
+      CodeUri: s3://dnd-lambda-deployer-bucket/1053690bb19179991cddad259e954c55
       Handler: get_character.handler
       Runtime: python3.11
       Timeout: 10
@@ -258,7 +258,7 @@ Resources:
   StartSagaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/f1c32d54b3382072cfc5da6771868a26
+      CodeUri: s3://dnd-lambda-deployer-bucket/1053690bb19179991cddad259e954c55
       Handler: create_saga.handler
       Runtime: python3.11
       Timeout: 30

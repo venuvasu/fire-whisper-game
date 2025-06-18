@@ -29,8 +29,8 @@ deploy:
 	  --capabilities CAPABILITY_IAM \
 	  --region $(REGION) \
 	  --parameter-overrides \
-	    TavernUserPool=$(TAVERN_USER_POOL) \
-	    TavernUserPoolClient=$(TAVERN_USER_POOL_CLIENT)
+	    FireWhisperUserPool=$(FIREWHISPER_USER_POOL) \
+	    FireWhisperUserPoolClient=$(FIREWHISPER_USER_POOL_CLIENT)
 
 delete:
 	aws cloudformation delete-stack \

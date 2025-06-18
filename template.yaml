@@ -3,11 +3,11 @@ Transform: AWS::Serverless-2016-10-31
 Description: Python Lambda with Cognito-protected HTTP API
 
 Parameters:
-  TavernUserPool:
+  FireWhisperUserPool:
     Type: String
     Description: The Cognito User Pool ID (e.g., us-east-1_ABC123)
 
-  TavernUserPoolClient:
+  FireWhisperUserPoolClient:
     Type: String
     Description: The Cognito User Pool App Client ID
 
@@ -21,9 +21,9 @@ Resources:
           CognitoAuthorizer:
             AuthorizationType: JWT
             JwtConfiguration:
-              issuer: !Sub "https://cognito-idp.${AWS::Region}.amazonaws.com/${TavernUserPool}"
+              issuer: !Sub "https://cognito-idp.${AWS::Region}.amazonaws.com/${FireWhisperUserPool}"
               audience:
-                - !Ref TavernUserPoolClient
+                - !Ref FireWhisperUserPoolClient
             IdentitySource: "$request.header.Authorization"
       CorsConfiguration:
         AllowMethods:
