@@ -9,7 +9,7 @@ Parameters:
     Type: String
     Description: The Cognito User Pool App Client ID
 Resources:
-  TavernHttpApi:
+  FireWhisperHttpApi:
     Type: AWS::Serverless::HttpApi
     Properties:
       Auth:
@@ -37,7 +37,7 @@ Resources:
         - https://rpgtestdomain.com
         - https://dev.firewhisper.io
     Metadata:
-      SamResourceId: TavernHttpApi
+      SamResourceId: FireWhisperHttpApi
   AllowTakeTurnToInvokeUpdateCharacter:
     Type: AWS::Lambda::Permission
     Properties:
@@ -56,7 +56,7 @@ Resources:
   GetGameFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/1053690bb19179991cddad259e954c55
+      CodeUri: s3://dnd-lambda-deployer-bucket/9f00c4baa60b72d4aacaa6f3fe052716
       Handler: get_game.handler
       Runtime: python3.11
       Timeout: 30
@@ -67,7 +67,7 @@ Resources:
             Path: /getgame
             Method: GET
             ApiId:
-              Ref: TavernHttpApi
+              Ref: FireWhisperHttpApi
             Auth:
               Authorizer: CognitoAuthorizer
       Policies:
@@ -83,7 +83,7 @@ Resources:
   GetUserDataFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/1053690bb19179991cddad259e954c55
+      CodeUri: s3://dnd-lambda-deployer-bucket/9f00c4baa60b72d4aacaa6f3fe052716
       Handler: get_user_data.handler
       Runtime: python3.11
       Timeout: 10
@@ -94,7 +94,7 @@ Resources:
             Path: /getuserdata
             Method: GET
             ApiId:
-              Ref: TavernHttpApi
+              Ref: FireWhisperHttpApi
             Auth:
               Authorizer: CognitoAuthorizer
       Policies:
@@ -108,7 +108,7 @@ Resources:
   TakeTurnFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/1053690bb19179991cddad259e954c55
+      CodeUri: s3://dnd-lambda-deployer-bucket/9f00c4baa60b72d4aacaa6f3fe052716
       Handler: take_turn.handler
       Runtime: python3.11
       Timeout: 30
@@ -125,7 +125,7 @@ Resources:
             Path: /taketurn
             Method: POST
             ApiId:
-              Ref: TavernHttpApi
+              Ref: FireWhisperHttpApi
             Auth:
               Authorizer: CognitoAuthorizer
       Policies:
@@ -161,7 +161,7 @@ Resources:
   CreateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/1053690bb19179991cddad259e954c55
+      CodeUri: s3://dnd-lambda-deployer-bucket/9f00c4baa60b72d4aacaa6f3fe052716
       Handler: create_character.handler
       Runtime: python3.11
       Timeout: 30
@@ -172,7 +172,7 @@ Resources:
             Path: /createcharacter
             Method: POST
             ApiId:
-              Ref: TavernHttpApi
+              Ref: FireWhisperHttpApi
             Auth:
               Authorizer: CognitoAuthorizer
       Policies:
@@ -195,7 +195,7 @@ Resources:
   UpdateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/1053690bb19179991cddad259e954c55
+      CodeUri: s3://dnd-lambda-deployer-bucket/9f00c4baa60b72d4aacaa6f3fe052716
       Handler: update_character_from_game.handler
       Runtime: python3.11
       Timeout: 30
@@ -206,7 +206,7 @@ Resources:
             Path: /updatecharacter
             Method: POST
             ApiId:
-              Ref: TavernHttpApi
+              Ref: FireWhisperHttpApi
             Auth:
               Authorizer: CognitoAuthorizer
       Policies:
@@ -230,7 +230,7 @@ Resources:
   GetCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/1053690bb19179991cddad259e954c55
+      CodeUri: s3://dnd-lambda-deployer-bucket/9f00c4baa60b72d4aacaa6f3fe052716
       Handler: get_character.handler
       Runtime: python3.11
       Timeout: 10
@@ -241,7 +241,7 @@ Resources:
             Path: /getcharacter
             Method: GET
             ApiId:
-              Ref: TavernHttpApi
+              Ref: FireWhisperHttpApi
             Auth:
               Authorizer: CognitoAuthorizer
       Policies:
@@ -258,7 +258,7 @@ Resources:
   StartSagaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/1053690bb19179991cddad259e954c55
+      CodeUri: s3://dnd-lambda-deployer-bucket/9f00c4baa60b72d4aacaa6f3fe052716
       Handler: create_saga.handler
       Runtime: python3.11
       Timeout: 30
@@ -269,7 +269,7 @@ Resources:
             Path: /createsaga
             Method: POST
             ApiId:
-              Ref: TavernHttpApi
+              Ref: FireWhisperHttpApi
             Auth:
               Authorizer: CognitoAuthorizer
       Policies:
@@ -299,4 +299,4 @@ Outputs:
   HttpApiUrl:
     Description: HTTP API URL
     Value:
-      Fn::Sub: https://${TavernHttpApi}.execute-api.${AWS::Region}.amazonaws.com
+      Fn::Sub: https://${FireWhisperHttpApi}.execute-api.${AWS::Region}.amazonaws.com
