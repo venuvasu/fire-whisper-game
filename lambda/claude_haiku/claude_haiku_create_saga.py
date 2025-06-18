@@ -3,7 +3,7 @@ import decimal
 import json
 from amplitude.amplitude_handler import send_bedrock_amplitude_event
 
-with open("prompts/claude_system_prompt.txt", "r") as f:
+with open("prompts/claude_system_prompt_start.txt", "r") as f:
     system_prompt = f.read()
 
 def decimal_default(obj):

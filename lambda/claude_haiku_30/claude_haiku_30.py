@@ -8,76 +8,9 @@ def decimal_default(obj):
         return int(obj) if obj % 1 == 0 else float(obj)
     raise TypeError
 
-with open("prompts/claude_system_prompt.txt", "r") as f:
+with open("prompts/claude_system_prompt_turns.txt", "r") as f:
     system_prompt = f.read()
 
-def start_game(body_params):
-    initial_prompt = """Create a campaign with the following details:
-- Generate a character and a backstory for the user to play as. The character should be either a rogue, mage, warrior or wizard. Give the player some minimal information to start with about the character, and answer their questions if they ask.
-- The adventure should take about 5–10 minutes to complete.
-- Include at least 1 boss encounter and 1 hidden secret.
-- Keep mechanics light—focus on narrative over stats or dice rolls.
-
-Begin the story now.
-"""
-
-    # TODO - move to it's own helper function
-    if body_params is not None:        
-        character_string = "You should choose a character name and tell the user."
-        class_string = "You should choose a class for the character and tell the user from these options: Warrior, Berserker, Mage, Druid, Shaman, Cleric, Templar, Assassin, Thief, Bard."
-        campaign_difficulty = "The campaign should be easy difficulty."
-        story_keywords = ""
-        story_tone = "The story tone should be fun but not silly."
-        if "character_name" in body_params and body_params['character_name'].strip() != "":
-            character_string = f"The characters name should be {body_params['character_name']}."  
-        if "class" in body_params and body_params["class"].strip() != "" and body_params["class"].strip() != "<Random>":
-            class_string = f"The characters class should be {body_params['class']}."
-        if "character_name" in body_params and body_params["character_name"].strip() != "":
-            campaign_difficulty = f"The campaign should be {body_params['difficulty']} difficulty."
-        if "story_keywords" in body_params and body_params["story_keywords"].strip() != "":
-            story_keywords = f"-The story should be inspired by the following keywords: {body_params['story_keywords']}."
-        if "tone" in body_params and body_params["tone"]:
-            story_tone = "The tone of the story should be based on balancing the following tones: " + ", ".join(body_params['tone']) + "."
-
-        initial_prompt = f'''Create a campaign with the following details:
-- Generate a character and a backstory for the user to play as.
-- {character_string}
-- {class_string}
-- {campaign_difficulty}
-- {story_tone}
-{story_keywords}
-'''
-    print("Initial prompt:", initial_prompt)
-
-    # invoke model with prompt
-    client = boto3.client('bedrock-runtime', region_name="us-east-1")
-
-    response = client.invoke_model(
-        modelId="anthropic.claude-3-haiku-20240307-v1:0",
-        body=json.dumps({
-            "anthropic_version": "bedrock-2023-05-31",
-            "system": system_prompt,
-            "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": initial_prompt
-                        }
-                    ]
-                }
-            ],
-            "max_tokens": 512
-        }),
-        contentType="application/json",
-        accept="application/json"
-    )
-
-    response_body = json.loads(response["body"].read())
-    text = response_body["content"][0]["text"]
-
-    return {"prompt": initial_prompt, "response": text}
 
 def take_turn(game_record, message):
     messages = game_record.get('messages', [])
