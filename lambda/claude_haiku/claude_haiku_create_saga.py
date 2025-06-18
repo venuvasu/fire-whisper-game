@@ -1,10 +1,16 @@
 import boto3
 import decimal
 import json
+import random
 from amplitude.amplitude_handler import send_bedrock_amplitude_event
 
 with open("prompts/claude_system_prompt_start.txt", "r") as f:
     system_prompt = f.read()
+
+with open("prompts/story_arcs.txt", "r") as f:
+    story_arcs_file = f.read()
+    story_arcs_list = [line.strip() for line in story_arcs_file.split('\n') if line.strip()]
+
 
 def decimal_default(obj):
     if isinstance(obj, decimal.Decimal):
@@ -26,15 +32,15 @@ def get_length_prompt(length):
 def get_difficulty_prompt(difficulty):
     difficulty_prompt = ""
     if difficulty and difficulty.strip() != "":
-        difficulty_prompt = "Story should focus on narrative and exploration, lighter challenges."
+        difficulty_prompt = "Easy"
     elif difficulty.strip() == "Story":
-        difficulty_prompt = "Story should focus on narrative and exploration, lighter challenges."
+        difficulty_prompt = "Easy"
     elif difficulty.strip() == "Adventurer":
-        difficulty_prompt = "Story should focus on narrative and exploration and combat should be moderately difficult and have the possibility of failure."
+        difficulty_prompt = "Normal"
     elif difficulty.strip() == "Hero":
-        difficulty_prompt = "Story should strive to challenge the player and mistakes should be punished."
+        difficulty_prompt = "Hard"
     else:
-        difficulty_prompt = "Story should focus on narrative and exploration, lighter challenges."
+        difficulty_prompt = "Easy"
     return difficulty_prompt
 
 
@@ -46,32 +52,34 @@ def create_saga_with_character(user_id, character_data, setting, difficulty, len
     character_dict = response.get('Item')
     character_dict_str = json.dumps(character_dict, default=decimal_default)
 
-    setting_prompt = ""
-    if setting and setting.strip() != "":
-        setting_prompt = "- The setting of the story should be " + setting + "."
-    difficulty_prompt = get_difficulty_prompt(difficulty)
-    length_prompt = get_length_prompt(length)
-    
-    story_prompt = f"""We want to generate a game story for the following character. Track characters progress in this format as we play: {character_dict_str}
+    story_arc = random.choice(story_arcs_list)
+    print("Selected story arc:", story_arc)
 
-The story should have the following characteristics:
-- Give the character simple, relevant backstory and a specific goal (or quest) to achieve
-- This is a SINGLE-SESSION story that MUST conclude after the goal is achieved.
-- The story should END automatically after the goals are completed and NOT prompt for further input. This means to options and no questions, as the user won't be able to respond.
-- {length_prompt}
-- {setting_prompt}
-- {difficulty_prompt}
-"""
+    story_prompt = f"""Begin a Fire Whisper adventure for this character. Track progress in this format:
+{character_dict_str}
 
-    if difficulty.strip() == "Tutorial":
-        story_prompt = f"""We want to generate a game story for the following character. Track characters progress in this format as we play: {character_dict_str}
+## QUEST PARAMETERS
+- Duration: {length}
+- Setting: {setting}
+- Difficulty: {difficulty}
 
-The story should have the following characteristics:
-- Give the character simple, relevant backstory and a specific goal (or quest) to achieve
-- This is a SINGLE-SESSION story that MUST conclude after the goal is achieved.
-- The story should END automatically after the goals are completed and NOT prompt for further input. This means to options and no questions, as the user won't be able to respond.
-- This is a tutorial story, so it should be very simple, consisting of a very simple puzzle followed by a combat encounter leading to a quick conclusion.
-{setting_prompt}
+## STORY ARC
+{story_arc}
+
+## GENERATION RULES
+- Create appropriate backstory connecting the character to this crisis
+- Establish clear objective in opening scene via SPARK method
+- This is a SINGLE-SESSION story that MUST reach "Congratulations, you have completed this Saga!" 
+- Scale complexity to match duration:
+  - Short: Direct path, 1 major obstacle
+  - Medium: Some exploration, 2-3 major challenges  
+  - Long: Multiple paths, subplots, 4+ major encounters
+- Adjust challenge based on difficulty:
+  - Story: Narrative focus, forgiving combat
+  - Adventurer: Balanced challenge
+  - Hero: Tactical thinking required - Death is a real possibility
+
+Begin immediately with the opening crisis. Emberlyn should introduce herself naturally within the action.
 """
 
     client = boto3.client('bedrock-runtime', region_name="us-east-1")
