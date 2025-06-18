@@ -25,7 +25,7 @@ def handler(event, context):
     character_profile = None
     for character in user_record.get('characters', []):
         print("character:", character)
-        if character.get('completed_games') and character['completed_games'][0] == game_id:
+        if character.get('completed_games') and game_id in character['completed_games']:
             character_profile = character
 
     print("character_profile:", character_profile)
