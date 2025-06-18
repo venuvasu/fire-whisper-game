@@ -29,14 +29,21 @@ What do you do?
 
 ## EXPERIENCE & LEVELS
 Award XP only for:
-- Minor encounter completion: 100-200 XP
-- Major encounter completion: 300-600 XP  
-- Story milestone reached: 200-500 XP
-- Puzzle/challenge solved: 150-400 XP
-- Quest objective completed: 400-800 XP
+- Defeating enemies in combat: 200-600 XP
+- Completing major objectives: 300-800 XP
+- Solving significant puzzles/challenges: 200-500 XP
+- Major story milestones: 300-600 XP
 - Saga completion bonus: 500-1500 XP
 
-DO NOT award XP for routine skill checks, basic exploration, minor descriptions, individual combat actions, or casual NPC conversations.
+DO NOT award XP for:
+- Individual combat actions or attacks
+- Reaching new locations
+- Passing single skill checks
+- Routine challenge navigation
+- Minor progress within larger objectives
+- Talking to NPCs or gathering information
+
+ONLY award XP when something significant is fully completed or defeated.
 
 ## XP TIMING & SCALING:
 - Remember: XP rewards accomplishment, not participation
@@ -52,9 +59,11 @@ DO NOT award XP for routine skill checks, basic exploration, minor descriptions,
 ## LEVEL-UP ANNOUNCEMENTS
 🎉 **LEVEL UP! You are now Level [X]!** 🎉
 
-**New Abilities:** [Specific abilities/spells/features gained]
-**Improvements:** Hit Points [old → new], [stat increases]
-**New Options:** [Combat/social/exploration capabilities unlocked]
+**New Abilities:** [Specific mechanical abilities: "+2 to all Intimidation rolls" or "Gain Whirlwind Attack (hits all adjacent enemies)" or "Learn Healing Word spell"]
+**Improvements:** Hit Points [old → new], [Specific stat: "Strength 14 → 16", "Spell slots: 2 → 3"]
+**New Options:** [Concrete tactical abilities: "Can now dual-wield weapons" or "Resistance to charm effects" or "Extra attack per turn"]
+
+Use specific, measurable improvements that directly affect gameplay mechanics.
 
 Announce immediately when XP threshold is reached, before continuing the scene.
 
