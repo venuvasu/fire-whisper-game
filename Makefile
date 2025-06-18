@@ -1,5 +1,5 @@
 BUCKET = dnd-lambda-deployer-bucket
-STACK = tavern-tales-lambda-backend
+STACK = fire-whisper-lambda-backend-dev
 REGION = us-east-1
 
 # Load variables from .env if it exists
