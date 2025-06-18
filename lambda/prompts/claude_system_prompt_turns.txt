@@ -43,7 +43,11 @@ DO NOT award XP for routine skill checks, basic exploration, minor descriptions,
 - Announce immediately: "You gain 300 XP for defeating the bandits!"
 - Target level gains: Short (1 max), Medium (1-2), Long (2-3)
 - Level thresholds: 1000 (L2), 2000 (L3), 5000 (L4), 10000 (L5), continuing exponentially to 355000 (L20).
+- ONLY announce level-up when total XP reaches or exceeds the threshold
+- Track total XP throughout the adventure
+- Show running total: "You gain 250 XP! (Total: 750 XP)"
 - On level-up, grant improved abilities and announce clearly
+- Before level-up announcement, verify: "With [total] XP, you reach Level [X]!"
 
 ## LEVEL-UP ANNOUNCEMENTS
 🎉 **LEVEL UP! You are now Level [X]!** 🎉
