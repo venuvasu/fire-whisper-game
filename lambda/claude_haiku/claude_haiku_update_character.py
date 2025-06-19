@@ -2,14 +2,19 @@ import boto3
 import json
 from amplitude.amplitude_handler import send_bedrock_amplitude_event
 
-with open("prompts/claude_system_prompt_turns.txt", "r") as f:
-    system_prompt = f.read()
+with open("prompts/claude_system_prompt_start.txt", "r") as f:
+    character_system_prompt = f.read()
 
-def take_turn(user_id, game_record, haiku_model="claude_haiku_30"):
+def update_character(user_id, game_id, character_id, haiku_model="claude_haiku_30"):
+    # Get messages from game record
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table('FW_Sagas_Dev')
+
+    # Retrieve the game record from DynamoDB
+    response = table.get_item(Key={'game_id': game_id})
+    game_record = response['Item']
     messages = game_record.get('messages', [])
-    
-    if not messages or len(messages) < 2:
-        raise ValueError("Message history must contain at least an initial prompt and one AI response.")
+    messages.append("Return an updated character sheet in the same format as the original character sheet, with any changes made during the turn. Do not return any other text or explanation, just the updated character sheet.")
 
     claude_messages = []
 
@@ -38,16 +43,20 @@ def take_turn(user_id, game_record, haiku_model="claude_haiku_30"):
         modelId=bedrock_model_id,
         body=json.dumps({
             "anthropic_version": "bedrock-2023-05-31",
-            "system": system_prompt,
+            "system": character_system_prompt,
             "messages": claude_messages,
-            "max_tokens": 384
+            "max_tokens": 3072
         }),
         contentType="application/json",
         accept="application/json"
     )
 
-    send_bedrock_amplitude_event(user_id, "take_turn", haiku_model, response)
+    send_bedrock_amplitude_event(user_id, "update_character", haiku_model, response)
 
     response_body = json.loads(response["body"].read())
-    text = response_body["content"][0]["text"]
-    return text
+    content = response_body.get("content", [])
+    if not content or not isinstance(content, list) or "text" not in content[0]:
+        raise ValueError(f"Claude API returned no content: {response_body}")
+    text = content[0]["text"]
+
+    return text.strip()

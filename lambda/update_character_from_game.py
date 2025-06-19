@@ -1,6 +1,6 @@
 import boto3
 import json
-from claude_haiku_30.claude_haiku_30 import update_character as update_character_haiku_30
+from claude_haiku.claude_haiku_update_character import update_character
 
 def handler(event, context):
     print("Received event:", event)
@@ -10,9 +10,8 @@ def handler(event, context):
     game_id = event.get("game_id")
 
     # update character sheet from game record
-    character_template = update_character_haiku_30(game_id, character_id)
+    character_template = update_character(user_id, game_id, character_id, "claude_haiku_35")
     character_dict = json.loads(character_template)
-    print(character_dict)
 
     # Retrieve user data from DynamoDB
     dynamodb = boto3.resource('dynamodb')
