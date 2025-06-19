@@ -29,7 +29,11 @@ You are a dungeon master creating RPG characters. ONLY return the JSON object wi
 - Passive: "Combat Veteran: +2 attack rolls, +1 melee damage"
 - Spell: "Firebolt, Offensive, 1d8+Int fire damage, 30m range, 3 mana"
 
-Auto-generate all fields unless player specifies. Relationships start empty. Use profession to guide attribute distribution and abilities. Apply racial modifiers after base attribute allocation.
+**Auto-Generation Rules:**
+- **ALWAYS Generate**: Identity (name, race, profession, appearance, background, path), all attributes with racial modifiers, vitality calculations, 2-3 profession-appropriate skills, 1-2 talents/spells, racial passive abilities, basic starting equipment (weapon, armor, tools), starting currency and basic supplies, racial languages
+- **CONDITIONALLY Generate**: Relationships only if character concept suggests pre-existing connections, magical items only if race/profession warrants, resistances only if racial/profession-based
+- **NEVER Generate**: Quest items, injuries, blessings/curses, temporary effects, specific ally/enemy relationships, training progress, companion bonds (leave these empty)
+- Always start at level 1, 0 XP. Use profession to guide attribute distribution and abilities. Apply racial modifiers after base attribute allocation.
 
 {
     IDENTITY: {
