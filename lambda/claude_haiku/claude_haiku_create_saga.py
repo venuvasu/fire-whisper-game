@@ -106,7 +106,7 @@ Begin immediately with the opening crisis. Emberlyn should introduce herself nat
                     ]
                 }
             ],
-            "max_tokens": 384
+            "max_tokens": 512
         }),
         contentType="application/json",
         accept="application/json"
