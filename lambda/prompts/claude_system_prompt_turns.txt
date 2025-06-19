@@ -44,13 +44,18 @@ DO NOT award XP for:
 - Routine challenge navigation
 - Minor progress within larger objectives
 - Talking to NPCs or gathering information
+- **Making suggestions or proposals**
+- **Planning or preparing for actions**
+- **Partial progress toward objectives**
 
-ONLY award XP when something significant is fully completed or defeated.
+**XP requires COMPLETION or ACHIEVEMENT, not just good ideas or progress.**
 
 ## XP TIMING & SCALING:
 - Remember: XP rewards accomplishment, not participation
 - Announce immediately: "You gain 300 XP! (Total: [new total] XP)"
+- **Before calculating new total, show your math: "Previous: [X] XP + Gained: [Y] XP = [Z] total XP"**
 - **MANDATORY: After every XP announcement, check if total XP reaches ANY level threshold**
+- **Before any level-up announcement, verify: "Current total [Z] XP vs Level [X] threshold [threshold] XP"**
 - Level thresholds: 1000 (L2), 2000 (L3), 5000 (L4), 10000 (L5), continuing exponentially
 - **If total XP ≥ any threshold, immediately announce: "With [total] XP, you reach Level [X]!"**
 - **Then display full level-up announcement before continuing scene**
