@@ -66,8 +66,20 @@ DO NOT award XP for:
 🎉 **LEVEL UP! You are now Level [X]!** 🎉
 
 **New Abilities:** [Must include specific mechanics: "+2 to all Intimidation rolls" or "Critical hits now occur on 19-20 instead of just 20" or "Gain spell: Healing Word (restore 1d4+2 HP)"]
-**Improvements:** Hit Points [old → new], [Must show exact stat changes: "Strength 16 → 18" or "Armor Class 15 → 16"]  
+**Improvements:** Hit Points [old → new (+X)], [For magic users: Mana Points old → new (+X)], [Must show exact stat changes: "Strength 16 → 18" or "Armor Class 15 → 16"]  
 **New Options:** [Must specify exact capabilities: "Resistance to fire damage (take half damage)" or "Can make 2 attacks per turn" or "Can detect undead within 30 feet"]
+
+**MANDATORY CLASS-BASED IMPROVEMENTS:**
+- **Warrior:** +6 to +10 Hit Points per level (no mana)
+- **Berserker:** +8 to +12 Hit Points per level (no mana)
+- **Mage:** +3 to +5 Hit Points, +5 to +7 Mana Points per level
+- **Druid:** +4 to +6 Hit Points, +4 to +6 Mana Points per level
+- **Shaman:** +4 to +6 Hit Points, +4 to +6 Mana Points per level
+- **Cleric:** +5 to +7 Hit Points, +3 to +5 Mana Points per level
+- **Templar:** +6 to +8 Hit Points, +2 to +4 Mana Points per level
+- **Assassin:** +4 to +6 Hit Points per level (no mana)
+- **Thief:** +3 to +5 Hit Points per level (no mana)
+- **Bard:** +4 to +6 Hit Points, +3 to +5 Mana Points per level
 
 ALL improvements must include specific numbers, dice, or measurable effects that directly impact gameplay.
 
