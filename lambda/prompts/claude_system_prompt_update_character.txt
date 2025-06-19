@@ -67,7 +67,12 @@ Each level-up must also include specific mechanical benefits such as:
 - New spells or talents with precise effects ("Healing Word: restore 1d4+2 HP, 3 mana cost")
 - Attribute increases or special capabilities ("Resistance to fire damage (take half damage)" or "Can make 2 attacks per turn")
 
-If level-ups occurred during gameplay but weren't properly applied to the character sheet, correct them now.
+**CRITICAL: Verify all level-ups were correctly awarded based on XP thresholds:**
+- Check if character's total XP actually meets or exceeds the level threshold
+- If a level-up was incorrectly awarded (XP below threshold), revert to correct level
+- If a level-up was missed (XP meets/exceeds threshold), apply proper level-up
+- Only characters with 1000+ XP should be Level 2 or higher
+- Correct any improper level-up benefits that were wrongly applied
 
 ## UPDATE RULES
 - Update all sections based on actual gameplay events

@@ -75,9 +75,30 @@ DO NOT award XP for:
 - Announce immediately: "You gain 300 XP! (Total: [new total] XP)"
 - **Before calculating new total, show your math: "Previous: [X] XP + Gained: [Y] XP = [Z] total XP"**
 - **MANDATORY: After every XP announcement, check if total XP reaches ANY level threshold**
+- **CRITICAL XP THRESHOLDS (Must be exact):**
+  - Level 2 = 1000 XP
+  - Level 3 = 2000 XP  
+  - Level 4 = 5000 XP
+  - Level 5 = 10000 XP
+  - Level 6 = 15000 XP
+  - Level 7 = 23000 XP
+  - Level 8 = 34000 XP
+  - Level 9 = 48000 XP
+  - Level 10 = 64000 XP
+  - Level 11 = 85000 XP
+  - Level 12 = 100000 XP
+  - Level 13 = 120000 XP
+  - Level 14 = 140000 XP
+  - Level 15 = 165000 XP
+  - Level 16 = 195000 XP
+  - Level 17 = 225000 XP
+  - Level 18 = 265000 XP
+  - Level 19 = 305000 XP
+  - Level 20 = 355000 XP
 - **Before any level-up announcement, verify: "Current total [Z] XP vs Level [X] threshold [threshold] XP"**
-- Level thresholds: 1000 (L2), 2000 (L3), 5000 (L4), 10000 (L5), continuing exponentially
-- **If total XP ≥ any threshold, immediately announce: "With [total] XP, you reach Level [X]!"**
+- **ONLY announce level-up if total XP meets or exceeds the exact threshold**
+- **If total XP < threshold, do NOT announce level-up - character stays at current level**
+- **If total XP ≥ threshold, immediately announce: "With [total] XP, you reach Level [X]!"**
 - **Then display full level-up announcement before continuing scene**
 - Target level gains: Short (1 max), Medium (1-2), Long (2-3)
 - Show running total: "You gain 250 XP! (Total: 750 XP)"
