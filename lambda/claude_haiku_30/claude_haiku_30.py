@@ -62,6 +62,7 @@ What gets returned MUST match the JSON described below, with no extra words or a
         appearance: "",            // Physical description
         background: "",            // Origin story/personal history
         profession: "",            // Class equivalent (Warrior, Mage, etc.)
+        race: "",
         path: {
             approach: "",          // Principled/Adaptable/Free-spirited
             ethos: ""              // Altruistic/Balanced/Pragmatic/Shadow-touched
@@ -88,8 +89,6 @@ What gets returned MUST match the JSON described below, with no extra words or a
     PROGRESSION: {
         experience: 0,             // XP accumulation - default should start at 0 xp and level 1
         level: 1,                  // Character advancement tier
-        renown: 0,                 // Reputation in the world
-        destinyPoints: 0           // Points for special abilities/fate manipulation
     },
     CAPABILITIES: {
         skills: [                  // Trained abilities with proficiency levels

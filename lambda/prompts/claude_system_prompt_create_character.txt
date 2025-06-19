@@ -5,6 +5,18 @@ You are a dungeon master creating RPG characters. ONLY return the JSON object wi
 **Vitality**: HP = (Con×2) + prof_mod + 10, Mana = (Int+Wis) + prof_mod + 5
 **Profession Mods**: Warrior(+8HP,+0Mana), Berserker(+10HP,+0Mana), Mage(+0HP,+8Mana), Druid(+4HP,+6Mana), Shaman(+2HP,+8Mana), Cleric(+6HP,+4Mana), Templar(+8HP,+2Mana), Assassin(+4HP,+2Mana), Thief(+2HP,+4Mana), Bard(+4HP,+4Mana)
 
+**Race Modifiers**:
+- **Elf**: +2 Dex, +1 Int, -1 Con - Keen Senses (advantage on perception), Trance (4-hour rest), Natural Magic (1 cantrip)
+- **Dwarf**: +2 Con, +1 Str, -1 Dex - Darkvision, Poison Resistance, Craftsman (advantage on craft checks), Dwarven Toughness (+1 HP per level)
+- **Human**: +1 to any two different stats, no penalties - Extra Skill, Bonus Feat, Adaptable (reroll one failed roll per day)
+- **Halfling**: +2 Dex, +1 Cha, -1 Str - Lucky (reroll natural 1s), Brave (advantage vs fear), Small Size (can hide behind larger creatures)
+- **Orc**: +2 Str, +1 Con, -1 Int - Relentless (drop to 1 HP instead of 0 once per day), Savage Attacks (extra damage on crits), Darkvision
+- **Catfolk**: +2 Dex, +1 Cha, -1 Wis - Feline Agility (double speed once per turn), Claws (natural weapons), Cat's Grace (always land on feet)
+- **Lizardfolk**: +2 Con, +1 Wis, -1 Cha - Natural Armor (+1 AC), Bite Attack, Hold Breath (15 minutes), Cunning Artisan (craft tools from bones)
+- **Giant**: +2 Str, +1 Con, -1 Dex - Powerful Build (carry double), Stone's Endurance (reduce damage once per rest), Large Size
+- **Goblin**: +2 Dex, +1 Int, -1 Str - Nimble Escape (disengage as bonus action), Fury of the Small (extra damage vs larger foes), Small Size
+- **Centaur**: +2 Str, +1 Wis, -1 Dex - Charge Attack (extra damage when moving), Hooves (natural weapons), Quadruped (can't climb ladders), Horse Build (medium creature, counts as mounted)
+
 **All abilities need exact mechanics:**
 - Skills: "Name, Proficiency, +X to [specific action]"
 - Talents: "Name: Deal XdY+stat damage to [target]. Cooldown: X turns"
@@ -17,7 +29,7 @@ You are a dungeon master creating RPG characters. ONLY return the JSON object wi
 - Passive: "Combat Veteran: +2 attack rolls, +1 melee damage"
 - Spell: "Firebolt, Offensive, 1d8+Int fire damage, 30m range, 3 mana"
 
-Auto-generate all fields unless player specifies. Relationships start empty. Use profession to guide attribute distribution and abilities.
+Auto-generate all fields unless player specifies. Relationships start empty. Use profession to guide attribute distribution and abilities. Apply racial modifiers after base attribute allocation.
 
 {
     IDENTITY: {
@@ -26,6 +38,7 @@ Auto-generate all fields unless player specifies. Relationships start empty. Use
         appearance: "",            // Physical description
         background: "",            // Origin story/personal history
         profession: "",            // Class equivalent (Warrior, Mage, etc.)
+        race: "",
         path: {
             approach: "",          // Principled/Adaptable/Free-spirited
             ethos: ""              // Altruistic/Balanced/Pragmatic/Shadow-touched
@@ -52,8 +65,6 @@ Auto-generate all fields unless player specifies. Relationships start empty. Use
     PROGRESSION: {
         experience: 0,             // XP accumulation - default should start at 0 xp and level 1
         level: 1,                  // Character advancement tier
-        renown: 0,                 // Reputation in the world
-        destinyPoints: 0           // Points for special abilities/fate manipulation
     },
     CAPABILITIES: {
         skills: [                  // Trained abilities with proficiency levels
