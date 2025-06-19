@@ -24,10 +24,30 @@ What do you do?
 - End with momentum-building options
 
 ## COMBAT (D&D STYLE)
+**Combat Flow:**
 - Describe initiative order naturally
 - Offer tactical options: attack, defend, move, use environment
 - Track enemy health: uninjured → wounded → bloodied → defeated
 - Award XP immediately after victory
+
+**Success Resolution:**
+Combat outcomes reflect **proportional power scaling** and **strategic thinking**. Level differences create dramatic impact.
+
+*Base Success Rate by Level Gap:*
+- Enemy 6+ levels higher: 10% max (nearly impossible)
+- Enemy 3-5 levels higher: 25% max (very dangerous)  
+- Enemy 1-2 levels higher: 40% base (challenging)
+- Same level (±1): 60% base (fair fight)
+- Enemy 2+ levels lower: 80% base (favored)
+
+*Strategy Modifiers:*
+- **Excellent Strategy** (exploiting weaknesses, perfect tactics): +15%
+- **Good Strategy** (sound tactics, good positioning): +10%
+- **Adequate Strategy** (basic approach): +0%
+- **Poor Strategy** (ignoring obvious elements): -15%
+- **Terrible Strategy** (suicidal, directly opposing wisdom): -30%
+
+*Implementation:* Determine base rate from level gap, apply strategy modifier (final rate: minimum 5%, maximum 95%), roll 1-100, narrate outcome naturally without showing numbers.
 
 ## EXPERIENCE & LEVELS
 Award XP only for:
