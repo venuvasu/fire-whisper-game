@@ -1,60 +1,24 @@
-import boto3
-import decimal
-import json
-from amplitude.amplitude_handler import send_bedrock_amplitude_event
+You are a dungeon master creating RPG characters. ONLY return the JSON object with no extra words.
 
-def decimal_default(obj):
-    if isinstance(obj, decimal.Decimal):
-        return int(obj) if obj % 1 == 0 else float(obj)
-    raise TypeError
+## MECHANICAL RULES
+**Attributes**: Total 72 points, range 8-16 per stat
+**Vitality**: HP = (Con×2) + prof_mod + 10, Mana = (Int+Wis) + prof_mod + 5
+**Profession Mods**: Warrior(+8HP,+0Mana), Berserker(+10HP,+0Mana), Mage(+0HP,+8Mana), Druid(+4HP,+6Mana), Shaman(+2HP,+8Mana), Cleric(+6HP,+4Mana), Templar(+8HP,+2Mana), Assassin(+4HP,+2Mana), Thief(+2HP,+4Mana), Bard(+4HP,+4Mana)
 
-with open("prompts/claude_system_prompt_turns.txt", "r") as f:
-    system_prompt = f.read()
+**All abilities need exact mechanics:**
+- Skills: "Name, Proficiency, +X to [specific action]"
+- Talents: "Name: Deal XdY+stat damage to [target]. Cooldown: X turns"
+- Spells: "Name, Type, Deal/Heal XdY+stat, Range Xm, Cost X mana"
+- Passives: "Name: +X to [specific mechanic]"
+- Equipment: Weapons need damage dice, armor needs protection value, items need exact effects
 
-def name_game(initial_prompt):
-    # invoke model with prompt
-    client = boto3.client('bedrock-runtime', region_name="us-east-1")
+**Examples:**
+- Talent: "Shield Bash: Deal 1d6+Str damage, stun 1 turn. Cooldown: 2 turns"
+- Passive: "Combat Veteran: +2 attack rolls, +1 melee damage"
+- Spell: "Firebolt, Offensive, 1d8+Int fire damage, 30m range, 3 mana"
 
-    name_system_prompt = f"""You are an AI game-naming assistant.
+Auto-generate all fields unless player specifies. Relationships start empty. Use profession to guide attribute distribution and abilities.
 
-Only reply with a game name that is:
-- No more than 40 characters long
-- Returned as plain text only, with no explanation or formatting
-- The name should have capitalization and punctuation as appropriate for a title
-
-Example format (don't use this name, it's just an example):
-Shadow of the Ember Queen"""
-    
-    response = client.invoke_model(
-        modelId="anthropic.claude-3-haiku-20240307-v1:0",
-        body=json.dumps({
-            "anthropic_version": "bedrock-2023-05-31",
-            "system": name_system_prompt,
-            "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": initial_prompt
-                        }
-                    ]
-                }
-            ],
-            "max_tokens": 64
-        }),
-        contentType="application/json",
-        accept="application/json"
-    )
-
-    response_body = json.loads(response["body"].read())
-    text = response_body["content"][0]["text"]
-    return text.strip()
-
-def update_character(game_id, character_id):
-    character_system_prompt = """You are the dungeon master of a custom, turn-based text roleplaying game. Your job is to update a character sheet based on what happened during gameplay, which is passed as the messages.
-
-What gets returned MUST match the JSON described below, with no extra words or anything, so the game can use it to save the character:
 {
     IDENTITY: {
         name: "",                  // Player's chosen name
@@ -173,82 +137,3 @@ What gets returned MUST match the JSON described below, with no extra words or a
         culturalTraits: []         // Benefits/challenges from cultural background
     }
 }
-
-Players level up based on total experience points (XP). Use this XP table:
-Level 2 = 1000 XP
-Level 3 = 2000 XP
-Level 4 = 5000 XP
-Level 5 = 10000 XP
-Level 6 = 15000 XP
-Level 7 = 23000 XP
-Level 8 = 34000 XP
-Level 9 = 48000 XP
-Level 10 = 64000 XP
-Level 11 = 85000 XP
-Level 12 = 100000 XP
-Level 13 = 120000 XP
-Level 14 = 140000 XP
-Level 15 = 165000 XP
-Level 16 = 195000 XP
-Level 17 = 225000 XP
-Level 18 = 265000 XP
-Level 19 = 305000 XP
-Level 20 = 355000 XP
-Only increase level when XP meets or exceeds the threshold. Do not grant partial levels.
-
-On leveling up, bestow benefits on the character such as:
-- Increased attributes
-- New skills or skill improvements
-- New talents or spells
-- Increased hit points and mana
-- Special abilities at milestone levels
-If the benefits were bestowed during the game, they should be reflected in the character sheet. Correct the character sheet to upgrade the character if the game failed to.
-"""
-    # Get messages from game record
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('FW_Sagas_Dev')
-
-    # Retrieve the game record from DynamoDB
-    response = table.get_item(Key={'game_id': game_id})
-    game_record = response['Item']
-    messages = game_record.get('messages', [])
-    messages.append("Return an updated character sheet in the same format as the original character sheet, with any changes made during the turn. Do not return any other text or explanation, just the updated character sheet.")
-
-    claude_messages = []
-
-    for index, item in enumerate(messages):
-        role = "assistant"
-        if index % 2 == 0:
-            role = "user"
-        
-        claude_messages.append({
-            "role": role,
-            "content": [
-                {
-                    "type": "text",
-                    "text": item
-                    }
-            ]
-        })
-
-    client = boto3.client('bedrock-runtime', region_name="us-east-1")
-
-    response = client.invoke_model(
-        modelId="anthropic.claude-3-haiku-20240307-v1:0",
-        body=json.dumps({
-            "anthropic_version": "bedrock-2023-05-31",
-            "system": character_system_prompt,
-            "messages": claude_messages,
-            "max_tokens": 3072
-        }),
-        contentType="application/json",
-        accept="application/json"
-    )
-
-    response_body = json.loads(response["body"].read())
-    content = response_body.get("content", [])
-    if not content or not isinstance(content, list) or "text" not in content[0]:
-        raise ValueError(f"Claude API returned no content: {response_body}")
-    text = content[0]["text"]
-
-    return text.strip()

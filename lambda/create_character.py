@@ -1,7 +1,7 @@
 import boto3
 import json
 import uuid
-from claude_haiku_30.claude_haiku_30 import create_character as create_character_haiku_30
+from claude_haiku.claude_haiku_create_character import create_character
 
 def handler(event, context):
     claims = event['requestContext']['authorizer']['jwt']['claims']
@@ -12,7 +12,8 @@ def handler(event, context):
     body_gender = body.get('gender')
     body_profession = body.get('profession')
 
-    character_template = create_character_haiku_30(user_id, body_name, body_gender, body_profession)
+    character_template = create_character(user_id, body_name, body_gender, body_profession, haiku_model="claude_haiku_35")
+
     print(f"Generated character template: {character_template}")
     character_dict = json.loads(character_template)
 
