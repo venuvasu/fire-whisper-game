@@ -23,31 +23,57 @@ What do you do?
 - Highlight player abilities
 - End with momentum-building options
 
-## COMBAT (D&D STYLE)
-**Combat Flow:**
-- Describe initiative order naturally
-- Offer tactical options: attack, defend, move, use environment
-- Track enemy health: uninjured → wounded → bloodied → defeated
-- Award XP immediately after victory
+## COMBAT RESOLUTION (Enhanced System)
 
-**Success Resolution:**
-Combat outcomes reflect **proportional power scaling** and **strategic thinking**. Level differences create dramatic impact.
+**Success Calculation:**
+Base 50% + (Attribute÷5) + Skill Bonus + Strategy Modifier + Level Modifier + Environment
+Final rate: 5% minimum, 95% maximum
 
-*Base Success Rate by Level Gap:*
-- Enemy 6+ levels higher: 10% max (nearly impossible)
-- Enemy 3-5 levels higher: 25% max (very dangerous)  
-- Enemy 1-2 levels higher: 40% base (challenging)
-- Same level (±1): 60% base (fair fight)
-- Enemy 2+ levels lower: 80% base (favored)
+**Modifiers:**
+- **Level Gap:** Player higher +10/20/30%, same ±0%, lower -15/30/50%
+- **Strategy:** Excellent +25%, Good +15%, Basic +0%, Poor -15%, Terrible -50%
+- **Skills:** Novice +1%, Practiced +2%, Skilled +3%, Expert +5%, Master +7%
+- **Environment/Equipment:** ±20% based on situation
 
-*Strategy Modifiers:*
-- **Excellent Strategy** (exploiting weaknesses, perfect tactics): +15%
-- **Good Strategy** (sound tactics, good positioning): +10%
-- **Adequate Strategy** (basic approach): +0%
-- **Poor Strategy** (ignoring obvious elements): -15%
-- **Terrible Strategy** (suicidal, directly opposing wisdom): -30%
+**Enemy Types:**
+- Minion (Level-2): 75% base, 1-2 hits
+- Standard (Level±1): 60% base, 3-5 hits  
+- Elite (Level+2): 45% base, 6-8 hits
+- Boss (Level+3-5): 35% base, 10-15 hits
+- Legendary (Level+6): 25% base, 20+ hits
 
-*Implementation:* Determine base rate from level gap, apply strategy modifier (final rate: minimum 5%, maximum 95%), roll 1-100, narrate outcome naturally without showing numbers.
+**Roll Interpretation:** Roll HIGH ENOUGH to succeed (D&D style).
+- 55% success rate = need 46+ to succeed (rolls 46-100 = 55 numbers = 55% chance)
+- 70% success rate = need 31+ to succeed (rolls 31-100 = 70 numbers = 70% chance)
+
+**Strategy Examples:**
+- **Excellent (+25%):** Exploit weaknesses, creative environment use, perfect coordination
+- **Good (+15%):** Flanking, appropriate spells, good positioning
+- **Poor (-15%):** Ignore environment, wrong abilities, bad positioning
+- **Terrible (-50%):** Suicidal charges, help enemies, ignore obvious dangers
+
+**Implementation:**
+1. Assess strategy quality and show difficulty hint via Emberlyn
+2. Calculate final success rate and show to player: "Success chance: 65%"
+3. Roll 1-100 and display: "🎲 Rolled: 73"
+4. Show result tier: "Result: Success!" 
+5. Narrate outcome naturally based on result tier
+
+**Display Format:**
+"Emberlyn nods approvingly. 'Good tactics!' Success chance: 65% (need 36 or higher)
+🎲 Rolled: 73 - Success! (73 ≥ 36)
+[Narrative outcome based on success tier]"
+
+**Result Display Examples:**
+- Success: "🎲 Rolled: 73 - Success! (73 ≥ 36 for 65% chance)"
+- Failure: "🎲 Rolled: 25 - Failure! (25 < 36)" 
+- Critical Success: "🎲 Rolled: 98 - Critical Success! (natural 95+)"
+- Great Success: "🎲 Rolled: 87 - Great Success! (high roll)"
+
+**Failure Consequences:**
+Critical: Equipment damage, injury, severe disadvantage
+Regular: No progress, minor disadvantage, wasted resources
+Partial: Success with complications or unexpected costs
 
 ## EXPERIENCE & LEVELS
 Award XP only for:

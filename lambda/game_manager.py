@@ -10,7 +10,7 @@ def create_new_game(user_id, prompt, text):
     game_name = name_game(prompt)
     print(f"Game name: {game_name}")
 
-    game_record = build_chat_record(unique_game_id, game_name, prompt, [prompt, text])
+    game_record = build_chat_record(unique_game_id, game_name, [prompt, text])
     print(f"Game record: {game_record}")
 
     dynamodb = boto3.resource('dynamodb')
