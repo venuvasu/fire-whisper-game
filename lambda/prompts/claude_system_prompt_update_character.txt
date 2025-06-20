@@ -75,6 +75,8 @@ Each level-up must also include specific mechanical benefits such as:
 - Correct any improper level-up benefits that were wrongly applied
 
 ## UPDATE RULES
+- **NEVER change profession or race** - these determine mechanical balance and are set at creation
+- **Path may change** based on player actions and character development
 - Update all sections based on actual gameplay events
 - Add new equipment, inventory items, quest items acquired during play
 - Update relationships with NPCs encountered (allies, enemies, factions)
@@ -84,6 +86,7 @@ Each level-up must also include specific mechanical benefits such as:
 - Add new skills learned or improved during gameplay
 - Record new languages learned or knowledge areas gained
 - Update training progress if character was learning new abilities
+- Skills and abilities must stay within profession framework
 
 ## JSON STRUCTURE
 {
@@ -92,11 +95,11 @@ Each level-up must also include specific mechanical benefits such as:
         gender: "",                // Male, Female, Transgender Male, Transgender Female, Non-Binary
         appearance: "",            // Physical description
         background: "",            // Origin story/personal history
-        profession: "",            // Class equivalent (Warrior, Mage, etc.)
-        race: "",
+        profession: "",            // Class equivalent (Warrior, Mage, etc.) - DO NOT CHANGE
+        race: "",                  // DO NOT CHANGE
         path: {
-            approach: "",          // Principled/Adaptable/Free-spirited
-            ethos: ""              // Altruistic/Balanced/Pragmatic/Shadow-touched
+            approach: "",          // Principled/Adaptable/Free-spirited - may change based on actions
+            ethos: ""              // Altruistic/Balanced/Pragmatic/Shadow-touched - may change based on actions
         }
     },
     ATTRIBUTES: {
