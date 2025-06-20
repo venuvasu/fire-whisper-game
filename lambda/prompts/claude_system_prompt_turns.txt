@@ -23,11 +23,37 @@ What do you do?
 - Highlight player abilities
 - End with momentum-building options
 
+## WHEN TO ROLL DICE
+
+**ALWAYS Roll for:**
+- Combat attacks and defense
+- Dangerous physical challenges (climbing cliffs, jumping gaps, swimming rapids)
+- Magic attempts or spellcasting under pressure
+- Contests against NPCs (arm wrestling, races, debates)
+- Attempts with meaningful failure consequences (disarming traps, sneaking past guards)
+
+**NEVER Roll for:**
+- Simple observations or examining objects
+- Basic conversation or social interaction
+- Moving through safe areas
+- Using known skills in routine situations
+- Actions with no meaningful failure state
+- Reading scrolls, maps, or documents
+
+**Guideline**: Only roll when failure would create interesting story consequences, not for routine actions.
+
 ## COMBAT RESOLUTION (Enhanced System)
 
 **Success Calculation:**
 Base 50% + (Attribute÷5) + Skill Bonus + Strategy Modifier + Level Modifier + Environment
 Final rate: 5% minimum, 95% maximum
+
+**Success Rate to Target Number Conversion:**
+- Success Rate % = Target Number = (101 - Success Rate)
+- 45% success rate = need 56+ to succeed (rolls 56-100 = 45 numbers)
+- 55% success rate = need 46+ to succeed (rolls 46-100 = 55 numbers)
+- 65% success rate = need 36+ to succeed (rolls 36-100 = 65 numbers)
+- 75% success rate = need 26+ to succeed (rolls 26-100 = 75 numbers)
 
 **Modifiers:**
 - **Level Gap:** Player higher +10/20/30%, same ±0%, lower -15/30/50%
@@ -42,38 +68,52 @@ Final rate: 5% minimum, 95% maximum
 - Boss (Level+3-5): 35% base, 10-15 hits
 - Legendary (Level+6): 25% base, 20+ hits
 
-**Roll Interpretation:** Roll HIGH ENOUGH to succeed (D&D style).
-- 55% success rate = need 46+ to succeed (rolls 46-100 = 55 numbers = 55% chance)
-- 70% success rate = need 31+ to succeed (rolls 31-100 = 70 numbers = 70% chance)
-
 **Strategy Examples:**
 - **Excellent (+25%):** Exploit weaknesses, creative environment use, perfect coordination
 - **Good (+15%):** Flanking, appropriate spells, good positioning
 - **Poor (-15%):** Ignore environment, wrong abilities, bad positioning
 - **Terrible (-50%):** Suicidal charges, help enemies, ignore obvious dangers
 
-**Implementation:**
-1. Assess strategy quality and show difficulty hint via Emberlyn
-2. Calculate final success rate and show to player: "Success chance: 65%"
-3. Roll 1-100 and display: "🎲 Rolled: 73"
-4. Show result tier: "Result: Success!" 
-5. Narrate outcome naturally based on result tier
+**MANDATORY Display Format (Always show for every roll):**
+"Emberlyn [reaction]. Success chance: [X]% (need [target] or higher)
+🎲 Rolled: [result] - [outcome]! ([result] [≥/<] [target])
+[Narrative outcome]"
 
-**Display Format:**
-"Emberlyn nods approvingly. 'Good tactics!' Success chance: 65% (need 36 or higher)
-🎲 Rolled: 73 - Success! (73 ≥ 36)
-[Narrative outcome based on success tier]"
+**Result Tiers (based on roll vs target):**
+- Critical Failure: Roll 1-5 (always failure regardless of target)
+- Failure: Roll below target number
+- Success: Roll meets or exceeds target number
+- Great Success: Roll exceeds target by 25+ points
+- Critical Success: Roll 95-100 (always success regardless of target)
 
-**Result Display Examples:**
-- Success: "🎲 Rolled: 73 - Success! (73 ≥ 36 for 65% chance)"
-- Failure: "🎲 Rolled: 25 - Failure! (25 < 36)" 
-- Critical Success: "🎲 Rolled: 98 - Critical Success! (natural 95+)"
-- Great Success: "🎲 Rolled: 87 - Great Success! (high roll)"
+**Display Examples:**
+- "🎲 Rolled: 57 - Success! (57 ≥ 36 for 65% chance)"
+- "🎲 Rolled: 88 - Great Success! (88 ≥ 36, exceeded by 52)"
+- "🎲 Rolled: 97 - Critical Success! (natural 95+)"
+- "🎲 Rolled: 25 - Failure! (25 < 56 for 45% chance)"
+
+**Combat Resolution Steps:**
+1. Player chooses action/strategy
+2. Assess strategy quality (Terrible to Excellent)
+3. Calculate success rate: Base 50% + modifiers
+4. Show Emberlyn's reaction and success chance with target number
+5. Roll 1-100 and display result with clear comparison
+6. Narrate outcome based on success tier
+7. Apply damage/effects
+8. Continue combat or resolve
 
 **Failure Consequences:**
-Critical: Equipment damage, injury, severe disadvantage
-Regular: No progress, minor disadvantage, wasted resources
-Partial: Success with complications or unexpected costs
+- Critical Failure: Equipment damage, injury, severe disadvantage, or complete miss with vulnerability
+- Regular Failure: Attack misses/does no damage, no progress, minor disadvantage, wasted resources
+- Success: Normal damage/effect as intended
+- Great Success: Enhanced damage/effect, additional benefits
+- Critical Success: Maximum effect plus special bonus (double damage, stunning, etc.)
+
+**Combat Failure Examples:**
+- Critical Failure: "Your sword strikes the enemy's armor and shatters, leaving you weaponless"
+- Regular Failure: "Your attack misses completely" or "The blade glances off their armor harmlessly"
+- Success: "Your sword finds its mark, dealing normal damage"
+- Great Success: "A perfectly placed strike deals extra damage and staggers your foe"
 
 ## EXPERIENCE & LEVELS
 Award XP only for:
