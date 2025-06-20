@@ -74,6 +74,49 @@ Each level-up must also include specific mechanical benefits such as:
 - Only characters with 1000+ XP should be Level 2 or higher
 - Correct any improper level-up benefits that were wrongly applied
 
+## LOOT TRACKING & EQUIPMENT UPDATES
+
+**Equipment Additions:**
+When new equipment is acquired during gameplay, update appropriate sections:
+- Replace existing weapon/armor if superior item found
+- Add accessories to accessories array (max 3 slots)
+- Add magical items to magicalItems array
+- Track consumables in consumables array
+
+**Loot JSON Format:**
+```json
+"weapon": {
+    "name": "Masterwork Longsword",
+    "effect": "+1 attack rolls",
+    "damage": "1d10+Str",
+    "durability": 100,
+    "rarity": "Uncommon"
+},
+"accessories": [
+    {
+        "name": "Ring of Protection",
+        "effect": "+1 to all saving throws",
+        "rarity": "Uncommon"
+    }
+],
+"magicalItems": [
+    {
+        "name": "Boots of Speed",
+        "power": "+10 movement speed",
+        "charges": 0,
+        "rarity": "Rare"
+    }
+]
+```
+
+**Rarity Levels:** Common, Uncommon, Rare, Epic, Legendary
+
+**Equipment Priority Rules:**
+- Always keep highest damage weapon for character's fighting style
+- Highest protection armor unless special effects warrant keeping lower protection
+- Magical items with useful effects take priority over mundane equipment
+- Track multiple weapons if character switches between melee/ranged
+
 ## UPDATE RULES
 - **NEVER change profession or race** - these determine mechanical balance and are set at creation
 - **Path may change** based on player actions and character development
@@ -87,6 +130,9 @@ Each level-up must also include specific mechanical benefits such as:
 - Record new languages learned or knowledge areas gained
 - Update training progress if character was learning new abilities
 - Skills and abilities must stay within profession framework
+- **CRITICAL: Track all loot found during gameplay and update equipment accordingly**
+- **Remove/replace outdated equipment when superior items are found**
+- **Update consumables inventory with potions/items used or gained**
 
 ## RELATIONSHIP UPDATE FRAMEWORK
 **These are total changes across the entire game session, not per-turn adjustments.**
@@ -167,21 +213,23 @@ Each level-up must also include specific mechanical benefits such as:
             name: "",              // Primary offensive tool
             effect: "",            // Special properties
             damage: 0,             // Base damage
-            durability: 0          // Condition (100 = perfect)
+            durability: 0,         // Condition (100 = perfect)
+            rarity: ""             // Common/Uncommon/Rare/Epic/Legendary
         },
         armor: {
             name: "",              // Protective gear
             protection: 0,         // Damage reduction
-            durability: 0          // Condition (100 = perfect)
+            durability: 0,         // Condition (100 = perfect)
+            rarity: ""             // Common/Uncommon/Rare/Epic/Legendary
         },
-        accessories: [             // Rings, amulets, etc.
-            {name: "", effect: ""}
+        accessories: [             // Rings, amulets, etc. (max 3)
+            {name: "", effect: "", rarity: ""}
         ],
         tools: [                   // Utility items
             {name: "", use: ""}
         ],
         magicalItems: [            // Special enchanted possessions
-            {name: "", power: "", charges: 0}
+            {name: "", power: "", charges: 0, rarity: ""}
         ]
     },
     INVENTORY: {
