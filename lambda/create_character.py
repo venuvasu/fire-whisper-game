@@ -9,10 +9,11 @@ def handler(event, context):
 
     body = json.loads(event.get('body', '{}'))
     body_name = body.get('name')
+    body_race = body.get('race')
     body_gender = body.get('gender')
     body_profession = body.get('profession')
 
-    character_template = create_character(user_id, body_name, body_gender, body_profession, haiku_model="claude_haiku_35")
+    character_template = create_character(user_id, body_name, body_race, body_gender, body_profession, haiku_model="claude_haiku_35")
 
     print(f"Generated character template: {character_template}")
     character_dict = json.loads(character_template)

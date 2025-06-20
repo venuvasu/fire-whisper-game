@@ -54,6 +54,7 @@ def create_saga_with_character(user_id, character_data, setting, difficulty, len
 
     story_arc = random.choice(story_arcs_list)
     print("Selected story arc:", story_arc)
+    print("Length of story_arc string:", len(story_arcs_list))
 
     story_prompt = f"""Begin a Fire Whisper adventure for this character. Track progress in this format:
 {character_dict_str}
@@ -87,8 +88,6 @@ Begin immediately with the opening crisis. Emberlyn should introduce herself nat
     bedrock_model_id = "anthropic.claude-3-haiku-20240307-v1:0"
     if haiku_model == "claude_haiku_35":
         bedrock_model_id = "us.anthropic.claude-3-5-haiku-20241022-v1:0"
-
-    print("Invoking model with prompt:", system_prompt)
 
     response = client.invoke_model(
         modelId=bedrock_model_id,

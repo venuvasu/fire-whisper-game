@@ -5,20 +5,13 @@ from amplitude.amplitude_handler import send_bedrock_amplitude_event
 with open("prompts/claude_system_prompt_create_character.txt", "r") as f:
     character_system_prompt = f.read()
 
-def create_character(user_id, name, gender, profession, haiku_model="claude_haiku_30"):
+def create_character(user_id, name, race, gender, profession, haiku_model="claude_haiku_30"):
     name_prompt = ""
     if name and name.strip() != "":
         name_prompt = "The character's name should be " + name + "."
-    gender_prompt = ""
-    if gender and gender.strip() != "":
-        gender_prompt = "The character's gender should be " + gender + "."
-    profession_prompt = ""
-    if profession and profession.strip() != "":
-        profession_prompt = "The character's profession should be " + profession + "."
-
-    name_prompt = ""
-    if name and name.strip() != "":
-        name_prompt = "The character's name should be " + name + "."
+    race_prompt = ""
+    if race and race.strip() != "":
+        race_prompt = "The character's race should be " + race + "."
     gender_prompt = ""
     if gender and gender.strip() != "":
         gender_prompt = "The character's gender should be " + gender + "."
@@ -28,6 +21,7 @@ def create_character(user_id, name, gender, profession, haiku_model="claude_haik
 
     character_prompt = f"""Randomly generate a level 1 character.
 {name_prompt}
+{race_prompt}
 {gender_prompt}
 {profession_prompt}
 """
