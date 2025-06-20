@@ -88,6 +88,30 @@ Each level-up must also include specific mechanical benefits such as:
 - Update training progress if character was learning new abilities
 - Skills and abilities must stay within profession framework
 
+## RELATIONSHIP UPDATE FRAMEWORK
+**These are total changes across the entire game session, not per-turn adjustments.**
+
+**Emberlyn Companion Bond (0-100 scale):**
+- **+5 to +15**: Following Emberlyn's advice, teamwork, protecting her, showing trust
+- **+1 to +5**: Positive interactions, friendly conversation, successful cooperation
+- **-1 to -5**: Ignoring advice, minor disagreements, reckless behavior
+- **-5 to -15**: Directly opposing Emberlyn, endangering her, hostile behavior
+
+**NPCs - Allies (attitude scale -100 to +100):**
+- **New allies**: Start at +20 to +40 based on first impression
+- **Existing allies**: Adjust ±5 to ±20 based on player actions toward them
+- **Betrayed/abandoned allies**: May become enemies (move to enemies list)
+
+**NPCs - Enemies (threat level 1-10):**
+- **New enemies**: Rate threat based on power level and hostility
+- **Existing enemies**: Increase threat if player escalates conflict
+- **Defeated enemies**: Remove from list or reduce threat to 1-2 if still alive
+
+**Factions (standing scale -100 to +100):**
+- **New factions**: Start based on how player was introduced (±10 to ±30)
+- **Existing factions**: Adjust based on player's actions affecting the group
+- **Major faction events**: Large swings (±20 to ±50) for significant help/harm
+
 ## JSON STRUCTURE
 {
     IDENTITY: {
