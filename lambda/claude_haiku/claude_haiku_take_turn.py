@@ -1,5 +1,6 @@
 import boto3
 import json
+import random
 from amplitude.amplitude_handler import send_bedrock_amplitude_event
 
 with open("prompts/claude_system_prompt_turns.txt", "r") as f:
@@ -17,7 +18,15 @@ def take_turn(user_id, game_record, haiku_model="claude_haiku_30"):
         role = "assistant"
         if index % 2 == 0:
             role = "user"
-        
+
+        if index == len(messages) - 1:
+            dice_pool = [random.randint(1, 100) for _ in range(4)]
+            item = f"""DICE POOL FOR THIS TURN: {dice_pool}
+Use these dice results IN ORDER when rolls are needed. Do not mention this dice pool to the user.
+Original player action: {item}
+"""
+            print(f"Using dice pool: {dice_pool}")
+
         claude_messages.append({
             "role": role,
             "content": [

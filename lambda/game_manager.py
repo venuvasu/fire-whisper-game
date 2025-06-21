@@ -44,9 +44,7 @@ def update_game_messages(game_id, messages, game_active=None):
     update_expr = "SET messages = :m"
     expr_attrs = {':m': messages}
 
-    print(f'game_active: {game_active}')
     if game_active is not None:
-        print(f'in game_active: {game_active}')
         update_expr += ", game_active = :g"
         expr_attrs[':g'] = game_active
 
