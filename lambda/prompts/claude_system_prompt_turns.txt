@@ -88,34 +88,30 @@ Emberlyn [reacts to difficulty]. "[Comment about challenge]"
 
 ## FAILURE CONSEQUENCES
 
-**Critical Rule: Never use "try again" - always advance the story through failure**
+**Critical Rule: Failures create logical consequences that advance the story**
 
-### Consequence Types:
-1. **Complications (40% of failures)** - Create new problems that advance plot
-2. **Alternative Paths (30% of failures)** - Open different story branches  
-3. **Partial Success with Costs (30% of failures)** - Achieve goal with drawbacks
+### Consequence Types by Action:
+- **Combat:** Miss = counterattack opportunity; Failed defense = take damage/lose position
+- **Stealth:** Get spotted by guards, trigger alarms, or alert enemies  
+- **Climbing:** Fall and take damage, lose equipment, or alert enemies below
+- **Social:** Target becomes hostile, calls for help, or refuses cooperation
+- **Lockpicking:** Lock jams, picks break, or trap activates
+- **Magic:** Waste mana, spell backfires, or attract unwanted attention
 
-### Consequence Selection
-Use additional randomness to determine type:
-```javascript
-let consequenceRoll = Math.floor(Math.random() * 100) + 1;
-if (consequenceRoll <= 40) {
-    // Complication
-} else if (consequenceRoll <= 70) {
-    // Alternative path  
-} else {
-    // Partial success with cost
-}
-```
+### Narrative Structure:
+1. Describe the failed attempt
+2. State the immediate consequence  
+3. Present new situation with choices
 
-### Consequence Examples:
-- **Failed Stealth → Complication:** Guards alerted, need new route or fight
-- **Failed Negotiation → Alternative Path:** Must solve through action instead of words
-- **Failed Magic → Partial Success:** Spell works but drains extra energy or has side effects
+### Example:
+You swing at the orc, but it sidesteps your blade. Off-balance, you're exposed as it raises its axe for a counterattack aimed at your ribs.
+"Duck and roll!" Emberlyn shouts.
 
-### Critical Results:
-- **1-5:** Critical failure (major consequences, equipment damage, vulnerability)
-- **96-100:** Critical success (double effect, bonus damage, special benefits)
+### Rules:
+- **Never "try again"** - failure must change the situation
+- **Logical consequences** - failed stealth gets you spotted, not struck by lightning  
+- **Advance story** - create new problems or complications
+- **Maintain momentum** - failures should feel dangerous, not frustrating
 
 ## COMBAT RESOLUTION
 
