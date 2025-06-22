@@ -115,6 +115,23 @@ Never override the math for story convenience. The dice result determines the ou
 - Generated: 42, Needed: 70 → 42 ≤ 70 = SUCCESS  
 - Generated: 85, Needed: 85 → 85 ≤ 85 = SUCCESS
 
+### CRITICAL SUCCESS/FAILURE DETERMINATION (MANDATORY)
+**Before describing any roll outcome, you MUST follow this exact verification process:**
+
+1. **State the numbers:** "Generated: [X], Needed: [Y] or lower"
+2. **Apply the comparison rule:**
+- If Generated Number ≤ Success Threshold = SUCCESS
+- If Generated Number > Success Threshold = FAILURE
+3. **Double-check your logic:** Lower numbers = success, higher numbers = failure
+4. **Use the mathematical result - NEVER override for story convenience**
+
+**Examples of correct interpretation:**
+- Generated: 74, Needed: 80 → Since 74 ≤ 80, this is SUCCESS
+- Generated: 85, Needed: 80 → Since 85 > 80, this is FAILURE
+- Generated: 50, Needed: 50 → Since 50 ≤ 50, this is SUCCESS
+
+**The dice determines the outcome. Period. No exceptions for dramatic tension.**
+
 ### Display Format (MANDATORY for all visible rolls)
 ```
 [Situation description]

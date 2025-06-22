@@ -42,6 +42,9 @@ Original player action: {item}
     bedrock_model_id = "anthropic.claude-3-haiku-20240307-v1:0"
     if haiku_model == "claude_haiku_35":
         bedrock_model_id = "us.anthropic.claude-3-5-haiku-20241022-v1:0"
+    elif haiku_model == "sonnet_40":
+        bedrock_model_id = "us.anthropic.claude-sonnet-4-20250514-v1:0"
+
 
     response = client.invoke_model(
         modelId=bedrock_model_id,
@@ -49,7 +52,7 @@ Original player action: {item}
             "anthropic_version": "bedrock-2023-05-31",
             "system": system_prompt,
             "messages": claude_messages,
-            "max_tokens": 384
+            "max_tokens": 512
         }),
         contentType="application/json",
         accept="application/json"

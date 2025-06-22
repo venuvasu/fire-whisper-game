@@ -17,6 +17,10 @@ def handler(event, context):
     claims = event['requestContext']['authorizer']['jwt']['claims']
     user_id = claims.get('sub')
 
+    if user_id == "14584438-f0e1-70f3-cddb-aacc62298e55":
+        model_type = "sonnet_40"
+
+
     # Get API parameters
     body = json.loads(event.get("body", "{}"))
     game_id = body.get("game_id")
@@ -52,6 +56,9 @@ def handler(event, context):
         text = take_turn(user_id, game_record, "claude_haiku_35")
     elif(model_type == "claude_haiku_30"):
         text = take_turn(user_id, game_record, "claude_haiku_30")
+    elif(model_type == "sonnet_40"):
+        text = take_turn(user_id, game_record, "sonnet_40")
+
 
     # Append the AI response to the game record
     game_record = append_message_to_game(game_record, text)
