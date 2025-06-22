@@ -17,11 +17,6 @@ def handler(event, context):
     claims = event['requestContext']['authorizer']['jwt']['claims']
     user_id = claims.get('sub')
 
-    # temporary to allow sonnet testing
-    model_type = "claude_haiku_35"
-    if user_id == "14584438-f0e1-70f3-cddb-aacc62298e55":
-        model_type = "sonnet_40"
-
     # Get API parameters
     body = json.loads(event.get("body", "{}"))
     game_id = body.get("game_id")

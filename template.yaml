@@ -189,7 +189,7 @@ Resources:
       CodeUri: lambda/
       Handler: update_character_from_game.handler
       Runtime: python3.11
-      Timeout: 30
+      Timeout: 60
       Events:
         TitanApi:
           Type: HttpApi
