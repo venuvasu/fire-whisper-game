@@ -111,7 +111,7 @@ Begin immediately with the opening crisis. Emberlyn should introduce herself nat
         accept="application/json"
     )
 
-    send_bedrock_amplitude_event(user_id, "create_saga", haiku_model, response)
+    send_bedrock_amplitude_event(user_id, "create_saga", haiku_model, response, {"character_id": character_data['character_id']})
 
     response_body = json.loads(response["body"].read())
     text = response_body["content"][0]["text"]

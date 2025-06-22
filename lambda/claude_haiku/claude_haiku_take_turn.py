@@ -58,7 +58,7 @@ Original player action: {item}
         accept="application/json"
     )
 
-    send_bedrock_amplitude_event(user_id, "take_turn", haiku_model, response)
+    send_bedrock_amplitude_event(user_id, "take_turn", haiku_model, response, {"game_id": game_record['game_id']})
 
     response_body = json.loads(response["body"].read())
     text = response_body["content"][0]["text"]

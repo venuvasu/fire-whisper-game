@@ -4,14 +4,19 @@ import requests
 # This is a public key and exposed in web anyway, no worry about it in code.
 AMPLITUDE_API_KEY = "e8fbd42ed1d90d161e89c5b0a8114d87"
 
-def send_bedrock_amplitude_event(user_id, callType, model, bedrock_response):
+def send_bedrock_amplitude_event(user_id, callType, model, bedrock_response, event_properties=None):
     headers = bedrock_response['ResponseMetadata']['HTTPHeaders']
 
-    invocation_latency = int(headers.get('x-amzn-bedrock-invocation-latency', 0))
-    output_tokens = int(headers.get('x-amzn-bedrock-output-token-count', 0))
-    input_tokens = int(headers.get('x-amzn-bedrock-input-token-count', 0))
+    if event_properties is None:
+        event_properties = {}
 
-    send_amplitude_event(user_id, "bedrock_call", {"callType": callType, "model": model, "inputTokens": input_tokens, "outputTokens": output_tokens, "latency": invocation_latency})
+    event_properties["callType"] = callType
+    event_properties["model"] = model
+    event_properties["inputTokens"] = int(headers.get('x-amzn-bedrock-input-token-count', 0))
+    event_properties["outputTokens"] = int(headers.get('x-amzn-bedrock-output-token-count', 0))
+    event_properties["latency"] = int(headers.get('x-amzn-bedrock-invocation-latency', 0))
+
+    send_amplitude_event(user_id, "bedrock_call", event_properties)
 
 def send_amplitude_event(user_id, event_type, event_properties=None):
     if event_properties is None:
