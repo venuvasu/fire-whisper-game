@@ -10,7 +10,6 @@ def handler(event, context):
     # Get parameters from the event body
     body = json.loads(event.get("body", "{}"))
     character_id = body.get("characterId")
-    print("character_id:", character_id)
     setting = body.get("setting")
     difficulty = body.get("difficulty")
 
@@ -19,7 +18,6 @@ def handler(event, context):
     characters_table = dynamodb.Table('FW_Characters_Dev')
     response = characters_table.get_item(Key={'character_id': character_id})
     character_dict = response.get('Item')
-    print("character_dict:", repr(character_dict))
     
     start_response = create_saga_with_character(user_id, character_dict, setting, difficulty, "claude_haiku_35")
     prompt = start_response['prompt']
