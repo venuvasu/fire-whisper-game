@@ -11,6 +11,14 @@ Parameters:
     Type: String
     Description: The Cognito User Pool App Client ID
 
+  Environment:
+    Type: String
+    Default: Dev
+    AllowedValues:
+      - Dev
+      - Beta
+    Description: Environment name for resource naming
+
 Resources:
   FireWhisperHttpApi:
     Type: AWS::Serverless::HttpApi
@@ -70,8 +78,8 @@ Resources:
               Action:
                 - dynamodb:GetItem
               Resource:
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Sagas_${Environment}"
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}"
 
   GetUserDataFunction:
     Type: AWS::Serverless::Function
@@ -94,7 +102,8 @@ Resources:
             - Effect: Allow
               Action:
                 - dynamodb:GetItem
-              Resource: arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+              Resource:
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}"
 
   TakeTurnFunction:
     Type: AWS::Serverless::Function
@@ -139,9 +148,9 @@ Resources:
                 - dynamodb:PutItem
                 - dynamodb:UpdateItem
               Resource:
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Sagas_${Environment}"
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}"
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Characters_${Environment}"
             - Effect: Allow
               Action:
                 - lambda:InvokeFunction
@@ -181,8 +190,8 @@ Resources:
                 - dynamodb:PutItem
                 - dynamodb:UpdateItem
               Resource:
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Characters_${Environment}"
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}"
 
   DeleteCharacterFunction:
     Type: AWS::Serverless::Function
@@ -208,7 +217,7 @@ Resources:
                 - dynamodb:PutItem
                 - dynamodb:UpdateItem
               Resource:
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}"
 
   UpdateCharacterFunction:
     Type: AWS::Serverless::Function
@@ -244,9 +253,9 @@ Resources:
                 - dynamodb:PutItem
                 - dynamodb:UpdateItem
               Resource:
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Sagas_${Environment}"
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Characters_${Environment}"
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}"
 
   GetCharacterFunction:
     Type: AWS::Serverless::Function
@@ -270,9 +279,9 @@ Resources:
               Action:
                 - dynamodb:GetItem
               Resource:
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Sagas_${Environment}"
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Characters_${Environment}"
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}"
 
   StartSagaFunction:
     Type: AWS::Serverless::Function
@@ -308,9 +317,9 @@ Resources:
                 - dynamodb:PutItem
                 - dynamodb:UpdateItem
               Resource:
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
-                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Sagas_${Environment}"
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Characters_${Environment}"
+                - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}"
 
 Outputs:
   HttpApiUrl:

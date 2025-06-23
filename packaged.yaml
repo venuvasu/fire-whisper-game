@@ -8,6 +8,13 @@ Parameters:
   FireWhisperUserPoolClient:
     Type: String
     Description: The Cognito User Pool App Client ID
+  Environment:
+    Type: String
+    Default: Dev
+    AllowedValues:
+    - Dev
+    - Beta
+    Description: Environment name for resource naming
 Resources:
   FireWhisperHttpApi:
     Type: AWS::Serverless::HttpApi
@@ -57,7 +64,7 @@ Resources:
   GetGameFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
+      CodeUri: s3://dnd-lambda-deployer-bucket/3e06842da1c23e8e949402be650af4b8
       Handler: get_game.handler
       Runtime: python3.11
       Timeout: 30
@@ -77,14 +84,14 @@ Resources:
           Action:
           - dynamodb:GetItem
           Resource:
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Sagas_${Environment}
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}
     Metadata:
       SamResourceId: GetGameFunction
   GetUserDataFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
+      CodeUri: s3://dnd-lambda-deployer-bucket/3e06842da1c23e8e949402be650af4b8
       Handler: get_user_data.handler
       Runtime: python3.11
       Timeout: 10
@@ -103,13 +110,14 @@ Resources:
         - Effect: Allow
           Action:
           - dynamodb:GetItem
-          Resource: arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+          Resource:
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}
     Metadata:
       SamResourceId: GetUserDataFunction
   TakeTurnFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
+      CodeUri: s3://dnd-lambda-deployer-bucket/3e06842da1c23e8e949402be650af4b8
       Handler: take_turn.handler
       Runtime: python3.11
       Timeout: 30
@@ -153,9 +161,9 @@ Resources:
           - dynamodb:PutItem
           - dynamodb:UpdateItem
           Resource:
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Sagas_${Environment}
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Characters_${Environment}
         - Effect: Allow
           Action:
           - lambda:InvokeFunction
@@ -168,7 +176,7 @@ Resources:
   CreateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
+      CodeUri: s3://dnd-lambda-deployer-bucket/3e06842da1c23e8e949402be650af4b8
       Handler: create_character.handler
       Runtime: python3.11
       Timeout: 30
@@ -200,14 +208,14 @@ Resources:
           - dynamodb:PutItem
           - dynamodb:UpdateItem
           Resource:
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Characters_${Environment}
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}
     Metadata:
       SamResourceId: CreateCharacterFunction
   DeleteCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
+      CodeUri: s3://dnd-lambda-deployer-bucket/3e06842da1c23e8e949402be650af4b8
       Handler: delete_character.handler
       Runtime: python3.11
       Timeout: 30
@@ -229,13 +237,13 @@ Resources:
           - dynamodb:PutItem
           - dynamodb:UpdateItem
           Resource:
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}
     Metadata:
       SamResourceId: DeleteCharacterFunction
   UpdateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
+      CodeUri: s3://dnd-lambda-deployer-bucket/3e06842da1c23e8e949402be650af4b8
       Handler: update_character_from_game.handler
       Runtime: python3.11
       Timeout: 60
@@ -267,15 +275,15 @@ Resources:
           - dynamodb:PutItem
           - dynamodb:UpdateItem
           Resource:
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Sagas_${Environment}
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Characters_${Environment}
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}
     Metadata:
       SamResourceId: UpdateCharacterFunction
   GetCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
+      CodeUri: s3://dnd-lambda-deployer-bucket/3e06842da1c23e8e949402be650af4b8
       Handler: get_character.handler
       Runtime: python3.11
       Timeout: 10
@@ -295,15 +303,15 @@ Resources:
           Action:
           - dynamodb:GetItem
           Resource:
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Sagas_${Environment}
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Characters_${Environment}
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}
     Metadata:
       SamResourceId: GetCharacterFunction
   StartSagaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
+      CodeUri: s3://dnd-lambda-deployer-bucket/3e06842da1c23e8e949402be650af4b8
       Handler: create_saga.handler
       Runtime: python3.11
       Timeout: 30
@@ -335,9 +343,9 @@ Resources:
           - dynamodb:PutItem
           - dynamodb:UpdateItem
           Resource:
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
-          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Sagas_Dev
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Sagas_${Environment}
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_Characters_${Environment}
+          - Fn::Sub: arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/FW_UserData_${Environment}
     Metadata:
       SamResourceId: StartSagaFunction
 Outputs:

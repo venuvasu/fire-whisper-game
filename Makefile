@@ -30,7 +30,8 @@ deploy:
 	  --region $(REGION) \
 	  --parameter-overrides \
 	    FireWhisperUserPool=$(FIREWHISPER_USER_POOL) \
-	    FireWhisperUserPoolClient=$(FIREWHISPER_USER_POOL_CLIENT)
+	    FireWhisperUserPoolClient=$(FIREWHISPER_USER_POOL_CLIENT) \
+		Environment=$(FIREWHISPER_ENV)
 
 delete:
 	aws cloudformation delete-stack \
