@@ -30,6 +30,7 @@ Resources:
           - POST
           - GET
           - OPTIONS
+          - DELETE
         AllowHeaders:
           - Authorization
           - Content-Type
@@ -181,6 +182,32 @@ Resources:
                 - dynamodb:UpdateItem
               Resource:
                 - arn:aws:dynamodb:us-east-1:485875644646:table/FW_Characters_Dev
+                - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+
+  DeleteCharacterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/
+      Handler: delete_character.handler
+      Runtime: python3.11
+      Timeout: 30
+      Events:
+        TitanApi:
+          Type: HttpApi
+          Properties:
+            Path: /deletecharacter
+            Method: DELETE
+            ApiId: !Ref FireWhisperHttpApi
+            Auth:
+              Authorizer: CognitoAuthorizer
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - dynamodb:GetItem
+                - dynamodb:PutItem
+                - dynamodb:UpdateItem
+              Resource:
                 - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
 
   UpdateCharacterFunction:

@@ -28,6 +28,7 @@ Resources:
         - POST
         - GET
         - OPTIONS
+        - DELETE
         AllowHeaders:
         - Authorization
         - Content-Type
@@ -56,7 +57,7 @@ Resources:
   GetGameFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/9acad266e6a7eeaa642c588940f540d5
+      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
       Handler: get_game.handler
       Runtime: python3.11
       Timeout: 30
@@ -83,7 +84,7 @@ Resources:
   GetUserDataFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/9acad266e6a7eeaa642c588940f540d5
+      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
       Handler: get_user_data.handler
       Runtime: python3.11
       Timeout: 10
@@ -108,7 +109,7 @@ Resources:
   TakeTurnFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/9acad266e6a7eeaa642c588940f540d5
+      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
       Handler: take_turn.handler
       Runtime: python3.11
       Timeout: 30
@@ -167,7 +168,7 @@ Resources:
   CreateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/9acad266e6a7eeaa642c588940f540d5
+      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
       Handler: create_character.handler
       Runtime: python3.11
       Timeout: 30
@@ -203,10 +204,38 @@ Resources:
           - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
     Metadata:
       SamResourceId: CreateCharacterFunction
+  DeleteCharacterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
+      Handler: delete_character.handler
+      Runtime: python3.11
+      Timeout: 30
+      Events:
+        TitanApi:
+          Type: HttpApi
+          Properties:
+            Path: /deletecharacter
+            Method: DELETE
+            ApiId:
+              Ref: FireWhisperHttpApi
+            Auth:
+              Authorizer: CognitoAuthorizer
+      Policies:
+      - Statement:
+        - Effect: Allow
+          Action:
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+          Resource:
+          - arn:aws:dynamodb:us-east-1:485875644646:table/FW_UserData_Dev
+    Metadata:
+      SamResourceId: DeleteCharacterFunction
   UpdateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/9acad266e6a7eeaa642c588940f540d5
+      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
       Handler: update_character_from_game.handler
       Runtime: python3.11
       Timeout: 60
@@ -246,7 +275,7 @@ Resources:
   GetCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/9acad266e6a7eeaa642c588940f540d5
+      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
       Handler: get_character.handler
       Runtime: python3.11
       Timeout: 10
@@ -274,7 +303,7 @@ Resources:
   StartSagaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/9acad266e6a7eeaa642c588940f540d5
+      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
       Handler: create_saga.handler
       Runtime: python3.11
       Timeout: 30
