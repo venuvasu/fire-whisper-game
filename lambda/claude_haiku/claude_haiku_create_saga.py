@@ -1,7 +1,7 @@
 import boto3
 import decimal
 import json
-import random
+import secrets
 from amplitude.amplitude_handler import send_bedrock_amplitude_event
 
 with open("prompts/claude_system_prompt_start.txt", "r") as f:
@@ -52,7 +52,7 @@ def create_saga_with_character(user_id, character_data, setting, difficulty, len
     character_dict = response.get('Item')
     character_dict_str = json.dumps(character_dict, default=decimal_default)
 
-    story_arc = random.choice(story_arcs_list)
+    story_arc = secrets.choice(story_arcs_list)
     print("Selected story arc:", story_arc)
     print("Length of story_arc string:", len(story_arcs_list))
 
