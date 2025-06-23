@@ -73,7 +73,6 @@ def get_game_summary(game_id):
         'message_count': message_count
     }
 
-
 def get_games_for_character(user_id, target_character_id):
     dynamodb = boto3.client('dynamodb')
     response = dynamodb.get_item(
