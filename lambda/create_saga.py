@@ -1,6 +1,6 @@
 import boto3
 import json
-from game_manager import create_new_game
+from utils.game_manager import create_new_game
 from claude_haiku.claude_haiku_create_saga import create_saga_with_character
 
 def handler(event, context):

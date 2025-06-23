@@ -1,7 +1,7 @@
 import boto3
 import decimal
 import json
-from game_manager import get_games_for_character
+from utils.game_manager import get_games_for_character
 
 def default_serializer(obj):
     if isinstance(obj, decimal.Decimal):

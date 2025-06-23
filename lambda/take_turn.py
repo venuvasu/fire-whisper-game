@@ -2,7 +2,7 @@ import boto3
 import decimal
 import json
 import os
-from game_manager import get_game_by_id, append_message_to_game, update_game_messages
+from utils.game_manager import get_game_by_id, append_message_to_game, update_game_messages
 from mistral.mistral import take_turn as take_turn_mistral
 from claude_haiku.claude_haiku_take_turn import take_turn
 

@@ -1,6 +1,6 @@
 import boto3
 import uuid
-from game_record_schema import build_chat_record
+from utils.game_record_schema import build_chat_record
 
 def create_new_game(user_id, prompt, text, game_name):
     unique_game_id = str(uuid.uuid4())
