@@ -17,33 +17,6 @@ def decimal_default(obj):
         return int(obj) if obj % 1 == 0 else float(obj)
     raise TypeError
 
-def get_length_prompt(length):
-    length_prompt = ""
-    if not length or not length.strip() or length.strip() == "Short":
-        length_prompt = "The duration of this story should be short, consisting of simple puzzle followed by a combat encounter leading to a conclusion."
-    elif length.strip() == "Medium":
-        length_prompt = "The duration of this story should be medium, consisting of puzzle followed by 2-3 combat encounters leading to a conclusion."
-    elif length.strip() == "Long":
-        length_prompt = "The duration of this story should be longer, consisting of 3 clear quest milestones that cascade to a conclusion. Each milestone should consist of a puzzle, 1-2 combat encounters, or a boss fight. There should be a heavy bias to using a Boss fight for the third milestone. NPCs should be encouraged to adventure alongside the player in this story."
-    else:
-        length_prompt = "The duration of this story should be short, consisting of simple puzzle followed by a combat encounter leading to a conclusion."
-    return length_prompt
-
-def get_difficulty_prompt(difficulty):
-    difficulty_prompt = ""
-    if difficulty and difficulty.strip() != "":
-        difficulty_prompt = "Easy"
-    elif difficulty.strip() == "Story":
-        difficulty_prompt = "Easy"
-    elif difficulty.strip() == "Adventurer":
-        difficulty_prompt = "Normal"
-    elif difficulty.strip() == "Hero":
-        difficulty_prompt = "Hard"
-    else:
-        difficulty_prompt = "Easy"
-    return difficulty_prompt
-
-
 def create_saga_with_character(user_id, character_data, setting, difficulty, length, haiku_model="claude_haiku_30"):
     # Retrieve character dict from FW_Characters_Dev table
     dynamodb = boto3.resource('dynamodb')
@@ -60,7 +33,6 @@ def create_saga_with_character(user_id, character_data, setting, difficulty, len
 {character_dict_str}
 
 ## QUEST PARAMETERS
-- Duration: {length}
 - Setting: {setting}
 - Difficulty: {difficulty}
 
@@ -71,10 +43,8 @@ def create_saga_with_character(user_id, character_data, setting, difficulty, len
 - Create appropriate backstory connecting the character to this crisis
 - Establish clear objective in opening scene via SPARK method
 - This is a SINGLE-SESSION story that MUST reach "Congratulations, you have completed this Saga!" 
-- Scale complexity to match duration:
-  - Short: Direct path, 1 major obstacle
-  - Medium: Some exploration, 2-3 major challenges  
-  - Long: Multiple paths, subplots, 4+ major encounters
+- The duration of this story should be less then 50 turns, with a turn being a single message from the player. The game will be forcibly ended at 50 turns.
+- It should consist of a 2-3 challenges around the story arc, with at most 1 being a puzzle and the rest combat.
 - Adjust challenge based on difficulty:
   - Story: Narrative focus, forgiving combat
   - Adventurer: Balanced challenge
