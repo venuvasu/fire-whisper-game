@@ -17,7 +17,7 @@ def decimal_default(obj):
         return int(obj) if obj % 1 == 0 else float(obj)
     raise TypeError
 
-def create_saga_with_character(user_id, character_data, setting, difficulty, length, haiku_model="claude_haiku_30"):
+def create_saga_with_character(user_id, character_data, setting, difficulty, haiku_model="claude_haiku_30"):
     # Retrieve character dict from FW_Characters_Dev table
     dynamodb = boto3.resource('dynamodb')
     characters_table = dynamodb.Table('FW_Characters_Dev')
