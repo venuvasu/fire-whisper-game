@@ -4,11 +4,8 @@ from game_record_schema import build_chat_record
 from user_record_schema import build_user_record
 from claude_haiku_30.claude_haiku_30 import name_game
 
-def create_new_game(user_id, prompt, text):
+def create_new_game(user_id, prompt, text, game_name):
     unique_game_id = str(uuid.uuid4())
-
-    game_name = name_game(prompt)
-    print(f"Game name: {game_name}")
 
     game_record = build_chat_record(unique_game_id, game_name, [prompt, text])
     print(f"Game record: {game_record}")

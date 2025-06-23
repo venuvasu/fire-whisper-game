@@ -24,9 +24,10 @@ def handler(event, context):
     start_response = create_saga_with_character(user_id, character_dict, setting, difficulty, "claude_haiku_35")
     prompt = start_response['prompt']
     response = start_response['response']
+    game_name = start_response['game_name']
 
     # Generate a new game record and attach to user
-    game_record = create_new_game(user_id, prompt, response)
+    game_record = create_new_game(user_id, prompt, response, game_name)
 
     # Safely get user data
     dynamodb = boto3.resource('dynamodb')

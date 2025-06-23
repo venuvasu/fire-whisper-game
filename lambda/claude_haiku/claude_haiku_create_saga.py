@@ -17,6 +17,16 @@ def decimal_default(obj):
         return int(obj) if obj % 1 == 0 else float(obj)
     raise TypeError
 
+def parse_story_arc(story_line):
+    result = {}
+    sections = story_line.split(' | ')
+    
+    for section in sections:
+        key, value = section.split(':', 1)
+        result[key.strip()] = value.strip()
+    
+    return result
+
 def create_saga_with_character(user_id, character_data, setting, difficulty, haiku_model="claude_haiku_30"):
     # Retrieve character dict from FW_Characters_Dev table
     dynamodb = boto3.resource('dynamodb')
@@ -26,7 +36,8 @@ def create_saga_with_character(user_id, character_data, setting, difficulty, hai
     character_dict_str = json.dumps(character_dict, default=decimal_default)
 
     story_arc = secrets.choice(story_arcs_list)
-    print("Selected story arc:", story_arc)
+    parsed_story_arc = parse_story_arc(story_arc)
+    print("Selected story arc:", parsed_story_arc['Name'])
     print("Length of story_arc string:", len(story_arcs_list))
 
     story_prompt = f"""Begin a Fire Whisper adventure for this character. Track progress in this format:
@@ -81,8 +92,8 @@ Begin immediately with the opening crisis. Emberlyn should introduce herself nat
         accept="application/json"
     )
 
-    send_bedrock_amplitude_event(user_id, "create_saga", haiku_model, response, {"character_id": character_data['character_id']})
+    send_bedrock_amplitude_event(user_id, "create_saga", haiku_model, response, {"game_name": parsed_story_arc['Name'], "character_id": character_data['character_id']})
 
     response_body = json.loads(response["body"].read())
     text = response_body["content"][0]["text"]
-    return {"prompt": story_prompt, "response": text.strip()}
+    return {"prompt": story_prompt, "response": text.strip(), "game_name": parsed_story_arc['Name']}
