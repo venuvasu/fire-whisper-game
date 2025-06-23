@@ -59,7 +59,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /getgame
+            Path: /api/getgame
             Method: GET
             ApiId: !Ref FireWhisperHttpApi
             Auth:
@@ -84,7 +84,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /getuserdata
+            Path: /api/getuserdata
             Method: GET
             ApiId: !Ref FireWhisperHttpApi
             Auth:
@@ -110,7 +110,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /taketurn
+            Path: /api/taketurn
             Method: POST
             ApiId: !Ref FireWhisperHttpApi
             Auth:
@@ -158,7 +158,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /createcharacter
+            Path: /api/createcharacter
             Method: POST
             ApiId: !Ref FireWhisperHttpApi
             Auth:
@@ -195,7 +195,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /deletecharacter
+            Path: /api/deletecharacter
             Method: DELETE
             ApiId: !Ref FireWhisperHttpApi
             Auth:
@@ -221,7 +221,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /updatecharacter
+            Path: /api/updatecharacter
             Method: POST
             ApiId: !Ref FireWhisperHttpApi
             Auth:
@@ -259,7 +259,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /getcharacter
+            Path: /api/getcharacter
             Method: GET
             ApiId: !Ref FireWhisperHttpApi
             Auth:
@@ -285,7 +285,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /createsaga
+            Path: /api/createsaga
             Method: POST
             ApiId: !Ref FireWhisperHttpApi
             Auth:

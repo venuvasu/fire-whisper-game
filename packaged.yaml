@@ -57,7 +57,7 @@ Resources:
   GetGameFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
+      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
       Handler: get_game.handler
       Runtime: python3.11
       Timeout: 30
@@ -65,7 +65,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /getgame
+            Path: /api/getgame
             Method: GET
             ApiId:
               Ref: FireWhisperHttpApi
@@ -84,7 +84,7 @@ Resources:
   GetUserDataFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
+      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
       Handler: get_user_data.handler
       Runtime: python3.11
       Timeout: 10
@@ -92,7 +92,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /getuserdata
+            Path: /api/getuserdata
             Method: GET
             ApiId:
               Ref: FireWhisperHttpApi
@@ -109,7 +109,7 @@ Resources:
   TakeTurnFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
+      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
       Handler: take_turn.handler
       Runtime: python3.11
       Timeout: 30
@@ -123,7 +123,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /taketurn
+            Path: /api/taketurn
             Method: POST
             ApiId:
               Ref: FireWhisperHttpApi
@@ -168,7 +168,7 @@ Resources:
   CreateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
+      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
       Handler: create_character.handler
       Runtime: python3.11
       Timeout: 30
@@ -176,7 +176,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /createcharacter
+            Path: /api/createcharacter
             Method: POST
             ApiId:
               Ref: FireWhisperHttpApi
@@ -207,7 +207,7 @@ Resources:
   DeleteCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
+      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
       Handler: delete_character.handler
       Runtime: python3.11
       Timeout: 30
@@ -215,7 +215,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /deletecharacter
+            Path: /api/deletecharacter
             Method: DELETE
             ApiId:
               Ref: FireWhisperHttpApi
@@ -235,7 +235,7 @@ Resources:
   UpdateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
+      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
       Handler: update_character_from_game.handler
       Runtime: python3.11
       Timeout: 60
@@ -243,7 +243,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /updatecharacter
+            Path: /api/updatecharacter
             Method: POST
             ApiId:
               Ref: FireWhisperHttpApi
@@ -275,7 +275,7 @@ Resources:
   GetCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
+      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
       Handler: get_character.handler
       Runtime: python3.11
       Timeout: 10
@@ -283,7 +283,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /getcharacter
+            Path: /api/getcharacter
             Method: GET
             ApiId:
               Ref: FireWhisperHttpApi
@@ -303,7 +303,7 @@ Resources:
   StartSagaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://dnd-lambda-deployer-bucket/ff1ace86ba1d638b1a23aa3b1f2eb329
+      CodeUri: s3://dnd-lambda-deployer-bucket/d829b151f854b883cb36d69b4f941641
       Handler: create_saga.handler
       Runtime: python3.11
       Timeout: 30
@@ -311,7 +311,7 @@ Resources:
         TitanApi:
           Type: HttpApi
           Properties:
-            Path: /createsaga
+            Path: /api/createsaga
             Method: POST
             ApiId:
               Ref: FireWhisperHttpApi
