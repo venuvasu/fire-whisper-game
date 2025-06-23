@@ -1,12 +1,15 @@
-BUCKET = dnd-lambda-deployer-bucket
-STACK = fire-whisper-lambda-backend-dev
-REGION = us-east-1
-
 # Load variables from .env if it exists
 ifneq (,$(wildcard .env))
   include .env
   export
 endif
+
+# Default environment if not specified
+FIREWHISPER_ENV ?= Dev
+
+BUCKET = dnd-lambda-deployer-bucket
+STACK = fire-whisper-lambda-backend-$(shell echo $(FIREWHISPER_ENV) | tr A-Z a-z)
+REGION = us-east-1
 
 build:
 	rm -rf lambda/requests.installed

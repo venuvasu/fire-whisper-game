@@ -23,6 +23,7 @@ Resources:
   FireWhisperHttpApi:
     Type: AWS::Serverless::HttpApi
     Properties:
+      Name: !Sub "FireWhisper-API-${Environment}"
       Auth:
         DefaultAuthorizer: CognitoAuthorizer
         Authorizers:
