@@ -1,7 +1,7 @@
 import boto3
 import decimal
 import json
-import os
+from utils.user_record_schema import parse_user_record
 
 def decimal_default(obj):
     if isinstance(obj, decimal.Decimal):
@@ -31,7 +31,7 @@ def handler(event, context):
     user_table = dynamodb.Table('FW_UserData_Dev')
     user_data_response = user_table.get_item(Key={'user_id': user_id})
     user_record = user_data_response['Item']
-    
+
     character_profile = None
     for character in user_record.get('characters', []):
         if character.get('active_games') and character['active_games'][0] == game_id:
