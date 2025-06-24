@@ -1,7 +1,7 @@
 import boto3
 import decimal
 import json
-from utils.user_record_schema import parse_user_record
+from utils.user_record_schema import get_character_by_game_id
 
 def decimal_default(obj):
     if isinstance(obj, decimal.Decimal):
@@ -32,17 +32,7 @@ def handler(event, context):
     user_data_response = user_table.get_item(Key={'user_id': user_id})
     user_record = user_data_response['Item']
 
-    character_profile = None
-    for character in user_record.get('characters', []):
-        if character.get('active_games') and character['active_games'][0] == game_id:
-            character_profile = character
-            break
-
-    if character_profile is None:
-        for character in user_record.get('characters', []):
-            if game_id in character.get('completed_games', []):
-                character_profile = character
-                break
+    character_profile = get_character_by_game_id(user_record, game_id)
 
     print(f"Character profile for game {game_id}: {character_profile}")
 

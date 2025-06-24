@@ -5,6 +5,7 @@ import os
 from utils.game_manager import get_game_by_id, append_message_to_game, update_game_messages
 from mistral.mistral import take_turn as take_turn_mistral
 from claude_haiku.claude_haiku_take_turn import take_turn
+from utils.user_record_schema import get_character_by_active_game_id, get_active_game, add_to_completed, remove_from_active
 
 model_type = "claude_haiku_35"
 
@@ -64,13 +65,12 @@ def handler(event, context):
     user_table = dynamodb.Table('FW_UserData_Dev')
     user_data_response = user_table.get_item(Key={'user_id': user_id})
     user_record = user_data_response['Item']
-    
-    character_profile = None
-    for character in user_record.get('characters', []):
-        if character.get('active_games') and character['active_games'][0] == game_id:
-            character_profile = character
 
-    if character_profile is None:
+    character_profile = get_character_by_active_game_id(user_record, game_id)    
+
+    try:
+        character_profile = get_character_by_active_game_id(user_record, game_id)
+    except Exception as e:
         return {
             'statusCode': 404,
             'body': json.dumps({'error': 'Character profile not found for this game'}),
@@ -84,22 +84,12 @@ def handler(event, context):
         print("Game completed, updating game record status.")
         # Mark game_record as no longer active
         game_record['game_active'] = False
+ 
+        current_game = get_active_game(user_record, game_id)
 
-        # Append game_id to completed_games
-        if 'completed_games' not in character_profile or not isinstance(character_profile['completed_games'], list):
-            character_profile['completed_games'] = []
-        if game_id not in character_profile['completed_games']:
-            character_profile['completed_games'].append(game_id)
-
-        if 'active_games' in character_profile and isinstance(character_profile['active_games'], list):
-            character_profile['active_games'] = [
-                g for g in character_profile['active_games'] if g != game_id
-            ]
-
-        for idx, character in enumerate(user_record.get('characters', [])):
-            if character.get('character_id') == character_profile.get('character_id'):
-                user_record['characters'][idx] = character_profile
-                break
+        # Append game_id to completed_games and remove from active_games
+        user_record = add_to_completed(user_record, character_profile["character_id"], game_id, current_game["game_name"])
+        user_record = remove_from_active(user_record, character_profile["character_id"], game_id)
 
         # Update game in dynamo db
         user_table.put_item(Item=user_record)

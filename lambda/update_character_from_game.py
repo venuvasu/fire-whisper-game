@@ -1,6 +1,7 @@
 import boto3
 import json
 from claude_haiku.claude_haiku_update_character import update_character
+from utils.user_record_schema import get_character_by_game_id, update_character_level
 
 def handler(event, context):
     print("Received event:", event)
@@ -20,24 +21,10 @@ def handler(event, context):
     user_record = user_data_response['Item']
     
     print("user_record:", user_record)
-
-    character_profile = None
-    for character in user_record.get('characters', []):
-        print("character:", character)
-        if character.get('completed_games') and game_id in character['completed_games']:
-            character_profile = character
-
+    character_profile = get_character_by_game_id(user_record, game_id)
     print("character_profile:", character_profile)
 
-    if character_profile is None:
-        raise ValueError("No character_profile found")
-
-    character_profile['level'] = character_dict["PROGRESSION"]["level"]
-
-    for idx, character in enumerate(user_record.get('characters', [])):
-        if character.get('character_id') == character_profile.get('character_id'):
-            user_record['characters'][idx] = character_profile
-            break
+    user_record = update_character_level(user_record, character_id, character_dict["PROGRESSION"]["level"])
 
     # Update game in dynamo db
     user_table.put_item(Item=user_record)

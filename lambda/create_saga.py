@@ -2,6 +2,7 @@ import boto3
 import json
 from utils.game_manager import create_new_game
 from claude_haiku.claude_haiku_create_saga import create_saga_with_character
+from utils.user_record_schema import add_to_active
 
 def handler(event, context):
     claims = event['requestContext']['authorizer']['jwt']['claims']
@@ -33,20 +34,8 @@ def handler(event, context):
     response = user_table.get_item(Key={'user_id': user_id})
     user_data = response.get('Item', {})
 
-    # Append to existing characters active_games or create new list
-    characters = user_data.get('characters', [])
-
-    # Find and update the correct character's active_games
-    for char in characters:
-        if char.get('character_id') == character_id:
-            if 'active_games' not in char:
-                char['active_games'] = []
-            char['active_games'].append(game_record["game_id"])
-            break
-
-    # Rebuild full item
-    user_data['user_id'] = user_id
-    user_data['characters'] = characters
+    # Append to existing characters active_games
+    add_to_active(user_data, character_id, game_record["game_id"], game_name)
 
     # Write back to table
     user_table.put_item(Item=user_data)
