@@ -34,7 +34,7 @@ def handler(event, context):
     response = user_table.get_item(Key={'user_id': user_id})
     user_data = response.get('Item', {})
 
-    # Append to existing characters active_games
+    # Append to existing characters active
     add_to_active(user_data, character_id, game_record["game_id"], game_name)
 
     # Write back to table

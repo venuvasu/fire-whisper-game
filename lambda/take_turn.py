@@ -87,7 +87,7 @@ def handler(event, context):
  
         current_game = get_active_game(user_record, game_id)
 
-        # Append game_id to completed_games and remove from active_games
+        # Append game_id to completed and remove from active
         user_record = add_to_completed(user_record, character_profile["character_id"], game_id, current_game["game_name"])
         user_record = remove_from_active(user_record, character_profile["character_id"], game_id)
 

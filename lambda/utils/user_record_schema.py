@@ -33,12 +33,7 @@ def build_user_record(user_id, characters):
             char['completed_games'] = []
         elif not isinstance(char['completed_games'], list) or not all(isinstance(g, str) for g in char['completed_games']):
             raise ValueError("character 'completed_games' must be a list of strings")
-        
-        if 'active_games' not in char:
-            char['active_games'] = []
-        elif not isinstance(char['active_games'], list) or not all(isinstance(g, str) for g in char['active_games']):
-            raise ValueError("character 'active_games' must be a list of strings")
-        
+                
         if 'active' not in char:
             char['active'] = []
         else:
@@ -269,8 +264,6 @@ def add_character(user_record, name, profession, character_id, level):
         'profession': profession,
         'character_id': character_id,
         'level': level,
-        'completed_games': [],
-        'active_games': [],
         'active': [],
         'completed': []
     }
@@ -421,11 +414,6 @@ def build_user_record(user_id, characters):
         elif not isinstance(char['completed_games'], list) or not all(isinstance(g, str) for g in char['completed_games']):
             raise ValueError("character 'completed_games' must be a list of strings")
         
-        if 'active_games' not in char:
-            char['active_games'] = []
-        elif not isinstance(char['active_games'], list) or not all(isinstance(g, str) for g in char['active_games']):
-            raise ValueError("character 'active_games' must be a list of strings")
-        
         if 'active' not in char:
             char['active'] = []
         else:
@@ -656,8 +644,6 @@ def add_character(user_record, name, profession, character_id, level):
         'profession': profession,
         'character_id': character_id,
         'level': level,
-        'completed_games': [],
-        'active_games': [],
         'active': [],
         'completed': []
     }
