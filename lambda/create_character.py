@@ -2,6 +2,7 @@ import boto3
 import json
 import uuid
 from claude_haiku.claude_haiku_create_character import create_character
+from dal.user_data import get_user_record, put_user_record
 from utils.user_record_schema import add_character
 
 
@@ -22,17 +23,15 @@ def handler(event, context):
     character_dict['character_id'] = character_id
 
     dynamodb = boto3.resource('dynamodb')
-    user_table = dynamodb.Table('FW_UserData_Dev')
 
-    # Safely get user data
-    response = user_table.get_item(Key={'user_id': user_id})
-    user_data = response.get('Item', {})
+    # Get user data
+    user_data = get_user_record(user_id)
 
     # Add new character to user data
     add_character(user_data, character_dict["IDENTITY"]["name"], character_dict["IDENTITY"]["profession"], character_id, character_dict["PROGRESSION"]["level"])
 
     # Write back to table
-    user_table.put_item(Item=user_data)
+    put_user_record(user_data)
 
     # Write character to the characters table
     characters_table = dynamodb.Table('FW_Characters_Dev')

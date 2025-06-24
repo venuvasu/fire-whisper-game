@@ -1,7 +1,6 @@
-import boto3
 import decimal
 import json
-import os
+from dal.user_data import get_user_record
 
 def default_serializer(obj):
     if isinstance(obj, decimal.Decimal):
@@ -12,9 +11,7 @@ def handler(event, context):
     claims = event['requestContext']['authorizer']['jwt']['claims']
     user_id = claims.get('sub')
 
-    dynamodb = boto3.resource('dynamodb')
-    user_table = dynamodb.Table('FW_UserData_Dev')
-    user_data = user_table.get_item(Key={'user_id': user_id})
+    user_data = get_user_record(user_id)
 
     return {
         'statusCode': 200,
