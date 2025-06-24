@@ -1,6 +1,7 @@
 import boto3
 import uuid
 from utils.game_record_schema import build_chat_record
+from utils.user_record_schema import get_user_record_character
 
 def create_new_game(user_id, prompt, text, game_name):
     unique_game_id = str(uuid.uuid4())
@@ -74,34 +75,19 @@ def get_game_summary(game_id):
     }
 
 def get_games_for_character(user_id, target_character_id):
-    dynamodb = boto3.client('dynamodb')
-    response = dynamodb.get_item(
-        TableName='FW_UserData_Dev',
-        Key={'user_id': {'S': user_id}}
-    )
-    
-    item = response.get('Item')
-    if not item:
-        return None
+    dynamodb = boto3.resource('dynamodb')
+    user_table = dynamodb.Table('FW_UserData_Dev')
+    user_data_response = user_table.get_item(Key={'user_id': user_id})
+    user_record = user_data_response['Item']
 
-    characters = item.get('characters', {}).get('L', [])
-    
+    character_profile = get_user_record_character(user_record, target_character_id)
+    print(f"get_games_for_character Character profile: {character_profile}")
+
     game_object = {
         'character_id': target_character_id,
-        'active_games': [],
-        'completed_games': []
+        'active_games': character_profile["active"],
+        'completed_games': character_profile["completed"]
     }
-    for char_entry in characters:
-        char = char_entry.get('M', {})
-        char_id = char.get('character_id', {}).get('S')
-        if char_id == target_character_id:
-            active_games = [g['S'] for g in char.get('active_games', {}).get('L', [])]
-            completed_games = [g['S'] for g in char.get('completed_games', {}).get('L', [])]
-            game_object = {
-                'character_id': char_id,
-                'active_games': active_games,
-                'completed_games': completed_games
-            }
 
     hydrated_games = {
         'character_id': game_object['character_id'],
@@ -109,11 +95,16 @@ def get_games_for_character(user_id, target_character_id):
         'completed_games': []
     }
 
-    for game_id in game_object.get('active_games', []):
-        hydrated_games['active_games'].append(get_game_summary(game_id))
+    for game in game_object.get('active_games', []):
+        game_id = game.get('game_id')
+        if game_id:
+            hydrated_games['active_games'].append(get_game_summary(game_id))
 
-    for game_id in game_object.get('completed_games', []):
-        hydrated_games['completed_games'].append(get_game_summary(game_id))
+    for game in game_object.get('completed_games', []):
+        game_id = game.get('game_id')
+        if game_id:
+            hydrated_games['completed_games'].append(get_game_summary(game_id))
+
 
     game_object = hydrated_games
 
