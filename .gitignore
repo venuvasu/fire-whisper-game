@@ -188,3 +188,6 @@ lambda/charset_normalizer/
 lambda/*.pyc
 lambda/requests.installed
 lambda/bin/
+
+# Ignore AWS SAM build artifacts
+packaged.yaml
