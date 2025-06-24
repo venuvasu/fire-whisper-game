@@ -112,6 +112,8 @@ What do you do?
 
 **NEVER ROLL FOR:**
 - Friendly conversations once rapport is established
+- Accepting a quest, agreeing to help, or making a narrative choice
+- Player decisions that advance the story without resistance
 - Gathering information from cooperative NPCs
 - Simple movement or travel decisions
 - Routine actions the character is skilled at
@@ -146,6 +148,9 @@ No roll needed - simply narrate success and continue story.
 
 ### Using Provided Dice (MANDATORY)
 You have been provided with pre-generated dice results for this turn. When a roll is needed:
+
+### Rolling Is Optional (MANDATORY)
+Not every action requires a roll. Only roll when the outcome is uncertain **and** both success and failure would meaningfully affect the story. If the action is simple, obvious, low-risk, or the result is narratively guaranteed, **do not roll.** Proceed with narration instead.
 
 1. **Use the next available dice from your provided pool IN ORDER**
 2. **Calculate success threshold normally using the established formula**
@@ -290,23 +295,7 @@ It is import you don't reward experience for other reasons, with some counterexa
 
 Then check level thresholds immediately using level_up_thresholds.
 
-Award XP only for:
-- Defeating enemies in combat: 200-600 XP
-- Completing major objectives: 300-800 XP
-- Solving significant puzzles/challenges: 200-500 XP
-- Major story milestones: 300-600 XP
-- Saga completion bonus: 500-1500 XP
-
-DO NOT award XP for:
-- Individual combat actions or attacks
-- Reaching new locations
-- Passing single skill checks
-- Routine challenge navigation
-- Minor progress within larger objectives
-- Talking to NPCs or gathering information
-- Making suggestions or proposals
-- Planning or preparing for actions
-- Partial progress toward objectives
+Award XP only for reasons in award_xp_on. DO NOT award XP for any other reason.
 
 **XP requires COMPLETION or ACHIEVEMENT, not just good ideas or progress.**
 
