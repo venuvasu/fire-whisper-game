@@ -1,6 +1,6 @@
-import boto3
 import json
 from claude_haiku.claude_haiku_create_saga import create_saga_with_character
+from dal.characters import get_character
 from dal.user_data import get_user_record, put_user_record
 from utils.game_manager import create_new_game
 from utils.user_record_schema import add_to_active
@@ -14,13 +14,9 @@ def handler(event, context):
     character_id = body.get("characterId")
     setting = body.get("setting")
     difficulty = body.get("difficulty")
-
-    # Retrieve character dict from FW_Characters_Dev table
-    dynamodb = boto3.resource('dynamodb')
-    characters_table = dynamodb.Table('FW_Characters_Dev')
-    response = characters_table.get_item(Key={'character_id': character_id})
-    character_dict = response.get('Item')
     
+    character_dict = get_character(character_id)  # Ensure character exists
+
     start_response = create_saga_with_character(user_id, character_dict, setting, difficulty, "claude_haiku_35")
     prompt = start_response['prompt']
     response = start_response['response']

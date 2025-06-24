@@ -1,8 +1,8 @@
-import boto3
 import json
 from claude_haiku.claude_haiku_update_character import update_character
-from utils.user_record_schema import update_character_level
+from dal.characters import get_character, put_character
 from dal.user_data import get_user_record, put_user_record
+from utils.user_record_schema import update_character_level
 
 def handler(event, context):
     print("Received event:", event)
@@ -21,6 +21,4 @@ def handler(event, context):
     put_user_record(user_record)
 
     # Update game in dynamo db
-    dynamodb = boto3.resource('dynamodb')
-    characters_table = dynamodb.Table('FW_Characters_Dev')
-    characters_table.put_item(Item=character_dict)
+    put_character(character_dict)

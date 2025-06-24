@@ -3,6 +3,7 @@ import decimal
 import json
 import secrets
 from amplitude.amplitude_handler import send_bedrock_amplitude_event
+from dal.characters import get_character
 
 with open("prompts/claude_system_prompt_start.txt", "r") as f:
     system_prompt = f.read()
@@ -28,12 +29,7 @@ def parse_story_arc(story_line):
     return result
 
 def create_saga_with_character(user_id, character_data, setting, difficulty, haiku_model="claude_haiku_30"):
-    # Retrieve character dict from FW_Characters_Dev table
-    dynamodb = boto3.resource('dynamodb')
-    characters_table = dynamodb.Table('FW_Characters_Dev')
-    response = characters_table.get_item(Key={'character_id': character_data['character_id']})
-    character_dict = response.get('Item')
-    character_dict_str = json.dumps(character_dict, default=decimal_default)
+    character_dict_str = json.dumps(character_data, default=decimal_default)
 
     story_arc = secrets.choice(story_arcs_list)
     parsed_story_arc = parse_story_arc(story_arc)
