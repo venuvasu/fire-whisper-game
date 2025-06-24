@@ -24,6 +24,9 @@ def handler(event, context):
     # Get user data
     user_data = get_user_record(user_id)
 
+    # Ensure user_id is present in user_data
+    user_data["user_id"] = user_id
+
     # Add new character to user data
     add_character(user_data, character_dict["IDENTITY"]["name"], character_dict["IDENTITY"]["profession"], character_id, character_dict["PROGRESSION"]["level"])
 
