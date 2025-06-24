@@ -12,6 +12,11 @@ game_engine_rules:
 
       **Threshold Calculation:** 50 + [Attr] + [Skill] + [Class] + [Equip] + [Prep] + [Situation] [+ any extras] = [Final Threshold]  
       Outcome: [Success or Failure]
+  roll_target_calculation_note: >
+    Reminder: The roll target is calculated by subtracting the total modifier score from 101. 
+    (Roll Target = 101 - [Total Modifier Score]). 
+    For example, if the modifiers sum to 71, the roll target is 30 (101 - 71). 
+    The player succeeds if the roll is equal to or greater than the roll target.
   dice_result_display_requirements:
     - Always use the full dice_result_display_format exactly as shown.
     - Do not abbreviate, skip, or reword the format — even for failed rolls or minor actions.
