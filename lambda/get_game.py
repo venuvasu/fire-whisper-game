@@ -1,6 +1,7 @@
 import boto3
 import decimal
 import json
+from dal.sagas import get_saga
 from dal.user_data import get_user_record
 from utils.user_record_schema import get_character_by_game_id
 
@@ -29,14 +30,10 @@ def handler(event, context):
     user_record = get_user_record(user_id)
     character_profile = get_character_by_game_id(user_record, game_id)
 
-    print(f"Character profile for game {game_id}: {character_profile}")
-
     # Retrieve the game record from DynamoDB
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('FW_Sagas_Dev')
-    response = table.get_item(Key={'game_id': game_id})
+    game_record = get_saga(game_id)
 
-    if 'Item' not in response:
+    if not game_record:
         return {
             'statusCode': 404,
             'body': json.dumps({'error': 'Game not found'}),
@@ -45,7 +42,7 @@ def handler(event, context):
             }
         }
 
-    game_record = response['Item']
+
     game_record['character_profile'] = character_profile
     print(f"Game record: {game_record}")
 
