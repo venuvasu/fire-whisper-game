@@ -1,6 +1,6 @@
-import boto3
 import decimal
 import json
+from dal.characters import get_character
 from utils.game_manager import get_games_for_character
 
 def default_serializer(obj):
@@ -14,12 +14,8 @@ def handler(event, context):
 
     character_id = event.get("queryStringParameters", {}).get("character_id")
 
-    dynamodb = boto3.resource('dynamodb')
-    characters_table = dynamodb.Table('FW_Characters_Dev')
-
     # Retrieve character data by character_id
-    response = characters_table.get_item(Key={'character_id': character_id})
-    character_data = response.get('Item')
+    character_data = get_character(character_id)
 
     if not character_data:
         return {
