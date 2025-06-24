@@ -1,18 +1,15 @@
 import boto3
 import json
 from amplitude.amplitude_handler import send_bedrock_amplitude_event
+from dal.sagas import get_saga
 
 with open("prompts/claude_system_prompt_start.txt", "r") as f:
     character_system_prompt = f.read()
 
 def update_character(user_id, game_id, character_id, haiku_model="claude_haiku_30"):
-    # Get messages from game record
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('FW_Sagas_Dev')
-
     # Retrieve the game record from DynamoDB
-    response = table.get_item(Key={'game_id': game_id})
-    game_record = response['Item']
+    game_record = get_saga(game_id)
+
     messages = game_record.get('messages', [])
     messages.append("Return an updated character sheet in the same format as the original character sheet, with any changes made during the turn. Do not return any other text or explanation, just the updated character sheet.")
 

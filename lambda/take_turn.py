@@ -2,10 +2,11 @@ import boto3
 import decimal
 import json
 import os
+from dal.sagas import update_saga
 from dal.user_data import get_user_record, put_user_record
 from mistral.mistral import take_turn as take_turn_mistral
 from claude_haiku.claude_haiku_take_turn import take_turn
-from utils.game_manager import get_game_by_id, append_message_to_game, update_game_messages
+from utils.game_manager import get_game_by_id, append_message_to_game
 from utils.user_record_schema import get_character_by_active_game_id, get_active_game, add_to_completed, remove_from_active
 
 model_type = "claude_haiku_35"
@@ -97,7 +98,7 @@ def handler(event, context):
     # Update game in dynamo db
     if 'game_active' not in game_record:
         game_record['game_active'] = True
-    update_game_messages(game_id, game_record['messages'], game_record['game_active'])
+    update_saga(game_id, game_record['messages'], game_record['game_active'])
 
     game_record['character_profile'] = character_profile
 

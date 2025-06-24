@@ -1,6 +1,7 @@
 import boto3
 import uuid
-from dal.user_data import get_user_record, put_user_record
+from dal.sagas import get_saga, put_saga
+from dal.user_data import get_user_record
 from utils.game_record_schema import build_chat_record
 from utils.user_record_schema import get_user_record_character
 
@@ -8,24 +9,14 @@ def create_new_game(user_id, prompt, text, game_name):
     unique_game_id = str(uuid.uuid4())
 
     game_record = build_chat_record(unique_game_id, game_name, [prompt, text])
-    print(f"Game record: {game_record}")
 
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('FW_Sagas_Dev')
-    table.put_item(Item=game_record)
+    put_saga(game_record)
 
     return game_record
 
 def get_game_by_id(game_id):
     # Retrieve the game record from DynamoDB
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('FW_Sagas_Dev')
-    response = table.get_item(Key={'game_id': game_id})
-
-    if 'Item' not in response:
-        return None
-
-    game_record = response['Item']
+    game_record = get_saga(game_id)
     return game_record
 
 def append_message_to_game(game_record, message):
@@ -33,23 +24,6 @@ def append_message_to_game(game_record, message):
     messages.append(message)
     game_record['messages'] = messages
     return game_record
-
-def update_game_messages(game_id, messages, game_active=None):
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('FW_Sagas_Dev')
-
-    update_expr = "SET messages = :m"
-    expr_attrs = {':m': messages}
-
-    if game_active is not None:
-        update_expr += ", game_active = :g"
-        expr_attrs[':g'] = game_active
-
-    table.update_item(
-        Key={'game_id': game_id},
-        UpdateExpression=update_expr,
-        ExpressionAttributeValues=expr_attrs
-    )
 
 def get_game_summary(game_id):
     dynamodb = boto3.client('dynamodb')
