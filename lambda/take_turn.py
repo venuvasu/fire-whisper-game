@@ -2,9 +2,10 @@ import boto3
 import decimal
 import json
 import os
-from utils.game_manager import get_game_by_id, append_message_to_game, update_game_messages
+from dal.user_data import get_user_record, put_user_record
 from mistral.mistral import take_turn as take_turn_mistral
 from claude_haiku.claude_haiku_take_turn import take_turn
+from utils.game_manager import get_game_by_id, append_message_to_game, update_game_messages
 from utils.user_record_schema import get_character_by_active_game_id, get_active_game, add_to_completed, remove_from_active
 
 model_type = "claude_haiku_35"
@@ -61,10 +62,9 @@ def handler(event, context):
     game_record = append_message_to_game(game_record, text)
 
     # Retrieve user data from DynamoDB
-    dynamodb = boto3.resource('dynamodb')
-    user_table = dynamodb.Table('FW_UserData_Dev')
-    user_data_response = user_table.get_item(Key={'user_id': user_id})
-    user_record = user_data_response['Item']
+    user_record = get_user_record(user_id)
+    
+
 
     character_profile = get_character_by_active_game_id(user_record, game_id)    
 
@@ -92,7 +92,7 @@ def handler(event, context):
         user_record = remove_from_active(user_record, character_profile["character_id"], game_id)
 
         # Update game in dynamo db
-        user_table.put_item(Item=user_record)
+        put_user_record(user_record)
 
     # Update game in dynamo db
     if 'game_active' not in game_record:

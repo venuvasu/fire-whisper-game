@@ -1,7 +1,8 @@
 import boto3
 import json
 from claude_haiku.claude_haiku_update_character import update_character
-from utils.user_record_schema import get_character_by_game_id, update_character_level
+from utils.user_record_schema import update_character_level
+from dal.user_data import get_user_record, put_user_record
 
 def handler(event, context):
     print("Received event:", event)
@@ -14,19 +15,12 @@ def handler(event, context):
     character_template = update_character(user_id, game_id, character_id, "claude_haiku_35")
     character_dict = json.loads(character_template)
 
-    # Retrieve user data from DynamoDB
-    dynamodb = boto3.resource('dynamodb')
-    user_table = dynamodb.Table('FW_UserData_Dev')
-    user_data_response = user_table.get_item(Key={'user_id': user_id})
-    user_record = user_data_response['Item']
-    
-    print("user_record:", user_record)
-    character_profile = get_character_by_game_id(user_record, game_id)
-    print("character_profile:", character_profile)
-
+    # Retrieve user record 
+    user_record = get_user_record(user_id)
     user_record = update_character_level(user_record, character_id, character_dict["PROGRESSION"]["level"])
+    put_user_record(user_record)
 
     # Update game in dynamo db
-    user_table.put_item(Item=user_record)
+    dynamodb = boto3.resource('dynamodb')
     characters_table = dynamodb.Table('FW_Characters_Dev')
     characters_table.put_item(Item=character_dict)

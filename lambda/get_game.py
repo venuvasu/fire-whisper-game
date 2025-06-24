@@ -1,6 +1,7 @@
 import boto3
 import decimal
 import json
+from dal.user_data import get_user_record
 from utils.user_record_schema import get_character_by_game_id
 
 def decimal_default(obj):
@@ -24,19 +25,14 @@ def handler(event, context):
             }
         }
 
-    # Initialize DynamoDB client
-    dynamodb = boto3.resource('dynamodb')
-
-    # Retrieve user data from DynamoDB
-    user_table = dynamodb.Table('FW_UserData_Dev')
-    user_data_response = user_table.get_item(Key={'user_id': user_id})
-    user_record = user_data_response['Item']
-
+    # Get User Record
+    user_record = get_user_record(user_id)
     character_profile = get_character_by_game_id(user_record, game_id)
 
     print(f"Character profile for game {game_id}: {character_profile}")
 
     # Retrieve the game record from DynamoDB
+    dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('FW_Sagas_Dev')
     response = table.get_item(Key={'game_id': game_id})
 

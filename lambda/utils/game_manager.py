@@ -1,5 +1,6 @@
 import boto3
 import uuid
+from dal.user_data import get_user_record, put_user_record
 from utils.game_record_schema import build_chat_record
 from utils.user_record_schema import get_user_record_character
 
@@ -75,10 +76,7 @@ def get_game_summary(game_id):
     }
 
 def get_games_for_character(user_id, target_character_id):
-    dynamodb = boto3.resource('dynamodb')
-    user_table = dynamodb.Table('FW_UserData_Dev')
-    user_data_response = user_table.get_item(Key={'user_id': user_id})
-    user_record = user_data_response['Item']
+    user_record = get_user_record(user_id)
 
     character_profile = get_user_record_character(user_record, target_character_id)
     print(f"get_games_for_character Character profile: {character_profile}")

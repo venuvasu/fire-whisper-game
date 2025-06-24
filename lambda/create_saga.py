@@ -1,7 +1,8 @@
 import boto3
 import json
-from utils.game_manager import create_new_game
 from claude_haiku.claude_haiku_create_saga import create_saga_with_character
+from dal.user_data import get_user_record, put_user_record
+from utils.game_manager import create_new_game
 from utils.user_record_schema import add_to_active
 
 def handler(event, context):
@@ -29,16 +30,13 @@ def handler(event, context):
     game_record = create_new_game(user_id, prompt, response, game_name)
 
     # Safely get user data
-    dynamodb = boto3.resource('dynamodb')
-    user_table = dynamodb.Table('FW_UserData_Dev')
-    response = user_table.get_item(Key={'user_id': user_id})
-    user_data = response.get('Item', {})
+    user_data = get_user_record(user_id)
 
     # Append to existing characters active
     add_to_active(user_data, character_id, game_record["game_id"], game_name)
 
     # Write back to table
-    user_table.put_item(Item=user_data)
+    put_user_record(user_data)
 
     return {
         'statusCode': 200,
