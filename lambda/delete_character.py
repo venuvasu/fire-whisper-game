@@ -1,5 +1,5 @@
 import json
-import boto3
+from dal.user_data import get_user_record, put_user_record
 
 def handler(event, context):
     claims = event['requestContext']['authorizer']['jwt']['claims']
@@ -16,10 +16,7 @@ def handler(event, context):
         }
     
     # Get user data
-    dynamodb = boto3.resource('dynamodb')
-    user_table = dynamodb.Table('FW_UserData_Dev')
-    response = user_table.get_item(Key={'user_id': user_id})
-    user_data = response.get('Item', {})
+    user_data = get_user_record(user_id)
     characters = user_data.get('characters', [])
 
     for char in characters:
@@ -30,7 +27,8 @@ def handler(event, context):
     user_data['characters'] = characters
 
     # Write back to table
-    user_table.put_item(Item=user_data)
+    put_user_record(user_data)
+
 
     return {
         "statusCode": 200,

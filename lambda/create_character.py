@@ -5,7 +5,6 @@ from claude_haiku.claude_haiku_create_character import create_character
 from dal.user_data import get_user_record, put_user_record
 from utils.user_record_schema import add_character
 
-
 def handler(event, context):
     claims = event['requestContext']['authorizer']['jwt']['claims']
     user_id = claims.get('sub')
