@@ -75,7 +75,58 @@ game_engine_rules:
       Level 20: 355000
     story_milestone_definition: "A major story milestone involves completing a quest step, resolving a faction conflict, discovering a legendary truth, or triggering a game-wide shift in status."
     no_xp_message_format: "No XP gained. This action does not meet reward criteria."
-
+ loot_system:
+    drop_chance:
+      combat:
+        minion: 25
+        standard: 25
+        elite: 50
+        boss: 85
+      quest:
+        milestone: 40
+        saga_completion: 100
+      exploration:
+        dangerous_area: [15, 30]  # Range
+    quality_by_level:
+      levels_1_3:
+        common: [1, 75]
+        uncommon: [76, 100]
+      levels_4_7:
+        common: [1, 55]
+        uncommon: [56, 90]
+        rare: [91, 100]
+      levels_8_12:
+        common: [1, 45]
+        uncommon: [46, 75]
+        rare: [76, 95]
+        epic: [96, 100]
+      levels_13_17:
+        common: [1, 30]
+        uncommon: [31, 55]
+        rare: [56, 85]
+        epic: [86, 99]
+        legendary: [100, 100]
+      levels_18_20:
+        common: [1, 20]
+        uncommon: [21, 40]
+        rare: [41, 65]
+        epic: [66, 95]
+        legendary: [96, 100]
+    item_types:
+      roll_range: [1, 100]
+      breakdown:
+        weapons: [1, 35]
+        armor: [36, 60]
+        accessories: [61, 80]
+        consumables: [81, 95]
+        tools: [96, 100]
+    discovery_format:
+      intro: "Something glints among the remains..."
+      item_line: "You discover a **[Item Name]** ([mechanical effect])! [Brief flavor description]"
+    rules:
+      - Only roll for loot after eligible events: combat, exploration, or quest completion
+      - Use 1d100 to determine both drop chance and item quality/type
+      - Loot drops must match player level tier and context (e.g., boss = high-quality gear)
 notes:
   - These rules override narrative preferences if there is a conflict.
   - Use these definitions when interpreting all rolls, XP events, and thresholds.
