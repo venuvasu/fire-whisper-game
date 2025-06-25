@@ -34,6 +34,10 @@ update_character_rules:
         Only increase the character's level if their XP is **greater than or equal to the minimum XP required for the next level**.
         If XP is below the threshold, do not increase the level.
         Do not infer level-up from story beats, saga conclusions, or narrative events unless XP meets or exceeds the required threshold.
+        ### EXAMPLES:
+        - XP: 500 → Level remains 1 (requires 1000 for Level 2)
+        - XP: 1000 → Level becomes 2
+        - XP: 3200 → Level remains 3 (next threshold is 5000)
       - inventory_changes: "Apply additions or removals if explicitly earned or lost"
       - vitality: "Update hitPoints and mana if altered due to combat, rest, healing, or magic"
       - known_spells_or_talents: "Add new abilities only if clearly learned during the game"

@@ -1,6 +1,6 @@
 import json
 from claude_haiku.claude_haiku_update_character import update_character
-from dal.characters import get_character, put_character
+from dal.characters import put_character, validate_and_fix_level, validate_and_fix_profession
 from dal.user_data import get_user_record, put_user_record
 from utils.user_record_schema import update_character_level
 
@@ -15,7 +15,11 @@ def handler(event, context):
     character_template = update_character(user_id, game_id, character_id, "claude_haiku_35")
     character_dict = json.loads(character_template)
 
-    # Retrieve user record 
+    # Validate and fix character data the AI routinely miscalculates
+    character_dict = validate_and_fix_profession(character_dict)
+    character_dict = validate_and_fix_level(character_dict)
+
+    # Retrieve and upddate user record 
     user_record = get_user_record(user_id)
     user_record = update_character_level(user_record, character_id, character_dict["PROGRESSION"]["level"])
     put_user_record(user_record)
