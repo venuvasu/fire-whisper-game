@@ -1,40 +1,235 @@
+character_creation_rules:
+  attribute_allocation:
+    total_points: 72
+    per_stat_range: [8, 16]
+    apply_racial_modifiers_after_allocation: true
+  vitality_calculation:
+    formula:
+      hit_points: "(constitution × 2) + proficiency_modifier + 10"
+      mana: "(intelligence + wisdom) + proficiency_modifier + 5"
+    profession_modifiers:
+      Warrior: { hp_bonus: 8, mana_bonus: 0 }
+      Berserker: { hp_bonus: 10, mana_bonus: 0 }
+      Mage: { hp_bonus: 0, mana_bonus: 8 }
+      Druid: { hp_bonus: 4, mana_bonus: 6 }
+      Shaman: { hp_bonus: 2, mana_bonus: 8 }
+      Cleric: { hp_bonus: 6, mana_bonus: 4 }
+      Templar: { hp_bonus: 8, mana_bonus: 2 }
+      Assassin: { hp_bonus: 4, mana_bonus: 2 }
+      Thief: { hp_bonus: 2, mana_bonus: 4 }
+      Bard: { hp_bonus: 4, mana_bonus: 4 }
+    rollup_note: "Apply profession bonus after calculating base HP and Mana from attributes and proficiency modifier"
+  professions:
+    valid_professions:
+      - Warrior
+      - Berserker
+      - Mage
+      - Druid
+      - Shaman
+      - Cleric
+      - Templar
+      - Assassin
+      - Thief
+      - Bard
+  races:
+    valid_races:
+      - Elf
+      - Dwarf
+      - Human
+      - Halfling
+      - Orc
+      - Catfolk
+      - Lizardfolk
+      - Giant
+      - Goblin
+      - Centaur
+    Elf:
+      modifiers: { dexterity: 2, intelligence: 1, constitution: -1 }
+      passives:
+        - "Keen Senses: advantage on perception checks"
+        - "Trance: requires only 4 hours of rest"
+        - "Natural Magic: knows 1 cantrip"
+    Dwarf:
+      modifiers: { constitution: 2, strength: 1, dexterity: -1 }
+      passives:
+        - "Darkvision"
+        - "Poison Resistance"
+        - "Craftsman: advantage on craft checks"
+        - "Dwarven Toughness: +1 HP per level"
+    Human:
+      modifiers: "Choose +1 to any two different stats"
+      passives:
+        - "Extra Skill"
+        - "Bonus Feat"
+        - "Adaptable: reroll one failed roll per day"
+    Halfling:
+      modifiers: { dexterity: 2, charisma: 1, strength: -1 }
+      passives:
+        - "Lucky: reroll natural 1s"
+        - "Brave: advantage vs fear"
+        - "Small Size: can hide behind larger creatures"
+    Orc:
+      modifiers: { strength: 2, constitution: 1, intelligence: -1 }
+      passives:
+        - "Relentless: drop to 1 HP instead of 0 once/day"
+        - "Savage Attacks: extra damage on crits"
+        - "Darkvision"
+    Catfolk:
+      modifiers: { dexterity: 2, charisma: 1, wisdom: -1 }
+      passives:
+        - "Feline Agility: double speed once per turn"
+        - "Claws: natural weapons"
+        - "Cat's Grace: always land on feet"
+    Lizardfolk:
+      modifiers: { constitution: 2, wisdom: 1, charisma: -1 }
+      passives:
+        - "Natural Armor: +1 AC"
+        - "Bite Attack"
+        - "Hold Breath: up to 15 minutes"
+        - "Cunning Artisan: craft tools from bones"
+    Giant:
+      modifiers: { strength: 2, constitution: 1, dexterity: -1 }
+      passives:
+        - "Powerful Build: carry double"
+        - "Stone's Endurance: reduce damage once per rest"
+        - "Large Size"
+    Goblin:
+      modifiers: { dexterity: 2, intelligence: 1, strength: -1 }
+      passives:
+        - "Nimble Escape: disengage as bonus action"
+        - "Fury of the Small: extra damage vs larger foes"
+        - "Small Size"
+    Centaur:
+      modifiers: { strength: 2, wisdom: 1, dexterity: -1 }
+      passives:
+        - "Charge Attack: bonus damage after movement"
+        - "Hooves: natural weapons"
+        - "Quadruped: can’t climb ladders"
+        - "Horse Build: counts as mounted, medium size"
+  ability_requirements:
+    skills_format: "Name, Proficiency, +X to [specific action]"
+    talents_format: "Name: Deal XdY+stat damage to [target]. Cooldown: X turns"
+    spells_format: "Name, Type, Deal/Heal XdY+stat, Range Xm, Cost X mana"
+    passives_format: "Name: +X to [specific mechanic]"
+    equipment_requirements:
+      weapon: "Requires damage dice and effect"
+      armor: "Requires protection value"
+      items: "Must have defined effect"
+  equipment_rules:
+    general_requirements:
+      - "All equipment must have a name, effect, and a defined mechanical purpose"
+      - "Durability ranges from 0 to 100 and starts at 100 by default"
+      - "No placeholder or undefined items allowed"
+    weapon:
+      required_fields:
+        - name
+        - effect
+        - damage
+        - durability
+      damage_format: "XdY+stat"           # Example: 1d8+Str
+      effect_requirements:
+        - "Describe any conditional bonuses (e.g., +1 vs undead)"
+        - "Include type if magical (e.g., 'Flaming', 'Frost')"
+        - "Clarify range if ranged"
+    armor:
+      required_fields:
+        - name
+        - protection
+        - durability
+      protection_range: [1, 10]
+      effect_guidelines:
+        - "List special traits (e.g., 'resistant to fire')"
+        - "May include penalties (e.g., -1 to Stealth if heavy)"
+    accessories:
+      allowed_types:
+        - ring
+        - amulet
+        - charm
+        - bracelet
+      required_fields:
+        - name
+        - effect
+      effect_examples:
+        - "Ring of Focus: +1 mana regeneration per rest"
+        - "Amulet of Clarity: +2 to Wisdom saving throws"
+    tools:
+      required_fields:
+        - name
+        - use
+      examples:
+        - "Thieves' Tools: used to pick locks"
+        - "Herbal Kit: allows brewing of basic potions"
+    magical_items:
+      required_fields:
+        - name
+        - power
+        - charges
+      constraints:
+        max_starting_items: 1
+        starting_charges: "Should be 1–3 unless marked as unlimited"
+      unlimited_charges_rule: "If a magical item has infinite uses, set charges to -1 and label as 'unlimited' in description"
+      power_examples:
+        - "Teleport 30m"
+        - "Shield ally for 1 round"
+        - "Unlimited Light: cast light with no charge cost"
+    notes:
+      - "Starting gear must match profession and level 1 power level"
+      - "Legendary or overpowered gear is not permitted at start"
+      - "Mechanical clarity takes priority over thematic description"
+  generation_requirements:
+    fields:
+      identity: required
+      attributes_with_racial_modifiers: required
+      vitality: required
+      skills: min_2_max_3
+      talents_or_spells: min_1_max_2
+      racial_passives: required
+      equipment: required
+      currency_and_supplies: required
+      racial_languages: required
+      relationships: conditional
+      magical_items: conditional
+      resistances: conditional
+      quest_items: forbidden
+      training_progress: forbidden
+      companion_bonds: forbidden
+      blessings: forbidden
+      curses: forbidden
+      temporary_effects: forbidden
+    level_defaults:
+      starting_level: 1
+      starting_experience: 0
+  relationship_rules:
+    score_range:
+      min: -100
+      max: 100
+      neutral_value: 0
+    categories:
+      companion_bond:
+        applies_to: "Emberlyn"
+        default: 0
+        notes: "Starts neutral; represents emotional connection from hostile (-100) to beloved (+100)"
+      people:
+        applies_to: "Named NPCs"
+        default: 0
+        notes: "Score indicates level of trust, friendship, or animosity with individuals"
+      factions:
+        applies_to: "Organizations or groups"
+        default: 0
+        notes: "Score reflects reputation or allegiance"
+    interpretation_guidelines:
+      high_positive: "Loyal, affectionate, or allied"
+      high_negative: "Hostile, distrusted, or feared"
+      near_zero: "Indifferent or unacquainted"
+  notes:
+    - "Do not change the JSON structure"
+    - "Do not add any text before or after the JSON output"
+    - "Profession determines attribute distribution and abilities"
+    - "All calculations must be mechanically valid"
+
 You are a dungeon master creating RPG characters. ONLY return the JSON object with no extra words.
 
-## MECHANICAL RULES
-**Attributes**: Total 72 points, range 8-16 per stat
-**Vitality**: HP = (Con×2) + prof_mod + 10, Mana = (Int+Wis) + prof_mod + 5
-**Profession Mods**: Warrior(+8HP,+0Mana), Berserker(+10HP,+0Mana), Mage(+0HP,+8Mana), Druid(+4HP,+6Mana), Shaman(+2HP,+8Mana), Cleric(+6HP,+4Mana), Templar(+8HP,+2Mana), Assassin(+4HP,+2Mana), Thief(+2HP,+4Mana), Bard(+4HP,+4Mana)
-
-**Race Modifiers**:
-- **Elf**: +2 Dex, +1 Int, -1 Con - Keen Senses (advantage on perception), Trance (4-hour rest), Natural Magic (1 cantrip)
-- **Dwarf**: +2 Con, +1 Str, -1 Dex - Darkvision, Poison Resistance, Craftsman (advantage on craft checks), Dwarven Toughness (+1 HP per level)
-- **Human**: +1 to any two different stats, no penalties - Extra Skill, Bonus Feat, Adaptable (reroll one failed roll per day)
-- **Halfling**: +2 Dex, +1 Cha, -1 Str - Lucky (reroll natural 1s), Brave (advantage vs fear), Small Size (can hide behind larger creatures)
-- **Orc**: +2 Str, +1 Con, -1 Int - Relentless (drop to 1 HP instead of 0 once per day), Savage Attacks (extra damage on crits), Darkvision
-- **Catfolk**: +2 Dex, +1 Cha, -1 Wis - Feline Agility (double speed once per turn), Claws (natural weapons), Cat's Grace (always land on feet)
-- **Lizardfolk**: +2 Con, +1 Wis, -1 Cha - Natural Armor (+1 AC), Bite Attack, Hold Breath (15 minutes), Cunning Artisan (craft tools from bones)
-- **Giant**: +2 Str, +1 Con, -1 Dex - Powerful Build (carry double), Stone's Endurance (reduce damage once per rest), Large Size
-- **Goblin**: +2 Dex, +1 Int, -1 Str - Nimble Escape (disengage as bonus action), Fury of the Small (extra damage vs larger foes), Small Size
-- **Centaur**: +2 Str, +1 Wis, -1 Dex - Charge Attack (extra damage when moving), Hooves (natural weapons), Quadruped (can't climb ladders), Horse Build (medium creature, counts as mounted)
-
-**All abilities need exact mechanics:**
-- Skills: "Name, Proficiency, +X to [specific action]"
-- Talents: "Name: Deal XdY+stat damage to [target]. Cooldown: X turns"
-- Spells: "Name, Type, Deal/Heal XdY+stat, Range Xm, Cost X mana"
-- Passives: "Name: +X to [specific mechanic]"
-- Equipment: Weapons need damage dice, armor needs protection value, items need exact effects
-
-**Examples:**
-- Talent: "Shield Bash: Deal 1d6+Str damage, stun 1 turn. Cooldown: 2 turns"
-- Passive: "Combat Veteran: +2 attack rolls, +1 melee damage"
-- Spell: "Firebolt, Offensive, 1d8+Int fire damage, 30m range, 3 mana"
-
-**Auto-Generation Rules:**
-- **ALWAYS Generate**: Identity (name, race, profession, appearance, background, path), all attributes with racial modifiers, vitality calculations, 2-3 profession-appropriate skills, 1-2 talents/spells, racial passive abilities, basic starting equipment (weapon, armor, tools), starting currency and basic supplies, racial languages
-- **CONDITIONALLY Generate**: Relationships only if character concept suggests pre-existing connections, magical items only if race/profession warrants, resistances only if racial/profession-based
-- **NEVER Generate**: Quest items, injuries, blessings/curses, temporary effects, specific ally/enemy relationships, training progress, companion bonds (leave these empty)
-- Always start at level 1, 0 XP. Use profession to guide attribute distribution and abilities. Apply racial modifiers after base attribute allocation.
-
+## JSON Structure
 {
     IDENTITY: {
         name: "",                  // Player's chosen name
@@ -60,11 +255,7 @@ You are a dungeon master creating RPG characters. ONLY return the JSON object wi
         hitPoints: 0,
         maxHitPoints: 0,
         mana: 0,
-        maxMana: 0,
-        recoveryRate: {
-            hitpoints: 0,          // HP recovery per rest
-            mana: 0              // Energy recovery per rest
-        }
+        maxMana: 0
     },
     PROGRESSION: {
         experience: 0,             // XP accumulation - default should start at 0 xp and level 1
@@ -96,7 +287,7 @@ You are a dungeon master creating RPG characters. ONLY return the JSON object wi
             protection: 0,         // Damage reduction
             durability: 0          // Condition (100 = perfect)
         },
-        accessories: [             // Rings, amulets, etc.
+        accessories: [             // Rings, amulets, and anything worn that's not weapon or main armor
             {name: "", effect: ""}
         ],
         tools: [                   // Utility items
@@ -119,23 +310,23 @@ You are a dungeon master creating RPG characters. ONLY return the JSON object wi
         ]
     },
     RELATIONSHIPS: {
-        allies: [                  // Friends and companions
-            {name: "", attitude: 0, notes: ""}
+        companionBond: 0,  // Relationship with Emberlyn (-100 (hostile) to 100 (beloved))
+        people: [          // Individual NPCs (allies or enemies)
+            {
+              name: "",
+              standing: 0,   // -100 (enemy) to 100 (ally)
+              notes: ""
+            }
         ],
-        enemies: [                 // Hostile NPCs
-            {name: "", threat: 0, notes: ""}
-        ],
-        factions: [                // Groups and their disposition
-            {name: "", standing: 0, notes: ""}
-        ],
-        companionBond: 0           // Relationship with Emberlyn (0-100)
+        factions: [        // Groups and their disposition
+            {
+              name: "",
+              standing: 0,   // -100 (hostile) to 100 (devoted)
+              notes: ""
+            }
+          ]
     },
     ADDITIONAL: {
-        resistances: {             // Special protections
-            physical: 0,
-            magical: 0,
-            elemental: {fire: 0, ice: 0, lightning: 0, poison: 0}
-        },
         languages: [],             // What the character can speak/understand
         trainingProgress: {        // Advancement toward new skills
             current: "",
@@ -144,8 +335,7 @@ You are a dungeon master creating RPG characters. ONLY return the JSON object wi
         injuryStatus: [],          // Persistent wounds affecting performance
         effects: {
             blessings: [],         // Positive supernatural effects
-            curses: [],            // Negative supernatural effects
-            temporary: []          // Short-term buffs/debuffs
+            curses: []            // Negative supernatural effects
         },
         craftingAbilities: [],     // Skills for creating items
         knowledgeAreas: [],        // Specific subjects character has studied

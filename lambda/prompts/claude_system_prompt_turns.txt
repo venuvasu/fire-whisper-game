@@ -67,7 +67,6 @@ game_engine_rules:
       Level 19: 305000
       Level 20: 355000
     story_milestone_definition: "A major story milestone involves completing a quest step, resolving a faction conflict, discovering a legendary truth, or triggering a game-wide shift in status."
-    no_xp_confirmation_required: true
     no_xp_message_format: "No XP gained. This action does not meet reward criteria."
 
 notes:
