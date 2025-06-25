@@ -82,6 +82,80 @@ update_character_rules:
       - "HP and Mana gains must fall within defined ranges"
       - "If level increases, XP must meet or exceed threshold defined in `level_up_check.level_up_thresholds`"
       - "Do not invent benefits unless a level-up is explicitly triggered by XP"
+  ability_requirements:
+    skills_format: "Name, Proficiency, +X to [specific action]"
+    talents_format: "Name: Deal XdY+stat damage to [target]. Cooldown: X turns"
+    spells_format: "Name, Type, Deal/Heal XdY+stat, Range Xm, Cost X mana"
+    passives_format: "Name: +X to [specific mechanic]"
+    equipment_requirements:
+      weapon: "Requires damage dice and effect"
+      armor: "Requires protection value"
+      items: "Must have defined effect"
+  equipment_rules:
+    general_requirements:
+      - "All equipment must have a name, effect, and a defined mechanical purpose"
+      - "Durability ranges from 0 to 100 and starts at 100 by default"
+      - "No placeholder or undefined items allowed"
+    weapon:
+      required_fields:
+        - name
+        - effect
+        - damage
+        - durability
+        - quality
+      damage_format: "XdY+stat"           # Example: 1d8+Str
+      effect_requirements:
+        - "Describe any conditional bonuses (e.g., +1 vs undead)"
+        - "Include type if magical (e.g., 'Flaming', 'Frost')"
+        - "Clarify range if ranged"
+    armor:
+      required_fields:
+        - name
+        - protection
+        - durability
+        - quality
+      protection_range: [1, 10]
+      effect_guidelines:
+        - "List special traits (e.g., 'resistant to fire')"
+        - "May include penalties (e.g., -1 to Stealth if heavy)"
+    accessories:
+      allowed_types:
+        - ring
+        - amulet
+        - charm
+        - bracelet
+      required_fields:
+        - name
+        - effect
+        - quality
+      effect_examples:
+        - "Ring of Focus: +1 mana regeneration per rest"
+        - "Amulet of Clarity: +2 to Wisdom saving throws"
+    tools:
+      required_fields:
+        - name
+        - use
+      examples:
+        - "Thieves' Tools: used to pick locks"
+        - "Herbal Kit: allows brewing of basic potions"
+    magical_items:
+      required_fields:
+        - name
+        - power
+        - charges
+      constraints:
+        max_starting_items: 1
+        starting_charges: "Should be 1–3 unless marked as unlimited"
+      unlimited_charges_rule: "If a magical item has infinite uses, set charges to -1 and label as 'unlimited' in description"
+      power_examples:
+        - "Teleport 30m"
+        - "Shield ally for 1 round"
+        - "Unlimited Light: cast light with no charge cost"
+    notes:
+      - "Starting gear must match profession and level 1 power level"
+      - "Legendary or overpowered gear is not permitted at start"
+      - "Mechanical clarity takes priority over thematic description"
+      - Items that have a quality have valid values, in order of power: Common, Uncommon, Rare, Epic, Legendary
   experience_repair:
     enable_auto_correction: true
     expected_format: |
@@ -171,21 +245,23 @@ You are a dungeon master updating RPG characters. ONLY return the JSON object wi
             name: "",              // Primary offensive tool
             effect: "",            // Special properties
             damage: 0,             // Base damage
-            durability: 0          // Condition (100 = perfect)
+            durability: 0,         // Condition (100 = perfect)
+            quality: ""            // Common, Uncommon, Rare, Epic, Legendary
         },
         armor: {
             name: "",              // Protective gear
             protection: 0,         // Damage reduction
-            durability: 0          // Condition (100 = perfect)
+            durability: 0,         // Condition (100 = perfect)
+            quality: ""            // Common, Uncommon, Rare, Epic, Legendary
         },
         accessories: [             // Rings, amulets, and anything worn that's not weapon or main armor
-            {name: "", effect: ""}
+            {name: "", effect: "", quality: ""}
         ],
         tools: [                   // Utility items
             {name: "", use: ""}
         ],
         magicalItems: [            // Special enchanted possessions
-            {name: "", power: "", charges: 0}
+            {name: "", power: "", charges: 0, quality: ""}
         ]
     },
     INVENTORY: {

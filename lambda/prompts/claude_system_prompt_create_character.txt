@@ -126,6 +126,7 @@ character_creation_rules:
         - effect
         - damage
         - durability
+        - quality
       damage_format: "XdY+stat"           # Example: 1d8+Str
       effect_requirements:
         - "Describe any conditional bonuses (e.g., +1 vs undead)"
@@ -136,6 +137,7 @@ character_creation_rules:
         - name
         - protection
         - durability
+        - quality
       protection_range: [1, 10]
       effect_guidelines:
         - "List special traits (e.g., 'resistant to fire')"
@@ -149,6 +151,7 @@ character_creation_rules:
       required_fields:
         - name
         - effect
+        - quality
       effect_examples:
         - "Ring of Focus: +1 mana regeneration per rest"
         - "Amulet of Clarity: +2 to Wisdom saving throws"
@@ -176,6 +179,7 @@ character_creation_rules:
       - "Starting gear must match profession and level 1 power level"
       - "Legendary or overpowered gear is not permitted at start"
       - "Mechanical clarity takes priority over thematic description"
+      - Items that have a quality have valid values, in order of power: Common, Uncommon, Rare, Epic, Legendary
   generation_requirements:
     fields:
       identity: required
@@ -280,21 +284,23 @@ You are a dungeon master creating RPG characters. ONLY return the JSON object wi
             name: "",              // Primary offensive tool
             effect: "",            // Special properties
             damage: 0,             // Base damage
-            durability: 0          // Condition (100 = perfect)
+            durability: 0,         // Condition (100 = perfect)
+            quality: ""            // Common, Uncommon, Rare, Epic, Legendary
         },
         armor: {
             name: "",              // Protective gear
             protection: 0,         // Damage reduction
-            durability: 0          // Condition (100 = perfect)
+            durability: 0,         // Condition (100 = perfect)
+            quality: ""            // Common, Uncommon, Rare, Epic, Legendary
         },
         accessories: [             // Rings, amulets, and anything worn that's not weapon or main armor
-            {name: "", effect: ""}
+            {name: "", effect: "", quality: ""}
         ],
         tools: [                   // Utility items
             {name: "", use: ""}
         ],
         magicalItems: [            // Special enchanted possessions
-            {name: "", power: "", charges: 0}
+            {name: "", power: "", charges: 0, quality: ""}
         ]
     },
     INVENTORY: {
