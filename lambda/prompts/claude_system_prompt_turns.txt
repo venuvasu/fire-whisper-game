@@ -25,6 +25,13 @@ game_engine_rules:
       - The **Threshold Calculation** line showing math components
       - The **Outcome** line stating success or failure
     - This format must be used for **every roll-based check**, without exception.
+  saga_completion:
+    completion_phrase: "Congratulations, you have completed this Saga!"
+    summary_required: true
+    prohibit_followups: true
+    notes:
+      - This phrase must appear **exactly** as written for the system to recognize saga completion.
+      - No additional choices, dialogue, or narrative may follow this message—only a brief summary.
   experience_award:
     only_award_on_achievement: true
     award_xp_on:
