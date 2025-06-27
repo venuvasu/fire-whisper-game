@@ -60,7 +60,7 @@ Resources:
   GetGameFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambda/
+      CodeUri: backend/
       Handler: get_game.handler
       Runtime: python3.11
       Timeout: 30
@@ -85,7 +85,7 @@ Resources:
   GetUserDataFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambda/
+      CodeUri: backend/
       Handler: get_user_data.handler
       Runtime: python3.11
       Timeout: 10
@@ -109,7 +109,7 @@ Resources:
   TakeTurnFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambda/
+      CodeUri: backend/
       Handler: take_turn.handler
       Runtime: python3.11
       Timeout: 30
@@ -160,7 +160,7 @@ Resources:
   CreateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambda/
+      CodeUri: backend/
       Handler: create_character.handler
       Runtime: python3.11
       Timeout: 30
@@ -197,7 +197,7 @@ Resources:
   DeleteCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambda/
+      CodeUri: backend/
       Handler: delete_character.handler
       Runtime: python3.11
       Timeout: 30
@@ -223,7 +223,7 @@ Resources:
   UpdateCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambda/
+      CodeUri: backend/
       Handler: update_character_from_game.handler
       Runtime: python3.11
       Timeout: 60
@@ -261,7 +261,7 @@ Resources:
   GetCharacterFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambda/
+      CodeUri: backend/
       Handler: get_character.handler
       Runtime: python3.11
       Timeout: 10
@@ -287,7 +287,7 @@ Resources:
   StartSagaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: lambda/
+      CodeUri: backend/
       Handler: create_saga.handler
       Runtime: python3.11
       Timeout: 30

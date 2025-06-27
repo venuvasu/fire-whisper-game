@@ -1,0 +1,21 @@
+{
+  "name": "fire-whisper-game",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Fire Whisper - A storytelling game with AI-powered narrative generation",
+  "scripts": {
+    "dev": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "preview": "npm run preview --prefix frontend",
+    "install:frontend": "npm install --prefix frontend",
+    "install:backend": "pip install -r backend/requirements.txt",
+    "deploy": "sam build && sam deploy",
+    "local": "sam local start-api"
+  },
+  "workspaces": [
+    "frontend"
+  ],
+  "keywords": ["game", "storytelling", "ai", "react", "lambda", "aws"],
+  "author": "",
+  "license": "MIT"
+}

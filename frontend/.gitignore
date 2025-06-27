@@ -1,0 +1,49 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Environment variables
+.env
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Parcel cache
+.cache/
+
+# Vite cache
+.vite/
+
+# Tailwind CSS output (if you're using JIT with custom build scripts)
+*.css.d.ts
+
+# React Native (if present)
+*.xcworkspace/
+*.xcodeproj/
+android/
+ios/
+
+# Misc
+coverage/
+*.log
+*.tgz
+
+# Optional: local dev servers
+*.local

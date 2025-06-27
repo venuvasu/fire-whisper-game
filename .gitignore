@@ -175,6 +175,16 @@ cython_debug/
 
 .DS_Store
 
+# Fire Whisper RPG specific ignores
+.env.local
+*.csv
+aws_deploy/
+fire-whisper-lambda.zip
+
+# Test results (keep structure, ignore individual results)
+tests/results/*.json
+tests/results/*.csv
+
 # Ignore dependencies installed by build step
 lambda/__pycache__/
 lambda/*.dist-info/

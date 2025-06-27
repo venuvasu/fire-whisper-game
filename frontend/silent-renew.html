@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Silent Renew</title>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/oidc-client-ts/2.4.0/oidc-client-ts.min.js"></script>
+    <script>
+      // Reconstruct the UserManager with the same config
+      const userManager = new oidc.UserManager({
+        authority:
+          "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_ZejduSmCw",
+        client_id: "17004bfsq9mf4ptkrqc93v4hes",
+        redirect_uri: window.location.origin + "/callback",
+        response_type: "code",
+        scope: "email openid profile",
+        userStore: new oidc.WebStorageStateStore({
+          store: window.localStorage,
+        }),
+        silent_redirect_uri: window.location.origin + "/silent-renew.html",
+        automaticSilentRenew: true,
+      });
+
+      // Process the silent renew callback
+      userManager
+        .signinSilentCallback()
+        .then(() => {
+          console.log("Silent renew successful");
+        })
+        .catch((err) => {
+          console.error("Silent renew error:", err);
+        });
+    </script>
+  </body>
+</html>

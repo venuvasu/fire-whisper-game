@@ -12,11 +12,11 @@ STACK = fire-whisper-lambda-backend-$(shell echo $(FIREWHISPER_ENV) | tr A-Z a-z
 REGION = us-east-1
 
 build:
-	rm -rf lambda/requests.installed
-	rm -rf lambda/requests*
-	rm -rf lambda/urllib3*
-	python3 -m pip install -r lambda/requirements.txt -t lambda/
-	touch lambda/requests.installed
+	rm -rf backend/requests.installed
+	rm -rf backend/requests*
+	rm -rf backend/urllib3*
+	python3 -m pip install -r backend/requirements.txt -t backend/
+	touch backend/requests.installed
 
 package: build
 	sam package \

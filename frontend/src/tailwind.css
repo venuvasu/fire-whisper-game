@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primaryBackground: #3e2713;
+  --color-primaryText: #3e2713;
+  --color-containerBackground: #f5e8d0;
+}
+
+[data-theme="greek"] {
+  --color-primaryBackground: #a6793d;
+  --color-primaryText: #2d2a26;
+  --color-containerBackground: #fdf6ec;
+}

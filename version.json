@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0.0",
+  "major": 1,
+  "minor": 0,
+  "prompt": 0,
+  "ui": 0,
+  "last_updated": "2025-06-27T12:31:00Z",
+  "changelog": {
+    "1.0.0.0": {
+      "date": "2025-06-27",
+      "changes": [
+        "Initial version with AI behavior validation system",
+        "Deterministic game mechanics implemented",
+        "Claude AI integration with constraint validation"
+      ],
+      "breaking_changes": [],
+      "prompt_changes": [
+        "Initial AI constraint prompts established"
+      ],
+      "ui_changes": [
+        "Basic game interface structure"
+      ]
+    }
+  }
+}

@@ -1,159 +1,345 @@
-## Fire Whisper API Backend
+# 🔥 Fire Whisper RPG
 
-This repository contains the Python-based AWS Lambda backend for the Fire Whisper API.
+> An AI-powered text-based RPG with deterministic mechanics and intelligent narrative generation
 
-## Setting Up a New Environment
+[![Version](https://img.shields.io/badge/version-1.0.0.0-blue.svg)](./version.json)
+[![Tests](https://img.shields.io/badge/tests-passing-green.svg)](./tests/results/)
+[![AI Behavior](https://img.shields.io/badge/AI%20behavior-validated-green.svg)](./tests/ai_behavior/)
 
-To set up a new environment or deploy to a new AWS account, you’ll need to provision several AWS resources. This section walks you through that process.
+## 🎯 Overview
 
-**Prerequisites:**  
-Make sure the following tools are installed before proceeding:
+Fire Whisper RPG combines the creativity of AI storytelling with the reliability of deterministic game mechanics. Players experience rich, dynamic narratives while the system maintains strict control over game balance and progression.
 
-- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
-- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
+### ✨ Key Features
+- **🤖 AI-Driven Narratives**: Claude AI generates immersive story content
+- **🎲 Deterministic Mechanics**: All dice rolls and XP calculated by code, not AI
+- **🛡️ Constraint Validation**: AI behavior is continuously monitored and validated
+- **📊 Comprehensive Testing**: Multi-layered testing ensures reliability
+- **🏷️ Smart Versioning**: MAJOR.MINOR.PROMPT.UI versioning for AI-integrated projects
 
-You will also need to configure IAM privileges for each, which are documented on their pages.
+## 📋 Table of Contents
 
-### Choosing an Environment
+- [🏗️ Project Structure](#️-project-structure)
+- [🏷️ Versioning System](#️-versioning-system)
+- [🧪 Testing Strategy](#-testing-strategy)
+- [🚀 Getting Started](#-getting-started)
+- [🔧 Development Workflow](#-development-workflow)
+- [📚 Documentation](#-documentation)
 
-Before starting the setup, decide which environment you want to deploy to.  
-**Allowed values** (case-sensitive):
+## 🏗️ Project Structure
 
-- `Dev`
-- `Beta`
+```
+fire-whisper-game/
+├── backend/                    # Python AWS Lambda functions
+│   ├── engine/                # Core game mechanics
+│   ├── claude_direct/         # AI integration layer
+│   ├── utils/                 # Shared utilities
+│   └── testing/               # Backend-specific tests
+├── frontend/                  # React TypeScript UI
+├── tests/                     # Organized test suites
+│   ├── ai_behavior/          # AI constraint validation
+│   ├── integration/          # Full system tests
+│   ├── performance/          # Load and stress tests
+│   ├── results/              # Versioned test outputs
+│   └── automation/           # Test runners and utilities
+├── prompts/                   # Versioned AI prompt templates
+├── scripts/                   # Development and deployment scripts
+├── docs/                      # Project documentation
+└── version.json              # Version tracking and changelog
+```
 
-For local development, it's recommended to use `Dev`.  
-However, any value is fine—as long as you use the same one consistently within the same AWS account.
+## 🏷️ Versioning System
 
-### Set Up Cognito User Pool
+Fire Whisper uses a **MAJOR.MINOR.PROMPT.UI** versioning scheme optimized for AI-integrated projects:
 
-A Cognito User Pool is required for user authentication. Follow these steps to create and configure it.
+### Version Format: `X.Y.Z.U`
+
+- **X (Major)** — Breaking architectural changes (e.g., new AI model, major system overhaul)
+- **Y (Minor)** — New features or flow changes that are backward compatible
+- **Z (Prompt)** — Changes to AI prompts or logic that affect AI behavior/output
+- **U (UI)** — Pure UI/UX changes (frontend visuals, layout adjustments)
+
+### Examples
+
+| Change | Version Impact |
+|--------|----------------|
+| Update AI prompt for NPC dialogue | `1.3.4.2` → `1.3.5.2` |
+| Add new AI-powered quest system | `1.3.5.2` → `1.4.0.2` |
+| Revamp frontend battle UI only | `1.4.0.2` → `1.4.0.3` |
+| Migrate from Claude 3 to Claude 4 | `1.4.0.3` → `2.0.0.0` |
+
+### Version Management
+
+```bash
+# Check current version
+python3 scripts/version_manager.py info
+
+# Bump versions with automatic changelog
+python3 scripts/version_manager.py bump-prompt "Updated NPC dialogue constraints"
+python3 scripts/version_manager.py bump-minor "Added new combat system"
+python3 scripts/version_manager.py bump-ui "Redesigned character sheet layout"
+python3 scripts/version_manager.py bump-major "Migrated to GPT-4"
+```
+
+## 🧪 Testing Strategy
+
+### Test Categories
+
+#### 🤖 AI Behavior Tests (`tests/ai_behavior/`)
+**Purpose**: Validate AI constraint compliance and prevent hallucinations
+- **Triggers**: Changes to AI integration, prompts, or constraint logic
+- **Tests**: `ai_behavior_validation_test.py`
+- **Focus**: Tricky inputs, edge cases, constraint violations
+
+#### 🔗 Integration Tests (`tests/integration/`)
+**Purpose**: End-to-end system validation
+- **Triggers**: Changes to game engine, mechanics, or core systems
+- **Tests**: `hybrid_game_test.py`, `enhanced_game_test.py`, `deterministic_game_test.py`
+- **Focus**: Full gameplay flows, character progression, narrative consistency
+
+#### ⚡ Performance Tests (`tests/performance/`)
+**Purpose**: Load testing and performance validation
+- **Triggers**: Changes to AI integration, backend engine, or API layers
+- **Tests**: `comprehensive_stress_test.py`
+- **Focus**: Response times, concurrent users, resource usage
+
+### Automated Test Selection
+
+The test runner automatically selects relevant tests based on code changes:
+
+```bash
+# Run tests based on git changes (automatic detection)
+python3 tests/automation/test_runner.py
+
+# Run specific test categories
+python3 tests/automation/test_runner.py ai_behavior integration
+python3 tests/automation/test_runner.py performance
+```
+
+### Test Results
+
+All test results are versioned and stored in `tests/results/`:
+- **Filename**: `test_results_v{version}_{timestamp}.json`
+- **Content**: Full test transcripts, AI responses, mechanical results
+- **Tracking**: Version tested against, pass/fail status, detailed logs
+
+## 🚀 Getting Started
+
+Fire Whisper RPG supports two operation modes:
+
+### 🏠 **Local Mode (Development)**
+Run the game locally for development and testing
+
+### ☁️ **AWS Mode (Production)**
+Deploy to AWS Lambda for scalable production use
 
 ---
 
-#### 🛠️ Create a User Pool
+## 🏠 Local Development Setup
 
-1. In the AWS Console, go to **Amazon Cognito** → **User Pools** and click **"Create user pool"**.
-2. **Name the User Pool** – You can choose any name, but we recommend:  
-   `Fire-Whisper-{Environment}` (e.g., `Fire-Whisper-Dev`)
-3. Under **Sign-in options**, select `Username` and `Email` (recommended).
-4. Under **Required attributes**, at a minimum select `Email`.
+### Prerequisites
+- Python 3.9+
+- Claude API key
+- Git
+
+### Installation
+
+1. **Clone and setup**:
+   ```bash
+   git clone <repository-url>
+   cd fire-whisper-game
+   ```
+
+2. **Install Python dependencies**:
+   ```bash
+   pip install -r backend/requirements.txt
+   pip install python-dotenv  # For environment variable management
+   ```
+
+3. **Configure environment**:
+   ```bash
+   cp .env.example .env.local
+   # Edit .env.local and add your Claude API key
+   ```
+
+4. **Run the game locally**:
+   ```bash
+   python3 scripts/local_runner.py
+   ```
+
+### Local Development Features
+- **Direct Python execution** - No AWS dependencies
+- **Debug mode** - See dice rolls and mechanical results
+- **Fast iteration** - Immediate code changes
+- **Character sheet command** - Type 'character' to see stats
+- **Easy exit** - Type 'quit' or 'q' to exit
+
+### Local Testing
+
+```bash
+# Test AI behavior validation
+python3 tests/ai_behavior/ai_behavior_validation_test.py
+
+# Run all tests with automatic selection
+python3 tests/automation/test_runner.py
+
+# Run specific test categories
+python3 tests/automation/test_runner.py ai_behavior integration
+```
 
 ---
 
-#### 🔧 Configure App Client
+## ☁️ AWS Production Deployment
 
-Once your User Pool is created:
+### Prerequisites
+- AWS CLI installed and configured
+- AWS account with appropriate permissions
+- All local setup completed
 
-1. Go to the **"App clients"** tab.
-2. Select your **App client**, then go to the **"Login pages"** section under **App client information**.
-3. In **Managed login pages configuration**, update the following fields via the edit:
+### AWS Configuration
 
-##### ✅ Allowed Callback URLs
+1. **Update environment for AWS**:
+   ```bash
+   # Edit .env.local and add AWS settings:
+   DEPLOYMENT_MODE=aws
+   AWS_REGION=us-east-1
+   AWS_LAMBDA_FUNCTION_NAME=fire-whisper-game
+   AWS_S3_BUCKET=your-bucket-name
+   ```
 
-- You must include both the base domain **and** the `/callback` path for each allowed frontend domain.
-- Example for local development with the `fire-whisper-ui`:
-  - `http://localhost:5173/` **(trailing slash required)**
-  - `http://localhost:5173/callback`
-- Multiple domains can be added to the same User Pool.
+2. **Deploy to AWS**:
+   ```bash
+   python3 scripts/aws_deploy.py
+   ```
 
-##### ✅ Allowed Sign-Out URLs
+### AWS Deployment Features
+- **Lambda Functions** - Serverless game logic
+- **CloudFormation** - Infrastructure as code
+- **Environment Variables** - Secure API key management
+- **Auto-scaling** - Handles multiple concurrent players
 
-- List each base domain where users should be redirected after signing out.
-- Example:
-  - `http://localhost:5173/` **(trailing slash required)**
-
-##### ✅ OpenID Connect Scopes
-
-- Ensure the following scopes are enabled:
-  - `email`
-  - `openid`
-  - `phone`
-  - `profile` (must be manually added)
-
-> ⚠️ **Note:** If any of these settings are incorrect, authentication via the frontend may fail to complete the redirect flow.
-
-### Set Up DynamoDB Tables
-
-You will need to create **three DynamoDB tables** using the AWS Console.  
-Each table should use the **default settings** and include the environment name as a suffix.
-
-#### Table Naming Convention
-
-Use the following format for table names:
-
-- `FW_Characters_{Environment}`
-- `FW_Sagas_{Environment}`
-- `FW_UserData_{Environment}`
-
-For example, if you're deploying to the `Dev` environment, your table names should be:
-
-- `FW_Characters_Dev`
-- `FW_Sagas_Dev`
-- `FW_UserData_Dev`
-
-> 💡 Make sure the environment suffix (e.g. `Dev`, `Beta`) matches the value used in your `.env` file and other configuration steps.
-
-### Create a Deployer S3 Bucket
-
-An S3 bucket is required to store and serve your deployment packages during the build and deploy process. This bucket will be used by AWS SAM to stage artifacts before deploying your Lambda functions.
-
-#### Steps to Create the Bucket
-
-1. **Go to the AWS Console** and navigate to **S3**.
-2. Click **"Create bucket"**.
-3. Choose a **globally unique name** for your bucket (e.g., `fire-whisper-deployer`).
-4. Select the **region** where your Lambda functions will be deployed. (this should be where you intend to deploy)
-5. Click **"Create bucket"**.
-
-### Setup .env file for Lambda's
-
-Create a .env file in the root of the fire-whisper-lambda-api. This file will indicate the specific environment and Cognito settings to deploy to. It must be consistent with the above setup steps.
-
-```
-FIREWHISPER_ENV=Dev
-FIREWHISPER_USER_POOL=XXX
-FIREWHISPER_USER_POOL_CLIENT=XXX
-```
-
-#### `.env` Variable Reference
-
-| Key                            | Description                                                              | Example Values       |
-| ------------------------------ | ------------------------------------------------------------------------ | -------------------- |
-| `FIREWHISPER_ENV`              | The name of the environment to deploy to. Used for naming suffixes.      | `Dev`, `Beta`        |
-| `FIREWHISPER_USER_POOL`        | Cognito User Pool ID (visible in the AWS Cognito console).               | e.g. `us-east-1_ABC` |
-| `FIREWHISPER_USER_POOL_CLIENT` | Cognito User Pool App Client ID (visible under the app client settings). | e.g. `123abc456xyz`  |
-
-### Package and Deploy
-
-To build and prepare your Lambda functions for deployment, run:
+### AWS Testing
 
 ```bash
-make package
+# Test deployed Lambda function
+aws lambda invoke --function-name fire-whisper-game \
+  --payload '{"action": "start_game"}' \
+  response.json
 ```
 
-This will compile the code and upload the deployment artifacts to your designated S3 bucket.
+---
 
-Then, deploy the packaged application using:
+## 🔧 Environment Configuration
+
+### Required Variables
+```bash
+# .env.local
+CLAUDE_API_KEY=your_api_key_here
+DEPLOYMENT_MODE=local  # or 'aws'
+```
+
+### Optional Variables
+```bash
+# Development
+DEBUG_MODE=true
+LOG_LEVEL=DEBUG
+MAX_TURNS_PER_GAME=100
+
+# AWS (only needed for AWS mode)
+AWS_REGION=us-east-1
+AWS_LAMBDA_FUNCTION_NAME=fire-whisper-game
+AWS_S3_BUCKET=your-bucket
+```
+
+### Security Notes
+- **Never commit .env.local** - Contains sensitive API keys
+- **Use AWS IAM roles** - For production Lambda execution
+- **Rotate API keys regularly** - For security best practices
+
+## 🔧 Development Workflow
+
+### 1. Making Changes
+
+When you modify code, the system automatically determines which tests to run:
+
+- **Prompt changes** → AI behavior tests
+- **Engine changes** → Integration tests  
+- **API changes** → Performance tests
+- **Frontend changes** → UI tests (when implemented)
+
+### 2. Version Bumping
+
+After making changes, bump the appropriate version:
 
 ```bash
-make deploy
+# For AI prompt modifications
+python3 scripts/version_manager.py bump-prompt "Improved character dialogue constraints"
+
+# For new game features
+python3 scripts/version_manager.py bump-minor "Added magic system"
+
+# For UI improvements
+python3 scripts/version_manager.py bump-ui "Enhanced character sheet design"
 ```
 
-Once deployment is complete, you can view and manage your Lambda functions in the [AWS Lambda Console](https://console.aws.amazon.com/lambda/).
+### 3. Testing
 
-### AWS Bedrock Model Permissions
+Run tests automatically or manually:
 
-To use Amazon Bedrock in your AWS account, you must request access to individual models.  
-If these permissions are not granted, your Lambda functions may fail with authorization errors.
+```bash
+# Automatic test selection based on changes
+python3 tests/automation/test_runner.py
 
-You can manage model access in the **AWS Console** under **Amazon Bedrock** → **Model access** (found in the **Bedrock configuration** section).
+# Manual test selection
+python3 tests/automation/test_runner.py ai_behavior integration
+```
 
-#### Required Models for Fire Whisper
+### 4. Results Review
 
-The primary models used by Fire Whisper are:
+Check test results in `tests/results/` for:
+- Detailed test transcripts
+- AI response validation
+- Performance metrics
+- Version compatibility
 
-- **Claude 3.5 Haiku**
-- **Claude 3 Haiku**
+## 📚 Documentation
 
-Fire Whisper also supports other models, which may require additional approval depending on your use case. Note you may need to redploy your lambda's after getting approval.
+### Key Files
+
+- **`version.json`** - Version tracking and changelog
+- **`prompts/`** - Versioned AI prompt templates
+- **`tests/results/`** - Historical test results
+- **`TESTING_WORKFLOW.md`** - Detailed testing procedures
+- **`ARCHITECTURE_REDESIGN.md`** - System architecture overview
+
+### AI Constraint System
+
+The game uses a sophisticated constraint validation system:
+
+1. **Pre-calculated Mechanics**: All dice rolls and XP awards calculated by code
+2. **AI Response Validation**: Real-time detection of constraint violations
+3. **Fallback Responses**: Safe responses when AI violates constraints
+4. **Continuous Monitoring**: Every AI response is validated against patterns
+
+### Prompt Management
+
+AI prompts are versioned and stored separately:
+- **File naming**: `{prompt_name}.v{version}.txt`
+- **Version tracking**: Linked to overall system version
+- **Change detection**: Prompt changes trigger appropriate tests
+
+## 🤝 Contributing
+
+1. Make your changes
+2. Run relevant tests: `python3 tests/automation/test_runner.py`
+3. Bump version: `python3 scripts/version_manager.py bump-[type] "Description"`
+4. Commit with version tag: `git tag v{version}`
+5. Submit PR with test results
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+---
+
+**🎮 Ready to play? Run the tests and start your adventure!**
