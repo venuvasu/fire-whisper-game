@@ -5,6 +5,26 @@
 [![Version](https://img.shields.io/badge/version-1.0.0.0-blue.svg)](./version.json)
 [![Tests](https://img.shields.io/badge/tests-passing-green.svg)](./tests/results/)
 [![AI Behavior](https://img.shields.io/badge/AI%20behavior-validated-green.svg)](./tests/ai_behavior/)
+[![Branch](https://img.shields.io/badge/branch-v1-orange.svg)](https://github.com/echang-home/fire-whisper-game/tree/v1)
+
+## 🚀 **Version 1.0 - Major System Redesign**
+
+This branch represents a complete architectural overhaul of the original Fire Whisper concept, transforming it from separate API/UI components into a unified, AI-integrated RPG system.
+
+### **🔄 What Changed from Original:**
+- **🏗️ Unified Architecture**: Merged backend API + frontend into cohesive game system
+- **🤖 AI Integration**: Added Claude AI with strict constraint validation
+- **🎲 Deterministic Mechanics**: Code-controlled dice rolls and XP, AI handles narrative only
+- **🧪 Comprehensive Testing**: AI behavior validation, integration tests, performance testing
+- **📦 Dual Deployment**: Local development mode + AWS production deployment
+- **🏷️ Smart Versioning**: MAJOR.MINOR.PROMPT.UI versioning for AI-integrated projects
+- **🔧 Developer Experience**: Organized project structure, automated test selection, version management
+
+### **🎯 Key Innovations:**
+- **AI Constraint System**: Prevents AI from "hallucinating" game mechanics
+- **Prompt Versioning**: Track AI behavior changes with dedicated version component
+- **Intelligent Testing**: Automatically selects relevant tests based on code changes
+- **Environment Management**: Seamless switching between local and AWS modes
 
 ## 🎯 Overview
 
