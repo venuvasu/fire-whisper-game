@@ -1,0 +1,55 @@
+# Gameplay Validation Test Configuration
+# Purpose: Validate core gameplay mechanics work end-to-end
+# Strategy: Permanent - Core functionality test that should always pass
+
+test_name: "Core Gameplay Validation"
+purpose: "Ensure character creation -> saga creation -> gameplay turns work correctly"
+test_type: "integration"
+strategy: "permanent"  # This test should always be maintained
+priority: "critical"   # Must pass for releases
+
+# Code files being tested
+files_under_test:
+  - "src/handlers/character_handler.py"
+  - "src/handlers/game_handler.py" 
+  - "src/handlers/gameplay_handler.py"
+  - "src/engine/story_engine.py"
+  - "src/ai/claude_client.py"
+
+# Test scenarios
+scenarios:
+  - name: "Elf Mage Adventure"
+    character:
+      name: "Lyra Starweaver"
+      race: "Elf"
+      profession: "Mage"
+    saga:
+      setting: "Ancient Ruins"
+      difficulty: "Adventurer"
+    turns: 10
+    
+  - name: "Human Paladin Quest"
+    character:
+      name: "Marcus Brightblade"
+      race: "Human" 
+      profession: "Paladin"
+    saga:
+      setting: "Mystical Forest"
+      difficulty: "Hero"
+    turns: 10
+
+# Output configuration
+output:
+  format: "readable_transcript"
+  include_timing: true
+  include_dice_details: true
+  include_code_trace: true
+
+# Success criteria
+success_criteria:
+  - "All characters created successfully"
+  - "All sagas created successfully" 
+  - "All gameplay turns complete without errors"
+  - "AI responses contain proper choice structures"
+  - "Dice mechanics work correctly"
+  - "No AI constraint violations"

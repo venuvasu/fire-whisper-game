@@ -21,12 +21,19 @@
 
 This branch represents a complete architectural overhaul of the original Fire Whisper concept, transforming it from separate API/UI components into a unified, AI-integrated RPG system.
 
-### 🔧 **Latest Updates - Core Game Engine Fixes**
-- **✅ Fixed State Management**: Location tracking, turn counting, and story progression now work correctly
-- **✅ Fixed Choice Processing**: Player choices are properly parsed and responded to
-- **✅ Fixed Debug Information**: All game state tracking is visible and accurate
-- **✅ Enhanced Story Progression**: Story advances based on meaningful player actions
-- **✅ Improved Continuity**: AI responses maintain narrative consistency
+### 🔧 **Latest Updates - Dice System & Real Consequences Implementation**
+- **✅ Implemented Real Dice Rolling**: All actions now use proper D20 dice mechanics with difficulty classes
+- **✅ Added Meaningful Consequences**: Success/failure affects character stats, story progression, and world state
+- **✅ Eliminated Auto-Success**: Players can now fail actions and face real penalties
+- **✅ Location Progression System**: Movement actions can successfully change locations when dice rolls succeed
+- **✅ Character Stat Tracking**: Social standing, investigation progress, HP/mana damage properly applied
+- **✅ Risk/Reward Gameplay**: Every choice now has mechanical weight and consequences
+
+### 🎯 **Current Development Status**
+- **✅ Core Dice System**: COMPLETED - Real D20 mechanics with consequences
+- **🔄 Story Arc Integration**: IN PROGRESS - Need to use 50 predefined story arcs instead of AI generation
+- **🔄 Location Progression**: IN PROGRESS - Dice system works but location changes need debugging
+- **📋 Next Priority**: Integrate predefined story content and fix location transitions
 
 ### **🔄 What Changed from Original:**
 - **🏗️ Unified Architecture**: Merged backend API + frontend into cohesive game system
@@ -46,6 +53,8 @@ This branch represents a complete architectural overhaul of the original Fire Wh
 ## 🎯 Overview
 
 Fire Whisper RPG combines the creativity of AI storytelling with the reliability of deterministic game mechanics. Players experience rich, dynamic narratives while the system maintains strict control over game balance and progression.
+
+**🎲 NEW: Real Dice System** - Every action now uses proper D20 mechanics with meaningful success/failure consequences. No more auto-success - players face real risk and reward!
 
 ### ✨ Key Features
 - **🤖 AI-Driven Narratives**: Claude AI generates immersive story content

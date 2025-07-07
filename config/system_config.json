@@ -1,0 +1,30 @@
+{
+  "system_version": "1.0.0",
+  "deployment_date": "2025-06-28T10:36:40.249804",
+  "features": {
+    "dynamic_ai_code_swapping": true,
+    "real_time_performance_monitoring": true,
+    "user_experience_optimization": true,
+    "comprehensive_analytics": true
+  },
+  "performance_thresholds": {
+    "user_engagement_min": 0.6,
+    "return_likelihood_min": 0.65,
+    "session_quality_min": 0.7,
+    "error_rate_max": 0.15,
+    "response_time_max": 3.0,
+    "consistency_score_min": 0.8
+  },
+  "component_settings": {
+    "default_ai_components": [
+      "npc_relationships",
+      "narrative_generation"
+    ],
+    "default_code_components": [
+      "state_management",
+      "consistency_checking"
+    ],
+    "switch_cooldown_minutes": 2,
+    "metrics_history_size": 50
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "environment": "development",
+  "debug": true,
+  "features": {
+    "dynamic_ai_code_swapping": true,
+    "real_time_performance_monitoring": false,
+    "user_experience_optimization": true,
+    "comprehensive_analytics": false
+  },
+  "performance_thresholds": {
+    "user_engagement_min": 0.5,
+    "return_likelihood_min": 0.6,
+    "session_quality_min": 0.6,
+    "error_rate_max": 0.25,
+    "response_time_max": 5.0,
+    "consistency_score_min": 0.7
+  },
+  "logging": {
+    "level": "DEBUG",
+    "enable_file_logging": true
+  }
+}

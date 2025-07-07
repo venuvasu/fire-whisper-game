@@ -1,11 +1,42 @@
 {
-  "version": "1.1.0.0",
+  "version": "1.2.0.0",
   "major": 1,
-  "minor": 1,
+  "minor": 2,
   "prompt": 0,
   "ui": 0,
-  "last_updated": "2025-07-07T16:57:00Z",
+  "last_updated": "2025-07-07T18:05:00Z",
   "changelog": {
+    "1.2.0.0": {
+      "date": "2025-07-07",
+      "changes": [
+        "MAJOR FEATURE: Implemented real D20 dice rolling system with difficulty classes",
+        "MAJOR FEATURE: Added meaningful action consequences (success/failure affects game state)",
+        "MAJOR FEATURE: Eliminated auto-success - players can now fail actions",
+        "MAJOR FEATURE: Character progression tracking (social standing, investigation progress, HP/mana)",
+        "IMPROVEMENT: Location progression system (movement can change locations on success)",
+        "IMPROVEMENT: Risk/reward gameplay - every choice has mechanical weight",
+        "CLEANUP: Renamed files for clarity, removed unused/broken files",
+        "CLEANUP: Removed temporary files, old logs, improved .gitignore"
+      ],
+      "breaking_changes": [
+        "Actions now require dice rolls instead of auto-succeeding",
+        "File renames may affect imports in custom extensions"
+      ],
+      "prompt_changes": [],
+      "ui_changes": [
+        "Dice roll results now displayed in debug output",
+        "Character stat changes shown (HP damage, social standing, etc.)"
+      ],
+      "technical_changes": [
+        "Added src/core/dice_system.py - Pure D20 randomness system",
+        "Added src/core/action_system.py - Action processing with consequences",
+        "Enhanced AI integration to use dice results for narrative",
+        "Fixed narrative enhancer to handle dictionary-based roll results",
+        "Renamed files: enhanced_game_engine_adapter.py → game_engine_with_dice_system.py",
+        "Renamed files: smart_action_analyzer.py → legacy_action_analyzer.py",
+        "Renamed files: enhanced_narrative_integration.py → narrative_enhancer.py"
+      ]
+    },
     "1.1.0.0": {
       "date": "2025-07-07",
       "changes": [

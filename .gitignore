@@ -6,6 +6,22 @@ __pycache__/
 # C extensions
 *.so
 
+# Fire Whisper RPG specific
+.env.local
+.env
+logs/gameplay_*.txt
+*.log
+*.tmp
+*.temp
+*~
+*.bak
+*.orig
+.DS_Store
+
+# Development artifacts
+experiment_metrics.jsonl
+test_output_*.txt
+
 # Distribution / packaging
 .Python
 build/

@@ -8,14 +8,28 @@
     "build": "npm run build --prefix frontend",
     "preview": "npm run preview --prefix frontend",
     "install:frontend": "npm install --prefix frontend",
-    "install:backend": "pip install -r backend/requirements.txt",
+    "install:backend": "pip install -r requirements.txt",
     "deploy": "sam build && sam deploy",
     "local": "sam local start-api"
   },
   "workspaces": [
     "frontend"
   ],
-  "keywords": ["game", "storytelling", "ai", "react", "lambda", "aws"],
+  "keywords": [
+    "game",
+    "storytelling",
+    "ai",
+    "react",
+    "lambda",
+    "aws"
+  ],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "enhanced_system": {
+    "version": "1.0.0",
+    "features": [
+      "dynamic_optimization",
+      "performance_monitoring"
+    ]
+  }
 }

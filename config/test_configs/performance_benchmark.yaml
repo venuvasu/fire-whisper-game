@@ -1,0 +1,47 @@
+# Performance Benchmark Test Configuration
+# Purpose: Measure system performance under normal load
+# Strategy: Temporary - Run when investigating performance issues
+
+test_name: "Performance Benchmark"
+purpose: "Measure response times and system performance"
+test_type: "performance"
+strategy: "temporary"  # Only run when needed
+priority: "medium"
+
+# Code files being tested
+files_under_test:
+  - "src/handlers/gameplay_handler.py"
+  - "src/ai/claude_client.py"
+  - "src/engine/story_engine.py"
+
+# Performance test scenarios
+scenarios:
+  - name: "Standard Load Test"
+    description: "Measure performance under normal conditions"
+    concurrent_games: 1
+    turns_per_game: 20
+    iterations: 5
+    
+  - name: "Response Time Test"
+    description: "Measure AI response times"
+    character:
+      name: "Test Character"
+      race: "Human"
+      profession: "Fighter"
+    saga:
+      setting: "Test Arena"
+      difficulty: "Adventurer"
+    turns: 10
+    measure_each_turn: true
+
+# Performance criteria
+performance_criteria:
+  max_response_time_ms: 30000  # 30 seconds max
+  avg_response_time_ms: 10000  # 10 seconds average
+  success_rate_percent: 95     # 95% success rate minimum
+
+# Output configuration
+output:
+  format: "performance_report"
+  include_timing_breakdown: true
+  include_resource_usage: true

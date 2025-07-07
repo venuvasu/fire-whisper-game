@@ -1,0 +1,19 @@
+test_name: "Full System Validation"
+purpose: "Validate complete restructured codebase functionality"
+test_type: "integration"
+strategy: "permanent"
+priority: "critical"
+files_under_test:
+  - "src/handlers/character_handler.py"
+  - "src/handlers/game_handler.py" 
+  - "src/handlers/gameplay_handler.py"
+  - "src/ai/providers/claude_haiku_take_turn.py"
+  - "src/data/characters.py"
+  - "src/data/sagas.py"
+  - "src/utils/game_manager.py"
+output_format: "readable_transcript"
+scenarios:
+  - character: "Human Warrior"
+    saga: "Mountain Pass"
+    turns: 3
+    description: "Test complete character -> saga -> gameplay flow"

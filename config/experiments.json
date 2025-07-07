@@ -1,0 +1,57 @@
+{
+  "experiments": {
+    "local_game_engine_v2": {
+      "enabled": true,
+      "rollout_percentage": 50,
+      "description": "New local game engine with proper state management",
+      "feature_flags": {
+        "use_enhanced_story_progression": true,
+        "use_location_transitions": true,
+        "use_choice_consequence_tracking": true,
+        "debug_game_state": true
+      },
+      "fallback_strategy": "legacy_ai_integration",
+      "metrics_to_track": [
+        "story_progression_rate",
+        "location_transition_success",
+        "choice_variety_score",
+        "player_engagement_time"
+      ]
+    },
+    "improved_narrative_coherence": {
+      "enabled": true,
+      "rollout_percentage": 30,
+      "description": "Enhanced narrative coherence and continuity tracking",
+      "feature_flags": {
+        "use_continuity_enforcement": true,
+        "use_world_state_tracking": true,
+        "use_character_memory": true
+      },
+      "fallback_strategy": "basic_narrative",
+      "metrics_to_track": [
+        "narrative_consistency_score",
+        "world_state_coherence",
+        "character_development_tracking"
+      ]
+    }
+  },
+  "user_segments": {
+    "local_development": {
+      "experiments": ["local_game_engine_v2", "improved_narrative_coherence"],
+      "override_rollout": 100
+    },
+    "beta_testers": {
+      "experiments": ["local_game_engine_v2"],
+      "override_rollout": 80
+    },
+    "production": {
+      "experiments": [],
+      "override_rollout": 0
+    }
+  },
+  "metrics_collection": {
+    "enabled": true,
+    "sample_rate": 1.0,
+    "storage_backend": "local_file"
+  }
+}

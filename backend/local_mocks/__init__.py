@@ -1,1 +1,0 @@
-# Local mocks for AWS environment - preserves all business rules

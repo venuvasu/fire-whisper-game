@@ -8,10 +8,10 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional
 from anthropic import Anthropic
 from .game_state_manager import GameStateManager, ActionType
-from .enhanced_narrative_integration import NarrativeEnhancer
+from .narrative_enhancer import NarrativeEnhancer
 from .option_generator import generate_contextual_options
 from .battle_system import BattleSystem
-from .smart_action_analyzer import SmartActionAnalyzer
+from .legacy_action_analyzer import SmartActionAnalyzer
 from .story_state_manager import StoryStateManager
 from .action_result_processor import ActionResultProcessor
 from .narrative_template_engine import NarrativeTemplateEngine
@@ -80,6 +80,110 @@ class AIIntegrationLayer:
             'game_state': self.game_manager.get_current_state()
         }
     
+    def _determine_action_type(self, player_input: str) -> str:
+        """Map player input to action type for dice system"""
+        player_lower = player_input.lower().strip()
+        
+        # Try to extract choice number first
+        try:
+            choice_num = int(player_input.strip())
+            # Map choice numbers to action types
+            choice_mapping = {
+                1: 'examine',
+                2: 'move', 
+                3: 'investigate',
+                4: 'social',
+                5: 'magic'
+            }
+            return choice_mapping.get(choice_num, 'examine')
+        except ValueError:
+            pass
+        
+        # Keyword-based mapping
+        if any(word in player_lower for word in ['look', 'examine', 'inspect', 'observe']):
+            return 'examine'
+        elif any(word in player_lower for word in ['move', 'go', 'walk', 'travel', 'head']):
+            return 'move'
+        elif any(word in player_lower for word in ['search', 'investigate', 'explore', 'find']):
+            return 'investigate'
+        elif any(word in player_lower for word in ['talk', 'speak', 'say', 'ask', 'tell']):
+            return 'social'
+        elif any(word in player_lower for word in ['cast', 'magic', 'spell', 'channel']):
+            return 'magic'
+        elif any(word in player_lower for word in ['attack', 'fight', 'strike', 'combat']):
+            return 'combat'
+        else:
+            return 'examine'  # Default fallback
+    
+    def _should_roll_dice(self, action_type: str, player_input: str, situation: str) -> bool:
+        """Determine if an action needs a dice roll based on risk and consequences"""
+        player_lower = player_input.lower().strip()
+        situation_lower = situation.lower()
+        
+        # ALWAYS roll for these high-stakes actions
+        always_roll_actions = ['combat', 'magic', 'sneak', 'climb', 'jump', 'persuade', 'intimidate']
+        if action_type in always_roll_actions:
+            return True
+        
+        # Check for risky keywords in player input
+        risky_keywords = ['sneak', 'hide', 'steal', 'pickpocket', 'climb', 'jump', 'leap', 
+                         'persuade', 'convince', 'intimidate', 'deceive', 'lie', 'attack', 
+                         'fight', 'cast', 'spell', 'magic', 'quickly', 'quietly', 'carefully']
+        if any(keyword in player_lower for keyword in risky_keywords):
+            return True
+        
+        # Check for dangerous context
+        danger_indicators = ['danger', 'trap', 'guard', 'enemy', 'hostile', 'risky', 
+                           'difficult', 'challenging', 'shadow', 'blight', 'corruption',
+                           'monster', 'creature', 'threat']
+        if any(indicator in situation_lower for indicator in danger_indicators):
+            return True
+        
+        # Movement actions - ALWAYS roll for movement to enable location progression
+        if action_type == 'move':
+            return True  # Movement should have consequences and enable progression
+        
+        # Investigation actions - ALWAYS roll to make them meaningful
+        if action_type == 'investigate':
+            return True  # Investigation should have risk/reward
+        
+        # Social actions - ALWAYS roll to make them meaningful
+        if action_type == 'social':
+            return True  # Social interactions should have consequences
+        
+        # Examine actions - Roll if it's a numbered choice (meaningful action)
+        if action_type == 'examine':
+            try:
+                int(player_input.strip())  # If it's a number, it's a meaningful choice
+                return True
+            except ValueError:
+                return False  # Free-form examine might be simple
+        
+        # Default: roll for meaningful actions
+        return True
+    
+    def _apply_dice_consequences(self, dice_consequence):
+        """Apply action consequences to game state"""
+        if not dice_consequence or not dice_consequence.state_changes:
+            return
+            
+        # Apply state changes from dice results
+        for key, value in dice_consequence.state_changes.items():
+            if key == 'hp_damage' and self.game_manager and self.game_manager.character:
+                current_hp = self.game_manager.character.get('resources', {}).get('hp', 20)
+                self.game_manager.character['resources']['hp'] = max(0, current_hp - value)
+                print(f"💔 HP DAMAGE: -{value} (now {self.game_manager.character['resources']['hp']})")
+            elif key == 'mana_damage' and self.game_manager and self.game_manager.character:
+                current_mana = self.game_manager.character.get('resources', {}).get('energy', 10)
+                self.game_manager.character['resources']['energy'] = max(0, current_mana - value)
+                print(f"🔮 MANA DAMAGE: -{value} (now {self.game_manager.character['resources']['energy']})")
+            elif key in ['social_standing', 'investigation_progress', 'magical_progress']:
+                # Track ongoing character development
+                if not hasattr(self, 'character_progression'):
+                    self.character_progression = {}
+                self.character_progression[key] = self.character_progression.get(key, 0) + value
+                print(f"📊 {key.upper()}: {'+' if value > 0 else ''}{value}")
+    
     def process_player_action(self, player_input: str) -> Dict:
         """Process player action with enhanced narrative integration"""
         if not self.game_manager:
@@ -107,13 +211,55 @@ class AIIntegrationLayer:
             # Add progression context to story context
             story_context['force_progression'] = progression_context['should_force_progression']
         
-        # Use smart analyzer to determine if dice roll is needed
-        action_analysis = self.action_analyzer.analyze_action(
-            player_input, 
-            current_situation, 
-            self.game_manager.character,
-            self.battle_system.battle_state.value != 'no_battle'
-        )
+        # SMART DICE SYSTEM - Only roll when meaningful
+        from .action_system import get_action_processor
+        action_processor = get_action_processor()
+        
+        # Map player input to action type
+        action_type = self._determine_action_type(player_input)
+        
+        # Determine if this action needs a dice roll
+        needs_dice_roll = self._should_roll_dice(action_type, player_input, current_situation)
+        
+        if needs_dice_roll:
+            # Process action with REAL dice consequences
+            dice_consequence = action_processor.process_action(
+                action_type,
+                self.game_manager.character,
+                self.game_manager.get_current_state(),
+                {'situation': current_situation, 'player_input': player_input}
+            )
+            
+            # Create action analysis from dice result
+            action_analysis = {
+                'requires_roll': True,
+                'action_category': 'meaningful',
+                'dice_result': dice_consequence.roll_result,
+                'success': dice_consequence.success,
+                'reasoning': f"Meaningful action with consequences: {dice_consequence.roll_result.description if dice_consequence.roll_result else 'No roll'}",
+                'auto_success': False,
+                'consequences': dice_consequence
+            }
+        else:
+            # Simple action - no dice needed, automatic success
+            from .action_system import ActionConsequence
+            dice_consequence = ActionConsequence(
+                success=True,
+                narrative_outcome="Your action succeeds without difficulty.",
+                mechanical_effects={'simple_action': True},
+                state_changes={'simple_progress': 1},
+                roll_result=None
+            )
+            
+            action_analysis = {
+                'requires_roll': False,
+                'action_category': 'simple',
+                'dice_result': None,
+                'success': True,
+                'reasoning': "Simple action with no meaningful risk or uncertainty",
+                'auto_success': True,
+                'consequences': dice_consequence
+            }
         
         # Check if battle should be triggered or is ongoing
         battle_results = {}
@@ -135,19 +281,52 @@ class AIIntegrationLayer:
             )
             battle_results.update(combat_results)
         
-        # Execute mechanics only if needed
-        mechanical_results = self._execute_smart_mechanics(action_analysis, battle_results)
+        # Apply dice consequences to game state
+        self._apply_dice_consequences(dice_consequence)
+        
+        # Apply location changes from dice consequences
+        if dice_consequence.state_changes and 'location' in dice_consequence.state_changes:
+            new_location_id = dice_consequence.state_changes['location']
+            location_str = new_location_id.value if hasattr(new_location_id, 'value') else str(new_location_id)
+            self.game_manager.update_location(location_str)
+            print(f"🗺️ LOCATION CHANGED: Moving to {location_str}")
+        
+        # Create mechanical results from dice system
+        if dice_consequence.roll_result:
+            dice_rolls = [{
+                'roll': dice_consequence.roll_result.description,
+                'success': dice_consequence.success,
+                'total': dice_consequence.roll_result.total,
+                'difficulty': dice_consequence.roll_result.difficulty,
+                'result_category': dice_consequence.roll_result.result.value,
+                'roll_type': 'ability_check',
+                'base_roll': dice_consequence.roll_result.raw_roll,
+                'modifiers': {'ability': dice_consequence.roll_result.modifier},
+                'target': dice_consequence.roll_result.difficulty
+            }]
+        else:
+            dice_rolls = []
+            
+        mechanical_results = {
+            'dice_rolls': dice_rolls,
+            'xp_awards': [{'xp_awarded': 1, 'reason': 'successful action', 'new_xp': 1, 'level_up': False, 'new_level': 1, 'new_abilities': []}] if dice_consequence.success and dice_consequence.roll_result else [],
+            'mechanical_effects': dice_consequence.mechanical_effects or {},
+            'state_changes': dice_consequence.state_changes or {}
+        }
         
         # Debug output
         if os.getenv("DEBUG_MODE", "false").lower() == "true":
             print(f"\n🔍 DEBUG - Action Analysis:")
             print(f"   Player Input: {player_input}")
+            print(f"   Action Type: {action_type}")
             print(f"   Requires Roll: {action_analysis['requires_roll']}")
             print(f"   Auto Success: {action_analysis.get('auto_success', False)}")
             print(f"   Reasoning: {action_analysis['reasoning']}")
             if battle_results:
                 print(f"   Battle Active: {battle_results.get('battle_status', {}).get('in_battle', False)}")
             print(f"   Dice Rolls Made: {len(mechanical_results['dice_rolls'])}")
+            if action_analysis['dice_result']:
+                print(f"   Roll Result: {action_analysis['dice_result'].total} vs DC {action_analysis['dice_result'].difficulty}")
         
         # Build AI prompt with pre-calculated results and battle status
         ai_prompt = self._build_action_prompt(
@@ -207,7 +386,10 @@ Please provide a response that maintains the established context and story eleme
         
         # Advance story progress for meaningful actions
         if self._is_meaningful_action(player_input, action_analysis):
-            event_description = f"player_{action_analysis.get('action_type', 'action').value}_{self.game_manager.session_data['turn_count']}"
+            action_type_str = action_analysis.get('action_type', 'action')
+            if hasattr(action_type_str, 'value'):
+                action_type_str = action_type_str.value
+            event_description = f"player_{action_type_str}_{self.game_manager.session_data['turn_count']}"
             if self.game_manager.advance_story_progress(event_description):
                 print(f"📈 STORY PROGRESS: Advanced to {self.game_manager.progression_state['story_progress']}")
         
@@ -285,6 +467,90 @@ Please provide a response that maintains the established context and story eleme
         hp_ratio = char['resources']['hp'] / char['resources']['max_hp']
         energy_ratio = char['resources']['energy'] / char['resources']['max_energy']
         return hp_ratio < 0.4 or energy_ratio < 0.4
+    
+    def _track_api_usage(self, response, prompt: str):
+        """Track API usage and calculate costs per turn"""
+        try:
+            # Get usage information from Claude API response
+            usage = response.usage
+            input_tokens = usage.input_tokens
+            output_tokens = usage.output_tokens
+            
+            # Claude 3.5 Sonnet pricing (as of 2024)
+            # Input: $3.00 per million tokens
+            # Output: $15.00 per million tokens
+            input_cost = (input_tokens / 1_000_000) * 3.00
+            output_cost = (output_tokens / 1_000_000) * 15.00
+            total_cost = input_cost + output_cost
+            
+            # Track in game manager if available
+            if hasattr(self, 'game_manager') and self.game_manager:
+                turn_count = self.game_manager.session_data.get('turn_count', 0)
+                
+                # Initialize cost tracking if not exists
+                if 'api_costs' not in self.game_manager.session_data:
+                    self.game_manager.session_data['api_costs'] = {
+                        'total_cost': 0.0,
+                        'total_input_tokens': 0,
+                        'total_output_tokens': 0,
+                        'turns': []
+                    }
+                
+                # Add this turn's costs
+                cost_data = self.game_manager.session_data['api_costs']
+                cost_data['total_cost'] += total_cost
+                cost_data['total_input_tokens'] += input_tokens
+                cost_data['total_output_tokens'] += output_tokens
+                cost_data['turns'].append({
+                    'turn': turn_count,
+                    'input_tokens': input_tokens,
+                    'output_tokens': output_tokens,
+                    'input_cost': input_cost,
+                    'output_cost': output_cost,
+                    'total_cost': total_cost,
+                    'prompt_length': len(prompt)
+                })
+                
+                # Print cost info if debug mode
+                import os
+                if os.getenv("DEBUG_MODE", "false").lower() == "true":
+                    print(f"💰 API COST - Turn {turn_count}: ${total_cost:.4f} (In: {input_tokens} tokens/${input_cost:.4f}, Out: {output_tokens} tokens/${output_cost:.4f})")
+                    print(f"💰 SESSION TOTAL: ${cost_data['total_cost']:.4f} ({cost_data['total_input_tokens'] + cost_data['total_output_tokens']} tokens)")
+            
+        except Exception as e:
+            print(f"⚠️ Cost tracking error: {e}")
+            # Don't fail the game if cost tracking fails
+            pass
+    
+    def get_cost_summary(self) -> str:
+        """Get formatted cost summary for the current session"""
+        if not hasattr(self, 'game_manager') or not self.game_manager:
+            return "Cost tracking not available (no game session)"
+        
+        cost_data = self.game_manager.session_data.get('api_costs')
+        if not cost_data:
+            return "No API costs recorded yet"
+        
+        total_tokens = cost_data['total_input_tokens'] + cost_data['total_output_tokens']
+        avg_cost_per_turn = cost_data['total_cost'] / max(len(cost_data['turns']), 1)
+        
+        summary = f"""
+💰 API COST SUMMARY
+==================
+Total Cost: ${cost_data['total_cost']:.4f}
+Total Tokens: {total_tokens:,} (Input: {cost_data['total_input_tokens']:,}, Output: {cost_data['total_output_tokens']:,})
+Turns Played: {len(cost_data['turns'])}
+Average Cost/Turn: ${avg_cost_per_turn:.4f}
+
+Last 5 Turns:
+"""
+        
+        # Show last 5 turns
+        recent_turns = cost_data['turns'][-5:]
+        for turn_data in recent_turns:
+            summary += f"Turn {turn_data['turn']}: ${turn_data['total_cost']:.4f} ({turn_data['input_tokens'] + turn_data['output_tokens']} tokens)\n"
+        
+        return summary
     
     def _is_meaningful_action(self, player_input: str, action_analysis: Dict) -> bool:
         """Determine if an action should advance story progress"""
@@ -642,10 +908,10 @@ MECHANICAL RESULTS (ALREADY CALCULATED):"""
         
         # Add dice roll results
         for roll in mechanical_results['dice_rolls']:
-            modifiers_text = " + ".join([f"{k} +{v}" for k, v in roll.modifiers.items()])
-            result_text = "SUCCESS" if roll.success else "FAILURE"
+            modifiers_text = " + ".join([f"{k} +{v}" for k, v in roll['modifiers'].items()])
+            result_text = "SUCCESS" if roll['success'] else "FAILURE"
             prompt += f"""
-🎲 {roll.roll_type.title()} Roll: {roll.base_roll} + {sum(roll.modifiers.values())} ({modifiers_text}) = {roll.base_roll + sum(roll.modifiers.values())} vs {roll.target}
+🎲 {roll['roll_type'].title()} Roll: {roll['base_roll']} + {sum(roll['modifiers'].values())} ({modifiers_text}) = {roll['base_roll'] + sum(roll['modifiers'].values())} vs {roll['target']}
 Result: {result_text}"""
         
         # Add XP awards
@@ -692,13 +958,17 @@ Generate response now:"""
         return prompt
     
     def _call_ai(self, prompt: str) -> str:
-        """Make API call to Claude"""
+        """Make API call to Claude with cost tracking"""
         try:
             response = self.client.messages.create(
                 model="claude-3-5-sonnet-20241022",
                 max_tokens=600,
                 messages=[{"role": "user", "content": prompt}]
             )
+            
+            # Track API usage and costs
+            self._track_api_usage(response, prompt)
+            
             return response.content[0].text
         except Exception as e:
             return f"AI Error: {str(e)}"
