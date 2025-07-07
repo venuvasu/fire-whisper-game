@@ -39,14 +39,84 @@ Fire Whisper RPG combines the creativity of AI storytelling with the reliability
 
 ## 📋 Table of Contents
 
-- [🏗️ Project Structure](#️-project-structure)
-- [🏷️ Versioning System](#️-versioning-system)
+- [🚀 Quick Start for New Developers](#-quick-start-for-new-developers)
+- [🏗️ Architecture Overview](#️-architecture-overview)
+- [🎯 Entry Points](#-entry-points)
 - [🧪 Testing Strategy](#-testing-strategy)
-- [🚀 Getting Started](#-getting-started)
-- [🔧 Development Workflow](#-development-workflow)
+- [🔧 Development Setup](#-development-setup)
+- [🏷️ Versioning System](#️-versioning-system)
 - [📚 Documentation](#-documentation)
 
-## 🏗️ Project Structure
+## 🚀 Quick Start for New Developers
+
+**New to this codebase? Start here!**
+
+### 1. **Understand What This Is**
+Fire Whisper RPG is an AI-powered text-based RPG where:
+- **AI (Claude)** generates story content and dialogue
+- **Code** controls all game mechanics (dice rolls, XP, stats)
+- **Players** make choices and the AI responds with narrative
+
+### 2. **Get It Running in 5 Minutes**
+```bash
+# 1. Clone and enter directory
+git clone <repo-url> && cd fire-whisper-game
+
+# 2. Install Python dependencies
+pip install -r backend/requirements.txt
+
+# 3. Set up your API key
+cp .env.example .env.local
+# Edit .env.local and add: CLAUDE_API_KEY=your_key_here
+
+# 4. Play the game!
+python3 scripts/play_fire_whisper_custom.py
+```
+
+### 3. **Run Tests to Understand the System**
+```bash
+# Run comprehensive test with full transcripts
+python3 scripts/full_game_flow_test.py
+
+# Check the results (shows how everything works)
+cat test_results/full_game_flow_test_results_*.yaml
+```
+
+### 4. **Key Files to Read First**
+1. **`backend/take_turn_enhanced.py`** - Main game logic
+2. **`backend/engine/`** - Core game mechanics
+3. **`backend/prompts/`** - AI prompts that control behavior
+4. **`test_results/README.md`** - Latest test results and findings
+
+### 5. **Architecture at a Glance**
+```
+Player Input → Lambda Function → Game Engine → AI (Claude) → Response
+     ↑              ↓              ↓           ↓         ↓
+  Frontend ←── API Gateway ←── Dice/XP ←── Prompt ←── Validation
+```
+
+## 🏗️ Architecture Overview
+
+### System Flow
+```
+┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌──────────────┐
+│   Player    │───▶│   Frontend   │───▶│   Backend   │───▶│   Claude AI  │
+│   Input     │    │   (React)    │    │  (Lambda)   │    │  (Narrative) │
+└─────────────┘    └──────────────┘    └─────────────┘    └──────────────┘
+                           │                    │                   │
+                           ▼                    ▼                   ▼
+                   ┌──────────────┐    ┌─────────────┐    ┌──────────────┐
+                   │   UI State   │    │Game Engine  │    │  Validation  │
+                   │  Management  │    │(Dice/XP/HP)│    │ & Constraints│
+                   └──────────────┘    └─────────────┘    └──────────────┘
+```
+
+### Key Principle: **AI for Story, Code for Mechanics**
+- **AI (Claude)**: Generates narrative, dialogue, descriptions
+- **Code**: Handles all dice rolls, XP calculation, HP tracking, game rules
+- **Validation**: Ensures AI never "hallucinates" game mechanics
+
+### Project Structure
 
 ```
 fire-whisper-game/
@@ -67,6 +137,61 @@ fire-whisper-game/
 ├── docs/                      # Project documentation
 └── version.json              # Version tracking and changelog
 ```
+
+## 🎯 Entry Points
+
+### 🏠 **Local Development**
+**Primary Entry Point**: `scripts/local_runner.py`
+```bash
+python3 scripts/local_runner.py
+```
+- Complete local game experience without AWS dependencies
+- Direct Python execution with debug capabilities
+- Character sheet commands and easy exit options
+
+### ☁️ **AWS Production**
+**Lambda Function Handlers** (defined in `template.yaml`):
+
+**Core Game Functions:**
+- `backend/take_turn.py` → `take_turn.handler` - Main game logic
+- `backend/create_saga.py` → `create_saga.handler` - Game creation
+- `backend/get_game.py` → `get_game.handler` - Game state retrieval
+
+**Character Management:**
+- `backend/create_character.py` → `create_character.handler`
+- `backend/get_character.py` → `get_character.handler`
+- `backend/update_character_from_game.py` → `update_character_from_game.handler`
+- `backend/delete_character.py` → `delete_character.handler`
+
+**User Management:**
+- `backend/get_user_data.py` → `get_user_data.handler`
+
+### 🌐 **Frontend**
+**React TypeScript Application**:
+```bash
+npm run dev  # Start development server
+```
+- Entry point: `frontend/src/main.tsx`
+- Vite-powered development environment
+
+### 🧪 **Testing**
+**Automated Test Runner**: `tests/automation/test_runner.py`
+```bash
+python3 tests/automation/test_runner.py
+```
+- Intelligent test selection based on code changes
+- Multiple test categories: AI behavior, integration, performance
+
+### 📦 **Essential Commands**
+
+| Purpose | Command | Description |
+|---------|---------|-------------|
+| **🎮 Play Game** | `python3 scripts/play_fire_whisper_custom.py` | Interactive gameplay (BEST for learning) |
+| **🧪 Run Tests** | `python3 scripts/full_game_flow_test.py` | Comprehensive test with full transcripts |
+| **🏠 Local Dev** | `python3 scripts/local_runner.py` | Local development server |
+| **☁️ Deploy AWS** | `npm run deploy` | Deploy to production |
+| **🌐 Frontend** | `npm run dev` | React development server |
+| **📊 Test Results** | `cat test_results/*.yaml` | View latest test results |
 
 ## 🏷️ Versioning System
 
@@ -143,19 +268,15 @@ All test results are versioned and stored in `tests/results/`:
 - **Content**: Full test transcripts, AI responses, mechanical results
 - **Tracking**: Version tested against, pass/fail status, detailed logs
 
-## 🚀 Getting Started
+## 🔧 Development Setup
 
-Fire Whisper RPG supports two operation modes:
+### Prerequisites
+- **Python 3.9+** (check: `python3 --version`)
+- **Claude API key** from Anthropic
+- **Git** for version control
+- **Node.js 16+** (for frontend, optional)
 
-### 🏠 **Local Mode (Development)**
-Run the game locally for development and testing
-
-### ☁️ **AWS Mode (Production)**
-Deploy to AWS Lambda for scalable production use
-
----
-
-## 🏠 Local Development Setup
+### 🏠 Local Development Setup (Recommended)
 
 ### Prerequisites
 - Python 3.9+
@@ -182,10 +303,37 @@ Deploy to AWS Lambda for scalable production use
    # Edit .env.local and add your Claude API key
    ```
 
-4. **Run the game locally**:
+4. **Test the setup**:
    ```bash
-   python3 scripts/local_runner.py
+   # Quick test to verify everything works
+   python3 scripts/play_fire_whisper_custom.py
+   
+   # Or run comprehensive test
+   python3 scripts/full_game_flow_test.py
    ```
+
+### 🎯 What to Do First
+
+1. **Play the game** to understand user experience:
+   ```bash
+   python3 scripts/play_fire_whisper_custom.py
+   ```
+
+2. **Run tests** to see how it works internally:
+   ```bash
+   python3 scripts/full_game_flow_test.py
+   # Then check: test_results/full_game_flow_test_results_*.yaml
+   ```
+
+3. **Read the code** in this order:
+   - `backend/take_turn_enhanced.py` (main game logic)
+   - `backend/engine/` (game mechanics)
+   - `backend/prompts/` (AI behavior control)
+
+4. **Make a small change** and test it:
+   - Edit a prompt in `backend/prompts/`
+   - Run tests to see the impact
+   - Use version manager to track changes
 
 ### Local Development Features
 - **Direct Python execution** - No AWS dependencies
@@ -194,18 +342,25 @@ Deploy to AWS Lambda for scalable production use
 - **Character sheet command** - Type 'character' to see stats
 - **Easy exit** - Type 'quit' or 'q' to exit
 
-### Local Testing
+### 🧪 Testing Your Changes
 
 ```bash
-# Test AI behavior validation
+# Best test for understanding the system
+python3 scripts/full_game_flow_test.py
+
+# Quick validation tests
 python3 tests/ai_behavior/ai_behavior_validation_test.py
 
-# Run all tests with automatic selection
+# Automated test selection based on your changes
 python3 tests/automation/test_runner.py
-
-# Run specific test categories
-python3 tests/automation/test_runner.py ai_behavior integration
 ```
+
+### 🔍 Understanding Test Results
+
+After running tests, check `test_results/` directory:
+- **YAML files**: Complete game transcripts showing AI responses
+- **README.md**: Explanation of what was tested
+- Look for patterns in AI behavior and game mechanics
 
 ---
 
@@ -276,7 +431,17 @@ AWS_S3_BUCKET=your-bucket
 - **Use AWS IAM roles** - For production Lambda execution
 - **Rotate API keys regularly** - For security best practices
 
-## 🔧 Development Workflow
+## 🔄 Development Workflow
+
+### For New Developers
+
+1. **Understand the system**: Play the game and run tests
+2. **Make small changes**: Start with prompt modifications
+3. **Test your changes**: Use `full_game_flow_test.py`
+4. **Version your changes**: Use the version manager
+5. **Document your findings**: Update relevant docs
+
+### Typical Development Cycle
 
 ### 1. Making Changes
 
@@ -322,15 +487,34 @@ Check test results in `tests/results/` for:
 - Performance metrics
 - Version compatibility
 
-## 📚 Documentation
+## 📚 Documentation & Key Files
 
-### Key Files
+### 🎯 New Developer? Start Here!
+
+1. **`HANDOFF.md`** - 🔥 **START HERE** - Complete handoff guide for new developers
+2. **This README** - Overview and setup
+3. **`TROUBLESHOOTING.md`** - Quick fixes for common issues
+4. **`test_results/README.md`** - Latest test results and findings
+5. **`scripts/README.md`** - What each script does
+6. **`ARCHITECTURE_REDESIGN.md`** - Detailed system architecture
+7. **`TESTING_WORKFLOW.md`** - How testing works
+
+### 📁 Important Directories
+
+- **`backend/`** - All game logic (Python)
+  - `take_turn_enhanced.py` - Main game handler
+  - `engine/` - Core mechanics (dice, XP, HP)
+  - `prompts/` - AI behavior control
+- **`test_results/`** - Latest test outputs with full transcripts
+- **`scripts/`** - Development and testing tools
+- **`frontend/`** - React UI (optional for backend work)
+
+### 🔧 Configuration Files
 
 - **`version.json`** - Version tracking and changelog
-- **`prompts/`** - Versioned AI prompt templates
-- **`tests/results/`** - Historical test results
-- **`TESTING_WORKFLOW.md`** - Detailed testing procedures
-- **`ARCHITECTURE_REDESIGN.md`** - System architecture overview
+- **`.env.local`** - Your local environment (API keys)
+- **`template.yaml`** - AWS deployment configuration
+- **`enhanced_system_config.json`** - System configuration
 
 ### AI Constraint System
 
@@ -348,13 +532,31 @@ AI prompts are versioned and stored separately:
 - **Version tracking**: Linked to overall system version
 - **Change detection**: Prompt changes trigger appropriate tests
 
-## 🤝 Contributing
+## 🤝 Contributing & Handoff Notes
 
-1. Make your changes
-2. Run relevant tests: `python3 tests/automation/test_runner.py`
-3. Bump version: `python3 scripts/version_manager.py bump-[type] "Description"`
-4. Commit with version tag: `git tag v{version}`
-5. Submit PR with test results
+### For New Developers Taking Over
+
+1. **Start with gameplay**: `python3 scripts/play_fire_whisper_custom.py`
+2. **Run comprehensive tests**: `python3 scripts/full_game_flow_test.py`
+3. **Read test results**: Check `test_results/*.yaml` for full transcripts
+4. **Understand the architecture**: AI does story, code does mechanics
+5. **Make small changes**: Edit prompts, test, observe behavior
+
+### Development Process
+
+1. **Make your changes**
+2. **Test thoroughly**: `python3 scripts/full_game_flow_test.py`
+3. **Version your changes**: `python3 scripts/version_manager.py bump-[type] "Description"`
+4. **Document findings**: Update relevant README files
+5. **Commit with context**: Include test results in commit message
+
+### 🚨 Critical Things to Know
+
+- **Never let AI control game mechanics** (dice, XP, HP)
+- **Always validate AI responses** for constraint violations
+- **Test changes thoroughly** - AI behavior can be unpredictable
+- **Version everything** - Especially prompt changes
+- **Keep test results** - They show how the system behaves over time
 
 ## 📄 License
 
@@ -362,4 +564,24 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-**🎮 Ready to play? Run the tests and start your adventure!**
+## 🎯 TL;DR for New Developers
+
+```bash
+# 1. Get it running
+git clone <repo> && cd fire-whisper-game
+pip install -r backend/requirements.txt
+cp .env.example .env.local  # Add your CLAUDE_API_KEY
+
+# 2. Understand it
+python3 scripts/play_fire_whisper_custom.py  # Play the game
+python3 scripts/full_game_flow_test.py       # See how it works
+cat test_results/*.yaml                       # Read the results
+
+# 3. Key files to read
+# - backend/take_turn_enhanced.py (main logic)
+# - backend/engine/ (game mechanics)
+# - backend/prompts/ (AI control)
+# - test_results/README.md (latest findings)
+```
+
+**🎮 Ready to take over? Start with the game, then the tests!**
