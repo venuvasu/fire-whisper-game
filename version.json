@@ -1,11 +1,34 @@
 {
-  "version": "1.0.0.0",
+  "version": "1.1.0.0",
   "major": 1,
-  "minor": 0,
+  "minor": 1,
   "prompt": 0,
   "ui": 0,
-  "last_updated": "2025-06-27T12:31:00Z",
+  "last_updated": "2025-07-07T16:57:00Z",
   "changelog": {
+    "1.1.0.0": {
+      "date": "2025-07-07",
+      "changes": [
+        "MAJOR FIX: Game state management now works properly",
+        "MAJOR FIX: Location tracking fixed (no more 'unknown' location)",
+        "MAJOR FIX: Turn counting fixed (no more stuck at turn 0)",
+        "MAJOR FIX: Story progression implemented (prevents endless loops)",
+        "IMPROVEMENT: Choice display cleaned up (no more duplication)",
+        "IMPROVEMENT: Debug information now shows accurate game state",
+        "IMPROVEMENT: AI continuity enforcement active and working"
+      ],
+      "breaking_changes": [],
+      "prompt_changes": [],
+      "ui_changes": [
+        "Cleaner choice display in local runner"
+      ],
+      "technical_changes": [
+        "Fixed AIIntegrationLayer return format for local runner compatibility",
+        "Enhanced GameStateManager.get_current_state() to include progression data",
+        "Added advance_story_progress() method to prevent story stagnation",
+        "Improved location parsing with more natural language patterns"
+      ]
+    },
     "1.0.0.0": {
       "date": "2025-06-27",
       "changes": [

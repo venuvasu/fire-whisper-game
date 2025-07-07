@@ -7,9 +7,26 @@
 [![AI Behavior](https://img.shields.io/badge/AI%20behavior-validated-green.svg)](./tests/ai_behavior/)
 [![Branch](https://img.shields.io/badge/branch-v1-orange.svg)](https://github.com/echang-home/fire-whisper-game/tree/v1)
 
+## 🎯 **RESTRUCTURING COMPLETE** ✅
+
+**The codebase has been completely restructured for professional development:**
+- 🏗️ Clean, readable project structure
+- 🧪 Config-driven testing system  
+- 👥 Developer-friendly organization
+- 📚 Comprehensive documentation
+
+**See [RESTRUCTURING_COMPLETE.md](RESTRUCTURING_COMPLETE.md) for full details.**
+
 ## 🚀 **Version 1.0 - Major System Redesign**
 
 This branch represents a complete architectural overhaul of the original Fire Whisper concept, transforming it from separate API/UI components into a unified, AI-integrated RPG system.
+
+### 🔧 **Latest Updates - Core Game Engine Fixes**
+- **✅ Fixed State Management**: Location tracking, turn counting, and story progression now work correctly
+- **✅ Fixed Choice Processing**: Player choices are properly parsed and responded to
+- **✅ Fixed Debug Information**: All game state tracking is visible and accurate
+- **✅ Enhanced Story Progression**: Story advances based on meaningful player actions
+- **✅ Improved Continuity**: AI responses maintain narrative consistency
 
 ### **🔄 What Changed from Original:**
 - **🏗️ Unified Architecture**: Merged backend API + frontend into cohesive game system
@@ -491,13 +508,12 @@ Check test results in `tests/results/` for:
 
 ### 🎯 New Developer? Start Here!
 
-1. **`HANDOFF.md`** - 🔥 **START HERE** - Complete handoff guide for new developers
-2. **This README** - Overview and setup
-3. **`TROUBLESHOOTING.md`** - Quick fixes for common issues
-4. **`test_results/README.md`** - Latest test results and findings
-5. **`scripts/README.md`** - What each script does
+1. **`docs/DEVELOPER_QUICKSTART.md`** - 🔥 **START HERE** - 5-minute developer onboarding
+2. **`docs/PROJECT_STRUCTURE.md`** - Clean project organization guide
+3. **This README** - Overview and setup
+4. **`TROUBLESHOOTING.md`** - Quick fixes for common issues
+5. **`tests/results/`** - Latest test results (readable format)
 6. **`ARCHITECTURE_REDESIGN.md`** - Detailed system architecture
-7. **`TESTING_WORKFLOW.md`** - How testing works
 
 ### 📁 Important Directories
 
