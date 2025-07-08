@@ -4,7 +4,7 @@ Generates 4-5 options based on character abilities, environment, and story stake
 """
 
 import random
-from typing import Dict, List, Any, Tuple
+from typing import Dict, List, Any, Tuple, Optional
 from enum import Enum
 
 
@@ -378,9 +378,459 @@ class OptionGenerator:
         return "\n".join(formatted_options)
 
 
-def generate_contextual_options(situation: str, character: Dict, story_context: Dict) -> str:
+class DynamicOptionGenerator(OptionGenerator):
+    """Enhanced option generator with dynamic contextual awareness"""
+    
+    def __init__(self):
+        super().__init__()
+        self.story_state_cache = {}
+        self.recent_actions = []
+        self.character_preferences = {}
+    
+    def generate_dynamic_options(self, situation: str, character: Dict, 
+                               story_context: Dict, location_context: Dict = None) -> List[Dict]:
+        """Generate truly dynamic options based on full game state"""
+        
+        # Analyze current situation complexity
+        situation_analysis = self._analyze_situation_complexity(situation, story_context)
+        
+        # Get character-specific options
+        character_options = self._generate_character_specific_options(
+            character, situation, situation_analysis
+        )
+        
+        # Get location-specific options
+        location_options = self._generate_location_specific_options(
+            location_context, situation, character
+        )
+        
+        # Get story-progression options
+        story_options = self._generate_story_progression_options(
+            story_context, situation, character
+        )
+        
+        # Get adaptive options based on recent actions
+        adaptive_options = self._generate_adaptive_options(
+            self.recent_actions, situation, character
+        )
+        
+        # Combine and prioritize options
+        all_options = character_options + location_options + story_options + adaptive_options
+        
+        # Select best 4-5 options
+        selected_options = self._select_best_options(all_options, situation_analysis)
+        
+        # Always include Emberlyn option
+        emberlyn_option = self._generate_emberlyn_option(situation, story_context)
+        selected_options.append(emberlyn_option)
+        
+        return selected_options
+    
+    def _analyze_situation_complexity(self, situation: str, story_context: Dict) -> Dict[str, Any]:
+        """Analyze the complexity and nature of current situation"""
+        
+        analysis = {
+            'complexity_level': 'medium',
+            'primary_challenge': 'unknown',
+            'emotional_stakes': 'medium',
+            'time_pressure': False,
+            'multiple_npcs': False,
+            'combat_likely': False,
+            'puzzle_elements': False,
+            'moral_choice': False
+        }
+        
+        situation_lower = situation.lower()
+        
+        # Detect complexity indicators
+        complexity_indicators = {
+            'high': ['multiple', 'complex', 'difficult', 'challenging', 'critical'],
+            'low': ['simple', 'easy', 'straightforward', 'basic']
+        }
+        
+        for level, indicators in complexity_indicators.items():
+            if any(indicator in situation_lower for indicator in indicators):
+                analysis['complexity_level'] = level
+                break
+        
+        # Detect challenge types
+        if any(word in situation_lower for word in ['fight', 'battle', 'attack', 'enemy', 'hostile']):
+            analysis['primary_challenge'] = 'combat'
+            analysis['combat_likely'] = True
+        elif any(word in situation_lower for word in ['puzzle', 'riddle', 'mystery', 'solve']):
+            analysis['primary_challenge'] = 'puzzle'
+            analysis['puzzle_elements'] = True
+        elif any(word in situation_lower for word in ['choose', 'decision', 'moral', 'right', 'wrong']):
+            analysis['primary_challenge'] = 'moral_choice'
+            analysis['moral_choice'] = True
+        elif any(word in situation_lower for word in ['negotiate', 'persuade', 'convince', 'talk']):
+            analysis['primary_challenge'] = 'social'
+        
+        # Detect time pressure
+        if any(word in situation_lower for word in ['quickly', 'urgent', 'hurry', 'time', 'before']):
+            analysis['time_pressure'] = True
+        
+        # Detect multiple NPCs
+        npc_indicators = ['villagers', 'people', 'crowd', 'group', 'everyone']
+        if any(indicator in situation_lower for indicator in npc_indicators):
+            analysis['multiple_npcs'] = True
+        
+        # Assess emotional stakes
+        high_stakes_words = ['life', 'death', 'destroy', 'save', 'rescue', 'doom']
+        if any(word in situation_lower for word in high_stakes_words):
+            analysis['emotional_stakes'] = 'high'
+        
+        return analysis
+    
+    def _generate_character_specific_options(self, character: Dict, situation: str, 
+                                           analysis: Dict) -> List[Dict]:
+        """Generate options tailored to character build and preferences"""
+        
+        character_class = character.get('class', 'Cleric')
+        character_level = character.get('level', 1)
+        character_stats = character.get('stats', {})
+        
+        options = []
+        
+        # High-stat options
+        highest_stat = max(character_stats.items(), key=lambda x: x[1]) if character_stats else ('strength', 14)
+        stat_name, stat_value = highest_stat
+        
+        if stat_value >= 16:  # High stat
+            stat_option = self._generate_high_stat_option(stat_name, situation, analysis)
+            if stat_option:
+                options.append(stat_option)
+        
+        # Class mastery options (higher level characters get more sophisticated options)
+        if character_level >= 3:
+            mastery_option = self._generate_mastery_option(character_class, situation, analysis)
+            if mastery_option:
+                options.append(mastery_option)
+        
+        # Skill-based options
+        character_skills = character.get('skills', {})
+        if isinstance(character_skills, dict):
+            for skill, level in character_skills.items():
+                if isinstance(level, (int, float)) and level >= 2:  # Skilled in this area
+                    skill_option = self._generate_skill_option(skill, situation, analysis)
+                    if skill_option:
+                        options.append(skill_option)
+                        break  # Only add one skill option
+        
+        return options
+    
+    def _generate_high_stat_option(self, stat_name: str, situation: str, analysis: Dict) -> Optional[Dict]:
+        """Generate option that leverages character's highest stat"""
+        
+        stat_options = {
+            'strength': {
+                'text': "Use your exceptional strength to overcome physical obstacles",
+                'category': 'physical',
+                'risk_level': 'medium',
+                'consequence_hint': "Brute force approach - effective but might cause collateral effects"
+            },
+            'dexterity': {
+                'text': "Rely on your agility and quick reflexes to navigate the challenge",
+                'category': 'agility',
+                'risk_level': 'low',
+                'consequence_hint': "Graceful approach - lower risk but may take more time"
+            },
+            'intelligence': {
+                'text': "Apply your keen intellect to analyze and solve the problem systematically",
+                'category': 'analytical',
+                'risk_level': 'low',
+                'consequence_hint': "Thoughtful approach - likely to reveal hidden aspects"
+            },
+            'charisma': {
+                'text': "Use your natural charisma to influence and inspire others",
+                'category': 'social',
+                'risk_level': 'medium',
+                'consequence_hint': "Persuasive approach - could rally support or create expectations"
+            }
+        }
+        
+        return stat_options.get(stat_name)
+    
+    def _generate_mastery_option(self, character_class: str, situation: str, analysis: Dict) -> Optional[Dict]:
+        """Generate advanced class-specific option for experienced characters"""
+        
+        mastery_options = {
+            'Cleric': {
+                'text': "Channel your deep connection to the divine for a powerful intervention",
+                'category': 'divine_mastery',
+                'risk_level': 'high',
+                'consequence_hint': "Powerful divine magic - great effect but will drain you significantly"
+            },
+            'Warrior': {
+                'text': "Execute a masterful combat technique honed through experience",
+                'category': 'combat_mastery',
+                'risk_level': 'medium',
+                'consequence_hint': "Expert technique - precise and effective with calculated risk"
+            },
+            'Mage': {
+                'text': "Weave a complex spell combining multiple schools of magic",
+                'category': 'arcane_mastery',
+                'risk_level': 'high',
+                'consequence_hint': "Advanced magic - unpredictable but potentially game-changing"
+            },
+            'Rogue': {
+                'text': "Employ a sophisticated strategy using misdirection and timing",
+                'category': 'tactical_mastery',
+                'risk_level': 'medium',
+                'consequence_hint': "Cunning plan - complex but could achieve multiple objectives"
+            }
+        }
+        
+        return mastery_options.get(character_class)
+    
+    def _generate_skill_option(self, skill: str, situation: str, analysis: Dict) -> Optional[Dict]:
+        """Generate option based on character's high skill level"""
+        
+        skill_options = {
+            'Combat': {
+                'text': f"Apply your combat expertise to handle this situation with precision",
+                'category': 'skill_combat',
+                'risk_level': 'medium',
+                'consequence_hint': "Skilled approach - efficient and controlled"
+            },
+            'Stealth': {
+                'text': f"Use your stealth mastery to approach the problem unseen",
+                'category': 'skill_stealth',
+                'risk_level': 'low',
+                'consequence_hint': "Covert approach - avoid direct confrontation"
+            },
+            'Persuasion': {
+                'text': f"Leverage your persuasive abilities to find a diplomatic solution",
+                'category': 'skill_social',
+                'risk_level': 'low',
+                'consequence_hint': "Diplomatic approach - could create lasting alliances"
+            },
+            'Investigation': {
+                'text': f"Use your investigative skills to uncover hidden information",
+                'category': 'skill_investigation',
+                'risk_level': 'low',
+                'consequence_hint': "Thorough approach - reveals important details"
+            }
+        }
+        
+        return skill_options.get(skill)
+    
+    def _generate_location_specific_options(self, location_context: Dict, 
+                                          situation: str, character: Dict) -> List[Dict]:
+        """Generate options specific to current location"""
+        
+        if not location_context:
+            return []
+        
+        location_id = location_context.get('id', '')
+        environmental_features = location_context.get('environmental_features', [])
+        
+        options = []
+        
+        # Location-specific environmental options
+        location_options = {
+            'crystal_cave': {
+                'text': "Use the cave's crystal formations to amplify magical energy",
+                'category': 'environmental',
+                'risk_level': 'medium',
+                'consequence_hint': "Crystal magic could be powerful but unpredictable"
+            },
+            'sacred_grove': {
+                'text': "Draw upon the grove's ancient spiritual energy for guidance",
+                'category': 'spiritual',
+                'risk_level': 'low',
+                'consequence_hint': "Sacred power provides wisdom and protection"
+            },
+            'ashbrook_village': {
+                'text': "Rally the villagers to help with their local knowledge and resources",
+                'category': 'community',
+                'risk_level': 'low',
+                'consequence_hint': "Community support - strength in numbers but slower decisions"
+            },
+            'ember_woods': {
+                'text': "Use the forest's natural cover and resources to your advantage",
+                'category': 'wilderness',
+                'risk_level': 'medium',
+                'consequence_hint': "Nature's aid - effective but requires wilderness skills"
+            }
+        }
+        
+        if location_id in location_options:
+            options.append(location_options[location_id])
+        
+        # Environmental feature options
+        if 'magical_atmosphere' in environmental_features:
+            options.append({
+                'text': "Tap into the ambient magical energy surrounding this place",
+                'category': 'magical_environment',
+                'risk_level': 'medium',
+                'consequence_hint': "Ambient magic - unpredictable but potentially powerful"
+            })
+        
+        return options
+    
+    def _generate_story_progression_options(self, story_context: Dict, 
+                                          situation: str, character: Dict) -> List[Dict]:
+        """Generate options that advance story progression"""
+        
+        options = []
+        
+        # Check for active quests
+        active_quests = story_context.get('active_quests', [])
+        if active_quests:
+            quest = active_quests[0]  # Focus on first active quest
+            options.append({
+                'text': f"Focus on advancing your quest: {quest.get('name', 'current objective')}",
+                'category': 'quest_progression',
+                'risk_level': 'medium',
+                'consequence_hint': "Direct progress toward your goal but may ignore other opportunities"
+            })
+        
+        # Story flag progression
+        story_flags = story_context.get('story_flags', {})
+        if not story_flags.get('sacred_flame_restored', False):
+            options.append({
+                'text': "Seek information or resources related to restoring the Sacred Flame",
+                'category': 'main_story',
+                'risk_level': 'low',
+                'consequence_hint': "Advances main storyline - reveals important plot elements"
+            })
+        
+        return options
+    
+    def _generate_adaptive_options(self, recent_actions: List[str], 
+                                 situation: str, character: Dict) -> List[Dict]:
+        """Generate options that adapt to player's recent choices"""
+        
+        options = []
+        
+        if not recent_actions:
+            return options
+        
+        # Analyze recent action patterns
+        action_patterns = self._analyze_action_patterns(recent_actions)
+        
+        # If player has been very aggressive, offer diplomatic option
+        if action_patterns.get('aggression_level', 0) > 0.7:
+            options.append({
+                'text': "Try a more diplomatic and peaceful approach this time",
+                'category': 'adaptive_diplomatic',
+                'risk_level': 'low',
+                'consequence_hint': "Change of pace - might surprise others and open new possibilities"
+            })
+        
+        # If player has been very cautious, offer bold option
+        elif action_patterns.get('caution_level', 0) > 0.7:
+            options.append({
+                'text': "Take a bold, decisive action to break the current pattern",
+                'category': 'adaptive_bold',
+                'risk_level': 'high',
+                'consequence_hint': "Dramatic action - could change everything but carries significant risk"
+            })
+        
+        return options
+    
+    def _analyze_action_patterns(self, recent_actions: List[str]) -> Dict[str, float]:
+        """Analyze patterns in recent player actions"""
+        
+        if not recent_actions:
+            return {}
+        
+        aggressive_keywords = ['attack', 'fight', 'charge', 'strike', 'battle']
+        cautious_keywords = ['wait', 'observe', 'careful', 'slowly', 'consider']
+        social_keywords = ['talk', 'persuade', 'negotiate', 'ask', 'discuss']
+        
+        aggression_count = sum(1 for action in recent_actions 
+                              if any(keyword in action.lower() for keyword in aggressive_keywords))
+        caution_count = sum(1 for action in recent_actions 
+                           if any(keyword in action.lower() for keyword in cautious_keywords))
+        social_count = sum(1 for action in recent_actions 
+                          if any(keyword in action.lower() for keyword in social_keywords))
+        
+        total_actions = len(recent_actions)
+        
+        return {
+            'aggression_level': aggression_count / total_actions,
+            'caution_level': caution_count / total_actions,
+            'social_level': social_count / total_actions
+        }
+    
+    def _generate_emberlyn_option(self, situation: str, story_context: Dict) -> Dict:
+        """Generate contextual Emberlyn advice option"""
+        
+        # Make Emberlyn's advice more specific to situation
+        situation_lower = situation.lower()
+        
+        if 'danger' in situation_lower or 'threat' in situation_lower:
+            return {
+                'text': "Ask Emberlyn about potential dangers and how to avoid them",
+                'category': 'emberlyn_safety',
+                'risk_level': 'safe',
+                'consequence_hint': "Emberlyn's protective instincts could reveal hidden threats"
+            }
+        elif 'magic' in situation_lower or 'spell' in situation_lower:
+            return {
+                'text': "Consult Emberlyn about the magical aspects of this situation",
+                'category': 'emberlyn_magic',
+                'risk_level': 'safe',
+                'consequence_hint': "Fairy magic knowledge might provide unique insights"
+            }
+        else:
+            return {
+                'text': "Ask Emberlyn for her fairy wisdom and unique perspective",
+                'category': 'emberlyn_wisdom',
+                'risk_level': 'safe',
+                'consequence_hint': "Emberlyn's otherworldly view might reveal unexpected opportunities"
+            }
+    
+    def _select_best_options(self, all_options: List[Dict], analysis: Dict) -> List[Dict]:
+        """Select the best 4 options from all generated options"""
+        
+        if len(all_options) <= 4:
+            return all_options
+        
+        # Score options based on situation analysis
+        scored_options = []
+        
+        for option in all_options:
+            score = 1.0
+            
+            # Prefer options that match situation complexity
+            if analysis['complexity_level'] == 'high' and option['risk_level'] == 'high':
+                score += 1.0
+            elif analysis['complexity_level'] == 'low' and option['risk_level'] == 'low':
+                score += 0.5
+            
+            # Prefer options that match primary challenge
+            primary_challenge = analysis['primary_challenge']
+            if primary_challenge == 'combat' and 'combat' in option['category']:
+                score += 1.5
+            elif primary_challenge == 'social' and 'social' in option['category']:
+                score += 1.5
+            elif primary_challenge == 'puzzle' and 'investigation' in option['category']:
+                score += 1.5
+            
+            # Prefer variety in risk levels
+            risk_bonus = {'low': 0.2, 'medium': 0.5, 'high': 0.3}
+            score += risk_bonus.get(option['risk_level'], 0)
+            
+            scored_options.append((option, score))
+        
+        # Sort by score and take top 4
+        scored_options.sort(key=lambda x: x[1], reverse=True)
+        return [option for option, score in scored_options[:4]]
+    
+    def update_recent_actions(self, action: str):
+        """Update recent actions for adaptive option generation"""
+        self.recent_actions.append(action)
+        if len(self.recent_actions) > 5:  # Keep only last 5 actions
+            self.recent_actions.pop(0)
+
+
+def generate_contextual_options(situation: str, character: Dict, story_context: Dict, 
+                              location_context: Dict = None) -> str:
     """Main function to generate contextual options for AI prompts"""
     
-    generator = OptionGenerator()
-    options = generator.generate_scene_options(situation, character, story_context)
+    generator = DynamicOptionGenerator()
+    options = generator.generate_dynamic_options(situation, character, story_context, location_context)
     return generator.format_options_for_ai(options)

@@ -88,7 +88,22 @@ class ProductionGameEngine:
             }
         }
         
-        print("🎮 Production Game Engine initialized with dynamic AI/Code swapping")
+        # Initialize the three new features
+        self.story_arcs = self._initialize_story_arcs()
+        self.active_story_arc = None
+        self.arc_progress = 0
+        
+        self.location_debug_history = []
+        self.location_patterns = self._initialize_location_patterns()
+        
+        self.recent_player_actions = []
+        self.dynamic_options_cache = {}
+        
+        print("🎮 Production Game Engine initialized with:")
+        print("   ✅ Dynamic AI/Code swapping")
+        print("   ✅ 50 Predefined Story Arcs")
+        print("   ✅ Location Progression Debugging")
+        print("   ✅ Dynamic Contextual Options")
     
     def process_player_action(self, player_input: str, context: Dict[str, Any] = None) -> Dict[str, Any]:
         """Process player action with full game integration"""
@@ -98,6 +113,56 @@ class ProductionGameEngine:
         if context is None:
             context = {}
         
+        # Track recent actions for dynamic options
+        self.recent_player_actions.append(player_input)
+        if len(self.recent_player_actions) > 5:
+            self.recent_player_actions.pop(0)
+        
+        # Process with all three integrated features
+        result = {
+            'success': True,
+            'player_input': player_input,
+            'timestamp': datetime.now().isoformat(),
+            'processing_time': 0,
+            'features_used': []
+        }
+        
+        try:
+            # 1. Story Arc Integration
+            story_arc_result = self._process_story_arc_integration(player_input, context)
+            result['story_arc'] = story_arc_result
+            if story_arc_result.get('arc_activated') or story_arc_result.get('progress_made'):
+                result['features_used'].append('story_arcs')
+            
+            # 2. Location Progression Debug
+            location_result = self._process_location_debugging(player_input, context)
+            result['location'] = location_result
+            if location_result.get('location_changed') or location_result.get('debug_applied'):
+                result['features_used'].append('location_debugging')
+            
+            # 3. Generate Dynamic Options for next turn
+            options_result = self._generate_dynamic_options(player_input, context)
+            result['dynamic_options'] = options_result
+            result['features_used'].append('dynamic_options')
+            
+            # Generate AI response using enhanced context
+            ai_response = self._generate_enhanced_ai_response(player_input, context, result)
+            result['ai_response'] = ai_response
+            
+            # Update game state
+            self._update_game_state(player_input, result)
+            
+            result['processing_time'] = time.time() - start_time
+            
+            return result
+            
+        except Exception as e:
+            result.update({
+                'success': False,
+                'error': str(e),
+                'processing_time': time.time() - start_time
+            })
+            return result
         # Parse player action
         action_data = self._parse_player_input(player_input, context)
         

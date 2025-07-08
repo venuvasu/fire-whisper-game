@@ -1,0 +1,400 @@
+🔥 Fire Whisper RPG - Local Mode
+========================================
+🏷️  Version: 1.2.0.0
+🔑 API Key: ✅ Configured
+🌍 Mode: Local Development
+📝 Log File: gameplay_2025-07-07_215027.txt
+========================================
+
+🎭 CHARACTER CREATION
+==================================================
+🌟 Time to breathe life into legend! Shape your hero below—choose
+their path, their spirit, and their spark. The world of Fire Whisper
+awaits your creation...
+==================================================
+Name: susan1
+Race: Dwarf
+Gender: Transgender Female
+Profession: Berserker
+
+✨ Creating susan1 the Dwarf Berserker...
+🤖 Generating character with AI (this may take a moment)...
+
+🎉 Character Created Successfully!
+🎭 susan1 the Dwarf Berserker
+📊 STR:13 DEX:12 CON:14
+📊 INT:10 WIS:12 CHA:10
+❤️  HP: 32 | 🔮 Mana: 15
+⚔️  Weapon: Dwarven Battle Axe (1d10+Str)
+
+🎮 Starting new game with susan1 the Berserker
+
+🎆 ENHANCED FEATURES ACTIVE:
+✅ Story Arc Integration (5 arcs available)
+✅ Location Progression Debug (6 locations mapped)
+✅ Dynamic Contextual Options
+🗺️ Starting Location: village_outskirts
+
+📖 *A small flame flickers to life beside you, coalescing into a tiny winged figure with hair like dancing embers*
+
+"Greetings, brave warrior! I am Emberlyn, a fire fairy of the Blazing Court. *curtsies with a shower of sparks* I've been watching you, and I believe you have the spark of a true hero within. The forests around here have grown dangerous lately - dark forces stir in the shadows."
+
+*Emberlyn flutters closer, her warm glow illuminating your face*
+
+"Just beyond these trees lies an abandoned woodcutter's cabin. The locals whisper that strange sounds echo from within at night, and an eerie green light seeps through its broken windows. Something unnatural has made its home there..."
+
+*She points toward a narrow trail leading deeper into the darkening woods*
+
+"The sun sets soon. The cabin isn't far, but the path isn't safe. Even now, I can sense hungry eyes watching from the underbrush. What say you, warrior? Shall we investigate this mystery together?"
+
+*A low growl emanates from the dense foliage nearby, and Emberlyn's glow pulses with concern*
+
+*As you pause to assess yourself, you notice Emberlyn seems distant and cautious.*
+
+**What would you like to do?**
+1. Seek information or resources related to restoring the Sacred Flame 🟢 (Advances main storyline - reveals important plot elements)
+2. Ask Emberlyn about potential dangers and how to avoid them 🟡 (Emberlyn's protective instincts could reveal hidden threats)
+
+==================================================
+Turn 1
+==================================================
+
+🎯 Player Input: 1
+
+🎭 STORY ARC ACTIVATED: The Sacred Flame Restoration
+📖 The Sacred Flame that protects the village is dimming, and you must find a Fire Essence crystal to restore it before darkness consumes the land.
+🎯 Key Elements: Sacred duty, elemental magic, village protection...
+
+🗺️ LOCATION CHANGED: village_outskirts → ashbrook_village
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Sacred Flame Restoration | Progress: 1 | Turn: 1
+
+📍 LOCATION: village_outskirts
+
+📖 *Flutter flutter* Oh, what a lovely afternoon! As I hover near your shoulder, my wings catching the golden sunlight filtering through the autumn leaves, I notice how the road ahead winds gracefully toward Ashbrook village. Drawing upon your abilities, you excel. The crisp air carries the subtle scent of fallen leaves and distant woodsmoke.
+
+"That was quite observant of you!" I say, admiring how carefully you've surveyed the surroundings. The path seems peaceful enough, though I can see why you'd want to be cautious - being a Berserker doesn't mean rushing blindly into situations, after all!
+
+The trees along the road are absolutely stunning in their fall colors - deep reds and bright golds. There's something so enchanting about the way the branches sway gently in the afternoon breeze. In the distance, I can just make out the first few buildings of Ashbrook, their chimneys releasing thin wisps of smoke into the clear sky.
+
+*My tiny form darts around excitedly* "You know, I've heard interesting stories about Ashbrook. They say the village has been here since before the Great Burning. I wonder what secrets we might discover there?"
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. 💥 Use your primal instincts to sense danger and opportunity 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 2
+==================================================
+
+🎯 Player Input: 2
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Sacred Flame Restoration | Progress: 1 | Turn: 2
+
+📍 LOCATION: village_outskirts
+
+📖 *Flutter-hovering near Susan's shoulder, my wings catching the afternoon light, I wince slightly as I notice her stumble on some loose stones along the path.*
+
+"Oh! Careful there! These old roads can be a bit tricky, especially with all these autumn leaves covering the ground. Your approach falls short this time. Though I must say, the way the sunlight filters through the golden and red leaves is quite magical..."
+
+*I drift closer to inspect the path ahead, my fairy glow casting small dancing shadows.*
+
+"The village of Ashbrook isn't far now - you can almost smell the hearth fires in the distance. These outskirts have such character though... see how the tree branches seem to reach across the road like they're trying to hold hands? Local children love making up stories about the trees being ancient guardians."
+
+*A gentle breeze rustles through the leaves, sending a cascade of red and gold drifting down around us.*
+
+"The air has that crisp autumn feeling that always reminds me of harvest festivals. I wonder if Ashbrook might be preparing for one soon? The timing would be right..."
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. 💥 Use your primal instincts to sense danger and opportunity 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 3
+==================================================
+
+🎯 Player Input: 3
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Sacred Flame Restoration | Progress: 1 | Turn: 3
+
+📍 LOCATION: village_outskirts
+
+📖 *Emberlyn's wings shimmer with a soft orange glow in the evening light as she hovers near your shoulder, her expression thoughtful as she surveys the autumn-painted path ahead*
+
+"The road to Ashbrook looks so different at this hour - the way the setting sun catches those red and gold leaves makes them look like they're on fire. Your skilled approach proves effective. But something feels... off." *She frowns slightly, her glow dimming*
+
+"There's usually more travelers on this road, even at this hour. The quiet feels heavy somehow. And those shadows between the trees..." *She flutters closer, her voice dropping to a whisper* "They seem darker than they should be, don't they? Like that shadow-blight the village elder mentioned."
+
+*A cool breeze rustles through the trees, sending a shower of amber leaves spiraling down onto the path. In the distance, the first lights of Ashbrook village are beginning to twinkle as residents light their evening lamps*
+
+"We should keep our wits about us. The village isn't far now, but these outskirts... well, let's just say I've heard whispers of strange happenings when the sun starts to set."
+
+*The fairy companion's wings cast dancing shadows on the path as she maintains her vigilant watch, occasionally glancing toward the deepening shadows between the trees*
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. 💥 Use your primal instincts to sense danger and opportunity 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 4
+==================================================
+
+🎯 Player Input: 4
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Sacred Flame Restoration | Progress: 1 | Turn: 4
+
+📍 LOCATION: village_outskirts
+
+📖 *Flutter-hovering near your shoulder, my fairy wings casting small dancing shadows in the dimming evening light*
+
+"Oh dear... Despite your best efforts, the challenge proves difficult. the shadows are getting longer, and I'm not liking how they seem to... move strangely. Did you notice that dark patch under those autumn trees? Something's not quite right about it. The way the darkness pools there, it's almost as if... *shivers* Well, let's just say my fairy senses are tingling, and not in a good way."
+
+*My usual sparkly glow pulses with concern as I dart closer to whisper*
+
+"I've seen shadow blight do strange things to peaceful places like this before. The way it creeps in during twilight hours... we should really keep our wits about us. Those beautiful orange and red autumn leaves would normally be so welcoming, but now they're casting such peculiar shadows..."
+
+*A cool breeze rustles through the trees, making the shadows dance unnaturally*
+
+"The village of Ashbrook isn't far now, but this path... it feels different than it did earlier today. More... watchful, somehow. Keep your eyes sharp - especially as night draws closer."
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. 💥 Use your primal instincts to sense danger and opportunity 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 5
+==================================================
+
+🎯 Player Input: 1
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Sacred Flame Restoration | Progress: 1 | Turn: 5
+
+🗺️  LOCATION DEBUG REPORT (1 transitions):
+  1. village_outskirts -> ashbrook_village 🚶
+
+
+📍 LOCATION: village_outskirts
+
+📖 *Fluttering closer with concern etched on my tiny features*
+
+"Oh dear... Your approach falls short this time. those mushrooms you were reaching for? They're definitely not what they seemed. The red spots may look appetizing, but I recognize those as Shadowcap fungi - nasty little things that sometimes spring up when the shadow blight's influence seeps into an area. Best to leave those be!"
+
+*My wings catch the evening light as I drift between the autumn trees, casting small sparkles on the fallen leaves*
+
+"The village of Ashbrook isn't far now, but seeing these Shadowcaps so close to the settlement is... troubling. Perhaps we should warn the villagers? The air feels heavy with unease, don't you think? Like the calm before a storm."
+
+*I gesture toward the weathered path ahead, where the first wisps of chimney smoke from Ashbrook can be seen rising above the treeline*
+
+"The sun's getting lower, casting such long shadows through these trees. Keep your wits about you - the shadow blight has ways of making even familiar paths feel strange as darkness falls."
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. 💥 Use your primal instincts to sense danger and opportunity 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 6
+==================================================
+
+🎯 Player Input: 3
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Sacred Flame Restoration | Progress: 2 | Turn: 6
+
+📍 LOCATION: village_outskirts
+
+📖 *Flutter-floating beside you, my soft glow casting dancing shadows among the autumn leaves*
+
+"Oh, well spotted! Those markings on the tree bark - they're quite unusual, aren't they? *hovering closer to illuminate the strange patterns* The way they spiral up the trunk... Drawing upon your abilities, you excel. these aren't natural growth patterns. In my years watching over these woods, I've never seen anything quite like this."
+
+*My wings shimmer with a touch of concern as I examine the markings more closely*
+
+"These symbols... they remind me of the old stories about the Shadow Blight. The villagers of Ashbrook have whispered about strange signs appearing before trouble strikes. We should perhaps make note of where we found these - they could be important later."
+
+*A cool night breeze rustles through the trees, causing my light to flicker slightly*
+
+"The village isn't far now - see those distant lanterns through the trees? But these markings... they make me wonder what we might find when we arrive. The air feels different here, charged with something I can't quite name."
+
+*My glow pulses softly in the darkness, reflecting off the mysterious tree markings*
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. 💥 Use your primal instincts to sense danger and opportunity 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 7
+==================================================
+
+🎯 Player Input: 4
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Sacred Flame Restoration | Progress: 3 | Turn: 7
+
+📍 LOCATION: village_outskirts
+
+📖 *Fluttering beside you with a concerned expression, my wings casting a soft golden glow in the darkness*
+
+"Something's not right here... Despite your best efforts, the challenge proves difficult. The shadows between the autumn trees seem darker than they should be, even for nighttime. Did you notice how the regular villagers rushed inside as soon as dusk fell? They know something's amiss too."
+
+*I dart closer to inspect a patch of grass that seems unnaturally withered, my light revealing an oily black residue*
+
+"This must be what the village elder was warning about - signs of the Shadow Blight spreading this far out. The way it creeps along the ground... *shudders* I've watched over these woods for centuries, but this corruption is different. We should be extra careful until we understand what we're dealing with."
+
+*A distant sound of shutters being hastily closed echoes from the village, and my glow dims slightly as I hover closer to you*
+
+"The villagers are frightened, and with good reason. That black residue we found... it's exactly like what was described in the old texts about the Shadow Blight. We need to find out more, but maybe approaching the village at night wasn't the best timing..."
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. 💥 Use your primal instincts to sense danger and opportunity 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 8
+==================================================
+
+🎯 Player Input: 2
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Sacred Flame Restoration | Progress: 3 | Turn: 8
+
+📍 LOCATION: ashbrook_village
+
+📖 *Fluttering beside you with a soft amber glow, I observe the autumn trees swaying gently in the night breeze*
+
+"Hmm, approaching Ashbrook at this hour does feel a bit eerie, doesn't it? Though the moonlight through these autumn leaves creates quite the enchanting sight. Your combination of skill and intuition serves you well. Those shadows dancing across the path... *I narrow my eyes slightly* Something about them doesn't feel quite natural. The way they move... it's as if they're being pulled toward the village."
+
+*My wings shimmer with concern as I hover closer*
+
+"I've heard whispers about a strange darkness affecting villages in these parts - some call it the Shadow Blight. The villagers might be able to tell us more, but they're likely all in their homes at this hour. Though... *I pause, noticing a flicker of movement ahead* ...I think I see a light moving near the village entrance. Perhaps someone's still awake?"
+
+*A cool breeze rustles through the leaves, carrying with it the faint sound of whispers from the village direction*
+
+"The shadows seem to be thickening around us. We should remain cautious as we proceed."
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. 💥 Use your primal instincts to sense danger and opportunity 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 9
+==================================================
+
+🎯 Player Input: 3
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Sacred Flame Restoration | Progress: 3 | Turn: 9
+
+📍 LOCATION: ashbrook_village
+
+📖 *My wings shimmer with concern as I notice you struggling to make out details in the darkness ahead*
+
+"Oh dear, the shadows between the trees are playing tricks tonight. Your approach falls short this time. Even with my glow, it's tricky to spot the safest path through these outskirts. The moonlight's pretty, but deceptive - those twisted branches cast the strangest shapes on the ground."
+
+*I flutter closer, my amber light catching the rustle of fallen leaves*
+
+"The village isn't far, but this hour... there's something not quite right in the air. The shadow blight has everyone on edge lately. Even the night birds are quieter than usual."
+
+*A cool breeze stirs the branches overhead, sending a cascade of copper-colored leaves spiraling down around us*
+
+"Perhaps we should tread carefully. The way these shadows dance at midnight, it's hard to tell what might be lurking just beyond my light. Did you hear that rustling in the underbrush? Could be nothing but... best to stay alert."
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. 💥 Use your primal instincts to sense danger and opportunity 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 10
+==================================================
+
+🎯 Player Input: 2
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Sacred Flame Restoration | Progress: 3 | Turn: 10
+
+🗺️  LOCATION DEBUG REPORT (1 transitions):
+  1. village_outskirts -> ashbrook_village 🚶
+
+
+📍 LOCATION: ashbrook_village
+
+📖 *Fluttering nearby with a soft amber glow, I watch as you take a defensive stance along the moonlit path*
+
+"Oh, careful there! Those shadows do look rather unsettling, don't they? The way the moonlight catches the autumn leaves makes everything look... Your skilled approach proves effective. different at this hour. *I drift closer, my wings casting tiny sparkles of light*
+
+The night air carries whispers from Ashbrook - not the usual cheerful sounds of the village, but something more... subdued. The twisted branches overhead seem to reach for each other like grasping fingers, and that shadow-play on the ground... *I shudder slightly* 
+
+But don't let my nerves worry you! Your instincts are good - staying alert is wise when darkness falls. Those stories about the shadow blight aren't just tavern tales, after all. *My glow pulses slightly brighter, illuminating the nearby path*
+
+The village lights are just ahead, though they seem dimmer than they should be. Something's not quite right in Ashbrook tonight..."
+
+*I hover anxiously near your shoulder, my light creating dancing patterns that help dispel some of the deeper shadows around us*
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. 💥 Use your primal instincts to sense danger and opportunity 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 11
+==================================================
+
+🎯 Player Input: quit
+
+👋 Thanks for playing Fire Whisper RPG!
+
+
+💰 API COST SUMMARY
+==================
+Total Cost: $0.0836
+Total Tokens: 13,299 (Input: 9,653, Output: 3,646)
+Turns Played: 14
+Average Cost/Turn: $0.0060
+
+Last 5 Turns:
+Turn 7: $0.0063 (1033 tokens)
+Turn 8: $0.0063 (1005 tokens)
+Turn 8: $0.0062 (1045 tokens)
+Turn 9: $0.0056 (984 tokens)
+Turn 10: $0.0061 (1011 tokens)
+
