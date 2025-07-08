@@ -65,11 +65,32 @@ class AIIntegrationLayer:
             'character_health_ratio': 1.0
         }
         
-        contextual_options = generate_contextual_options(
-            enhanced_response, 
-            self.game_manager.character, 
-            story_context
-        )
+        # Use local_runner's dynamic options if available
+        try:
+            from scripts.local_runner import generate_dynamic_options, current_location, recent_player_actions
+            contextual_options = generate_dynamic_options(
+                enhanced_response,
+                self.game_manager.character,
+                current_location,
+                recent_player_actions
+            )
+            # Format as numbered list
+            if isinstance(contextual_options, list):
+                formatted_options = []
+                risk_indicators = ['🟢', '🟡', '🔴', '🟣']
+                risk_labels = ['(Safe & Reliable)', '(Moderate Risk)', '(High Risk, High Reward)', '(Emberlyn Assisted)']
+                for i, (option, indicator, label) in enumerate(zip(contextual_options, risk_indicators, risk_labels), 1):
+                    formatted_options.append(f"{i}. {option} {indicator} {label}")
+                contextual_options = '\n'.join(formatted_options)
+            else:
+                contextual_options = str(contextual_options)
+        except ImportError:
+            # Fallback to original function
+            contextual_options = generate_contextual_options(
+                enhanced_response, 
+                self.game_manager.character, 
+                story_context
+            )
         
         # Append options to initial narrative
         enhanced_response += f"\n\n**What would you like to do?**\n{contextual_options}"

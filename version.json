@@ -1,11 +1,44 @@
 {
-  "version": "1.2.0.0",
+  "version": "1.3.0.0",
   "major": 1,
-  "minor": 2,
+  "minor": 3,
   "prompt": 0,
   "ui": 0,
-  "last_updated": "2025-07-07T18:05:00Z",
+  "last_updated": "2025-07-07T22:50:00Z",
   "changelog": {
+    "1.3.0.0": {
+      "date": "2025-07-07",
+      "changes": [
+        "MAJOR FEATURE: Story Arc Integration - 71 predefined story arcs with player saga selection",
+        "MAJOR FEATURE: Location Progression Debug - Movement validation with dice integration",
+        "MAJOR FEATURE: Dynamic Options Generation - Context-aware, class-specific, risk-structured choices",
+        "IMPROVEMENT: Saga selection menu allows players to choose their preferred adventure type",
+        "IMPROVEMENT: Options now adapt based on narrative content (magic, danger, social, investigation)",
+        "IMPROVEMENT: Character classes get specialized moderate-risk options (Warrior combat, Mage magic)",
+        "IMPROVEMENT: 4-tier risk structure (Safe → Moderate → Risky → Emberlyn) with visual indicators",
+        "IMPROVEMENT: Location transitions validated with connection rules and dice requirements",
+        "CLEANUP: Added comprehensive code comments and documentation",
+        "CLEANUP: Reduced debug output for production readiness"
+      ],
+      "breaking_changes": [
+        "Story arcs now selected by player instead of random activation",
+        "Options generation completely redesigned for context awareness"
+      ],
+      "prompt_changes": [],
+      "ui_changes": [
+        "Added saga selection menu before character creation",
+        "Options now show risk indicators and contextual descriptions",
+        "Enhanced debug commands: 'arc', 'location', 'features'"
+      ],
+      "technical_changes": [
+        "Enhanced scripts/local_runner.py with three integrated feature systems",
+        "Added story arc loading from src/ai/prompts/story_arcs.txt",
+        "Implemented location connection validation and debug reporting",
+        "Created context-aware dynamic option generation system",
+        "Fixed AI integration to use new dynamic options instead of static ones",
+        "Added comprehensive test suites for all new features"
+      ]
+    },
     "1.2.0.0": {
       "date": "2025-07-07",
       "changes": [

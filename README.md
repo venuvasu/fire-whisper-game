@@ -2,7 +2,7 @@
 
 > An AI-powered text-based RPG with deterministic mechanics and intelligent narrative generation
 
-[![Version](https://img.shields.io/badge/version-1.0.0.0-blue.svg)](./version.json)
+[![Version](https://img.shields.io/badge/version-1.3.0.0-blue.svg)](./version.json)
 [![Tests](https://img.shields.io/badge/tests-passing-green.svg)](./tests/results/)
 [![AI Behavior](https://img.shields.io/badge/AI%20behavior-validated-green.svg)](./tests/ai_behavior/)
 [![Branch](https://img.shields.io/badge/branch-v1-orange.svg)](https://github.com/echang-home/fire-whisper-game/tree/v1)
@@ -17,23 +17,46 @@
 
 **See [RESTRUCTURING_COMPLETE.md](RESTRUCTURING_COMPLETE.md) for full details.**
 
-## 🚀 **Version 1.0 - Major System Redesign**
+## 🚀 **Version 1.2 - Enhanced Gameplay Features**
 
-This branch represents a complete architectural overhaul of the original Fire Whisper concept, transforming it from separate API/UI components into a unified, AI-integrated RPG system.
+This version introduces three major gameplay enhancements that transform the Fire Whisper RPG experience with intelligent story progression, robust location handling, and adaptive player choices.
 
-### 🔧 **Latest Updates - Dice System & Real Consequences Implementation**
-- **✅ Implemented Real Dice Rolling**: All actions now use proper D20 dice mechanics with difficulty classes
-- **✅ Added Meaningful Consequences**: Success/failure affects character stats, story progression, and world state
-- **✅ Eliminated Auto-Success**: Players can now fail actions and face real penalties
-- **✅ Location Progression System**: Movement actions can successfully change locations when dice rolls succeed
-- **✅ Character Stat Tracking**: Social standing, investigation progress, HP/mana damage properly applied
-- **✅ Risk/Reward Gameplay**: Every choice now has mechanical weight and consequences
+### 🎭 **Latest Updates - Story Arc Integration & Dynamic Options**
+- **✅ Story Arc Integration**: All 71 predefined story arcs from story_arcs.txt with player saga selection
+- **✅ Location Progression Debug**: Intelligent movement detection with dice integration and validation
+- **✅ Dynamic Options Generation**: Context-aware choices that adapt to narrative, character class, and situation
+- **✅ Saga Selection System**: Players choose their preferred adventure from 10+ story types
+- **✅ Risk-Structured Choices**: 4-tier option system (Safe → Moderate → Risky → Emberlyn Assisted)
+- **✅ Class-Specific Options**: Character classes get specialized moderate-risk options
 
 ### 🎯 **Current Development Status**
-- **✅ Core Dice System**: COMPLETED - Real D20 mechanics with consequences
-- **🔄 Story Arc Integration**: IN PROGRESS - Need to use 50 predefined story arcs instead of AI generation
-- **🔄 Location Progression**: IN PROGRESS - Dice system works but location changes need debugging
-- **📋 Next Priority**: Integrate predefined story content and fix location transitions
+- **✅ Story Arc System**: COMPLETED - 71 arcs with player selection and progression tracking
+- **✅ Location Debugging**: COMPLETED - Movement validation with dice integration
+- **✅ Dynamic Options**: COMPLETED - Context-aware, class-specific, risk-structured choices
+- **✅ Integration Testing**: COMPLETED - All systems working together seamlessly
+- **📋 Production Ready**: All features tested and validated through live gameplay
+
+## 🎆 **New Features in v1.2**
+
+### 📚 **Story Arc Integration System**
+- **71 Predefined Story Arcs**: Loaded from `src/ai/prompts/story_arcs.txt`
+- **Saga Selection Menu**: Players choose from Epic Fantasy, Political Intrigue, Musical Mystery, and more
+- **Progress Tracking**: Automatic advancement through Introduction → Development → Complications → Climax
+- **Context-Aware Selection**: Arcs chosen based on character level, location, and story themes
+
+### 🗺️ **Location Progression Debug System**
+- **6 Connected Locations**: Village outskirts, Ashbrook village, tavern, woods, cave, sacred grove
+- **Movement Validation**: Prevents invalid transitions, enforces connection rules
+- **Dice Integration**: Challenging locations require successful dice rolls
+- **Debug Reporting**: Comprehensive transition history and validation logs
+- **Forced Progression**: Prevents players from getting stuck in location loops
+
+### 🎯 **Dynamic Options Generation**
+- **4-Tier Structure**: Safe → Moderate → Risky High-Reward → Emberlyn Assisted
+- **Context Awareness**: Options change based on magical threats, social situations, investigations
+- **Class Specialization**: Warriors get combat options, Mages get magical options, etc.
+- **Risk Indicators**: Visual color coding (🟢🟡🔴🟣) with clear reward expectations
+- **Adaptive Behavior**: Options adjust based on recent player actions and story context
 
 ### **🔄 What Changed from Original:**
 - **🏗️ Unified Architecture**: Merged backend API + frontend into cohesive game system

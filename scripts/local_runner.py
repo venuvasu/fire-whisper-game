@@ -1,7 +1,24 @@
 #!/usr/bin/env python3
 """
-Local Development Runner for Fire Whisper RPG
-Runs the game locally without AWS dependencies
+Fire Whisper RPG - Local Development Runner
+
+A complete text-based RPG with AI-powered narratives and deterministic mechanics.
+Features three major integrated systems:
+
+1. Story Arc Integration - 71 predefined story arcs with player saga selection
+2. Location Progression Debug - Movement validation with dice integration  
+3. Dynamic Options Generation - Context-aware, class-specific choices
+
+Usage:
+    python scripts/local_runner.py
+
+Requires:
+    - Python 3.8+
+    - Claude API key in .env.local
+    - src/ai/prompts/story_arcs.txt (71 predefined story arcs)
+
+Version: 1.3.0.0
+Author: Fire Whisper RPG Development Team
 """
 import os
 import sys
@@ -20,54 +37,46 @@ load_dotenv(project_root / ".env.local")
 # ===== INTEGRATED FEATURES =====
 # Story Arc Integration, Location Debugging, Dynamic Options
 
-# FEATURE 1: STORY ARC INTEGRATION
-STORY_ARCS = [
-    {
-        "name": "The Sacred Flame Restoration",
-        "type": "Nature Magic",
-        "hook": "The Sacred Flame that protects the village is dimming, and you must find a Fire Essence crystal to restore it before darkness consumes the land.",
-        "elements": ["Sacred duty", "elemental magic", "village protection", "ancient rituals"],
-        "climax": "Restoring the Sacred Flame and banishing the encroaching darkness",
-        "difficulty": 2,
-        "turns": 8
-    },
-    {
-        "name": "The Last Dragon's Quest",
-        "type": "Classic Fantasy",
-        "hook": "A young dragon, believed to be the last of its kind, seeks the player's protection from dragon hunters while searching for others of its race.",
-        "elements": ["Protecting an innocent", "dragon hunters", "ancient dragon lairs", "species preservation"],
-        "climax": "Discovery of a hidden dragon sanctuary and final battle with the Hunter King",
-        "difficulty": 3,
-        "turns": 12
-    },
-    {
-        "name": "Songs of the Silent Stones",
-        "type": "Musical Mystery",
-        "hook": "Ancient stones that once sang beautiful melodies have fallen silent, and the local village's crops are failing as a result.",
-        "elements": ["Musical puzzles", "environmental harmony", "corrupted magic", "restoring balance"],
-        "climax": "Conducting a ritual to reharmonize the stones and restore the land's fertility",
-        "difficulty": 2,
-        "turns": 10
-    },
-    {
-        "name": "The Memory Thief",
-        "type": "Psychological Mystery",
-        "hook": "People in a town are losing their most precious memories, and the player must track down the entity responsible before they forget who they are.",
-        "elements": ["Identity themes", "memory puzzles", "emotional connections", "abstract enemy"],
-        "climax": "Confronting the Memory Thief in a realm of stolen thoughts and recollections",
-        "difficulty": 3,
-        "turns": 11
-    },
-    {
-        "name": "The Crimson Prophecy",
-        "type": "Epic Fantasy",
-        "hook": "An ancient prophecy speaks of a crimson blade that will either save or doom the realm. Multiple factions seek the weapon, and the player must decide its fate.",
-        "elements": ["Rival seekers", "moral choices about power", "ancient weapon", "prophecy interpretation"],
-        "climax": "Confrontation at the Sundering Peaks where the blade's true nature is revealed",
-        "difficulty": 4,
-        "turns": 15
-    }
-]
+# ===== FEATURE 1: STORY ARC INTEGRATION =====
+# Loads all 71 predefined story arcs from the existing story_arcs.txt file
+# and provides saga selection functionality for players
+
+def load_story_arcs():
+    """Load all 50 story arcs from the existing story_arcs.txt file"""
+    story_arcs_file = Path(__file__).parent.parent / "src" / "ai" / "prompts" / "story_arcs.txt"
+    
+    with open(story_arcs_file, "r") as f:
+        story_arcs_content = f.read()
+        story_arcs_list = [line.strip() for line in story_arcs_content.split('\n') if line.strip()]
+    
+    parsed_arcs = []
+    for story_line in story_arcs_list:
+        try:
+            sections = story_line.split(' | ')
+            arc_data = {}
+            for section in sections:
+                if ':' in section:
+                    key, value = section.split(':', 1)
+                    arc_data[key.strip()] = value.strip()
+            
+            if 'Name' in arc_data:
+                parsed_arcs.append({
+                    "name": arc_data['Name'],
+                    "type": arc_data.get('Type', 'Adventure'),
+                    "hook": arc_data.get('Hook', ''),
+                    "elements": arc_data.get('Key Elements', '').split(', ') if arc_data.get('Key Elements') else [],
+                    "climax": arc_data.get('Climax', ''),
+                    "difficulty": 2,  # Default difficulty
+                    "turns": 10      # Default turns
+                })
+        except Exception as e:
+            print(f"Warning: Could not parse story arc: {story_line[:50]}... Error: {e}")
+    
+    return parsed_arcs
+
+STORY_ARCS = load_story_arcs()
+# Debug: Uncomment next line to see arc loading confirmation
+# print(f"📚 Loaded {len(STORY_ARCS)} story arcs from story_arcs.txt")
 
 active_story_arc = None
 arc_progress = 0
@@ -129,7 +138,10 @@ def advance_story_arc(player_action, ai_response, log_file):
     
     return None
 
-# FEATURE 2: LOCATION PROGRESSION DEBUG
+# ===== FEATURE 2: LOCATION PROGRESSION DEBUG =====
+# Validates location transitions, prevents invalid movement, and integrates
+# with dice system for challenging locations. Provides comprehensive debug reporting.
+
 LOCATION_CONNECTIONS = {
     'village_outskirts': ['ashbrook_village', 'ember_woods'],
     'ashbrook_village': ['village_outskirts', 'village_tavern'],
@@ -220,30 +232,53 @@ def get_location_debug_report():
     
     return report
 
-# FEATURE 3: DYNAMIC OPTIONS GENERATION
+# ===== FEATURE 3: DYNAMIC OPTIONS GENERATION =====
+# Generates context-aware, class-specific options with 4-tier risk structure:
+# Safe → Moderate (class-specific) → Risky High-Reward → Emberlyn Assisted
+# Options adapt based on narrative content, character class, and recent actions.
+
 def generate_dynamic_options(situation, character, current_location, recent_actions):
     """Generate 4 structured options: Safe -> Moderate -> Risky High-Reward -> Emberlyn"""
     
     char_class = character.get('class', 'Cleric')
     
+    # Analyze the current narrative situation for context
+    situation_lower = situation.lower()
+    
+    # Detect key narrative elements
+    has_magic = any(word in situation_lower for word in ['magic', 'spell', 'rune', 'energy', 'mystical', 'arcane', 'barrier'])
+    has_danger = any(word in situation_lower for word in ['danger', 'threat', 'shadow', 'blight', 'dark', 'corrupt', 'hostile'])
+    has_investigation = any(word in situation_lower for word in ['examine', 'investigate', 'clues', 'traces', 'markings', 'detect'])
+    has_movement = any(word in situation_lower for word in ['path', 'ahead', 'village', 'continue', 'forward', 'travel'])
+    has_social = any(word in situation_lower for word in ['villagers', 'people', 'talk', 'speak', 'ask', 'conversation'])
+    has_mystery = any(word in situation_lower for word in ['mystery', 'strange', 'unusual', 'curious', 'puzzling', 'secret'])
+    
+    # Determine primary situation context
+    if has_magic and has_danger:
+        situation_type = 'magical_danger'
+    elif has_investigation and has_mystery:
+        situation_type = 'investigation'
+    elif has_danger:
+        situation_type = 'danger'
+    elif has_magic:
+        situation_type = 'magic'
+    elif has_social:
+        situation_type = 'social'
+    elif has_movement:
+        situation_type = 'exploration'
+    else:
+        situation_type = 'default'
+    
     # OPTION 1: SAFE APPROACH (Low risk, reliable outcome)
     safe_options = {
-        'combat': "🛡️ Take a defensive stance and carefully assess the situation",
+        'magical_danger': "🛡️ Carefully assess the magical threat before taking action",
+        'investigation': "🔍 Methodically examine the evidence for important clues",
+        'danger': "🛡️ Take a defensive stance and assess the threat carefully",
+        'magic': "🔮 Study the magical energies cautiously before proceeding",
+        'social': "👂 Listen carefully and observe the social dynamics",
         'exploration': "🔍 Cautiously examine the area for important details",
-        'social': "👂 Listen carefully and observe before taking action",
-        'mystery': "📚 Look for clues and gather information methodically",
         'default': "🤔 Take a moment to carefully consider your options"
     }
-    
-    situation_type = 'default'
-    if any(word in situation.lower() for word in ['enemy', 'hostile', 'fight', 'battle', 'goblin']):
-        situation_type = 'combat'
-    elif any(word in situation.lower() for word in ['explore', 'search', 'find', 'path', 'tree']):
-        situation_type = 'exploration'
-    elif any(word in situation.lower() for word in ['talk', 'speak', 'villager', 'people']):
-        situation_type = 'social'
-    elif any(word in situation.lower() for word in ['puzzle', 'mystery', 'secret', 'ancient']):
-        situation_type = 'mystery'
     
     safe_option = safe_options.get(situation_type, safe_options['default'])
     
@@ -284,10 +319,12 @@ def generate_dynamic_options(situation, character, current_location, recent_acti
     
     # OPTION 3: RISKY HIGH-REWARD (High risk, potentially great outcome)
     risky_options = {
-        'combat': "⚡ Launch a bold all-out attack to end the threat quickly",
-        'exploration': "🚀 Venture boldly into the unknown despite the dangers",
-        'social': "👑 Take charge and make a dramatic declaration or demand",
-        'mystery': "💎 Attempt to unlock the mystery through direct magical interaction",
+        'magical_danger': "⚡ Attempt to counter the magical threat with raw power",
+        'investigation': "💎 Try to uncover the truth through direct magical probing",
+        'danger': "⚡ Launch a bold preemptive strike against the threat",
+        'magic': "🔥 Channel maximum magical energy to breakthrough barriers",
+        'social': "👑 Make a dramatic declaration to rally or intimidate",
+        'exploration': "🚀 Venture boldly into the unknown despite clear dangers",
         'default': "🎯 Take a bold, decisive action that could change everything"
     }
     
@@ -303,13 +340,16 @@ def generate_dynamic_options(situation, character, current_location, recent_acti
     
     # OPTION 4: EMBERLYN ASSISTANCE (Safe with unique fairy perspective)
     emberlyn_options = {
-        'combat': "🧚 Ask Emberlyn to use her fire magic to help in the fight",
+        'magical_danger': "🧚 Ask Emberlyn to help identify and counter the magical threat",
+        'investigation': "🧚 Ask Emberlyn to use her fairy senses to detect hidden clues",
+        'danger': "🧚 Ask Emberlyn to scout ahead and assess the danger safely",
+        'magic': "🧚 Ask Emberlyn about fairy knowledge of this type of magic",
+        'social': "🧚 Ask Emberlyn to use her charm to ease social tensions",
         'exploration': "🧚 Ask Emberlyn to scout ahead with her fairy abilities",
-        'social': "🧚 Ask Emberlyn to charm others with her fairy charisma",
-        'mystery': "🧚 Ask Emberlyn about fairy knowledge of ancient magic",
         'default': "🧚 Ask Emberlyn for her fairy wisdom and unique perspective"
     }
     
+    risky_option = risky_options.get(situation_type, risky_options['default'])
     emberlyn_option = emberlyn_options.get(situation_type, emberlyn_options['default'])
     
     return [
@@ -587,6 +627,44 @@ def log_to_file(log_file, content):
     with open(log_file, 'a', encoding='utf-8') as f:
         f.write(content + '\n')
 
+def select_saga(log_file):
+    """Let player select their preferred saga/story arc"""
+    saga_header = "\n🎆 SAGA SELECTION\n" + "=" * 50 + "\n🎭 Choose your adventure! Each saga offers a unique story\nexperience with different themes and challenges.\n" + "=" * 50
+    log_to_file(log_file, saga_header)
+    
+    # Show first 10 story arcs for selection
+    print("\n📚 Available Sagas:")
+    display_arcs = STORY_ARCS[:10]  # Show first 10 for now
+    
+    for i, arc in enumerate(display_arcs, 1):
+        print(f"  {i}. {arc['name']} ({arc['type']})")
+        print(f"     {arc['hook'][:80]}...")
+    
+    print(f"  {len(display_arcs) + 1}. Random Saga (Let fate decide!)")
+    
+    while True:
+        try:
+            choice_input = input(f"\nChoose saga (1-{len(display_arcs) + 1}) or 'quit' to exit: ").strip()
+            if choice_input.lower() in ['quit', 'exit', 'q']:
+                return None
+            
+            choice = int(choice_input)
+            if 1 <= choice <= len(display_arcs):
+                selected_arc = display_arcs[choice - 1]
+                log_to_file(log_file, f"Selected Saga: {selected_arc['name']}")
+                return selected_arc
+            elif choice == len(display_arcs) + 1:
+                import random
+                selected_arc = random.choice(STORY_ARCS)
+                log_to_file(log_file, f"Random Saga Selected: {selected_arc['name']}")
+                return selected_arc
+            else:
+                print(f"Please choose a number between 1 and {len(display_arcs) + 1}")
+        except ValueError:
+            print("Please enter a valid number")
+        except KeyboardInterrupt:
+            return None
+
 def run_local_game():
     """Run the game in local mode with gameplay logging"""
     if not check_environment():
@@ -611,6 +689,17 @@ def run_local_game():
         # Import your existing AI providers
         from src.ai.providers.claude_direct_api import take_turn_direct
         from src.ai.providers.local_character_creator import create_character_console as create_char_ai
+        
+        # Saga Selection
+        selected_saga = select_saga(log_file)
+        if not selected_saga:
+            if handle_graceful_quit(log_file):
+                return
+        
+        # Set the selected saga as the active story arc
+        global active_story_arc, arc_progress
+        active_story_arc = selected_saga
+        arc_progress = 0
         
         # Character Creation (matching frontend flow)
         character = create_character_console(log_file)

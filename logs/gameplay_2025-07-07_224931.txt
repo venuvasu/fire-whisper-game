@@ -1,0 +1,377 @@
+🔥 Fire Whisper RPG - Local Mode
+========================================
+🏷️  Version: 1.2.0.0
+🔑 API Key: ✅ Configured
+🌍 Mode: Local Development
+📝 Log File: gameplay_2025-07-07_224931.txt
+========================================
+
+🎆 SAGA SELECTION
+==================================================
+🎭 Choose your adventure! Each saga offers a unique story
+experience with different themes and challenges.
+==================================================
+Selected Saga: Rise of the Awakened
+
+🎭 CHARACTER CREATION
+==================================================
+🌟 Time to breathe life into legend! Shape your hero below—choose
+their path, their spirit, and their spark. The world of Fire Whisper
+awaits your creation...
+==================================================
+Name: bob2
+Race: Elf
+Gender: Transgender Female
+Profession: Warrior
+
+✨ Creating bob2 the Elf Warrior...
+🤖 Generating character with AI (this may take a moment)...
+
+🎉 Character Created Successfully!
+🎭 bob2 the Elf Warrior
+📊 STR:10 DEX:14 CON:10
+📊 INT:12 WIS:12 CHA:10
+❤️  HP: 22 | 🔮 Mana: 17
+⚔️  Weapon: Elven Longsword (1d8+Str)
+
+🎮 Starting new game with bob2 the Warrior
+
+🎆 ENHANCED FEATURES ACTIVE:
+✅ Story Arc Integration (71 arcs available)
+✅ Location Progression Debug (6 locations mapped)
+✅ Dynamic Contextual Options
+🗺️ Starting Location: village_outskirts
+
+📖 *A small flame flickers to life beside you, coalescing into a tiny fairy with glowing amber wings and flowing red hair*
+
+"Well met, brave soul! I am Emberlyn, a guardian of the Fire Whispers - ancient secrets carried on the dancing flames. The forests ahead hold both wonder and danger, but I sense a warrior's spirit within you."
+
+*She circles your head, leaving a trail of sparkling embers*
+
+"The village of Ashgrove lies just beyond these woods, but they say dark forces stir among the trees. Just ahead, I spy a fallen log blocking our path. The wood seems unusually charred, as if burned by no natural flame. Strange tracks in the ash suggest we're not alone..."
+
+*Emberlyn's light dims slightly as she hovers near the suspicious log*
+
+"Something feels wrong about this, friend. The very air crackles with an eerie energy."
+
+*As you pause to assess yourself, you notice Emberlyn seems distant and cautious.*
+
+*You sense opportunity slipping away if you hesitate*
+
+**What would you like to do?**
+1. 🛡️ Carefully assess the magical threat before taking action 🟢 (Safe & Reliable)
+2. ⚔️ Use your warrior training to handle this challenge 🟡 (Moderate Risk)
+3. ⚡ Attempt to counter the magical threat with raw power 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to help identify and counter the magical threat 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 1
+==================================================
+
+🎯 Player Input: 
+
+🗺️ LOCATION CHANGED: village_outskirts → ashbrook_village
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: Rise of the Awakened | Progress: 0 | Turn: 1
+
+📍 LOCATION: village_outskirts
+
+📖 *Flutter-hovering near your shoulder, my wings catching the autumn sunlight in iridescent sparkles*
+
+"Welcome to the outskirts of Ashbrook! *gestures excitedly at the scenic path ahead* Isn't it lovely? The maple trees are putting on quite a show with their red and gold leaves. I especially love how they dance in the afternoon breeze."
+
+*darts around playfully, leaving a slight trail of sparkles*
+
+"I can see the village's smoke plumes rising in the distance - mostly from the bakery and blacksmith, I'd wager. The air has that crisp autumn feel that makes everything seem more alive somehow. Though..." *pauses thoughtfully* "...it's peculiarly quiet on the road today. Usually there are at least a few traders or villagers about their business."
+
+*adjusts my tiny leafweave dress and peers down the path*
+
+"The path ahead winds through these beautiful trees before reaching the village proper. The fallen leaves make such a satisfying crunch underfoot - at least for someone your size!" *giggles musically*
+
+**What would you like to do?**
+1. 👂 Listen carefully and observe the social dynamics 🟢 (Safe & Reliable)
+2. 💪 Use your presence to command respect and attention 🟡 (Moderate Risk)
+3. 👑 Make a dramatic declaration to rally or intimidate 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to use her charm to ease social tensions 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 2
+==================================================
+
+🎯 Player Input: 
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: Rise of the Awakened | Progress: 0 | Turn: 2
+
+📍 LOCATION: ashbrook_village
+
+📖 *Fluttering nearby with a gentle sparkle of fairy dust, I observe the peaceful autumn scene around us*
+
+"What a lovely afternoon for a stroll to Ashbrook! The way these maple leaves catch the sunlight makes everything look like it's painted in gold and crimson. And do you smell that? There's a hint of woodsmoke in the air - must be coming from the village chimneys ahead."
+
+*I drift closer, my wings creating tiny eddies in the fallen leaves*
+
+"The path looks well-traveled, which is a good sign. Merchants and villagers use this road frequently to reach Ashbrook. Speaking of which, I can just make out the village rooftops through the trees - we must be getting close! The farmers should be bringing in the last of their harvest around this time of year."
+
+*A gentle breeze rustles through the branches overhead, sending a cascade of red and orange leaves spiraling down around us*
+
+"The village guard usually patrols this far out too, keeping the road safe for travelers. Though on such a peaceful day, the biggest excitement might be helping someone's wayward chicken back home!"
+
+**What would you like to do?**
+1. 👂 Listen carefully and observe the social dynamics 🟢 (Safe & Reliable)
+2. 💪 Use your presence to command respect and attention 🟡 (Moderate Risk)
+3. 👑 Make a dramatic declaration to rally or intimidate 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to use her charm to ease social tensions 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 3
+==================================================
+
+🎯 Player Input: 3
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: Rise of the Awakened | Progress: 0 | Turn: 3
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-hovering near your shoulder, my warm fairy glow casting gentle shadows in the deepening evening*
+
+"Oh, that's quite clever! Standing still and observing the surroundings really helps get a better sense of this place. Drawing upon your abilities, you excel. The autumn trees look absolutely magical at this hour - their leaves are like flickering embers in the setting sun. And... wait..."
+
+*My wings shimmer with excitement as I point toward the village*
+
+"Look there! Through the trees - those must be the first lights of Ashbrook Village being lit for the evening. The villagers always start their evening routines around this time. I can just make out the smoke rising from chimneys, and that wonderful smell of hearth fires and cooking meals is starting to drift our way."
+
+*I drift slightly closer to the path ahead, my golden light illuminating small patches of fallen leaves*
+
+"The evening air is getting that lovely autumn crispness to it. And listen - do you hear those bells? That's probably the village's evening chimes. We're getting quite close now!"
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+**What would you like to do?**
+1. 🛡️ Carefully assess the magical threat before taking action 🟢 (Safe & Reliable)
+2. ⚔️ Use your warrior training to handle this challenge 🟡 (Moderate Risk)
+3. ⚡ Attempt to counter the magical threat with raw power 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to help identify and counter the magical threat 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 4
+==================================================
+
+🎯 Player Input: 3
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: Rise of the Awakened | Progress: 1 | Turn: 4
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-hovering near your shoulder, my warm fairy glow casting dancing shadows on the autumn leaves*
+
+"Oh dear... Your approach falls short this time. those tracks you were trying to examine are quite difficult to make out in this evening light. The shadows from the trees aren't helping either. *gestures at the fading markings in the dirt* While they might have given us a clue about recent travelers to Ashbrook, they're too faint to tell us much now."
+
+*My wings shimmer with a concerned glint as I cast my glow a bit wider*
+
+"The village isn't far ahead, but something feels... different about the air tonight. There's an usual stillness - not the peaceful kind we normally find on this road. The way the autumn leaves are barely moving, despite there usually being a breeze through here... it's as if nature itself is holding its breath."
+
+*I drift slightly closer to the road leading to Ashbrook, my light revealing more of the path ahead*
+
+"Perhaps we should stay extra alert as we continue onward. The Shadow Blight has been making even familiar places feel strange lately."
+
+**What would you like to do?**
+1. 🔍 Methodically examine the evidence for important clues 🟢 (Safe & Reliable)
+2. ⚔️ Use your warrior training to handle this challenge 🟡 (Moderate Risk)
+3. 💎 Try to uncover the truth through direct magical probing 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to use her fairy senses to detect hidden clues 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 5
+==================================================
+
+🎯 Player Input: 2
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: Rise of the Awakened | Progress: 2 | Turn: 5
+
+🗺️  LOCATION DEBUG REPORT (1 transitions):
+  1. village_outskirts -> ashbrook_village 🚶
+
+
+📍 LOCATION: ashbrook_village
+
+📖 *Fluttering closer with concern, my wings casting small dancing shadows in the evening light*
+
+"Oh dear... Even with your training, success eludes you. the way those leaves are just hanging there, barely moving... it's not right at all. The wind spirits always dance through these trees at sunset, but tonight they seem to have abandoned their usual revelry. And look there - even the evening songbirds have gone quiet."
+
+*My glow dims slightly as I hover near your shoulder, my voice dropping to a whisper*
+
+"There's something unnatural about this stillness. The shadow blight... I fear it's affecting more than just the land itself. The very essence of autumn feels wrong here. The way those leaves are frozen in place, it's as if nature itself is holding its breath."
+
+*I gesture toward some particularly motionless branches ahead*
+
+"The village of Ashbrook lies just beyond those copper-colored oaks, but this eerie calm... it makes me wonder what we might find when we reach it. Perhaps we should proceed with extra caution?"
+
+*My ethereal light casts shifting patterns on the unnaturally still leaves around us as dusk deepens*
+
+*Time feels precious in this moment*
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. ⚔️ Use your warrior training to handle this challenge 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 6
+==================================================
+
+🎯 Player Input: 2
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: Rise of the Awakened | Progress: 2 | Turn: 6
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-hovering nearby, my soft glow casting dancing shadows among the autumn leaves, I watch with concern as bob2 tries to move stealthily along the village path but stumbles on some loose gravel*
+
+"Oh dear... Despite your best efforts, the challenge proves difficult. those footsteps were a bit louder than intended. The night does make everything trickier, doesn't it?" *I whisper, my wings creating tiny sparkles in the darkness*
+
+There's something unsettling about how still the autumn leaves are in the trees above. Not even a whisper of movement, despite the time of night when a breeze usually stirs through the village outskirts. The path ahead leads to Ashbrook proper, but the usual welcoming glow of the village lanterns seems dimmer somehow, more distant than it should be.
+
+*I drift closer, my fairy light casting a warm glow on bob2's face* "The shadows between the trees... they seem deeper than natural tonight. And have you noticed how the leaves are just... hanging there? It's as if the very air is holding its breath."
+
+The stillness feels heavy, expectant. Even the usual nighttime sounds of crickets and owls are strangely absent, leaving only the soft crunch of fallen leaves beneath boots to break the silence.
+
+*My voice drops to barely a whisper* "Something isn't right here. The shadow blight we've been hearing about... I fear it's affecting more than just the village crops."
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. ⚔️ Use your warrior training to handle this challenge 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 7
+==================================================
+
+🎯 Player Input: 2
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: Rise of the Awakened | Progress: 2 | Turn: 7
+
+📍 LOCATION: ashbrook_village
+
+📖 *Fluttering beside you with a soft golden glow, I watch as you expertly navigate through the darkened path, your footwork careful and precise despite the nighttime conditions.*
+
+"Impressive awareness of your surroundings! Those fallen leaves could have been quite treacherous in this darkness, but your movements are steady and sure-footed. Your skilled approach proves effective. Though..." *I pause, my light dimming slightly as I peer ahead* "...there's something unsettling about how the shadows seem to dance between the autumn trees tonight. The Shadow Blight's influence grows stronger the closer we get to Ashbrook."
+
+*A cool breeze rustles through the crimson and gold leaves above, carrying with it the distant sound of village bells.*
+
+"The village bells - they're ringing at this hour? That's... unusual. The townsfolk normally wouldn't..." *I drift closer, my voice dropping to a whisper* "Perhaps we should be extra vigilant as we approach. The night has a way of concealing dangers, especially with the Blight's corruption spreading."
+
+*My glow illuminates patches of disturbed earth along the path - signs of recent activity that wouldn't normally be visible in the darkness.*
+
+"Look there - someone or something has passed this way recently. The marks are fresh."
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. ⚔️ Use your warrior training to handle this challenge 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 8
+==================================================
+
+🎯 Player Input: 2
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: Rise of the Awakened | Progress: 2 | Turn: 8
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-hovering near your shoulder, my fairy light casting soft amber highlights on the autumn leaves around us*
+
+"Impressive defensive stance! Your training really shows in how smoothly you shifted your weight there. Drawing upon your abilities, you excel. Though... I must say, it's oddly quiet out here tonight. The usual evening crickets seem to have gone silent."
+
+*My wings twitch nervously as I scan the darkened path ahead*
+
+"Something about these shadows doesn't feel quite natural. See how they seem to pool a bit too thickly between the trees? The Shadow Blight's influence is growing stronger as we get closer to Ashbrook. The villagers will need our help soon enough."
+
+*A cool breeze rustles through the crimson leaves above, making them whisper and dance in the moonlight*
+
+"Perhaps we should remain vigilant as we continue. The road ahead winds through some particularly dense woods before reaching the village proper, and night has always been when the Blight's power grows strongest..."
+
+*I drift slightly closer, my glow providing a small circle of comforting light in the growing darkness*
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. ⚔️ Use your warrior training to handle this challenge 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 9
+==================================================
+
+🎯 Player Input: 1
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: Rise of the Awakened | Progress: 2 | Turn: 9
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-floating beside you, my soft glow casting dancing shadows among the autumn leaves, I notice your attempt to scan the darkened path ahead.*
+
+"Hmm... Even with your training, success eludes you. the shadows seem to be playing tricks at this midnight hour. While I can usually spot things quite well in the dark, something feels... different tonight. The way the moonlight catches those leaves - it's not quite natural."
+
+*My wings shimmer with concern as I drift closer, my voice dropping to a whisper.*
+
+"There's definitely something odd about those shadow patterns between the trees. They're moving against the wind, almost like... like they're reaching toward the village. I've seen this before, when the Shadow Blight first started spreading through these parts."
+
+*A cool breeze rustles through the autumn leaves, carrying with it the faint sound of whispers from the direction of Ashbrook village.*
+
+"Listen... those voices on the wind. The villagers must still be awake, despite the late hour. Something's keeping them from their rest, and I'd wager it has everything to do with these unnatural shadows. Perhaps we should investigate more carefully..."
+
+*My glow pulses softly, casting brief illumination on the peculiar darkness creeping along the forest floor.*
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. ⚔️ Use your warrior training to handle this challenge 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 10
+==================================================
+
+🎯 Player Input: quit
+
+👋 Thanks for playing Fire Whisper RPG!
+
+
+💰 API COST SUMMARY
+==================
+Total Cost: $0.0693
+Total Tokens: 10,923 (Input: 7,876, Output: 3,047)
+Turns Played: 12
+Average Cost/Turn: $0.0058
+
+Last 5 Turns:
+Turn 6: $0.0070 (1073 tokens)
+Turn 7: $0.0064 (993 tokens)
+Turn 8: $0.0057 (947 tokens)
+Turn 9: $0.0060 (955 tokens)
+Turn 9: $0.0063 (1021 tokens)
+

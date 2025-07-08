@@ -1,0 +1,419 @@
+🔥 Fire Whisper RPG - Local Mode
+========================================
+🏷️  Version: 1.2.0.0
+🔑 API Key: ✅ Configured
+🌍 Mode: Local Development
+📝 Log File: gameplay_2025-07-07_223916.txt
+========================================
+
+🎆 SAGA SELECTION
+==================================================
+🎭 Choose your adventure! Each saga offers a unique story
+experience with different themes and challenges.
+==================================================
+Selected Saga: The Merchant's Dilemma
+
+🎭 CHARACTER CREATION
+==================================================
+🌟 Time to breathe life into legend! Shape your hero below—choose
+their path, their spirit, and their spark. The world of Fire Whisper
+awaits your creation...
+==================================================
+Name: bob2
+Race: Elf
+Gender: Female
+Profession: Mage
+
+✨ Creating bob2 the Elf Mage...
+🤖 Generating character with AI (this may take a moment)...
+
+🎉 Character Created Successfully!
+🎭 bob2 the Elf Mage
+📊 STR:10 DEX:14 CON:12
+📊 INT:16 WIS:13 CHA:11
+❤️  HP: 22 | 🔮 Mana: 19
+⚔️  Weapon: Quarterstaff (1d6+Strength)
+
+🎮 Starting new game with bob2 the Mage
+
+🎆 ENHANCED FEATURES ACTIVE:
+✅ Story Arc Integration (71 arcs available)
+✅ Location Progression Debug (6 locations mapped)
+✅ Dynamic Contextual Options
+🗺️ Starting Location: village_outskirts
+
+📖 *A small orb of warm, flickering light dances before you, transforming into a tiny fairy with ember-colored wings and glowing red hair*
+
+"Well met, dear friend! I am Emberlyn, and I'm ever so pleased to meet a fellow practitioner of the magical arts. *she curtsies mid-air* The Whisperwoods have been rather troubled lately, and I've been searching for someone with your particular talents."
+
+*She flutters closer, her wings casting dancing shadows*
+
+"You see, just beyond these trees lies the entrance to an ancient fire shrine. The eternal flame within has grown dangerously weak, and without its warmth, the surrounding forest will soon wither. The local creatures have already begun to feel its effects."
+
+*Emberlyn gestures to a narrow path leading through the darkening woods*
+
+"The shrine's entrance is sealed by a magical barrier - a test for those who wish to enter. A simple fire rune glows upon its surface, waiting to be properly awakened. Nothing too daunting for a promising mage such as yourself, though one must be careful with such ancient magics..."
+
+*As you pause to assess yourself, you notice Emberlyn seems distant and cautious.*
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. ⚡ Use magical senses to detect hidden properties 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 1
+==================================================
+
+🎯 Player Input: 2
+
+🎭 STORY ARC ACTIVATED: The Crimson Prophecy
+📖 An ancient prophecy speaks of a crimson blade that will either save or doom the realm. Multiple factions seek the weapon, and the player must decide its fate.
+🎯 Key Elements: Rival seekers, moral choices about power, ancient weapon...
+
+🗺️ LOCATION CHANGED: village_outskirts → ashbrook_village
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Crimson Prophecy | Progress: 0 | Turn: 1
+
+📍 LOCATION: ashbrook_village
+
+📖 *Fluttering beside you with my golden wings catching the afternoon light*
+
+"Oh, what nimble footwork! Those fallen leaves didn't make a sound under your careful steps. Your skilled approach proves effective. The autumn colors are absolutely gorgeous here, aren't they? All those reds and golds in the trees... *gestures excitedly at the canopy above*
+
+The path ahead winds so peacefully toward Ashbrook village. I can just barely make out the first few cottage roofs through the trees. The smoke from their chimneys makes such lovely curls in the clear air. 
+
+*darts down to examine some mushrooms growing along the path*
+
+It's quite peaceful out here today - perfect weather for traveling. Though we should stay alert... even the prettiest paths can hide surprises. Speaking of which, did you notice those interesting markings on that tree trunk over there? Looks like some kind of traveler's sign..."
+
+*hovers thoughtfully near your shoulder, my fairy glow casting subtle sparkles in the afternoon light*
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. ⚡ Use magical senses to detect hidden properties 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 2
+==================================================
+
+🎯 Player Input: 1
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Crimson Prophecy | Progress: 0 | Turn: 2
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-hovering beside you, my wings catching the autumn sunlight, I watch as you examine the path ahead with magical insight.*
+
+"Ooh, nicely done! Your magical senses are already quite refined. Your combination of skill and intuition serves you well. Did you notice how the ambient energy flows differently here compared to deeper in the woods? The village's proximity creates interesting patterns in the magical currents."
+
+*I drift closer to a particularly vibrant red maple leaf, trailing sparkles as I move.* 
+
+"Ashbrook village is just ahead, and I can feel the warmth of its hearth-fires even from here. The villagers are quite friendly to magical folk - well, most of them anyway. The way the smoke rises from their chimneys reminds me of ancient protection sigils... though I suspect they don't even realize the traditional patterns they're following."
+
+*A gentle breeze rustles through the trees, carrying the scent of woodsmoke and baking bread.*
+
+"The autumn colors are especially beautiful this year. The old stories say that when the leaves turn this bright, it means the veil between our world and the fae realm grows a bit thinner. Though as a fairy, I suppose I might be a bit biased about such tales!"
+
+*I spin playfully in the air, sending a few fallen leaves swirling upward in a small spiral.*
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. ⚡ Use magical senses to detect hidden properties 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 3
+==================================================
+
+🎯 Player Input: 3
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Crimson Prophecy | Progress: 1 | Turn: 3
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-hovering near your shoulder, my tiny wings casting small shadows in the evening light*
+
+"Oh dear... Despite your best efforts, the challenge proves difficult. those mushrooms you were trying to identify aren't what you thought they were at all. The patterns on the caps are completely different from the magical variety we're seeking. *giggles softly* Though I must admit, your scholarly interest in local flora is admirable!"
+
+*Gesturing toward the village ahead, my glow casting a warm light on the autumn leaves*
+
+"The sun's getting lower, painting these trees in such lovely amber hues. Ashbrook's lanterns should be lighting up soon - we can see their warm glow just ahead through the trees. The villagers always have fascinating stories to share about the local plant life. Perhaps someone there could help point us toward the correct mushroom varieties?"
+
+*A gentle breeze rustles through the leaves, carrying the distant smell of woodsmoke from village chimneys*
+
+"The evening air is getting a bit crisp, isn't it? Those cozy village hearths are starting to sound quite inviting. Shall we continue toward Ashbrook?"
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. ⚡ Use magical senses to detect hidden properties 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 4
+==================================================
+
+🎯 Player Input: 3
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Crimson Prophecy | Progress: 1 | Turn: 4
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-hovering near your shoulder, my fairy light casting gentle shadows in the deepening evening, I watch with concern as you attempt to detect any magical traces of the Shadow Blight in the area*
+
+"Oh dear... The task tests the limits of your abilities. the magical energies are quite muddled here. The autumn winds seem to be dispersing any clear traces we might have found. But don't worry! Even if we can't track it magically, I'm noticing something interesting about these fallen leaves..."
+
+*I drift down to examine a patch of leaves, my glow illuminating their unusually darkened edges*
+
+"See how these leaves are withered in an unusual pattern? The Shadow Blight tends to leave subtle signs like this. While we couldn't pick up its magical signature, these physical clues suggest it passed through here, heading toward Ashbrook village."
+
+*A cool evening breeze rustles through the trees, carrying the scent of woodsmoke from distant chimneys*
+
+"The village isn't far now, and with night falling, we should keep our wits about us. Those corrupted leaves are fresh - the Blight can't be too far ahead. And something tells me the villagers might have noticed strange happenings of their own..."
+
+*My light flickers briefly as another gust of wind passes through the autumn trees*
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. ⚡ Use magical senses to detect hidden properties 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 5
+==================================================
+
+🎯 Player Input: 3
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Crimson Prophecy | Progress: 1 | Turn: 5
+
+🗺️  LOCATION DEBUG REPORT (1 transitions):
+  1. village_outskirts -> ashbrook_village 🚶
+
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-hovering nearby, my wings casting tiny dancing shadows in the evening light*
+
+"Oh dear... The task tests the limits of your abilities. those runes aren't quite coming together right, are they? The magical energies seem to be slipping away like autumn leaves in the wind. Perhaps we should take a moment to steady our focus? The fading daylight can make spellwork trickier."
+
+*I circle around to get a better look at the fading magical attempt, my glow providing a bit more illumination*
+
+"The path ahead to Ashbrook looks so peaceful with the golden leaves, though something about the lengthening shadows feels... unsettling. There's a strange stillness in the air that makes my wings twitch. Have you noticed how the birdsong has gone quiet?"
+
+*I drift closer, my voice dropping to a concerned whisper*
+
+"Those old stories about shadow magic affecting the forest creatures... I'm starting to wonder if there might be some truth to them. The way the darkness creeps between the trees isn't quite natural. Should we perhaps investigate further before continuing to the village?"
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. ⚡ Use magical senses to detect hidden properties 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 6
+==================================================
+
+🎯 Player Input: 1
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Crimson Prophecy | Progress: 1 | Turn: 6
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-floating beside you, my soft golden glow casting gentle shadows on the autumn leaves, I watch with concern as you attempt to discern something in the growing darkness...*
+
+"Oh dear... Your approach falls short this time. the shadows are playing tricks tonight. Even with my light, it's becoming rather difficult to make out details along the path. The way the moonlight filters through these autumn trees creates such deceptive patterns."
+
+*My wings shimmer with a touch of anxiety as I drift closer*
+
+"Something feels... different about these shadows. They seem to move in ways they shouldn't, almost as if... no, that can't be right. But we should remain vigilant. The Shadow Blight has been known to distort even the most familiar places."
+
+*I cast my fairy light a bit broader, illuminating more of the path ahead*
+
+"The village of Ashbrook isn't far now, but night has truly settled in. These autumn trees usually feel so welcoming, but there's an unsettling stillness in the air. Perhaps we should pay extra attention to our surroundings as we continue?"
+
+*The leaves rustle softly overhead, and my light catches the subtle movement of branches swaying in the evening breeze... or is it something else?*
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. ⚡ Use magical senses to detect hidden properties 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 7
+==================================================
+
+🎯 Player Input: 2
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Crimson Prophecy | Progress: 1 | Turn: 7
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-hovering beside you, my soft amber glow illuminating the darkened path, I watch as you gracefully maintain your defensive stance in these uncertain night hours.*
+
+"Oh, that was quite skillful! Your defensive movements show real promise - and at just the right time too. Your skilled approach proves effective. The shadows between the autumn trees seem... different at night. Not quite natural."
+
+*My wings create gentle chimes as I drift closer, my light catching the rustle of fallen leaves scattered across the road to Ashbrook.*
+
+"There's something unsettling about how the darkness moves between those branches. The Shadow Blight's influence perhaps? We should remain vigilant as we make our way forward. The village isn't far now, but night brings its own challenges in these troubled times."
+
+*I cast my fairy light in a wider arc, revealing more of the path ahead while keeping close to provide illumination. The moonlight filtering through the canopy creates strange patterns on the ground, and somewhere in the distance, an owl calls out into the night.*
+
+"The village lanterns should be visible soon - they always keep them lit after sunset. Until then, staying alert like this is wise. Those defensive skills might come in handy sooner than we'd like..."
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+*The situation demands swift decision-making*
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. ⚡ Use magical senses to detect hidden properties 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 8
+==================================================
+
+🎯 Player Input: 3
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Crimson Prophecy | Progress: 1 | Turn: 8
+
+📍 LOCATION: ashbrook_village
+
+📖 *Fluttering close by with a concerned expression, my fairy light casting dancing shadows*
+
+"Oh dear... Even with your training, success eludes you. while trying to sense the shadow magic in the area, it seems the residual darkness is too subtle to pick up clearly. The blight's presence is like trying to catch smoke with your hands - I can tell it's there, but pinpointing it is proving tricky."
+
+*I circle around thoughtfully, my wings catching the moonlight*
+
+"The trees do look more withered than they should for this time of year... see how the autumn colors seem slightly off? More ashen than golden. The shadow blight's influence is subtle but concerning. We should keep investigating, but perhaps try a different approach."
+
+*A cool night breeze rustles through the trees, carrying with it the faint scent of woodsmoke from Ashbrook village ahead*
+
+"The village isn't far now. Those lights in the distance are probably from the first houses along the road. Though something feels... different about the darkness between here and there. More watchful than it should be."
+
+*My glow pulses softly as I hover near your shoulder, keeping my voice low*
+
+"What worries me most is how natural this corruption feels - as if it's been seeping into the land so gradually that few have noticed. We'll need to be clever about uncovering its source."
+
+*Emberlyn tilts her head, her fairy light flickering with concern.* "That was... an interesting choice," *she says softly.*
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. ⚡ Use magical senses to detect hidden properties 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 9
+==================================================
+
+🎯 Player Input: 1
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Crimson Prophecy | Progress: 1 | Turn: 9
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-gliding beside you, my fairy light casting dancing shadows among the autumn leaves, I frown with concern*
+
+"Oh dear... The task tests the limits of your abilities. I can sense something's not quite right with the magical energies here. While trying to detect any traces of the Shadow Blight, the mystical resonances seem... muddled. The midnight hour isn't helping either - it's when the veil between realms is thinnest."
+
+*My glow dims slightly as I hover closer, speaking in a hushed tone*
+
+"The path ahead feels... different than it should. The trees are too quiet - no night birds, no rustling leaves. Perhaps we should proceed with extra caution toward Ashbrook. Something tells me the village might be more than just sleepy at this hour."
+
+*A cool breeze stirs the fallen leaves around your feet, carrying with it the faintest trace of wood smoke from the direction of the village*
+
+"Keep your wits about you. The Shadow Blight has a way of twisting even the most familiar places."
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. ⚡ Use magical senses to detect hidden properties 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 10
+==================================================
+
+🎯 Player Input: 2
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Crimson Prophecy | Progress: 1 | Turn: 10
+
+🗺️  LOCATION DEBUG REPORT (1 transitions):
+  1. village_outskirts -> ashbrook_village 🚶
+
+
+📍 LOCATION: ashbrook_village
+
+📖 *Fluttering anxiously beside you, my fairy light casting dancing shadows on the autumn leaves*
+
+"Oh dear... Even with your training, success eludes you. the shadows seem to be playing tricks tonight. That rustling in the branches - I could have sworn I saw something move, but it slipped away too quickly. The midnight hour makes everything more uncertain..."
+
+*My glow dims slightly as I hover closer*
+
+"The path ahead feels... different at this hour. The way the moonlight catches those fallen leaves - it's beautiful, but there's something not quite right. Perhaps we should be extra cautious as we continue toward Ashbrook. The shadow blight has a way of twisting even familiar places."
+
+*A cool breeze stirs the leaves around our feet, carrying the faint scent of woodsmoke from the distant village*
+
+"Listen... can you hear that? The night creatures have gone quiet. In all my years guiding travelers, I've learned that's rarely a good sign. The village isn't far now, but this stretch of road... it feels like we're being watched."
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. ⚡ Use magical senses to detect hidden properties 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite the dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 11
+==================================================
+
+🎯 Player Input: quit
+
+👋 Thanks for playing Fire Whisper RPG!
+
+
+💰 API COST SUMMARY
+==================
+Total Cost: $0.0637
+Total Tokens: 9,957 (Input: 7,140, Output: 2,817)
+Turns Played: 11
+Average Cost/Turn: $0.0058
+
+Last 5 Turns:
+Turn 6: $0.0061 (960 tokens)
+Turn 7: $0.0061 (979 tokens)
+Turn 8: $0.0065 (985 tokens)
+Turn 9: $0.0055 (919 tokens)
+Turn 10: $0.0056 (938 tokens)
+
