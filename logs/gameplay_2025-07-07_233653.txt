@@ -1,0 +1,131 @@
+🔥 Fire Whisper RPG - Local Mode
+========================================
+🏷️  Version: 2.0.0.0
+🔑 API Key: ✅ Configured
+🌍 Mode: Local Development
+📝 Log File: gameplay_2025-07-07_233653.txt
+========================================
+
+🎆 SAGA SELECTION
+==================================================
+🎭 Choose your adventure! Each saga offers a unique story
+experience with different themes and challenges.
+==================================================
+Random Saga Selected: Carnival of Souls
+
+🎭 CHARACTER CREATION
+==================================================
+🌟 Time to breathe life into legend! Shape your hero below—choose
+their path, their spirit, and their spark. The world of Fire Whisper
+awaits your creation...
+==================================================
+Name: bob11
+Race: Elf
+Gender: Transgender Male
+Profession: Berserker
+
+✨ Creating bob11 the Elf Berserker...
+🤖 Generating character with AI (this may take a moment)...
+
+🎉 Character Created Successfully!
+🎭 bob11 the Elf Berserker
+📊 STR:14 DEX:16 CON:12
+📊 INT:10 WIS:10 CHA:10
+❤️  HP: 28 | 🔮 Mana: 15
+⚔️  Weapon: Handaxe (1d6+Str)
+
+🎮 Starting new game with bob11 the Berserker
+
+🎆 ENHANCED FEATURES ACTIVE:
+✅ Story Arc Integration (71 arcs available)
+✅ Location Progression Debug (6 locations mapped)
+✅ Dynamic Contextual Options
+🗺️ Starting Location: village_outskirts
+
+🎆 BILLION DOLLAR FEATURES ACTIVE:
+✅ Enhanced Context Management
+✅ Session Hooks & Cliffhangers
+✅ Progressive Character Investment
+✅ Integrated Story Systems
+
+📊 Session Context: 1 | Investment Score: 0.00
+
+🔮 Session Preview: This session: character growth opportunities await.
+
+📖 *A small crimson light flutters around you, leaving tiny sparks in its wake before materializing into a fairy with flame-colored wings and ember-bright eyes*
+
+"Well met, brave soul! I am Emberlyn, and the Whisperwoods have been waiting for someone like you. The forest grows darker by the day, and we could certainly use a warrior of your... particular talents."
+
+*She gestures to your well-worn weapons and battle-scarred armor*
+
+"Though I must warn you - just ahead lies the Thornheart Thicket, where the brambles have grown wild and hostile. Strange shadows move among those thorns, and not all who enter find their way back out. But perhaps that's exactly the sort of challenge you seek?"
+
+*The fairy's wings cast dancing shadows as she hovers near your shoulder, pointing toward a mass of twisted vines blocking the path ahead. The thorns seem to pulse with an unnatural purple glow, and faint whispers echo from within.*
+
+"Those brambles won't clear themselves, and there may be something valuable trapped beyond. Though I'd understand if you'd prefer to seek an easier path to begin your journey..."
+
+*Emberlyn awaits your decision, her warm glow providing a small comfort against the foreboding thicket ahead*
+
+*As you pause to assess yourself, you notice Emberlyn seems distant and cautious.*
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. 🔥 Channel your berserker instincts with focused control 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 1
+==================================================
+
+🎯 Player Input: 3
+❌ Error processing action: process_player_action() takes 2 positional arguments but 3 were given
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/aetchang/Documents/firewhisper/fire-whisper-game/scripts/local_runner.py", line 827, in run_local_game
+    result = ai_layer.process_player_action(player_input, enhanced_context)
+TypeError: process_player_action() takes 2 positional arguments but 3 were given
+
+
+==================================================
+Turn 1
+==================================================
+
+🎯 Player Input: quit
+
+👋 Thanks for playing Fire Whisper RPG!
+
+
+💰 API COST SUMMARY
+==================
+Total Cost: $0.0051
+Total Tokens: 538 (Input: 251, Output: 287)
+Turns Played: 1
+Average Cost/Turn: $0.0051
+
+Last 5 Turns:
+Turn 0: $0.0051 (538 tokens)
+
+
+🪝 SESSION END HOOK (MODERATE):
+Just as you think you understand happens, everything goes silent...
+
+🔮 When you return, the mystery will be revealed...
+💭 Your safety and understanding hang in the balance
+
+📊 SESSION METRICS:
+• Overall Retention Score: 0.13/1.0
+• Character Investment: 0.00/1.0
+• Context Richness: 0.03/1.0
+• Hook Strength: 0.40/1.0
+
+🎯 RETURN MOTIVATION (MODERATE):
+Your story continues: Just as you think you understand happens, everything goes silent...
+
+Reasons to return:
+• Unresolved mysteries await your return
+• Character growth opportunities are within reach
+
+🎆 Upcoming Growth:
+• A memory from your past surfaces (in 1 more session count)

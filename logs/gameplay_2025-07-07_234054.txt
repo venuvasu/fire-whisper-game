@@ -1,0 +1,552 @@
+🔥 Fire Whisper RPG - Local Mode
+========================================
+🏷️  Version: 2.0.0.0
+🔑 API Key: ✅ Configured
+🌍 Mode: Local Development
+📝 Log File: gameplay_2025-07-07_234054.txt
+========================================
+
+🎆 SAGA SELECTION
+==================================================
+🎭 Choose your adventure! Each saga offers a unique story
+experience with different themes and challenges.
+==================================================
+Random Saga Selected: The Nightmare King
+
+🎭 CHARACTER CREATION
+==================================================
+🌟 Time to breathe life into legend! Shape your hero below—choose
+their path, their spirit, and their spark. The world of Fire Whisper
+awaits your creation...
+==================================================
+Name: boby12
+Race: Dwarf
+Gender: Male
+Profession: Berserker
+
+✨ Creating boby12 the Dwarf Berserker...
+🤖 Generating character with AI (this may take a moment)...
+
+🎉 Character Created Successfully!
+🎭 boby12 the Dwarf Berserker
+📊 STR:14 DEX:10 CON:16
+📊 INT:10 WIS:12 CHA:8
+❤️  HP: 34 | 🔮 Mana: 17
+⚔️  Weapon: Dwarven Warhammer (1d10+Str)
+
+🎮 Starting new game with boby12 the Berserker
+
+🎆 ENHANCED FEATURES ACTIVE:
+✅ Story Arc Integration (71 arcs available)
+✅ Location Progression Debug (6 locations mapped)
+✅ Dynamic Contextual Options
+🗺️ Starting Location: village_outskirts
+
+🎆 BILLION DOLLAR FEATURES ACTIVE:
+✅ Enhanced Context Management
+✅ Session Hooks & Cliffhangers
+✅ Progressive Character Investment
+✅ Integrated Story Systems
+
+📊 Session Context: 1 | Investment Score: 0.00
+
+🔮 Session Preview: This session: character growth opportunities await.
+
+📖 *A small flame flickers in the air before you, dancing and swirling until it takes the form of a tiny fairy with glowing amber wings*
+
+"Well met, brave warrior! I am Emberlyn, a flame spirit of the Eternal Hearth. *giggles while floating closer* Your fierce demeanor marks you as one who walks the path of rage and battle. The spirits speak of dark times ahead, and your strength may be just what these lands need."
+
+*Her light dims slightly as she glances toward a worn stone path leading into the misty woods*
+
+"The village of Ember's Rest lies ahead, but the way is not safe. A pack of shadow wolves has been terrorizing travelers, their eyes gleaming with unnatural hunger. Even now, I can sense them prowling in the undergrowth..."
+
+*The fairy's glow pulses with concern as rustling sounds emerge from the nearby bushes, accompanied by low growls*
+
+"They're drawing near, brave one. The villagers beyond need aid, but these beasts stand in our path. I shall light your way, whatever you choose..."
+
+*Emberlyn hovers anxiously as dark shapes begin to materialize in the mist*
+
+*As you pause to assess yourself, you notice Emberlyn seems distant and cautious.*
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. 🔥 Channel your berserker instincts with focused control 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 1
+==================================================
+
+🎯 Player Input: 2
+
+🗺️ LOCATION CHANGED: village_outskirts → ashbrook_village
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Nightmare King | Progress: 0 | Turn: 1
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter flutter* Oh! That was quite impressive! As I hover near, I watch as you scan the surroundings with keen awareness, your experienced warrior's instincts serving you well. Your strategy succeeds brilliantly. The autumn breeze carries the scent of fallen leaves and distant woodsmoke from Ashbrook village.
+
+The path ahead winds through a lovely display of red and gold trees, their leaves dancing in the gentle afternoon light. I can spot the first few thatched roofs of Ashbrook peeking through the colorful canopy in the distance.
+
+*Adjusting my sparkly wings* "The villagers usually come this way to gather firewood - see those well-worn spots near the treeline? I've heard whispers that they've been a bit nervous lately, something about strange noises in the woods at night..." 
+
+A few crows call out from the branches above, their voices echoing across the peaceful scene. The road itself shows recent wagon tracks leading toward the village, suggesting regular traffic between here and Ashbrook.
+
+*Floating closer* "This is a good spot to keep your bearings... What else catches your interest along this path?"
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+**What would you like to do?**
+1. 👂 Listen carefully and observe the social dynamics 🟢 (Safe & Reliable)
+2. 😤 Let your passionate nature inspire others to action 🟡 (Moderate Risk)
+3. 👑 Make a dramatic declaration to rally or intimidate 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to use her charm to ease social tensions 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 2
+==================================================
+
+🎯 Player Input: 1
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Nightmare King | Progress: 0 | Turn: 2
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-floating beside you, my wings catching the autumn sunlight, I frown slightly as I notice you stumble on some loose stones along the path.*
+
+"Oh, careful there! These old village roads can be a bit tricky, especially with all these fallen leaves covering the uneven spots. Despite your best efforts, the challenge proves difficult. Though I must say, the way the sunlight filters through the red and gold leaves is absolutely magical!"
+
+*I drift closer, my fairy light casting subtle sparkles on the surrounding foliage.*
+
+"You know, I've heard the locals in Ashbrook have quite a few interesting tales about these woods. The way the trees whisper in the breeze... it almost feels like they're trying to tell us something, doesn't it? Though right now they seem to be keeping their secrets."
+
+*A gentle breeze stirs the leaves around us, creating a soft rustling symphony.*
+
+"The village isn't too far ahead now. Look - you can just barely see the smoke from the chimneys rising above the treeline. The air has that lovely hint of woodsmoke that always reminds me of warm hearths and friendly faces."
+
+**What would you like to do?**
+1. 🔮 Study the magical energies cautiously before proceeding 🟢 (Safe & Reliable)
+2. 🔥 Channel your berserker instincts with focused control 🟡 (Moderate Risk)
+3. 🔥 Channel maximum magical energy to breakthrough barriers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn about fairy knowledge of this type of magic 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 3
+==================================================
+
+🎯 Player Input: 3
+
+🎆 CHARACTER PROGRESSION UNLOCKED!
+✨ Your strength increases from training
+💭 You feel yourself growing stronger
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Nightmare King | Progress: 0 | Turn: 3
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-hovering near your shoulder, my small form casting a faint golden glow in the deepening evening shadows*
+
+"Oh dear... Even with your training, success eludes you. those berries you just tried to identify definitely aren't the medicinal ones I was telling you about. *wincing* Those are actually False Ashberries - they look similar but have that distinctive darker stem. Good thing you didn't try to eat them!"
+
+*My wings catch the last rays of sunlight filtering through the autumn leaves as I drift closer to examine the bush*
+
+"The actual healing berries have a more silvery sheen to them, especially at twilight like this. But speaking of twilight... *glancing at the darkening path ahead* We should probably make our way to Ashbrook soon. The village lanterns should be lit by now, and I can almost smell the hearth fires from here. The autumn evenings get quite chilly in these parts."
+
+*A cool breeze rustles through the trees, causing my tiny form to sway slightly as red and gold leaves dance around us on the path*
+
+"The villagers are usually quite welcoming to travelers, especially as night falls. And I hear the Rusty Kettle Inn makes an excellent spiced cider."
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. 🔥 Channel your berserker instincts with focused control 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 4
+==================================================
+
+🎯 Player Input: 3
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Nightmare King | Progress: 0 | Turn: 4
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-hovering beside you, my fairy light casting a warm glow in the deepening evening*
+
+"Oh, how clever! That spot you found to rest gives such a perfect view of Ashbrook's approach. Your skilled approach proves effective. The way the autumn leaves catch the last rays of sunlight is simply magical - reminds me of ember-dance celebrations from long ago."
+
+*My wings shimmer with an orange-gold reflection as I gesture toward the village ahead*
+
+"Though something feels... different about the village tonight. See how the smoke from the chimneys curls strangely? Almost as if it's trying to avoid something in the air. And those shadows between the trees - they seem darker than they should be, even for evening."
+
+*I drift closer, my voice dropping to a concerned whisper*
+
+"The shadow blight we've been tracking... I can sense its influence growing stronger here. The villagers might not realize it yet, but there's an unnatural stillness settling over Ashbrook. Perhaps that's why we haven't seen any travelers on the road recently."
+
+*My light pulses softly as I scan the deepening shadows*
+
+"We should probably reach the village proper before full dark sets in. The way the shadows are behaving... well, let's just say I'd feel better once we're near more friendly faces and warm hearths."
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+**What would you like to do?**
+1. 🛡️ Carefully assess the magical threat before taking action 🟢 (Safe & Reliable)
+2. 🔥 Channel your berserker instincts with focused control 🟡 (Moderate Risk)
+3. ⚡ Attempt to counter the magical threat with raw power 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to help identify and counter the magical threat 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 5
+==================================================
+
+🎯 Player Input: 1
+
+🎆 CHARACTER PROGRESSION UNLOCKED!
+✨ You learn a new combat technique
+💭 Combat feels more natural to you
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Nightmare King | Progress: 0 | Turn: 5
+
+🗺️  LOCATION DEBUG REPORT (1 transitions):
+  1. village_outskirts -> ashbrook_village 🚶
+
+
+📍 LOCATION: ashbrook_village
+
+📖 *Fluttering close by with my warm fairy glow illuminating the dusky path, I notice your attentive posture as you scan the autumn-painted surroundings.*
+
+"The shadows between the trees are growing longer as evening settles in, but something feels... The task tests the limits of your abilities. off. That tingling in the air - can you sense it too? Like the whispers of fallen leaves, but heavier somehow."
+
+*My wings shimmer with concern as I hover near your shoulder, casting flickering light on the road ahead leading to Ashbrook village. The sunset paints the autumn trees in deep oranges and reds, but there's an unusual stillness to the scene.*
+
+"The village isn't far now, but this stretch of road has always been known for strange occurrences when darkness falls. Keep your wits about you - the way those shadows dance at the edge of the trees isn't quite natural..."
+
+*A cool breeze rustles through the branches overhead, sending a cascade of copper-colored leaves spiraling down around us. My glow catches them as they fall, creating dancing patterns of light and shadow on the path.*
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. 🔥 Channel your berserker instincts with focused control 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 6
+==================================================
+
+🎯 Player Input: 1
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Nightmare King | Progress: 1 | Turn: 6
+
+📍 LOCATION: ashbrook_village
+
+📖 *Fluttering close by with a soft golden glow, I watch with concern as you stumble slightly in the growing darkness*
+
+"Oh dear, these autumn leaves can be quite treacherous at night! The moonlight playing through the branches makes everything look different than it does during the day. The task tests the limits of your abilities. Perhaps we should find a more stable path?"
+
+*My wings cast dancing shadows as I hover near your shoulder, illuminating patches of the road ahead. The autumn trees rustle ominously in the evening breeze, their red and gold leaves creating shifting patterns on the ground.*
+
+"The lights of Ashbrook village aren't far ahead, but something feels... different tonight. The shadows seem deeper than usual between the trees. And did you notice how the night birds have gone quiet? Strange for this time of evening..."
+
+*I drift a bit closer, my glow brightening protectively as the darkness thickens around us. The path ahead winds between the towering autumn trees, their branches reaching overhead like grasping fingers against the starlit sky.*
+
+"Watch your step now - the recent rains have made these fallen leaves quite slippery. Though I must say, something about this particular stretch of road has my wings all aflutter..."
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. 🔥 Channel your berserker instincts with focused control 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 7
+==================================================
+
+🎯 Player Input: 3
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Nightmare King | Progress: 1 | Turn: 7
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-floating beside you with a soft golden glow, I watch with admiration as you demonstrate remarkable awareness of your surroundings in the darkness*
+
+"Oh my! Your instincts are quite sharp! Even in this dim light, you've noticed those peculiar shadows dancing between the autumn trees. Your skilled approach proves effective. Something's not quite right about them... they seem to move against the wind."
+
+*My wings emit subtle pulses of light, illuminating patches of the path ahead*
+
+"The way those shadows writhe and twist... it reminds me of old tales about the Shadow Blight. We should be extra vigilant as we approach Ashbrook. The village isn't far now - see those faint lights through the trees? But these unnatural movements in the darkness... they're certainly not a good sign."
+
+*I hover closer, my voice dropping to a concerned whisper*
+
+"The villagers need to be warned if the Blight is spreading this far from the corrupted lands. Though I must admit, I've never seen it manifest quite like this before..."
+
+*The autumn leaves rustle ominously in the night breeze, and the shadows between the trees continue their unsettling dance*
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+*Delay could prove costly here*
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. 🔥 Channel your berserker instincts with focused control 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 8
+==================================================
+
+🎯 Player Input: 1
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Nightmare King | Progress: 2 | Turn: 8
+
+📍 LOCATION: ashbrook_village
+
+📖 *Emberlyn's wings shimmer with a soft amber glow as she hovers near your shoulder, her light casting dancing shadows among the autumn leaves*
+
+"Look there, ahead on the path! The first lights of Ashbrook village are just becoming visible through the trees. Your strategy succeeds brilliantly. Though... something seems a bit off about them. The way they flicker isn't quite natural."
+
+*She darts forward a few feet, her expression growing concerned as she studies the distant lights*
+
+"I can sense traces of that strange shadow magic we encountered earlier. It's faint, but it's definitely seeping into the village somehow. The villagers might not even realize it yet."
+
+*A cool breeze rustles through the crimson and gold leaves, carrying with it the faint sound of voices from the village - though whether they're raised in argument or celebration is hard to tell at this distance*
+
+"We should probably investigate carefully. The village guards might be a bit jumpy at this hour, especially with all the strange happenings lately."
+
+*Emberlyn circles back, her glow dimming slightly as she whispers*
+
+"The shadow blight tends to be stronger at night... just like now. Stay alert - something tells me we'll find more answers in Ashbrook, though whether we'll like those answers is another matter entirely."
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+**What would you like to do?**
+1. 🛡️ Carefully assess the magical threat before taking action 🟢 (Safe & Reliable)
+2. 🔥 Channel your berserker instincts with focused control 🟡 (Moderate Risk)
+3. ⚡ Attempt to counter the magical threat with raw power 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to help identify and counter the magical threat 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 9
+==================================================
+
+🎯 Player Input: 2
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Nightmare King | Progress: 2 | Turn: 9
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-hovering anxiously beside you, my tiny form casting a faint golden glow in the midnight darkness*
+
+"Oh dear... Despite your best efforts, the challenge proves difficult. those shadows near the tree line - they're moving in ways shadows shouldn't. The Blight's influence grows stronger here at night. Your footing on that loose gravel wasn't the best just now... perhaps we should be extra cautious?"
+
+*My wings twitch nervously as I cast my fairy-light a bit wider, illuminating the autumn leaves that rustle ominously in the night breeze*
+
+"The village of Ashbrook is just ahead - we can see its lanterns through the trees. But something feels... wrong. The air has that same sickly-sweet scent we encountered near other Blighted areas. And did you notice? The usual night creatures have gone silent."
+
+*I dart closer, speaking in a hushed tone*
+
+"The villagers mentioned strange occurrences after dark. We should probably stay alert - those shadows could be more than just tricks of the moonlight..."
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. 🔥 Channel your berserker instincts with focused control 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 10
+==================================================
+
+🎯 Player Input: 3
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Nightmare King | Progress: 2 | Turn: 10
+
+🗺️  LOCATION DEBUG REPORT (1 transitions):
+  1. village_outskirts -> ashbrook_village 🚶
+
+
+📍 LOCATION: ashbrook_village
+
+📖 *Emberlyn's wings emit a concerned shimmer as she hovers near your shoulder, her glow casting dancing light on the autumn leaves*
+
+"Oh dear... The task tests the limits of your abilities. those shadows by the tree line - they're definitely not natural. The way they're writhing and twisting... this has all the signs of shadow blight corruption. We should be extra careful here."
+
+*She darts nervously between the trees, her fairy light revealing more of the unsettling movement in the darkness. The shadows seem to recoil slightly from her glow, but continue their unnatural undulation along the ground.*
+
+"The village isn't far now, but these corrupted shadows are blocking the safest path. They're particularly active at midnight like this... I can sense their negative energy growing stronger. The villagers must be terrified - no wonder they've been seeking help."
+
+*A chill wind rustles through the autumn leaves, making the shadows appear to dance even more menacingly. Emberlyn's light flickers anxiously as she stays close to you.*
+
+"My magic can offer some protection, but we'll need to be strategic about how we approach this. The shadow blight seems to be spreading..."
+
+**What would you like to do?**
+1. 🛡️ Carefully assess the magical threat before taking action 🟢 (Safe & Reliable)
+2. 🔥 Channel your berserker instincts with focused control 🟡 (Moderate Risk)
+3. ⚡ Attempt to counter the magical threat with raw power 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to help identify and counter the magical threat 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 11
+==================================================
+
+🎯 Player Input: 2
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Nightmare King | Progress: 2 | Turn: 11
+
+📍 LOCATION: ashbrook_village
+
+📖 *Fluttering closer with concern, my golden glow illuminating your face*
+
+"Oh dear, those shadows seem to be thickening ahead, making it harder to spot a safe route around them. Despite your best efforts, the challenge proves difficult. While the main path would normally lead straight to Ashbrook, the shadow blight has made things... complicated. The corrupted areas are spreading faster than I've ever seen before."
+
+*I dart between the autumn leaves, checking the surroundings before returning*
+
+"The moonlight reveals patches of untainted ground to our left, though it's a bit harder to traverse. The corrupted shadows seem to be avoiding the areas where the silver moonbeams touch the earth. Something about this particular manifestation of the blight feels different - more purposeful somehow. Like it's not just spreading randomly, but actually choosing its path..."
+
+*My wings create small trails of sparkles as I hover anxiously*
+
+"The wind carries whispers from the village... strange ones. We should be extra cautious as we proceed. Perhaps there's more to this shadow blight than meets the eye."
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. 🔥 Channel your berserker instincts with focused control 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 12
+==================================================
+
+🎯 Player Input: 2
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Nightmare King | Progress: 2 | Turn: 12
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-floating beside you, my fairy light casting subtle shadows in the dawn light*
+
+"Nicely observed! Those tracks in the morning dew definitely suggest recent travelers heading toward Ashbrook. Your combination of skill and intuition serves you well. The way the grass is bent shows they were moving rather quickly... concerning, given the rumors of Shadow Blight spreading in these parts."
+
+*I drift down to examine some wilting flowers along the path's edge, their petals unnaturally darkened at the tips*
+
+"The signs of the Blight are subtle here, but present. See how these autumn blooms are withering from the edges inward? Not natural at all. We should remain vigilant as we approach the village."
+
+*Rising back to eye level, my wings catching the first rays of sunlight*
+
+"The morning air carries whispers of worry from Ashbrook. Perhaps the villagers will know more about these hasty travelers and the spreading darkness. Though I must say, the dawn light through these amber leaves is rather beautiful, despite everything."
+
+*My glow pulses softly as I survey the path ahead*
+
+"The village gates should be just around that bend ahead, past the old oak with the twisted branches. Things seem quiet for now, but something tells me that won't last..."
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+*Emberlyn tilts her head, her fairy light flickering with concern.* "That was... an interesting choice," *she says softly.*
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. 🔥 Channel your berserker instincts with focused control 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 13
+==================================================
+
+🎯 Player Input: 4
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Nightmare King | Progress: 2 | Turn: 13
+
+📍 LOCATION: ashbrook_village
+
+📖 *My glow flickers with concern as I hover near your shoulder, observing the path ahead through the autumn trees. Your approach falls short this time. The first rays of dawn cast long shadows across the road, and there's something unsettling about how the morning mist clings to the ground.*
+
+"The shadow blight's influence seems stronger here than it should be... Look how the mist moves against the wind. And those villagers we saw earlier heading to Ashbrook? They seemed rather... distant. Almost too quiet."
+
+*I drift closer to the twisted oak tree, my light illuminating patches of darkened bark that shouldn't be there at this time of year.*
+
+"The village gates are just ahead, but something feels wrong. The shadow blight is changing things, even the trees. See how that oak's branches reach toward the path like grasping fingers? This isn't natural..."
+
+*A chill breeze rustles through the leaves, carrying whispers that make my wings shiver slightly.*
+
+"We should be extra careful. The villagers we're following might need our help, but this corruption... it's subtle. Insidious. Even the morning light seems to struggle against it."
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. 🔥 Channel your berserker instincts with focused control 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 14
+==================================================
+
+🎯 Player Input: quit
+
+👋 Thanks for playing Fire Whisper RPG!
+
+
+💰 API COST SUMMARY
+==================
+Total Cost: $0.0997
+Total Tokens: 16,017 (Input: 11,716, Output: 4,301)
+Turns Played: 17
+Average Cost/Turn: $0.0059
+
+Last 5 Turns:
+Turn 10: $0.0062 (1041 tokens)
+Turn 11: $0.0056 (944 tokens)
+Turn 12: $0.0062 (985 tokens)
+Turn 13: $0.0055 (953 tokens)
+Turn 13: $0.0062 (1044 tokens)
+
+
+🪝 SESSION END HOOK (MODERATE):
+Something significant is about to unfold...
+
+🔮 When you return, larger forces come into play...
+💭 The fate of many may depend on your actions
+
+📊 SESSION METRICS:
+• Overall Retention Score: 0.32/1.0
+• Character Investment: 0.40/1.0
+• Context Richness: 0.25/1.0
+• Hook Strength: 0.40/1.0
+
+🎯 RETURN MOTIVATION (MODERATE):
+Your story continues: Something significant is about to unfold...
+
+Reasons to return:
+• Unresolved mysteries await your return
+• Character growth opportunities are within reach
+
+🎆 Upcoming Growth:
+• A memory from your past surfaces (in 1 more session count)
+• You achieve mastery in your chosen path (in 12 more action count)

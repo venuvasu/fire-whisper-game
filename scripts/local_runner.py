@@ -34,15 +34,29 @@ sys.path.append(str(project_root / "backend"))
 # Load environment variables
 load_dotenv(project_root / ".env.local")
 
-# ===== INTEGRATED FEATURES =====
-# Story Arc Integration, Location Debugging, Dynamic Options
+# ===== BILLION DOLLAR GAME FEATURES =====
+# Enhanced Context Management, Session Hooks, Character Investment, Story Integration
+# Implements the complete retention and engagement strategy
 
-# ===== FEATURE 1: STORY ARC INTEGRATION =====
-# Loads all 71 predefined story arcs from the existing story_arcs.txt file
-# and provides saga selection functionality for players
+# ===== CORE SYSTEMS INTEGRATION =====
+# 1. Enhanced Context Manager - Persistent context across sessions
+# 2. Session Hooks Manager - Compelling reasons to return
+# 3. Character Investment Manager - Progressive emotional attachment
+# 4. Integrated Story Controller - All existing story systems
+# 5. Billion Dollar Game Controller - Master orchestration
+
+def initialize_billion_dollar_controller(character_data):
+    """Initialize the billion dollar game controller with all systems"""
+    try:
+        from src.core.billion_dollar_game_controller import BillionDollarGameController
+        return BillionDollarGameController(character_data)
+    except ImportError as e:
+        print(f"⚠️ Billion Dollar Controller not available: {e}")
+        print("🔄 Falling back to integrated story controller...")
+        return None
 
 def load_story_arcs():
-    """Load all 50 story arcs from the existing story_arcs.txt file"""
+    """Load all 71 story arcs from the existing story_arcs.txt file"""
     story_arcs_file = Path(__file__).parent.parent / "src" / "ai" / "prompts" / "story_arcs.txt"
     
     with open(story_arcs_file, "r") as f:
@@ -715,6 +729,31 @@ def run_local_game():
         features_msg = f"\n🎆 ENHANCED FEATURES ACTIVE:\n✅ Story Arc Integration ({len(STORY_ARCS)} arcs available)\n✅ Location Progression Debug ({len(LOCATION_CONNECTIONS)} locations mapped)\n✅ Dynamic Contextual Options\n🗺️ Starting Location: {current_location}"
         log_to_file(log_file, features_msg)
         
+        # Initialize Billion Dollar Game Controller
+        billion_dollar_controller = initialize_billion_dollar_controller(character)
+        
+        if billion_dollar_controller:
+            # Start session with full context integration
+            session_start = billion_dollar_controller.start_new_session()
+            
+            # Enhanced session start message
+            session_msg = f"\n🎆 BILLION DOLLAR FEATURES ACTIVE:\n✅ Enhanced Context Management\n✅ Session Hooks & Cliffhangers\n✅ Progressive Character Investment\n✅ Integrated Story Systems\n\n📊 Session Context: {session_start['session_context']['session_number']} | Investment Score: {session_start['character_investment'].get('investment_score', 0):.2f}"
+            log_to_file(log_file, session_msg)
+            
+            # Show session preview
+            if session_start.get('session_preview'):
+                preview_msg = f"\n🔮 Session Preview: {session_start['session_preview']}"
+                log_to_file(log_file, preview_msg)
+            
+            # Show active hooks if any
+            if session_start['active_hooks']['active_hooks']:
+                hooks_msg = "\n🪝 ACTIVE STORY HOOKS:"
+                for hook in session_start['active_hooks']['active_hooks'][:2]:
+                    hooks_msg += f"\n• {hook['hook_text']}"
+                    if hook['time_pressure']:
+                        hooks_msg += " ⏰ URGENT"
+                log_to_file(log_file, hooks_msg)
+        
         # Start game using existing system
         game_start = ai_layer.start_new_game(character)
         narrative_msg = f"\n📖 {game_start['narrative']}"
@@ -779,7 +818,40 @@ def run_local_game():
             
             # Process action with proper story progression
             try:
-                result = ai_layer.process_player_action(player_input)
+                # Process through billion dollar controller if available
+                if billion_dollar_controller:
+                    # Get enhanced AI context
+                    enhanced_context = billion_dollar_controller._generate_comprehensive_ai_context()
+                    
+                    # TODO: Integrate enhanced context into AI layer properly
+                    # For now, process action normally
+                    result = ai_layer.process_player_action(player_input)
+                    
+                    # Process through billion dollar systems
+                    bd_result = billion_dollar_controller.process_player_action(player_input, result.get('narrative', ''))
+                    
+                    # Show progression notifications
+                    if bd_result.get('character_investment', {}).get('progressions_unlocked'):
+                        progression_msg = "\n🎆 CHARACTER PROGRESSION UNLOCKED!"
+                        for progression in bd_result['character_investment']['progressions_unlocked']:
+                            progression_msg += f"\n✨ {progression['reward_description']}"
+                            progression_msg += f"\n💭 {progression['emotional_impact']}"
+                        log_to_file(log_file, progression_msg)
+                    
+                    # Show discovery notifications
+                    if bd_result.get('discoveries'):
+                        for discovery in bd_result['discoveries']:
+                            if discovery.get('progression'):
+                                discovery_msg = f"\n🔍 DISCOVERY MADE! Rarity: {'★' * discovery['rarity']}"
+                                log_to_file(log_file, discovery_msg)
+                    
+                    # Check for forced progression if needed
+                    force_check = billion_dollar_controller.force_progression_if_needed()
+                    if force_check['progression_forced']:
+                        force_msg = f"\n🚀 STORY PROGRESSION: {force_check['reason']}"
+                        log_to_file(log_file, force_msg)
+                else:
+                    result = ai_layer.process_player_action(player_input)
                 
                 # === INTEGRATED FEATURES PROCESSING ===
                 
@@ -871,6 +943,37 @@ def run_local_game():
             log_to_file(log_file, f"\n{final_cost_summary}")
         except:
             pass  # Don't fail if cost summary fails
+        
+        # End session with billion dollar controller
+        if billion_dollar_controller:
+            session_end = billion_dollar_controller.end_session("max_turns_reached")
+            
+            # Show session end hook
+            if session_end.get('session_hook'):
+                hook_data = session_end['session_hook']
+                hook_msg = f"\n🪝 SESSION END HOOK ({hook_data['intensity']}):\n{hook_data['hook_text']}\n\n🔮 {hook_data['next_session_preview']}\n💭 {hook_data['emotional_stakes']}"
+                log_to_file(log_file, hook_msg)
+            
+            # Show retention metrics
+            if session_end.get('retention_metrics'):
+                metrics = session_end['retention_metrics']
+                metrics_msg = f"\n📊 SESSION METRICS:\n• Overall Retention Score: {metrics['overall_retention_score']:.2f}/1.0\n• Character Investment: {metrics['character_investment_score']:.2f}/1.0\n• Context Richness: {metrics['context_richness_score']:.2f}/1.0\n• Hook Strength: {metrics['hook_strength_score']:.2f}/1.0"
+                log_to_file(log_file, metrics_msg)
+            
+            # Show return motivation
+            if session_end.get('return_motivation'):
+                motivation = session_end['return_motivation']
+                motivation_msg = f"\n🎯 RETURN MOTIVATION ({motivation['return_urgency'].upper()}):\n{motivation['anticipation_message']}"
+                if motivation['motivation_factors']:
+                    motivation_msg += "\n\nReasons to return:"
+                    for factor in motivation['motivation_factors']:
+                        motivation_msg += f"\n• {factor}"
+                log_to_file(log_file, motivation_msg)
+            
+            # Show character progression preview
+            if session_end.get('character_progression_preview'):
+                preview_msg = f"\n🎆 {session_end['character_progression_preview']}"
+                log_to_file(log_file, preview_msg)
         
         # Don't log completion message - it's handled in graceful quit
         print(f"\n🎉 Game completed after {turn_count} turns!")

@@ -1,0 +1,77 @@
+🔥 Fire Whisper RPG - Local Mode
+========================================
+🏷️  Version: 2.0.0.0
+🔑 API Key: ✅ Configured
+🌍 Mode: Local Development
+📝 Log File: gameplay_2025-07-07_233810.txt
+========================================
+
+🎆 SAGA SELECTION
+==================================================
+🎭 Choose your adventure! Each saga offers a unique story
+experience with different themes and challenges.
+==================================================
+Selected Saga: The Merchant's Dilemma
+
+🎭 CHARACTER CREATION
+==================================================
+🌟 Time to breathe life into legend! Shape your hero below—choose
+their path, their spirit, and their spark. The world of Fire Whisper
+awaits your creation...
+==================================================
+Name: TestHero
+Race: Elf
+Gender: Female
+Profession: Warrior
+
+✨ Creating TestHero the Elf Warrior...
+🤖 Generating character with AI (this may take a moment)...
+
+🎉 Character Created Successfully!
+🎭 TestHero the Elf Warrior
+📊 STR:12 DEX:16 CON:14
+📊 INT:11 WIS:12 CHA:10
+❤️  HP: 26 | 🔮 Mana: 17
+⚔️  Weapon: Elven Longsword (1d8+Strength)
+
+🎮 Starting new game with TestHero the Warrior
+
+🎆 ENHANCED FEATURES ACTIVE:
+✅ Story Arc Integration (71 arcs available)
+✅ Location Progression Debug (6 locations mapped)
+✅ Dynamic Contextual Options
+🗺️ Starting Location: village_outskirts
+
+🎆 BILLION DOLLAR FEATURES ACTIVE:
+✅ Enhanced Context Management
+✅ Session Hooks & Cliffhangers
+✅ Progressive Character Investment
+✅ Integrated Story Systems
+
+📊 Session Context: 1 | Investment Score: 0.00
+
+🔮 Session Preview: This session: character growth opportunities await.
+
+📖 *A tiny flame flickers to life beside you, coalescing into a small fairy with glowing ember-like wings and flowing red hair*
+
+"Well met, brave soul! I'm Emberlyn, and I'm ever so pleased to make your acquaintance! *curtsies mid-air with a sparkly trail* The Flame Sages sent me to guide promising adventurers like yourself through these troubled lands."
+
+*She flutters closer, her warm light casting dancing shadows*
+
+"Speaking of troubles... see that smoke rising from the village ahead? The folk of Ashbrook have been pestered by a most peculiar problem - their hearth fires keep going out, no matter how well-tended. In midwinter, no less! Something's clearly amiss, and they could use a capable hand."
+
+*Emberlyn's wings pulse with concern as she glances toward the village*
+
+"The village elder might know more, though the local tavern usually has the freshest gossip. Poor dears must be shivering something fierce without their fires..."
+
+*As you pause to assess yourself, you notice Emberlyn seems distant and cautious.*
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. ⚔️ Use your warrior training to handle this challenge 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 1
+==================================================

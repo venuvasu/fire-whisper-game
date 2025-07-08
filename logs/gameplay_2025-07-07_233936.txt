@@ -1,0 +1,213 @@
+🔥 Fire Whisper RPG - Local Mode
+========================================
+🏷️  Version: 2.0.0.0
+🔑 API Key: ✅ Configured
+🌍 Mode: Local Development
+📝 Log File: gameplay_2025-07-07_233936.txt
+========================================
+
+🎆 SAGA SELECTION
+==================================================
+🎭 Choose your adventure! Each saga offers a unique story
+experience with different themes and challenges.
+==================================================
+Selected Saga: The Crimson Prophecy
+
+🎭 CHARACTER CREATION
+==================================================
+🌟 Time to breathe life into legend! Shape your hero below—choose
+their path, their spirit, and their spark. The world of Fire Whisper
+awaits your creation...
+==================================================
+Name: TestPlayer
+Race: Human
+Gender: Male
+Profession: Warrior
+
+✨ Creating TestPlayer the Human Warrior...
+🤖 Generating character with AI (this may take a moment)...
+
+🎉 Character Created Successfully!
+🎭 TestPlayer the Human Warrior
+📊 STR:14 DEX:12 CON:13
+📊 INT:10 WIS:11 CHA:10
+❤️  HP: 30 | 🔮 Mana: 15
+⚔️  Weapon: Longsword (1d8+Str)
+
+🎮 Starting new game with TestPlayer the Warrior
+
+🎆 ENHANCED FEATURES ACTIVE:
+✅ Story Arc Integration (71 arcs available)
+✅ Location Progression Debug (6 locations mapped)
+✅ Dynamic Contextual Options
+🗺️ Starting Location: village_outskirts
+
+🎆 BILLION DOLLAR FEATURES ACTIVE:
+✅ Enhanced Context Management
+✅ Session Hooks & Cliffhangers
+✅ Progressive Character Investment
+✅ Integrated Story Systems
+
+📊 Session Context: 1 | Investment Score: 0.00
+
+🔮 Session Preview: This session: character growth opportunities await.
+
+📖 *A small crimson light flutters before you, revealing a tiny fairy with ember-like wings and flowing red hair*
+
+"Well met, brave soul! I am Emberlyn, a fire whisper fairy, and I sense a warrior's spirit burning within you. The local village has been plagued by mysterious fires, and I believe there's more to these incidents than mere accidents."
+
+*Emberlyn circles around you, her wings leaving trails of sparkling embers*
+
+"Just ahead lies an abandoned woodcutter's cabin where the first fire began. Smoke still curls from its chimney, though no one has lived there for months. The villagers are too frightened to investigate, but perhaps someone with your courage could help uncover the truth."
+
+*The fairy hovers near your shoulder, her warm glow illuminating the path ahead*
+
+"The cabin stands before us, its dark windows reflecting the setting sun. Strange whispers seem to echo from within, and the door hangs slightly ajar. There's definitely something unusual about this place..."
+
+*As you pause to assess yourself, you notice Emberlyn seems distant and cautious.*
+
+**What would you like to do?**
+1. 🔍 Methodically examine the evidence for important clues 🟢 (Safe & Reliable)
+2. ⚔️ Use your warrior training to handle this challenge 🟡 (Moderate Risk)
+3. 💎 Try to uncover the truth through direct magical probing 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to use her fairy senses to detect hidden clues 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 1
+==================================================
+
+🎯 Player Input: 2
+
+🗺️ LOCATION CHANGED: village_outskirts → ashbrook_village
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Crimson Prophecy | Progress: 1 | Turn: 1
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter flutter* Oh, look at that agile footwork! The way you shifted into that defensive stance shows real warrior instinct. Your strategy succeeds brilliantly. *My wings shimmer as I hover nearby*
+
+From this vigilant position, we can really take in the beauty of these autumn trees. The red and gold leaves dance in the afternoon light, creating such a peaceful scene along the path to Ashbrook. The crisp air carries hints of woodsmoke from the village ahead - they must be preparing their evening meals.
+
+*I circle around excitedly* While we're being cautious, I notice some interesting details from this vantage point. There's a well-worn side trail branching off to the east, partially hidden behind a particularly vibrant maple tree. The main path continues ahead, winding gently toward the village rooftops we can just barely see through the trees.
+
+*My glow softens thoughtfully* You know, being alert like this is wise, even on seemingly peaceful paths. The outskirts of villages often hold unexpected discoveries for those paying attention...
+
+*You feel yourself growing stronger and more capable from this encounter*
+
+**What would you like to do?**
+1. 🔍 Cautiously examine the area for important details 🟢 (Safe & Reliable)
+2. 🏃 Use your combat experience to navigate dangers 🟡 (Moderate Risk)
+3. 🚀 Venture boldly into the unknown despite clear dangers 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead with her fairy abilities 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 2
+==================================================
+
+🎯 Player Input: 1
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Crimson Prophecy | Progress: 1 | Turn: 2
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-floating beside you, my wings catching the autumn sunlight, I notice your attempt to spot anything unusual among the fallen leaves along the path*
+
+"Hmm, the leaves are quite thick here, making it tricky to spot anything interesting. Your approach falls short this time. Though... *gestures at the dancing shadows cast by the branches overhead* sometimes what seems like simple autumn scenery can hide fascinating secrets. Perhaps we should keep our eyes sharp as we continue toward Ashbrook."
+
+*A gentle breeze stirs the orange and red leaves around our feet, carrying the distant scent of woodsmoke from the village*
+
+"The village isn't far now - I can smell their hearth fires. The locals often say the path reveals different treasures depending on the time of day. The afternoon light does create such interesting shadows through these trees..."
+
+*I drift closer, my fairy glow casting subtle sparkles on the scattered leaves while pointing toward a particularly dense patch of foliage*
+
+"The path ahead seems peaceful enough, though these woods have their own quiet magic about them. Listen to how the leaves whisper - it's almost like they're trying to tell us something..."
+
+*Time feels precious in this moment*
+
+**What would you like to do?**
+1. 🛡️ Carefully assess the magical threat before taking action 🟢 (Safe & Reliable)
+2. ⚔️ Use your warrior training to handle this challenge 🟡 (Moderate Risk)
+3. ⚡ Attempt to counter the magical threat with raw power 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to help identify and counter the magical threat 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 3
+==================================================
+
+🎯 Player Input: 3
+
+🎆 CHARACTER PROGRESSION UNLOCKED!
+✨ Your strength increases from training
+💭 You feel yourself growing stronger
+
+🔧 LOCATION DEBUG: No valid location change detected (current: ashbrook_village)
+
+🔍 DEBUG - Game State: Location: ashbrook_village | Arc: The Crimson Prophecy | Progress: 1 | Turn: 3
+
+📍 LOCATION: ashbrook_village
+
+📖 *Flutter-hovering near your shoulder, my fairy wings catching the last rays of evening sun, I watch with concern as you stumble slightly on the uneven path.*
+
+"Oh dear... Your approach falls short this time. those tree roots can be quite treacherous in this fading light. The autumn leaves make it even trickier to spot them." *My gentle glow provides a bit more illumination around us.* "We should be extra careful as we continue toward Ashbrook. The shadow blight has made even familiar paths feel... different."
+
+*I drift closer to the ground, my light revealing strange patterns in the fallen leaves - almost like they're arranging themselves in unnatural ways. The evening air carries a peculiar chill that seems to deepen with each passing moment.*
+
+"Something's not quite right here... The trees shouldn't be this quiet at dusk - there's usually at least a few evening birds. And look at how the shadows stretch..." *I gesture toward the lengthening darkness between the trees.* "They seem to reach toward the path more than they should."
+
+*The path ahead winds through increasingly dense autumn foliage, the trees closing in on both sides. My fairy light casts dancing shadows that make it difficult to distinguish natural movement from something more sinister.*
+
+"The village isn't far now, but we'd best stay alert. The shadow blight has a way of making even the most familiar places feel... unsettling."
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. ⚔️ Use your warrior training to handle this challenge 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 4
+==================================================
+
+🎯 Player Input: quit
+
+👋 Thanks for playing Fire Whisper RPG!
+
+
+💰 API COST SUMMARY
+==================
+Total Cost: $0.0217
+Total Tokens: 3,223 (Input: 2,219, Output: 1,004)
+Turns Played: 4
+Average Cost/Turn: $0.0054
+
+Last 5 Turns:
+Turn 0: $0.0041 (475 tokens)
+Turn 1: $0.0052 (836 tokens)
+Turn 2: $0.0057 (916 tokens)
+Turn 3: $0.0067 (996 tokens)
+
+
+🪝 SESSION END HOOK (MODERATE):
+The air around you begins to take a step forward, and you realize this is just the beginning...
+
+🔮 Your next adventure: the mystery will be revealed
+💭 Your safety and understanding hang in the balance
+
+📊 SESSION METRICS:
+• Overall Retention Score: 0.18/1.0
+• Character Investment: 0.10/1.0
+• Context Richness: 0.11/1.0
+• Hook Strength: 0.40/1.0
+
+🎯 RETURN MOTIVATION (MODERATE):
+Your story continues: The air around you begins to take a step forward, and you realize this is just the beginning...
+
+Reasons to return:
+• Unresolved mysteries await your return
+• Character growth opportunities are within reach
+
+🎆 Upcoming Growth:
+• You learn a new combat technique (in 2 more action count)
+• A memory from your past surfaces (in 1 more session count)

@@ -65,4 +65,349 @@ class IntegratedStoryController:
         # 5. Check for story arc activation
         arc_activation_result = self._check_story_arc_activation()
         if arc_activation_result.get('arc_activated'):
-            turn_result['integration_data']['new_arc_activated'] = arc_activation_result\n        \n        return turn_result\n    \n    def _process_location_transitions(self, ai_response: str, \n                                    dice_rolls: List[Dict] = None) -> Dict[str, Any]:\n        \"\"\"Process location transitions with debugging\"\"\"\n        \n        current_location = self.story_state_manager.current_location\n        turn_number = self.story_state_manager.turn_count\n        \n        # Debug location transition\n        debug_result = self.location_debugger.debug_location_transition(\n            ai_response, current_location, dice_rolls, turn_number\n        )\n        \n        result = {\n            'debug_result': debug_result,\n            'location_changed': False,\n            'old_location': current_location,\n            'new_location': current_location\n        }\n        \n        # Apply location change if valid\n        if debug_result['transition_detected'] and debug_result['transition_valid']:\n            new_location = debug_result['new_location']\n            \n            # Update story state manager\n            move_result = self.story_state_manager.move_to_location(new_location)\n            \n            # Update game state manager\n            game_move_result = self.game_state_manager.update_location(\n                new_location, \"ai_narrative_transition\"\n            )\n            \n            result.update({\n                'location_changed': True,\n                'new_location': new_location,\n                'story_state_result': move_result,\n                'game_state_result': game_move_result\n            })\n        \n        # Handle fixes if needed\n        elif debug_result['fixes_applied']:\n            result['fixes_applied'] = debug_result['fixes_applied']\n            \n            # If a dice roll was suggested, store it for next turn\n            if debug_result.get('suggested_dice_roll'):\n                self.pending_location_change = {\n                    'target_location': debug_result['new_location'],\n                    'suggested_roll': debug_result['suggested_dice_roll'],\n                    'reason': 'location_transition_fix'\n                }\n        \n        return result\n    \n    def _process_story_arc_progression(self, player_action: str, ai_response: str) -> Dict[str, Any]:\n        \"\"\"Process story arc progression\"\"\"\n        \n        result = {'arc_progression': False}\n        \n        # Check if we have an active arc\n        current_arc_context = self.story_arc_manager.get_current_arc_context()\n        \n        if current_arc_context.get('no_active_arc'):\n            result['no_active_arc'] = True\n            return result\n        \n        # Determine if significant progress was made\n        progress_indicators = [\n            'quest', 'discovery', 'revelation', 'conflict', 'resolution',\n            'important', 'significant', 'breakthrough', 'climax'\n        ]\n        \n        ai_response_lower = ai_response.lower()\n        player_action_lower = player_action.lower()\n        \n        progress_made = any(\n            indicator in ai_response_lower or indicator in player_action_lower\n            for indicator in progress_indicators\n        )\n        \n        if progress_made:\n            arc_progress_result = self.story_arc_manager.advance_arc_progress(1)\n            result.update({\n                'arc_progression': True,\n                'progress_result': arc_progress_result\n            })\n            \n            # Check if arc completed\n            if arc_progress_result.get('arc_completed'):\n                result['arc_completed'] = True\n                result['completed_arc'] = arc_progress_result['completed_arc']\n        \n        return result\n    \n    def _check_story_arc_activation(self) -> Dict[str, Any]:\n        \"\"\"Check if a new story arc should be activated\"\"\"\n        \n        # Don't activate if we already have an active arc\n        current_arc = self.story_arc_manager.get_current_arc_context()\n        if not current_arc.get('no_active_arc'):\n            return {'no_activation': 'arc_already_active'}\n        \n        # Get context for arc selection\n        character = self.game_state_manager.character\n        character_level = character.get('level', 1)\n        \n        story_context = {\n            'character_level': character_level,\n            'turn_count': self.story_state_manager.turn_count,\n            'story_flags': self.story_state_manager.story_flags,\n            'themes': self._extract_current_themes()\n        }\n        \n        current_location = self.story_state_manager.current_location\n        \n        # Select appropriate arc\n        selected_arc = self.story_arc_manager.select_arc_for_context(\n            character_level, story_context, current_location\n        )\n        \n        if selected_arc:\n            activation_result = self.story_arc_manager.activate_arc(selected_arc)\n            return activation_result\n        \n        return {'no_activation': 'no_suitable_arc'}\n    \n    def _extract_current_themes(self) -> List[str]:\n        \"\"\"Extract current story themes from recent events\"\"\"\n        \n        themes = []\n        recent_events = self.story_state_manager.recent_events\n        \n        # Analyze recent events for themes\n        theme_keywords = {\n            'corruption': ['corruption', 'blight', 'dark', 'evil'],\n            'restoration': ['restore', 'heal', 'fix', 'repair'],\n            'exploration': ['discover', 'explore', 'find', 'search'],\n            'conflict': ['fight', 'battle', 'enemy', 'hostile'],\n            'mystery': ['mystery', 'unknown', 'secret', 'hidden']\n        }\n        \n        for theme, keywords in theme_keywords.items():\n            if any(any(keyword in event.lower() for keyword in keywords) \n                  for event in recent_events):\n                themes.append(theme)\n        \n        return themes\n    \n    def generate_enhanced_context_for_ai(self) -> str:\n        \"\"\"Generate comprehensive context for AI including all systems\"\"\"\n        \n        context_parts = []\n        \n        # 1. Story Arc Context\n        arc_context = self.story_arc_manager.get_current_arc_context()\n        if not arc_context.get('no_active_arc'):\n            context_parts.append(\"=== ACTIVE STORY ARC ===\")\n            active_arc = arc_context['active_arc']\n            context_parts.extend([\n                f\"Arc: {active_arc['name']} ({active_arc['type']})\",\n                f\"Phase: {arc_context['phase_guidance']}\",\n                f\"Progress: {active_arc['progress']}/{active_arc['estimated_turns']} turns\",\n                f\"Key Elements: {', '.join(active_arc['key_elements'])}\"\n            ])\n            \n            if arc_context.get('climax_direction'):\n                context_parts.append(f\"Approaching Climax: {arc_context['climax_direction']}\")\n            \n            context_parts.append(\"\")\n        \n        # 2. Location Context with Debug Info\n        current_location_context = self.story_state_manager.get_current_context()\n        location = current_location_context['location']\n        \n        context_parts.append(\"=== LOCATION CONTEXT ===\")\n        context_parts.extend([\n            f\"Current Location: {location['name']} ({location['type']})\",\n            f\"Description: {location['description']}\",\n            f\"Safe Zone: {'Yes' if location['safe_zone'] else 'No'}\"\n        ])\n        \n        if current_location_context['connected_locations']:\n            connected_names = [loc['name'] for loc in current_location_context['connected_locations']]\n            context_parts.append(f\"Connected Locations: {', '.join(connected_names)}\")\n        \n        if current_location_context['npcs_present']:\n            npc_names = [npc['name'] for npc in current_location_context['npcs_present']]\n            context_parts.append(f\"NPCs Present: {', '.join(npc_names)}\")\n        \n        context_parts.append(\"\")\n        \n        # 3. Game State Context\n        game_state = self.game_state_manager.get_current_state()\n        character = game_state['character']\n        \n        context_parts.append(\"=== CHARACTER STATUS ===\")\n        context_parts.extend([\n            f\"Name: {character['name']} (Level {character['level']} {character['class']})\",\n            f\"HP: {character['resources']['hp']}/{character['resources']['max_hp']}\",\n            f\"Energy: {character['resources']['energy']}/{character['resources']['max_energy']}\",\n            f\"XP: {character['xp']}\"\n        ])\n        \n        # 4. Pending Issues\n        if self.pending_location_change:\n            context_parts.append(\"=== PENDING LOCATION TRANSITION ===\")\n            pending = self.pending_location_change\n            context_parts.extend([\n                f\"Target: {pending['target_location']}\",\n                f\"Requires: {pending['suggested_roll']['skill_used']} check (difficulty: {pending['suggested_roll']['difficulty']})\",\n                f\"Reason: {pending['reason']}\"\n            ])\n            context_parts.append(\"\")\n        \n        # 5. Debug Information (if enabled)\n        if self.debug_mode:\n            debug_report = self.location_debugger.get_transition_debug_report()\n            if not debug_report.get('no_transitions'):\n                context_parts.append(\"=== DEBUG INFO ===\")\n                context_parts.append(f\"Location Transition Success Rate: {debug_report['success_rate']:.1%}\")\n                if debug_report['common_issues']:\n                    context_parts.append(f\"Common Issues: {', '.join(debug_report['common_issues'])}\")\n                context_parts.append(\"\")\n        \n        return \"\\n\".join(context_parts)\n    \n    def generate_dynamic_options(self, situation: str) -> str:\n        \"\"\"Generate dynamic options using enhanced option generator\"\"\"\n        \n        # Get comprehensive context\n        character = self.game_state_manager.character\n        story_context = {\n            'turn_count': self.story_state_manager.turn_count,\n            'story_flags': self.story_state_manager.story_flags,\n            'active_quests': [quest for quest in self.story_state_manager.quests.values() \n                            if quest.status == 'active'],\n            'character_level': character.get('level', 1)\n        }\n        \n        location_context = self.story_state_manager.get_current_context()['location']\n        \n        # Generate options\n        options = self.option_generator.generate_dynamic_options(\n            situation, character, story_context, location_context\n        )\n        \n        return self.option_generator.format_options_for_ai(options)\n    \n    def handle_dice_roll_request(self, roll_context: str) -> Dict[str, Any]:\n        \"\"\"Handle dice roll requests with location transition awareness\"\"\"\n        \n        # Check if this is for a pending location transition\n        if self.pending_location_change and 'movement' in roll_context.lower():\n            suggested_roll = self.pending_location_change['suggested_roll']\n            \n            # Execute the suggested roll\n            dice_result = self.game_state_manager.execute_dice_roll(\n                stat=suggested_roll['stat_used'],\n                skill=suggested_roll['skill_used'],\n                difficulty=suggested_roll['difficulty'],\n                context=suggested_roll['context']\n            )\n            \n            result = {\n                'dice_roll_executed': True,\n                'roll_result': dice_result,\n                'pending_transition': self.pending_location_change\n            }\n            \n            # If successful, apply the location change\n            if dice_result.success:\n                target_location = self.pending_location_change['target_location']\n                move_result = self.story_state_manager.move_to_location(target_location)\n                \n                result.update({\n                    'location_changed': True,\n                    'new_location': target_location,\n                    'move_result': move_result\n                })\n                \n                # Clear pending change\n                self.pending_location_change = None\n            \n            return result\n        \n        # Regular dice roll handling\n        return {'regular_dice_roll': True}\n    \n    def get_integration_status(self) -> Dict[str, Any]:\n        \"\"\"Get status of all integrated systems\"\"\"\n        \n        return {\n            'integration_active': self.integration_active,\n            'debug_mode': self.debug_mode,\n            'systems_status': {\n                'story_arc_manager': {\n                    'active_arc': self.story_arc_manager.active_arc.name if self.story_arc_manager.active_arc else None,\n                    'completed_arcs': len(self.story_arc_manager.completed_arcs),\n                    'available_arcs': len(self.story_arc_manager.available_arcs)\n                },\n                'location_debugger': {\n                    'transitions_logged': len(self.location_debugger.transition_history),\n                    'debug_report': self.location_debugger.get_transition_debug_report()\n                },\n                'option_generator': {\n                    'recent_actions_tracked': len(self.option_generator.recent_actions)\n                }\n            },\n            'current_state': {\n                'location': self.story_state_manager.current_location,\n                'turn_count': self.story_state_manager.turn_count,\n                'character_level': self.game_state_manager.character.get('level', 1)\n            },\n            'pending_issues': {\n                'location_change': self.pending_location_change is not None\n            }\n        }\n    \n    def force_story_progression(self, reason: str = \"manual_override\") -> Dict[str, Any]:\n        \"\"\"Force story progression when needed\"\"\"\n        \n        result = {'forced_progression': True, 'reason': reason, 'actions_taken': []}\n        \n        # 1. Check if we need to activate a story arc\n        if self.story_arc_manager.get_current_arc_context().get('no_active_arc'):\n            activation_result = self._check_story_arc_activation()\n            if activation_result.get('arc_activated'):\n                result['actions_taken'].append('activated_story_arc')\n                result['new_arc'] = activation_result\n        \n        # 2. Check if location progression is stuck\n        progression_check = self.game_state_manager.should_force_progression()\n        if progression_check['should_force']:\n            # Suggest location change\n            current_location = self.story_state_manager.current_location\n            connectivity = self.location_debugger.get_location_connectivity_map()\n            \n            available_destinations = connectivity['connections'].get(current_location, {}).get('connected_to', [])\n            if available_destinations:\n                suggested_destination = available_destinations[0]  # Take first available\n                \n                result['actions_taken'].append('suggested_location_change')\n                result['suggested_location'] = suggested_destination\n                result['progression_reason'] = progression_check['reason']\n        \n        # 3. Advance story arc if stalled\n        arc_context = self.story_arc_manager.get_current_arc_context()\n        if not arc_context.get('no_active_arc'):\n            active_arc = arc_context['active_arc']\n            if active_arc['progress_ratio'] < 0.1:  # Very little progress\n                arc_progress = self.story_arc_manager.advance_arc_progress(2)  # Double progress\n                result['actions_taken'].append('advanced_story_arc')\n                result['arc_progress'] = arc_progress\n        \n        return result\n    \n    def save_integrated_state(self) -> Dict[str, Any]:\n        \"\"\"Save state of all integrated systems\"\"\"\n        \n        return {\n            'game_state': json.loads(self.game_state_manager.save_state()),\n            'story_state': self.story_state_manager.save_state(),\n            'story_arc_state': {\n                'active_arc': self.story_arc_manager.active_arc.name if self.story_arc_manager.active_arc else None,\n                'arc_progress': self.story_arc_manager.arc_progress,\n                'completed_arcs': self.story_arc_manager.completed_arcs,\n                'available_arcs': self.story_arc_manager.available_arcs\n            },\n            'integration_state': {\n                'pending_location_change': self.pending_location_change,\n                'recent_actions': self.option_generator.recent_actions\n            },\n            'timestamp': time.time()\n        }\n    \n    def load_integrated_state(self, state_data: Dict[str, Any]):\n        \"\"\"Load state of all integrated systems\"\"\"\n        \n        # Load game state\n        if 'game_state' in state_data:\n            self.game_state_manager = GameStateManager.load_state(\n                json.dumps(state_data['game_state'])\n            )\n        \n        # Load story state\n        if 'story_state' in state_data:\n            self.story_state_manager.load_state(state_data['story_state'])\n        \n        # Load story arc state\n        if 'story_arc_state' in state_data:\n            arc_state = state_data['story_arc_state']\n            if arc_state.get('active_arc'):\n                # Reactivate arc\n                arc = self.story_arc_manager.story_arcs.get(arc_state['active_arc'])\n                if arc:\n                    self.story_arc_manager.activate_arc(arc)\n                    self.story_arc_manager.arc_progress = arc_state.get('arc_progress', 0)\n            \n            self.story_arc_manager.completed_arcs = arc_state.get('completed_arcs', [])\n            self.story_arc_manager.available_arcs = arc_state.get('available_arcs', [])\n        \n        # Load integration state\n        if 'integration_state' in state_data:\n            integration_state = state_data['integration_state']\n            self.pending_location_change = integration_state.get('pending_location_change')\n            self.option_generator.recent_actions = integration_state.get('recent_actions', [])
+            turn_result['integration_data']['new_arc_activated'] = arc_activation_result
+        
+        return turn_result
+    
+    def _process_location_transitions(self, ai_response: str, 
+                                    dice_rolls: List[Dict] = None) -> Dict[str, Any]:
+        """Process location transitions with debugging"""
+        
+        current_location = self.story_state_manager.current_location
+        turn_number = self.story_state_manager.turn_count
+        
+        # Debug location transition
+        debug_result = self.location_debugger.debug_location_transition(
+            ai_response, current_location, dice_rolls, turn_number
+        )
+        
+        result = {
+            'debug_result': debug_result,
+            'location_changed': False,
+            'old_location': current_location,
+            'new_location': current_location
+        }
+        
+        # Apply location change if valid
+        if debug_result['transition_detected'] and debug_result['transition_valid']:
+            new_location = debug_result['new_location']
+            
+            # Update story state manager
+            move_result = self.story_state_manager.move_to_location(new_location)
+            
+            # Update game state manager
+            game_move_result = self.game_state_manager.update_location(
+                new_location, "ai_narrative_transition"
+            )
+            
+            result.update({
+                'location_changed': True,
+                'new_location': new_location,
+                'story_state_result': move_result,
+                'game_state_result': game_move_result
+            })
+        
+        # Handle fixes if needed
+        elif debug_result['fixes_applied']:
+            result['fixes_applied'] = debug_result['fixes_applied']
+            
+            # If a dice roll was suggested, store it for next turn
+            if debug_result.get('suggested_dice_roll'):
+                self.pending_location_change = {
+                    'target_location': debug_result['new_location'],
+                    'suggested_roll': debug_result['suggested_dice_roll'],
+                    'reason': 'location_transition_fix'
+                }
+        
+        return result
+    
+    def _process_story_arc_progression(self, player_action: str, ai_response: str) -> Dict[str, Any]:
+        """Process story arc progression"""
+        
+        result = {'arc_progression': False}
+        
+        # Check if we have an active arc
+        current_arc_context = self.story_arc_manager.get_current_arc_context()
+        
+        if current_arc_context.get('no_active_arc'):
+            result['no_active_arc'] = True
+            return result
+        
+        # Determine if significant progress was made
+        progress_indicators = [
+            'quest', 'discovery', 'revelation', 'conflict', 'resolution',
+            'important', 'significant', 'breakthrough', 'climax'
+        ]
+        
+        ai_response_lower = ai_response.lower()
+        player_action_lower = player_action.lower()
+        
+        progress_made = any(
+            indicator in ai_response_lower or indicator in player_action_lower
+            for indicator in progress_indicators
+        )
+        
+        if progress_made:
+            arc_progress_result = self.story_arc_manager.advance_arc_progress(1)
+            result.update({
+                'arc_progression': True,
+                'progress_result': arc_progress_result
+            })
+            
+            # Check if arc completed
+            if arc_progress_result.get('arc_completed'):
+                result['arc_completed'] = True
+                result['completed_arc'] = arc_progress_result['completed_arc']
+        
+        return result
+    
+    def _check_story_arc_activation(self) -> Dict[str, Any]:
+        """Check if a new story arc should be activated"""
+        
+        # Don't activate if we already have an active arc
+        current_arc = self.story_arc_manager.get_current_arc_context()
+        if not current_arc.get('no_active_arc'):
+            return {'no_activation': 'arc_already_active'}
+        
+        # Get context for arc selection
+        character = self.game_state_manager.character
+        character_level = character.get('level', 1)
+        
+        story_context = {
+            'character_level': character_level,
+            'turn_count': self.story_state_manager.turn_count,
+            'story_flags': self.story_state_manager.story_flags,
+            'themes': self._extract_current_themes()
+        }
+        
+        current_location = self.story_state_manager.current_location
+        
+        # Select appropriate arc
+        selected_arc = self.story_arc_manager.select_arc_for_context(
+            character_level, story_context, current_location
+        )
+        
+        if selected_arc:
+            activation_result = self.story_arc_manager.activate_arc(selected_arc)
+            return activation_result
+        
+        return {'no_activation': 'no_suitable_arc'}
+    
+    def _extract_current_themes(self) -> List[str]:
+        """Extract current story themes from recent events"""
+        
+        themes = []
+        recent_events = self.story_state_manager.recent_events
+        
+        # Analyze recent events for themes
+        theme_keywords = {
+            'corruption': ['corruption', 'blight', 'dark', 'evil'],
+            'restoration': ['restore', 'heal', 'fix', 'repair'],
+            'exploration': ['discover', 'explore', 'find', 'search'],
+            'conflict': ['fight', 'battle', 'enemy', 'hostile'],
+            'mystery': ['mystery', 'unknown', 'secret', 'hidden']
+        }
+        
+        for theme, keywords in theme_keywords.items():
+            if any(any(keyword in event.lower() for keyword in keywords) 
+                  for event in recent_events):
+                themes.append(theme)
+        
+        return themes
+    
+    def generate_enhanced_context_for_ai(self) -> str:
+        """Generate comprehensive context for AI including all systems"""
+        
+        context_parts = []
+        
+        # 1. Story Arc Context
+        arc_context = self.story_arc_manager.get_current_arc_context()
+        if not arc_context.get('no_active_arc'):
+            context_parts.append("=== ACTIVE STORY ARC ===")
+            active_arc = arc_context['active_arc']
+            context_parts.extend([
+                f"Arc: {active_arc['name']} ({active_arc['type']})",
+                f"Phase: {arc_context['phase_guidance']}",
+                f"Progress: {active_arc['progress']}/{active_arc['estimated_turns']} turns",
+                f"Key Elements: {', '.join(active_arc['key_elements'])}"
+            ])
+            
+            if arc_context.get('climax_direction'):
+                context_parts.append(f"Approaching Climax: {arc_context['climax_direction']}")
+            
+            context_parts.append("")
+        
+        # 2. Location Context with Debug Info
+        current_location_context = self.story_state_manager.get_current_context()
+        location = current_location_context['location']
+        
+        context_parts.append("=== LOCATION CONTEXT ===")
+        context_parts.extend([
+            f"Current Location: {location['name']} ({location['type']})",
+            f"Description: {location['description']}",
+            f"Safe Zone: {'Yes' if location['safe_zone'] else 'No'}"
+        ])
+        
+        if current_location_context['connected_locations']:
+            connected_names = [loc['name'] for loc in current_location_context['connected_locations']]
+            context_parts.append(f"Connected Locations: {', '.join(connected_names)}")
+        
+        if current_location_context['npcs_present']:
+            npc_names = [npc['name'] for npc in current_location_context['npcs_present']]
+            context_parts.append(f"NPCs Present: {', '.join(npc_names)}")
+        
+        context_parts.append("")
+        
+        # 3. Game State Context
+        game_state = self.game_state_manager.get_current_state()
+        character = game_state['character']
+        
+        context_parts.append("=== CHARACTER STATUS ===")
+        context_parts.extend([
+            f"Name: {character['name']} (Level {character['level']} {character['class']})",
+            f"HP: {character['resources']['hp']}/{character['resources']['max_hp']}",
+            f"Energy: {character['resources']['energy']}/{character['resources']['max_energy']}",
+            f"XP: {character['xp']}"
+        ])
+        
+        # 4. Pending Issues
+        if self.pending_location_change:
+            context_parts.append("=== PENDING LOCATION TRANSITION ===")
+            pending = self.pending_location_change
+            context_parts.extend([
+                f"Target: {pending['target_location']}",
+                f"Requires: {pending['suggested_roll']['skill_used']} check (difficulty: {pending['suggested_roll']['difficulty']})",
+                f"Reason: {pending['reason']}"
+            ])
+            context_parts.append("")
+        
+        # 5. Debug Information (if enabled)
+        if self.debug_mode:
+            debug_report = self.location_debugger.get_transition_debug_report()
+            if not debug_report.get('no_transitions'):
+                context_parts.append("=== DEBUG INFO ===")
+                context_parts.append(f"Location Transition Success Rate: {debug_report['success_rate']:.1%}")
+                if debug_report['common_issues']:
+                    context_parts.append(f"Common Issues: {', '.join(debug_report['common_issues'])}")
+                context_parts.append("")
+        
+        return "\n".join(context_parts)
+    
+    def get_integration_status(self) -> Dict[str, Any]:
+        """Get status of all integrated systems"""
+        
+        return {
+            'integration_active': self.integration_active,
+            'debug_mode': self.debug_mode,
+            'systems_status': {
+                'story_arc_manager': {
+                    'active_arc': self.story_arc_manager.active_arc.name if self.story_arc_manager.active_arc else None,
+                    'completed_arcs': len(self.story_arc_manager.completed_arcs),
+                    'available_arcs': len(self.story_arc_manager.available_arcs)
+                },
+                'location_debugger': {
+                    'transitions_logged': len(self.location_debugger.transition_history),
+                    'debug_report': self.location_debugger.get_transition_debug_report()
+                },
+                'option_generator': {
+                    'recent_actions_tracked': len(self.option_generator.recent_actions)
+                }
+            },
+            'current_state': {
+                'location': self.story_state_manager.current_location,
+                'turn_count': self.story_state_manager.turn_count,
+                'character_level': self.game_state_manager.character.get('level', 1)
+            },
+            'pending_issues': {
+                'location_change': self.pending_location_change is not None
+            }
+        }
+    
+    def force_story_progression(self, reason: str = "manual_override") -> Dict[str, Any]:
+        """Force story progression when needed"""
+        
+        result = {'forced_progression': True, 'reason': reason, 'actions_taken': []}
+        
+        # 1. Check if we need to activate a story arc
+        if self.story_arc_manager.get_current_arc_context().get('no_active_arc'):
+            activation_result = self._check_story_arc_activation()
+            if activation_result.get('arc_activated'):
+                result['actions_taken'].append('activated_story_arc')
+                result['new_arc'] = activation_result
+        
+        # 2. Check if location progression is stuck
+        progression_check = self.game_state_manager.should_force_progression()
+        if progression_check['should_force']:
+            # Suggest location change
+            current_location = self.story_state_manager.current_location
+            connectivity = self.location_debugger.get_location_connectivity_map()
+            
+            available_destinations = connectivity['connections'].get(current_location, {}).get('connected_to', [])
+            if available_destinations:
+                suggested_destination = available_destinations[0]  # Take first available
+                
+                result['actions_taken'].append('suggested_location_change')
+                result['suggested_location'] = suggested_destination
+                result['progression_reason'] = progression_check['reason']
+        
+        # 3. Advance story arc if stalled
+        arc_context = self.story_arc_manager.get_current_arc_context()
+        if not arc_context.get('no_active_arc'):
+            active_arc = arc_context['active_arc']
+            if active_arc['progress_ratio'] < 0.1:  # Very little progress
+                arc_progress = self.story_arc_manager.advance_arc_progress(2)  # Double progress
+                result['actions_taken'].append('advanced_story_arc')
+                result['arc_progress'] = arc_progress
+        
+        return result
+    
+    def save_integrated_state(self) -> Dict[str, Any]:
+        """Save state of all integrated systems"""
+        
+        return {
+            'game_state': json.loads(self.game_state_manager.save_state()),
+            'story_state': self.story_state_manager.save_state(),
+            'story_arc_state': {
+                'active_arc': self.story_arc_manager.active_arc.name if self.story_arc_manager.active_arc else None,
+                'arc_progress': self.story_arc_manager.arc_progress,
+                'completed_arcs': self.story_arc_manager.completed_arcs,
+                'available_arcs': self.story_arc_manager.available_arcs
+            },
+            'integration_state': {
+                'pending_location_change': self.pending_location_change,
+                'recent_actions': self.option_generator.recent_actions
+            },
+            'timestamp': time.time()
+        }
+    
+    def load_integrated_state(self, state_data: Dict[str, Any]):
+        """Load state of all integrated systems"""
+        
+        # Load game state
+        if 'game_state' in state_data:
+            self.game_state_manager = GameStateManager.load_state(
+                json.dumps(state_data['game_state'])
+            )
+        
+        # Load story state
+        if 'story_state' in state_data:
+            self.story_state_manager.load_state(state_data['story_state'])
+        
+        # Load story arc state
+        if 'story_arc_state' in state_data:
+            arc_state = state_data['story_arc_state']
+            if arc_state.get('active_arc'):
+                # Reactivate arc
+                arc = self.story_arc_manager.story_arcs.get(arc_state['active_arc'])
+                if arc:
+                    self.story_arc_manager.activate_arc(arc)
+                    self.story_arc_manager.arc_progress = arc_state.get('arc_progress', 0)
+            
+            self.story_arc_manager.completed_arcs = arc_state.get('completed_arcs', [])
+            self.story_arc_manager.available_arcs = arc_state.get('available_arcs', [])
+        
+        # Load integration state
+        if 'integration_state' in state_data:
+            integration_state = state_data['integration_state']
+            self.pending_location_change = integration_state.get('pending_location_change')
+            self.option_generator.recent_actions = integration_state.get('recent_actions', [])

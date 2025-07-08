@@ -1,0 +1,123 @@
+🔥 Fire Whisper RPG - Local Mode
+========================================
+🏷️  Version: 2.0.0.0
+🔑 API Key: ✅ Configured
+🌍 Mode: Local Development
+📝 Log File: gameplay_2025-07-07_233852.txt
+========================================
+
+🎆 SAGA SELECTION
+==================================================
+🎭 Choose your adventure! Each saga offers a unique story
+experience with different themes and challenges.
+==================================================
+Selected Saga: The Crimson Prophecy
+
+🎭 CHARACTER CREATION
+==================================================
+🌟 Time to breathe life into legend! Shape your hero below—choose
+their path, their spirit, and their spark. The world of Fire Whisper
+awaits your creation...
+==================================================
+Name: Hero2
+Race: Human
+Gender: Male
+Profession: Warrior
+
+✨ Creating Hero2 the Human Warrior...
+🤖 Generating character with AI (this may take a moment)...
+
+🎉 Character Created Successfully!
+🎭 Hero2 the Human Warrior
+📊 STR:14 DEX:12 CON:14
+📊 INT:10 WIS:12 CHA:12
+❤️  HP: 32 | 🔮 Mana: 17
+⚔️  Weapon: Iron Longsword (1d8+Strength)
+
+🎮 Starting new game with Hero2 the Warrior
+
+🎆 ENHANCED FEATURES ACTIVE:
+✅ Story Arc Integration (71 arcs available)
+✅ Location Progression Debug (6 locations mapped)
+✅ Dynamic Contextual Options
+🗺️ Starting Location: village_outskirts
+
+🎆 BILLION DOLLAR FEATURES ACTIVE:
+✅ Enhanced Context Management
+✅ Session Hooks & Cliffhangers
+✅ Progressive Character Investment
+✅ Integrated Story Systems
+
+📊 Session Context: 1 | Investment Score: 0.00
+
+🔮 Session Preview: This session: character growth opportunities await.
+
+📖 *A tiny flame flickers to life beside you, coalescing into a small fairy with ember-bright wings and flowing red hair*
+
+"Well met, brave warrior! I'm Emberlyn, and I'm ever so pleased to be your guide through the Blazing Realms. *giggles while floating in a playful circle* Don't let my size fool you - I know all sorts of useful things about these lands!"
+
+*Her expression grows more serious as she points toward a worn stone path leading into a shadowy grove*
+
+"There's a village just beyond those trees that desperately needs help. Dark whispers tell of shadow wolves prowling at night, stealing livestock and threatening the villagers. The local guard is stretched thin dealing with other troubles..." 
+
+*Emberlyn's wings flutter anxiously as she hovers closer*
+
+"I can sense the warrior's spirit in you - perhaps you could be the one to face these beasts and protect the innocent? The path ahead isn't safe, but then again, the most important journeys rarely are..."
+
+*She gestures toward the grove, her warm glow illuminating the first steps of the trail*
+
+*As you pause to assess yourself, you notice Emberlyn seems distant and cautious.*
+
+**What would you like to do?**
+1. 🛡️ Take a defensive stance and assess the threat carefully 🟢 (Safe & Reliable)
+2. ⚔️ Use your warrior training to handle this challenge 🟡 (Moderate Risk)
+3. ⚡ Launch a bold preemptive strike against the threat 🔴 (High Risk, High Reward)
+4. 🧚 Ask Emberlyn to scout ahead and assess the danger safely 🟣 (Emberlyn Assisted)
+
+==================================================
+Turn 1
+==================================================
+
+🎯 Player Input: 2
+❌ Error processing action: process_player_action() takes 2 positional arguments but 3 were given
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/aetchang/Documents/firewhisper/fire-whisper-game/scripts/local_runner.py", line 827, in run_local_game
+    result = ai_layer.process_player_action(player_input, enhanced_context)
+TypeError: process_player_action() takes 2 positional arguments but 3 were given
+
+
+==================================================
+Turn 1
+==================================================
+
+🎯 Player Input: 1
+❌ Error processing action: process_player_action() takes 2 positional arguments but 3 were given
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/aetchang/Documents/firewhisper/fire-whisper-game/scripts/local_runner.py", line 827, in run_local_game
+    result = ai_layer.process_player_action(player_input, enhanced_context)
+TypeError: process_player_action() takes 2 positional arguments but 3 were given
+
+
+==================================================
+Turn 1
+==================================================
+
+🎯 Player Input: 4
+❌ Error processing action: process_player_action() takes 2 positional arguments but 3 were given
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/aetchang/Documents/firewhisper/fire-whisper-game/scripts/local_runner.py", line 827, in run_local_game
+    result = ai_layer.process_player_action(player_input, enhanced_context)
+TypeError: process_player_action() takes 2 positional arguments but 3 were given
+
+
+==================================================
+Turn 1
+==================================================
+
+🎯 Player Input: quit

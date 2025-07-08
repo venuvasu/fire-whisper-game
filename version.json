@@ -1,11 +1,47 @@
 {
-  "version": "1.3.0.0",
-  "major": 1,
-  "minor": 3,
+  "version": "2.0.0.0",
+  "major": 2,
+  "minor": 0,
   "prompt": 0,
   "ui": 0,
-  "last_updated": "2025-07-07T22:50:00Z",
+  "codename": "Billion Dollar Edition",
+  "last_updated": "2025-07-07T23:35:00Z",
   "changelog": {
+    "2.0.0.0": {
+      "date": "2025-07-07",
+      "changes": [
+        "🎯 BILLION DOLLAR EDITION: Complete retention and engagement system implementation",
+        "MAJOR FEATURE: Enhanced Context Manager - Persistent context across sessions with weighted importance",
+        "MAJOR FEATURE: Session Hooks Manager - Compelling cliffhangers and return motivation psychology",
+        "MAJOR FEATURE: Character Investment Manager - Progressive emotional attachment through visible growth",
+        "MAJOR FEATURE: Billion Dollar Game Controller - Master orchestration of all retention systems",
+        "MAJOR FEATURE: Retention Metrics & Analytics - Real-time tracking of engagement and investment",
+        "IMPROVEMENT: Context continuity across sessions with intelligent summarization",
+        "IMPROVEMENT: Emotional investment tracking through multiple progression systems",
+        "IMPROVEMENT: AI receives rich, weighted context for maximum narrative quality",
+        "IMPROVEMENT: Session end hooks create compelling reasons to return",
+        "IMPROVEMENT: Character progression visible every 3-5 actions for constant satisfaction"
+      ],
+      "breaking_changes": [
+        "Enhanced context system changes AI input format",
+        "Session management now includes hooks and retention tracking"
+      ],
+      "retention_systems": {
+        "context_continuity": "Persistent story memory across sessions",
+        "emotional_investment": "Progressive character attachment systems",
+        "session_hooks": "Compelling cliffhangers and return motivation",
+        "character_progression": "Visible growth every few actions",
+        "return_motivation": "Psychological hooks for next session"
+      },
+      "technical_changes": [
+        "Added src/core/enhanced_context_manager.py - Persistent context with weighted importance",
+        "Added src/core/session_hooks_manager.py - Cliffhanger and return motivation system",
+        "Added src/core/character_investment_manager.py - Progressive emotional attachment",
+        "Added src/core/billion_dollar_game_controller.py - Master retention orchestration",
+        "Enhanced scripts/local_runner.py with billion dollar features integration",
+        "Fixed src/core/integrated_story_controller.py syntax and formatting issues"
+      ]
+    },
     "1.3.0.0": {
       "date": "2025-07-07",
       "changes": [
