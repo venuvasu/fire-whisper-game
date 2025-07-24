@@ -1,0 +1,7 @@
+🔥 Fire Whisper RPG - Local Mode
+========================================
+🏷️  Version: 2.0.0.0
+🔑 API Key: ✅ Configured
+🌍 Mode: Local Development
+📝 Log File: gameplay_2025-07-24_092419.txt
+========================================

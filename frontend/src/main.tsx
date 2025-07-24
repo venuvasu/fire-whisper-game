@@ -8,6 +8,8 @@ import "./tailwind.css";
 import CreateCharacterPage from "./CreateCharacterPage";
 import CreateSagaPage from "./CreateSagaPage";
 import CharacterPage from "./CharacterPage";
+import BillionDollarGameUI from "./components/BillionDollarGameUI";
+import BillionDollarGameCreator from "./components/BillionDollarGameCreator";
 import * as amplitude from "@amplitude/analytics-browser";
 import {
   EnrichmentPlugin,
@@ -54,7 +56,9 @@ const Root = () => {
 
         {/* Protected routes */}
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
-          <Route path="/game/:gameid" element={<Game />} />
+          <Route path="/game/:gameid" element={<BillionDollarGameUI />} />
+          <Route path="/classic-game/:gameid" element={<Game />} />
+          <Route path="/create-game" element={<BillionDollarGameCreator />} />
           <Route path="/createcharacter" element={<CreateCharacterPage />} />
           <Route path="/createsaga/:characterId" element={<CreateSagaPage />} />
           <Route path="/character/:characterId" element={<CharacterPage />} />

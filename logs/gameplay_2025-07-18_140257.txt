@@ -1,0 +1,36 @@
+
+
+💰 API COST SUMMARY
+==================
+Total Cost: $0.0093
+Total Tokens: 1,292 (Input: 839, Output: 453)
+Turns Played: 2
+Average Cost/Turn: $0.0047
+
+Last 5 Turns:
+Turn 0: $0.0042 (480 tokens)
+Turn 1: $0.0051 (812 tokens)
+
+
+🪝 SESSION END HOOK (MODERATE):
+The air around you begins to take a step forward, and you realize this is just the beginning...
+
+🔮 Coming up: the mystery will be revealed
+💭 Your safety and understanding hang in the balance
+
+📊 SESSION METRICS:
+• Overall Retention Score: 0.14/1.0
+• Character Investment: 0.00/1.0
+• Context Richness: 0.05/1.0
+• Hook Strength: 0.40/1.0
+
+🎯 RETURN MOTIVATION (MODERATE):
+Your story continues: The air around you begins to take a step forward, and you realize this is just the beginning...
+
+Reasons to return:
+• Unresolved mysteries await your return
+• Character growth opportunities are within reach
+
+🎆 Upcoming Growth:
+• Your strength increases from training (in 2 more action count)
+• A memory from your past surfaces (in 1 more session count)

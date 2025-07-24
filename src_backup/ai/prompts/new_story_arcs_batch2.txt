@@ -1,0 +1,35 @@
+# HISTORICAL FANTASY CATEGORY
+
+Name: The Roman Eagle | Type: Historical Fantasy/Roman | Hook: A lost Roman legion has appeared through a time rift, believing they're still fighting for the glory of Rome. | Key Elements: Roman tactics, cultural clash, time displacement, ancient technology, imperial ambition | Climax: Helping the legion commander understand their new reality and choose a path forward | Difficulty: 3 | Turns: 13 | Location Start: village_outskirts | Character Level: 2-4
+
+Name: Samurai's Honor | Type: Historical Fantasy/Japanese | Hook: A dishonored samurai seeks redemption by hunting a yokai that has followed him through a portal from feudal Japan. | Key Elements: Bushido code, Japanese spirits, honor restoration, blade mastery, foreign customs | Climax: A final duel where honor matters more than victory | Difficulty: 4 | Turns: 15 | Location Start: sacred_grove | Character Level: 3-5
+
+Name: Viking Saga | Type: Historical Fantasy/Norse | Hook: A band of Viking warriors have sailed their longship into a mystical fog and emerged in your world, seeking Valhalla. | Key Elements: Norse culture, berserker rage, runic magic, feast traditions, fatalistic worldview | Climax: Helping the Vikings find a worthy battle or a new home | Difficulty: 3 | Turns: 14 | Location Start: village_tavern | Character Level: 2-4
+
+Name: Pharaoh's Curse | Type: Historical Fantasy/Egyptian | Hook: An ancient Egyptian tomb has appeared in the crystal cave, and the mummified pharaoh has awakened seeking his stolen treasures. | Key Elements: Egyptian magic, mummification, hieroglyphic puzzles, afterlife beliefs, divine judgment | Climax: Returning the pharaoh's heart scarab or helping him find peace | Difficulty: 2 | Turns: 12 | Location Start: crystal_cave | Character Level: 1-3
+
+Name: Aztec Sun Disk | Type: Historical Fantasy/Mesoamerican | Hook: An Aztec priest has come seeking a sacred calendar disk that can prevent the end of the Fifth Sun. | Key Elements: Mesoamerican cosmology, sacrifice rituals, solar magic, prophecy interpretation, cultural exchange | Climax: Completing the solar ritual at the exact moment of alignment | Difficulty: 4 | Turns: 16 | Location Start: ember_woods | Character Level: 3-5
+
+# CHARACTER-DRIVEN CATEGORY
+
+Name: The Forgotten Hero | Type: Character-Driven/Redemption | Hook: A once-celebrated hero now lives as a hermit, but a new threat forces them to confront their past failures. | Key Elements: Fallen hero, redemption arc, past trauma, reluctant mentor, personal growth | Climax: The hero must choose between personal redemption or sacrificing their legacy for the greater good | Difficulty: 2 | Turns: 12 | Location Start: ember_woods | Character Level: 1-3
+
+Name: Blood of My Enemy | Type: Character-Driven/Revenge | Hook: You discover that someone in the village is related to the person who destroyed your character's homeland. | Key Elements: Revenge cycle, moral questioning, hidden identity, justice vs. vengeance, forgiveness | Climax: The final confrontation where you choose between revenge or breaking the cycle | Difficulty: 3 | Turns: 14 | Location Start: ashbrook_village | Character Level: 2-4
+
+Name: The Prodigal Apprentice | Type: Character-Driven/Mentorship | Hook: Your character's former apprentice returns, now corrupted by forbidden knowledge and seeking to surpass their master. | Key Elements: Teacher-student relationship, corrupted knowledge, responsibility, tough love, surpassing limits | Climax: A contest of skills where teaching may be more powerful than defeating | Difficulty: 4 | Turns: 15 | Location Start: sacred_grove | Character Level: 3-5
+
+Name: Bonds of Blood | Type: Character-Driven/Family | Hook: A long-lost relative of your character appears, bringing news of a family curse that has begun to manifest. | Key Elements: Family legacy, inherited magic, bloodline secrets, reconciliation, shared burden | Climax: A ritual requiring the combined strength of family members to break the curse | Difficulty: 3 | Turns: 13 | Location Start: village_tavern | Character Level: 2-4
+
+Name: The Rival's Challenge | Type: Character-Driven/Competition | Hook: An old rival challenges your character to a series of tests to determine once and for all who is superior. | Key Elements: Competitive history, mutual respect, public spectacle, skill mastery, personal growth | Climax: The final challenge reveals the true purpose behind the rivalry | Difficulty: 2 | Turns: 11 | Location Start: village_outskirts | Character Level: 1-3
+
+# LOCATION-BASED CATEGORY
+
+Name: Secrets of the Crystal Cave | Type: Location-Based/Cave | Hook: The crystals in the cave have begun to resonate with each other, revealing hidden chambers and ancient knowledge. | Key Elements: Crystal magic, cave exploration, ancient civilization, resonance puzzles, underground dangers | Climax: Reaching the central crystal chamber to learn the cave's ultimate secret | Difficulty: 3 | Turns: 13 | Location Start: crystal_cave | Character Level: 2-4
+
+Name: Tavern of Lost Memories | Type: Location-Based/Tavern | Hook: The village tavern exists in multiple times simultaneously, and patrons sometimes leave with memories and abilities from other lives. | Key Elements: Tavern atmosphere, time anomalies, memory exchange, diverse patrons, identity questions | Climax: Stabilizing the tavern's temporal state or choosing which timeline to preserve | Difficulty: 2 | Turns: 11 | Location Start: village_tavern | Character Level: 1-3
+
+Name: Sacred Grove's Guardian | Type: Location-Based/Grove | Hook: The ancient guardian spirit of the sacred grove is dying, and the grove's magic is failing as a result. | Key Elements: Nature spirits, druidic rituals, life transfer, environmental harmony, sacred responsibility | Climax: A ceremony to transfer the guardian's essence to a new vessel | Difficulty: 4 | Turns: 15 | Location Start: sacred_grove | Character Level: 3-5
+
+Name: Ashbrook's Secret | Type: Location-Based/Village | Hook: Beneath Ashbrook village lies a network of tunnels where villagers have hidden a powerful secret for generations. | Key Elements: Village politics, hidden passages, generational secrets, communal responsibility, trust building | Climax: Deciding whether the village's secret should remain hidden or be revealed | Difficulty: 3 | Turns: 12 | Location Start: ashbrook_village | Character Level: 2-4
+
+Name: Heart of the Ember Woods | Type: Location-Based/Forest | Hook: The Ember Woods are revealed to be a single, massive organism that is awakening to consciousness after centuries of dormancy. | Key Elements: Forest sentience, root network, collective consciousness, environmental communication, ancient wisdom | Climax: Establishing communication with the forest entity and learning its purpose | Difficulty: 5 | Turns: 17 | Location Start: ember_woods | Character Level: 4-6

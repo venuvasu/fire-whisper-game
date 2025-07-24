@@ -1,0 +1,37 @@
+# CREATURE-FOCUSED CATEGORY
+
+Name: The Dragon's Pact | Type: Creature-Focused/Dragon | Hook: A wounded dragon seeks shelter in the village, offering ancient knowledge in exchange for protection from dragon hunters. | Key Elements: Dragon lore, healing magic, hunter evasion, knowledge exchange, trust building | Climax: Defending the dragon against the hunters' final assault | Difficulty: 4 | Turns: 15 | Location Start: village_outskirts | Character Level: 3-5
+
+Name: Wolf Speaker | Type: Creature-Focused/Wolf | Hook: The wolves of Ember Woods have begun speaking in human tongues, warning of a coming disaster only they can sense. | Key Elements: Animal communication, pack dynamics, natural disaster, primal instincts, forest protection | Climax: Leading the wolf pack to save the village from the impending catastrophe | Difficulty: 3 | Turns: 13 | Location Start: ember_woods | Character Level: 2-4
+
+Name: The Fae Court | Type: Creature-Focused/Fairy | Hook: A fairy noble has been exiled from the Fae Court and needs your help to clear their name of false accusations. | Key Elements: Fairy politics, glamour magic, trickery, court intrigue, magical contracts | Climax: Presenting evidence at the Fae Court trial to restore the noble's honor | Difficulty: 3 | Turns: 14 | Location Start: sacred_grove | Character Level: 2-4
+
+Name: Golem's Heart | Type: Creature-Focused/Construct | Hook: A stone golem in the crystal cave has developed consciousness and emotions, seeking to understand its purpose. | Key Elements: Artificial life, crystal magic, existential questions, creator's intent, free will | Climax: Helping the golem make a choice about its future existence | Difficulty: 2 | Turns: 12 | Location Start: crystal_cave | Character Level: 1-3
+
+# EPIC QUESTS CATEGORY
+
+Name: The World Seed | Type: Epic Quest/Cosmic | Hook: A seed containing an entire universe is growing too quickly, threatening to consume this reality unless contained. | Key Elements: Cosmic magic, reality manipulation, dimensional boundaries, universal balance, creation myths | Climax: Performing a ritual at the nexus of realities to stabilize the growing universe | Difficulty: 5 | Turns: 18 | Location Start: sacred_grove | Character Level: 4-6
+
+Name: The Titan's Chains | Type: Epic Quest/Mythic | Hook: Ancient chains that once bound a primordial titan are breaking, and the titan is beginning to stir beneath the mountains. | Key Elements: Titanic magic, divine smithing, ancient bindings, geological disturbances, godly intervention | Climax: Reforging the chains using materials from multiple realms | Difficulty: 5 | Turns: 17 | Location Start: crystal_cave | Character Level: 4-6
+
+Name: The Eternal Flame | Type: Epic Quest/Elemental | Hook: The eternal flame that powers all fire magic in the world is dying, and must be rekindled with rare elemental essences. | Key Elements: Elemental gathering, flame magic, world-spanning journey, magical ecology, fire spirits | Climax: Combining the elemental essences in a ritual to reignite the eternal flame | Difficulty: 4 | Turns: 16 | Location Start: ember_woods | Character Level: 3-5
+
+# CLASS-SPECIFIC CATEGORY
+
+Name: Warrior's Legacy | Type: Class-Specific/Warrior | Hook: A legendary warrior's weapons and armor have been discovered, but only a worthy warrior can claim them. | Key Elements: Combat trials, warrior code, ancestral techniques, weapon mastery, martial honor | Climax: Facing the spirit of the legendary warrior in single combat | Difficulty: 3 | Turns: 14 | Location Start: village_outskirts | Character Level: 2-4 | Required Class: Warrior
+
+Name: Mage's Grimoire | Type: Class-Specific/Mage | Hook: Pages from an ancient grimoire have been scattered throughout the region, each containing a powerful but dangerous spell. | Key Elements: Spell collection, magical research, arcane puzzles, power containment, magical theory | Climax: Deciding whether to complete the grimoire or destroy its most dangerous pages | Difficulty: 3 | Turns: 15 | Location Start: crystal_cave | Character Level: 2-4 | Required Class: Mage
+
+Name: Cleric's Vigil | Type: Class-Specific/Cleric | Hook: The gods have fallen silent, and a cleric must restore faith to the region by performing sacred rites at forgotten shrines. | Key Elements: Divine communion, crisis of faith, shrine restoration, religious ceremonies, divine signs | Climax: Receiving a direct message from the gods about why they fell silent | Difficulty: 3 | Turns: 14 | Location Start: sacred_grove | Character Level: 2-4 | Required Class: Cleric
+
+Name: Druid's Balance | Type: Class-Specific/Druid | Hook: The natural balance between growth and decay has been disrupted, causing rampant overgrowth in some areas and blight in others. | Key Elements: Nature magic, ecological balance, seasonal rituals, plant communication, elemental harmony | Climax: Performing the Grand Ritual of Balance at the heart of the disturbance | Difficulty: 3 | Turns: 13 | Location Start: ember_woods | Character Level: 2-4 | Required Class: Druid
+
+Name: Assassin's Mark | Type: Class-Specific/Assassin | Hook: A master assassin has marked you as their next target, but offers to spare you if you can complete three impossible tasks. | Key Elements: Stealth challenges, target elimination, poison crafting, information gathering, shadow magic | Climax: The final confrontation where you must outwit rather than outfight the master assassin | Difficulty: 4 | Turns: 15 | Location Start: village_tavern | Character Level: 3-5 | Required Class: Assassin
+
+# HIGH-LEVEL CHALLENGES CATEGORY
+
+Name: The Void Breach | Type: High-Level/Cosmic Horror | Hook: A tear in reality is allowing entities from the void to enter the world, corrupting everything they touch. | Key Elements: Reality manipulation, cosmic horror, sanity challenges, void magic, existential threats | Climax: Entering the void itself to seal the breach from the other side | Difficulty: 5 | Turns: 18 | Location Start: crystal_cave | Character Level: 5-7
+
+Name: Council of Dragons | Type: High-Level/Dragon Politics | Hook: The ancient dragons are gathering for their centennial council, and you've been invited as the first human representative in history. | Key Elements: Dragon diplomacy, ancient customs, interspecies politics, draconic magic, historical knowledge | Climax: Casting the deciding vote on a matter that will affect both dragons and humans for centuries | Difficulty: 5 | Turns: 17 | Location Start: sacred_grove | Character Level: 5-7
+
+Name: The Godslayer's Return | Type: High-Level/Divine Conflict | Hook: An ancient weapon capable of killing gods has been discovered, and divine factions are mobilizing to either claim or destroy it. | Key Elements: Divine politics, artifact protection, theological debates, celestial combat, moral dilemmas | Climax: Deciding the fate of the godslayer weapon and potentially the gods themselves | Difficulty: 5 | Turns: 19 | Location Start: ember_woods | Character Level: 6-8

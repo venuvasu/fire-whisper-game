@@ -1,0 +1,43 @@
+🔥 Fire Whisper RPG - Local Mode
+========================================
+🏷️  Version: 2.0.0.0
+🔑 API Key: ✅ Configured
+🌍 Mode: Local Development
+📝 Log File: gameplay_2025-07-18_092807.txt
+========================================
+
+🎆 SAGA SELECTION
+==================================================
+🎭 Choose your adventure! Each saga offers a unique story
+experience with different themes and challenges.
+==================================================
+Selected Saga: The Crimson Prophecy
+
+🎭 CHARACTER CREATION
+==================================================
+🌟 Time to breathe life into legend! Shape your hero below—choose
+their path, their spirit, and their spark. The world of Fire Whisper
+awaits your creation...
+==================================================
+Name: bob2
+Race: Human
+Gender: Male
+Profession: Warrior
+
+✨ Creating bob2 the Human Warrior...
+🤖 Generating character with AI (this may take a moment)...
+
+🎉 Character Created Successfully!
+🎭 bob2 the Human Warrior
+📊 STR:14 DEX:12 CON:14
+📊 INT:10 WIS:10 CHA:10
+❤️  HP: 28 | 🔮 Mana: 15
+⚔️  Weapon: Longsword (1d8+Str)
+
+🎮 Starting new game with bob2 the Warrior
+
+🎆 ENHANCED FEATURES ACTIVE:
+✅ Story Arc Integration (71 arcs available)
+✅ Location Progression Debug (6 locations mapped)
+✅ Dynamic Contextual Options
+🗺️ Starting Location: village_outskirts

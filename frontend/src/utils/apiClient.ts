@@ -1,6 +1,6 @@
 import { userManager } from "../auth/auth";
 
-const BASE_URL = "https://dev.firewhisper.io/api";
+const BASE_URL = "http://localhost:5000/api";
 
 interface ApiRequestOptions {
   path: string;

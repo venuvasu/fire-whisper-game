@@ -66,6 +66,22 @@ export default function Dashboard({ user }: DashboardProps) {
         </EmberlynMessage>
       </div>
 
+      {/* Billion Dollar Game Experience */}
+      <div className="p-6 max-w-6xl mx-auto text-center mb-8">
+        <div className="bg-gradient-to-r from-purple-600 to-orange-500 rounded-3xl p-8 shadow-2xl">
+          <h2 className="text-4xl font-bold text-white mb-4">🔥 Billion Dollar Experience</h2>
+          <p className="text-xl text-white/90 mb-6">
+            Experience the ultimate RPG with enhanced AI, dynamic storytelling, and immersive gameplay!
+          </p>
+          <Link
+            to="/create-game"
+            className="inline-block bg-white text-purple-600 px-8 py-4 rounded-2xl font-bold text-xl hover:bg-gray-100 transition-colors transform hover:scale-105 shadow-lg"
+          >
+            🚀 Start Epic Adventure
+          </Link>
+        </div>
+      </div>
+
       <div className="p-6 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-10">
         {characters.map((char) => (
           <div

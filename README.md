@@ -2,7 +2,7 @@
 
 > An AI-powered text-based RPG with deterministic mechanics and intelligent narrative generation
 
-[![Version](https://img.shields.io/badge/version-1.3.0.0-blue.svg)](./version.json)
+[![Version](https://img.shields.io/badge/version-1.3.1.0-blue.svg)](./version.json)
 [![Tests](https://img.shields.io/badge/tests-passing-green.svg)](./tests/results/)
 [![AI Behavior](https://img.shields.io/badge/AI%20behavior-validated-green.svg)](./tests/ai_behavior/)
 [![Branch](https://img.shields.io/badge/branch-v1-orange.svg)](https://github.com/echang-home/fire-whisper-game/tree/v1)

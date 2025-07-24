@@ -48,7 +48,7 @@ load_dotenv(project_root / ".env.local")
 def initialize_billion_dollar_controller(character_data):
     """Initialize the billion dollar game controller with all systems"""
     try:
-        from src.core.billion_dollar_game_controller import BillionDollarGameController
+        from src.domain.fire_whisper_game.billion_dollar_game_controller import BillionDollarGameController
         return BillionDollarGameController(character_data)
     except ImportError as e:
         print(f"⚠️ Billion Dollar Controller not available: {e}")
@@ -56,15 +56,25 @@ def initialize_billion_dollar_controller(character_data):
         return None
 
 def load_story_arcs():
-    """Load all 71 story arcs from the existing story_arcs.txt file"""
-    story_arcs_file = Path(__file__).parent.parent / "src" / "ai" / "prompts" / "story_arcs.txt"
+    """Load all story arcs from the story_arcs.txt and new story arcs files"""
+    story_arcs_file = Path(__file__).parent.parent / "src" / "infrastructure" / "ai" / "claude" / "prompts" / "story_arcs.txt"
+    new_story_arcs_file = Path(__file__).parent.parent / "src" / "infrastructure" / "ai" / "claude" / "prompts" / "new_story_arcs.txt"
+    new_story_arcs_batch2_file = Path(__file__).parent.parent / "src" / "infrastructure" / "ai" / "claude" / "prompts" / "new_story_arcs_batch2.txt"
+    new_story_arcs_batch3_file = Path(__file__).parent.parent / "src" / "infrastructure" / "ai" / "claude" / "prompts" / "new_story_arcs_batch3.txt"
     
+    parsed_arcs = []
+    new_arcs_count = 0
+    
+    # Load original arcs
     with open(story_arcs_file, "r") as f:
         story_arcs_content = f.read()
         story_arcs_list = [line.strip() for line in story_arcs_content.split('\n') if line.strip()]
     
-    parsed_arcs = []
+    # Parse original arcs
     for story_line in story_arcs_list:
+        if story_line.startswith('#'):  # Skip comment lines
+            continue
+            
         try:
             sections = story_line.split(' | ')
             arc_data = {}
@@ -81,11 +91,65 @@ def load_story_arcs():
                     "elements": arc_data.get('Key Elements', '').split(', ') if arc_data.get('Key Elements') else [],
                     "climax": arc_data.get('Climax', ''),
                     "difficulty": 2,  # Default difficulty
-                    "turns": 10      # Default turns
+                    "turns": 10,      # Default turns
+                    "location_start": None,  # Default location
+                    "character_level": "1-3"  # Default level range
                 })
         except Exception as e:
             print(f"Warning: Could not parse story arc: {story_line[:50]}... Error: {e}")
     
+    # Function to parse new arc files with enhanced format
+    def parse_new_arc_file(file_path):
+        nonlocal new_arcs_count
+        
+        if not file_path.exists():
+            return []
+            
+        with open(file_path, "r") as f:
+            new_arcs_content = f.read()
+            new_arcs_list = [line.strip() for line in new_arcs_content.split('\n') if line.strip()]
+        
+        file_arcs = []
+        for story_line in new_arcs_list:
+            if story_line.startswith('#'):  # Skip comment lines
+                continue
+                
+            try:
+                sections = story_line.split(' | ')
+                arc_data = {}
+                for section in sections:
+                    if ':' in section:
+                        key, value = section.split(':', 1)
+                        arc_data[key.strip()] = value.strip()
+                
+                if 'Name' in arc_data:
+                    file_arcs.append({
+                        "name": arc_data['Name'],
+                        "type": arc_data.get('Type', 'Adventure'),
+                        "hook": arc_data.get('Hook', ''),
+                        "elements": arc_data.get('Key Elements', '').split(', ') if arc_data.get('Key Elements') else [],
+                        "climax": arc_data.get('Climax', ''),
+                        "difficulty": int(arc_data.get('Difficulty', 2)),
+                        "turns": int(arc_data.get('Turns', 10)),
+                        "location_start": arc_data.get('Location Start'),
+                        "character_level": arc_data.get('Character Level', "1-3")
+                    })
+                    new_arcs_count += 1
+            except Exception as e:
+                print(f"Warning: Could not parse new story arc: {story_line[:50]}... Error: {e}")
+        
+        return file_arcs
+    
+    # Load and parse first batch of new arcs
+    parsed_arcs.extend(parse_new_arc_file(new_story_arcs_file))
+    
+    # Load and parse second batch of new arcs
+    parsed_arcs.extend(parse_new_arc_file(new_story_arcs_batch2_file))
+    
+    # Load and parse third batch of new arcs
+    parsed_arcs.extend(parse_new_arc_file(new_story_arcs_batch3_file))
+    
+    print(f"📚 Loaded {len(parsed_arcs)} story arcs ({new_arcs_count} new arcs)")
     return parsed_arcs
 
 STORY_ARCS = load_story_arcs()
@@ -95,24 +159,198 @@ STORY_ARCS = load_story_arcs()
 active_story_arc = None
 arc_progress = 0
 
-def select_story_arc(character_level, current_location, story_context):
-    """Select appropriate story arc based on context"""
+def select_story_arc(character_level, current_location, story_context, character_class=None):
+    """Select appropriate story arc based on context, location, character level, and class"""
     global active_story_arc
     
     if active_story_arc:
         return active_story_arc  # Already have active arc
     
-    # Filter arcs by difficulty
-    suitable_arcs = [arc for arc in STORY_ARCS if arc['difficulty'] <= character_level + 1]
+    # Parse character level range from arcs
+    def in_level_range(arc, level):
+        level_range = arc.get('character_level', '1-3')
+        if not level_range or '-' not in level_range:
+            return True  # Default to allowing if no valid range
+        try:
+            min_level, max_level = map(int, level_range.split('-'))
+            return min_level <= level <= max_level
+        except:
+            return True  # Allow if parsing fails
     
-    # Context-based selection
-    if 'sacred' in current_location.lower() or 'flame' in story_context:
-        for arc in suitable_arcs:
-            if 'Sacred Flame' in arc['name']:
-                return arc
+    # Check if arc is suitable for character class
+    def is_class_suitable(arc, char_class):
+        if not char_class:
+            return True  # No class restriction if character_class not provided
+        
+        required_class = None
+        # Check if arc has a required class in its type
+        if '/' in arc.get('type', ''):
+            arc_type = arc['type'].split('/')
+            if len(arc_type) > 1 and arc_type[0] == 'Class-Specific':
+                required_class = arc_type[1]
+        
+        # Also check for explicit Required Class field
+        if 'required_class' in arc:
+            required_class = arc['required_class']
+        
+        # If no required class, arc is suitable for all classes
+        if not required_class:
+            return True
+        
+        # Check if character class matches required class
+        return char_class.lower() == required_class.lower()
     
-    # Default to first suitable arc
-    return suitable_arcs[0] if suitable_arcs else STORY_ARCS[0]
+    # Filter arcs by difficulty, character level, and class
+    suitable_arcs = [
+        arc for arc in STORY_ARCS 
+        if arc['difficulty'] <= character_level + 1 
+        and in_level_range(arc, character_level)
+        and is_class_suitable(arc, character_class)
+    ]
+    
+    # Location-based selection (prioritize arcs that start in current location)
+    location_arcs = [arc for arc in suitable_arcs if arc.get('location_start') == current_location]
+    if location_arcs:
+        import random
+        return random.choice(location_arcs)  # Choose a random arc for this location for variety
+    
+    # Enhanced context-based selection
+    context_keywords = {
+        # Elements and nature
+        'shadow': ['shadow', 'darkness', 'whisper', 'secret', 'night'],
+        'fire': ['fire', 'flame', 'ember', 'burn', 'heat', 'ash'],
+        'water': ['water', 'tide', 'river', 'ocean', 'flood', 'rain'],
+        'earth': ['earth', 'stone', 'crystal', 'mountain', 'rock', 'gem'],
+        'air': ['air', 'wind', 'sky', 'breath', 'cloud', 'storm'],
+        
+        # Creatures and beings
+        'undead': ['undead', 'zombie', 'skeleton', 'ghost', 'spirit', 'haunt'],
+        'monster': ['monster', 'beast', 'creature', 'dragon', 'giant', 'troll'],
+        'fae': ['fairy', 'fae', 'elf', 'magical creature', 'sprite', 'pixie'],
+        
+        # Magic and mysticism
+        'magic': ['magic', 'spell', 'arcane', 'mystic', 'enchant', 'wizard'],
+        'ritual': ['ritual', 'ceremony', 'sacrifice', 'altar', 'offering', 'prayer'],
+        'myth': ['myth', 'legend', 'fate', 'god', 'deity', 'divine'],
+        
+        # Historical and cultural
+        'history': ['history', 'ancient', 'ruin', 'artifact', 'relic', 'tomb'],
+        'culture': ['culture', 'tradition', 'custom', 'foreign', 'exotic', 'tribe'],
+        
+        # Character-focused
+        'personal': ['personal', 'family', 'revenge', 'redemption', 'honor', 'duty'],
+        'relationship': ['friend', 'enemy', 'rival', 'mentor', 'apprentice', 'companion']
+    }
+    
+    story_context_lower = story_context.lower()
+    
+    # Score arcs based on context relevance
+    arc_scores = {}
+    for arc in suitable_arcs:
+        arc_text = f"{arc['name']} {arc['type']} {arc['hook']}".lower()
+        score = 0
+        
+        # Check for theme matches
+        for theme, keywords in context_keywords.items():
+            # Check if theme is in context
+            theme_in_context = any(keyword in story_context_lower for keyword in keywords)
+            # Check if theme is in arc
+            theme_in_arc = any(keyword in arc_text for keyword in keywords)
+            
+            if theme_in_context and theme_in_arc:
+                score += 3  # Strong match - both in context and arc
+            elif theme_in_context:
+                score += 1  # Context mentions theme but arc doesn't
+            elif theme_in_arc:
+                score += 1  # Arc has theme but context doesn't mention it
+        
+        # Bonus for location-specific arcs that match the current location type
+        if current_location in arc_text:
+            score += 2
+        
+        # Bonus for arcs with matching elements in key elements
+        for element in arc['elements']:
+            if element.lower() in story_context_lower:
+                score += 1
+        
+        arc_scores[arc['name']] = score
+    
+    # Get arcs with highest scores
+    if arc_scores:
+        max_score = max(arc_scores.values())
+        if max_score > 0:  # Only use score-based selection if we have meaningful matches
+            best_arcs = [arc for arc in suitable_arcs if arc_scores[arc['name']] == max_score]
+            import random
+            return random.choice(best_arcs)
+    
+    # Special location-based selection as fallback
+    location_type_arcs = []
+    
+    if 'sacred' in current_location.lower() or 'grove' in current_location.lower():
+        location_type_arcs = [arc for arc in suitable_arcs if 
+                             any(keyword in f"{arc['name']} {arc['type']}".lower() 
+                                for keyword in ['sacred', 'grove', 'nature', 'spirit', 'druid'])]
+    
+    elif 'crystal' in current_location.lower() or 'cave' in current_location.lower():
+        location_type_arcs = [arc for arc in suitable_arcs if 
+                             any(keyword in f"{arc['name']} {arc['type']}".lower() 
+                                for keyword in ['crystal', 'cave', 'stone', 'earth', 'underground'])]
+    
+    elif 'ember' in current_location.lower() or 'wood' in current_location.lower():
+        location_type_arcs = [arc for arc in suitable_arcs if 
+                             any(keyword in f"{arc['name']} {arc['type']}".lower() 
+                                for keyword in ['ember', 'wood', 'forest', 'fire', 'tree'])]
+    
+    elif 'village' in current_location.lower():
+        location_type_arcs = [arc for arc in suitable_arcs if 
+                             any(keyword in f"{arc['name']} {arc['type']}".lower() 
+                                for keyword in ['village', 'town', 'settlement', 'community'])]
+    
+    elif 'tavern' in current_location.lower():
+        location_type_arcs = [arc for arc in suitable_arcs if 
+                             any(keyword in f"{arc['name']} {arc['type']}".lower() 
+                                for keyword in ['tavern', 'inn', 'drink', 'social', 'gathering'])]
+    
+    if location_type_arcs:
+        import random
+        return random.choice(location_type_arcs)
+    
+    # Special handling for high-level characters
+    if character_level >= 5:
+        # For high-level characters, prioritize high-level arcs
+        high_level_arcs = [arc for arc in suitable_arcs if 'High-Level' in arc['type']]
+        
+        # If we have high-level arcs and the context suggests epic/cosmic themes, prioritize them
+        if high_level_arcs and any(keyword in story_context.lower() for keyword in 
+                                ['epic', 'cosmic', 'divine', 'godslayer', 'void', 'dragon']):
+            import random
+            print(f"DEBUG: Selecting from {len(high_level_arcs)} high-level arcs for level {character_level} character")
+            return random.choice(high_level_arcs)
+    
+    # Category-based selection as another fallback
+    character_level_category = "beginner" if character_level <= 2 else "intermediate" if character_level <= 4 else "advanced"
+    
+    if character_level_category == "beginner":
+        # For beginners, prefer straightforward adventure arcs
+        beginner_arcs = [arc for arc in suitable_arcs if 
+                        any(keyword in arc['type'].lower() 
+                           for keyword in ['classic', 'adventure', 'exploration'])]
+        if beginner_arcs:
+            import random
+            return random.choice(beginner_arcs)
+    
+    elif character_level_category == "advanced":
+        # For advanced players, prefer complex or challenging arcs
+        advanced_arcs = [arc for arc in suitable_arcs if 
+                        any(keyword in arc['type'].lower() 
+                           for keyword in ['epic', 'cosmic', 'mythological', 'complex'])]
+        if advanced_arcs:
+            import random
+            return random.choice(advanced_arcs)
+    
+    # Default to a random suitable arc for variety
+    import random
+    return random.choice(suitable_arcs) if suitable_arcs else STORY_ARCS[0]
 
 def activate_story_arc(arc, log_file):
     """Activate a story arc"""
@@ -126,13 +364,13 @@ def activate_story_arc(arc, log_file):
 
 def advance_story_arc(player_action, ai_response, log_file):
     """Advance story arc progress"""
-    global arc_progress
+    global arc_progress, active_story_arc
     
     if not active_story_arc:
         return None
     
     # Check for progress indicators
-    progress_keywords = ['discover', 'find', 'solve', 'defeat', 'complete', 'restore', 'save']
+    progress_keywords = ['discover', 'find', 'solve', 'defeat', 'complete', 'restore', 'save', 'search', 'progress', 'ritual']
     if any(keyword in player_action.lower() or keyword in ai_response.lower() for keyword in progress_keywords):
         arc_progress += 1
         progress_ratio = arc_progress / active_story_arc['turns']
@@ -148,9 +386,13 @@ def advance_story_arc(player_action, ai_response, log_file):
         elif progress_ratio >= 0.5:
             phase_msg = f"\n🔥 Story Arc Intensifying! ({arc_progress}/{active_story_arc['turns']})"
             log_to_file(log_file, phase_msg)
-            return {'phase': 'complications', 'message': phase_msg}
+            return {'phase': 'development', 'message': phase_msg}
+        else:
+            # Early progress
+            return {'phase': 'introduction', 'progress': arc_progress, 'total': active_story_arc['turns']}
     
-    return None
+    # No progress detected
+    return {'phase': 'no_progress', 'progress': arc_progress, 'total': active_story_arc['turns']}
 
 # ===== FEATURE 2: LOCATION PROGRESSION DEBUG =====
 # Validates location transitions, prevents invalid movement, and integrates
@@ -466,7 +708,7 @@ def create_character_console(log_file):
     
     try:
         # Use your ACTUAL character creation system
-        from src.ai.providers.local_character_creator import create_character_console
+        from src.infrastructure.ai.claude.providers.local_character_creator import create_character_console
         import json
         import uuid
         
@@ -544,7 +786,7 @@ def create_character_console(log_file):
         print("🎮 Creating basic character for console play...")
         
         # Fallback to basic character if AI fails
-        from src.utils.character_sheet import CharacterSheet
+        from src.shared.utils.character_sheet import CharacterSheet
         char_sheet = CharacterSheet({
             'name': name,
             'class': profession,
@@ -638,8 +880,14 @@ def handle_graceful_quit(log_file):
 def log_to_file(log_file, content):
     """Write content to log file and print to console"""
     print(content)
-    with open(log_file, 'a', encoding='utf-8') as f:
-        f.write(content + '\n')
+    
+    # Handle MockLogFile objects for testing
+    if hasattr(log_file, 'write'):
+        log_file.write(content + '\n')
+    else:
+        # Regular file path
+        with open(log_file, 'a', encoding='utf-8') as f:
+            f.write(content + '\n')
 
 def select_saga(log_file):
     """Let player select their preferred saga/story arc"""
@@ -693,16 +941,16 @@ def run_local_game():
     
     try:
         # Import existing game components (fix the broken import)
-        from src.core.ai_integration import AIIntegrationLayer
-        from src.utils.character_sheet import CharacterSheet
+        from src.domain.fire_whisper_game.ai_integration import AIIntegrationLayer
+        from src.shared.utils.character_sheet import CharacterSheet
         
         # Initialize game using existing architecture
         api_key = os.getenv("CLAUDE_API_KEY")
         ai_layer = AIIntegrationLayer(api_key)
         
         # Import your existing AI providers
-        from src.ai.providers.claude_direct_api import take_turn_direct
-        from src.ai.providers.local_character_creator import create_character_console as create_char_ai
+        from src.infrastructure.ai.claude.providers.claude_direct_api import take_turn_direct
+        from src.infrastructure.ai.claude.providers.local_character_creator import create_character_console as create_char_ai
         
         # Saga Selection
         selected_saga = select_saga(log_file)
